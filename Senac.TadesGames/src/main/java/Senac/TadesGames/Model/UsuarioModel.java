@@ -22,8 +22,8 @@ public class UsuarioModel {
     private String senha;
     private int idFilial;
 
-    public UsuarioModel(int idUsusario, String nome, String cpf,
-            String email, String filial, String cargo, PermissaoModel permissao,
+    public UsuarioModel(int idUsuario, String nome, String cpf,
+            String email, String filial, String cargo,
             String login, String senha, int idFilial) {
 
         this.idUsuario = idUsuario;
@@ -32,7 +32,6 @@ public class UsuarioModel {
         this.email = email;
         this.filial = filial;
         this.cargo = cargo;
-        this.permissao = permissao;
         this.login = login;
         this.senha = senha;
         this.idFilial = idFilial;

@@ -14,13 +14,13 @@ import java.util.List;
  */
 public class FilialModel {
     private int idFilial;
-    private int cnpj;
+    private String cnpj;
     private String nome;
     private List<ProdutoModel> produtos;
     private List<PedidoModel> pedidos;
     private List<UsuarioModel> usuarios;
     
-    public FilialModel(int idFilial, int cnpj, String nome){
+    public FilialModel(int idFilial, String nome, String cnpj){
         this.idFilial = idFilial;
         this.cnpj = cnpj;
         this.nome = nome;
@@ -46,14 +46,14 @@ public class FilialModel {
     /**
      * @return the cnpj
      */
-    public int getCnpj() {
+    public String getCnpj() {
         return cnpj;
     }
 
     /**
      * @param cnpj the cnpj to set
      */
-    public void setCnpj(int cnpj) {
+    public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
     }
 

@@ -22,15 +22,16 @@ public class ClienteModel {
     private int telefone;
     private int celular;
 
-    public ClienteModel(String nome, String cpf, String cnpj, Date dataNasc,
-           String email, int telefone, int celular ) {
-        this.nome=nome;
-        this.cpf=cpf;
-        this.cnpj=cnpj;
-        this.dataNasc=dataNasc;
-        this.email=email;
-        this.telefone=telefone;
-        this.celular=celular;
+    public ClienteModel(int idCliente, String nome, String cpf, String cnpj, Date dataNasc,
+            String email, int telefone, int celular) {
+        this.idCliente = idCliente;
+        this.nome = nome;
+        this.cpf = cpf;
+        this.cnpj = cnpj;
+        this.dataNasc = dataNasc;
+        this.email = email;
+        this.telefone = telefone;
+        this.celular = celular;
 
     }
 

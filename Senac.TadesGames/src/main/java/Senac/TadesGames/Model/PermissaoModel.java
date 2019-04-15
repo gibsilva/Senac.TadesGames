@@ -13,19 +13,19 @@ public class PermissaoModel {
 
     private int idPermissao;
     private int idUsuario;
-    private boolean relatorioVenda;
-    private boolean relatorioProduto;
-    private boolean relatorioCliente;
-    private boolean cadastrarCliente;
-    private boolean cadastrarProduto;
-    private boolean realizarVenda;
-    private boolean cadastrarFilial;
-    private boolean cadastrarUsuario;
+    private int relatorioVenda;
+    private int relatorioProduto;
+    private int relatorioCliente;
+    private int cadastrarCliente;
+    private int cadastrarProduto;
+    private int realizarVenda;
+    private int cadastrarFilial;
+    private int cadastrarUsuario;
 
-    public PermissaoModel(int idPermissao, int idUsuario, boolean relatorioVenda,
-            boolean relatorioProduto, boolean relatorioCliente, boolean cadastrarCliente,
-            boolean cadastrarProduto, boolean realizarVenda, boolean cadastrarFilial,
-            boolean cadastrarUsuario) {
+    public PermissaoModel(int idPermissao, int idUsuario, int relatorioVenda,
+            int relatorioProduto, int relatorioCliente, int cadastrarCliente,
+            int cadastrarProduto, int realizarVenda, int cadastrarFilial,
+            int cadastrarUsuario) {
         
         this.idPermissao = idPermissao;
         this.idUsuario = idUsuario;
@@ -70,112 +70,112 @@ public class PermissaoModel {
     /**
      * @return the relatorioVenda
      */
-    public boolean isRelatorioVenda() {
+    public int getRelatorioVenda() {
         return relatorioVenda;
     }
 
     /**
      * @param relatorioVenda the relatorioVenda to set
      */
-    public void setRelatorioVenda(boolean relatorioVenda) {
+    public void setRelatorioVenda(int relatorioVenda) {
         this.relatorioVenda = relatorioVenda;
     }
 
     /**
      * @return the relatorioProduto
      */
-    public boolean isRelatorioProduto() {
+    public int getRelatorioProduto() {
         return relatorioProduto;
     }
 
     /**
      * @param relatorioProduto the relatorioProduto to set
      */
-    public void setRelatorioProduto(boolean relatorioProduto) {
+    public void setRelatorioProduto(int relatorioProduto) {
         this.relatorioProduto = relatorioProduto;
     }
 
     /**
      * @return the relatorioCliente
      */
-    public boolean isRelatorioCliente() {
+    public int getRelatorioCliente() {
         return relatorioCliente;
     }
 
     /**
      * @param relatorioCliente the relatorioCliente to set
      */
-    public void setRelatorioCliente(boolean relatorioCliente) {
+    public void setRelatorioCliente(int relatorioCliente) {
         this.relatorioCliente = relatorioCliente;
     }
 
     /**
      * @return the cadastrarCliente
      */
-    public boolean isCadastrarCliente() {
+    public int getCadastrarCliente() {
         return cadastrarCliente;
     }
 
     /**
      * @param cadastrarCliente the cadastrarCliente to set
      */
-    public void setCadastrarCliente(boolean cadastrarCliente) {
+    public void setCadastrarCliente(int cadastrarCliente) {
         this.cadastrarCliente = cadastrarCliente;
     }
 
     /**
      * @return the cadastrarProduto
      */
-    public boolean isCadastrarProduto() {
+    public int getCadastrarProduto() {
         return cadastrarProduto;
     }
 
     /**
      * @param cadastrarProduto the cadastrarProduto to set
      */
-    public void setCadastrarProduto(boolean cadastrarProduto) {
+    public void setCadastrarProduto(int cadastrarProduto) {
         this.cadastrarProduto = cadastrarProduto;
     }
 
     /**
      * @return the realizarVenda
      */
-    public boolean isRealizarVenda() {
+    public int getRealizarVenda() {
         return realizarVenda;
     }
 
     /**
      * @param realizarVenda the realizarVenda to set
      */
-    public void setRealizarVenda(boolean realizarVenda) {
+    public void setRealizarVenda(int realizarVenda) {
         this.realizarVenda = realizarVenda;
     }
 
     /**
      * @return the cadastrarFilial
      */
-    public boolean isCadastrarFilial() {
+    public int getCadastrarFilial() {
         return cadastrarFilial;
     }
 
     /**
      * @param cadastrarFilial the cadastrarFilial to set
      */
-    public void setCadastrarFilial(boolean cadastrarFilial) {
+    public void setCadastrarFilial(int cadastrarFilial) {
         this.cadastrarFilial = cadastrarFilial;
     }
 
     /**
      * @return the cadastrarUsuario
      */
-    public boolean isCadastrarUsuario() {
+    public int getCadastrarUsuario() {
         return cadastrarUsuario;
     }
 
     /**
      * @param cadastrarUsuario the cadastrarUsuario to set
      */
-    public void setCadastrarUsuario(boolean cadastrarUsuario) {
+    public void setCadastrarUsuario(int cadastrarUsuario) {
         this.cadastrarUsuario = cadastrarUsuario;
     }
     

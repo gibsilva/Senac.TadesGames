@@ -23,18 +23,19 @@ public class PedidoModel {
     private List<ItensPedidoModel> itensPedido;
     private int idFilial;
     private int idUsuario;
+    private int formaPagamento;
 
-    public PedidoModel(int idPedido, int status, double valorTotal, Date dataPedido,
-            int idCliente, int idFilial, int idUsuario) {
+    public PedidoModel(int idPedido, int status, Date dataPedido,
+            int idCliente, int idFilial, int idUsuario, int formaPagamento) {
         
         this.idPedido = idPedido;
         this.status = status;
-        this.valorTotal = valorTotal;
         this.dataPedido = dataPedido;
         this.idCliente = idCliente;
         this.itensPedido = new ArrayList<ItensPedidoModel>();
         this.idFilial = idFilial;
         this.idUsuario = idUsuario;
+        this.formaPagamento = formaPagamento;
     }
 
     /**
@@ -69,7 +70,12 @@ public class PedidoModel {
      * @return the valorTotal
      */
     public double getValorTotal() {
-        return valorTotal;
+        double valor = 0;
+        for(ItensPedidoModel p : itensPedido){
+            valor += p.getQuantidade() * p.getValorUnitario();
+        }
+        
+        return valor;
     }
 
     /**
@@ -147,6 +153,20 @@ public class PedidoModel {
      */
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
+    }
+
+    /**
+     * @return the formaPagamento
+     */
+    public int getFormaPagamento() {
+        return formaPagamento;
+    }
+
+    /**
+     * @param formaPagamento the formaPagamento to set
+     */
+    public void setFormaPagamento(int formaPagamento) {
+        this.formaPagamento = formaPagamento;
     }
     
 }

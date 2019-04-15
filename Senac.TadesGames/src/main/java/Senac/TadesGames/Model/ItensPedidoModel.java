@@ -15,14 +15,16 @@ public class ItensPedidoModel {
     private int idProduto;
     private double valorUnitario;
     private int quantidade;
+    private int idPedido;
 
     public ItensPedidoModel(int idItensPedido, int idProduto,
-            double valorUnitario, int quantidade) {
+            double valorUnitario, int quantidade, int idPedido) {
         
         this.idItensPedido = idItensPedido;
         this.idProduto = idProduto;
         this.valorUnitario = valorUnitario;
         this.quantidade = quantidade;
+        this.idPedido = idPedido;
     }
 
     /**
@@ -79,5 +81,19 @@ public class ItensPedidoModel {
      */
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
+    }
+
+    /**
+     * @return the idPedido
+     */
+    public int getIdPedido() {
+        return idPedido;
+    }
+
+    /**
+     * @param idPedido the idPedido to set
+     */
+    public void setIdPedido(int idPedido) {
+        this.idPedido = idPedido;
     }
 }

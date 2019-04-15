@@ -5,9 +5,9 @@
  */
 package Senac.TadesGames.DAO;
 
-import Senac.TadesGames.DAO.Interfaces.IFilialDao;
+import Senac.TadesGames.DAO.Interfaces.IPlataformaDao;
 import Senac.TadesGames.Data.ConexaoDB;
-import Senac.TadesGames.Model.FilialModel;
+import Senac.TadesGames.Model.PlataformaModel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,35 +19,28 @@ import java.util.List;
  *
  * @author Gi
  */
-public class FilialDAO implements IFilialDao {
-
+public class PlataformaDAO implements IPlataformaDao{
     private ConexaoDB conexao = new ConexaoDB();
     private PreparedStatement stmt = null;
     ResultSet rs = null;
 
     @Override
-    public FilialModel obterPorId(int id) {
+    public PlataformaModel obterPorId(int id) {
         Connection conn = conexao.getConnection();
-        FilialModel filial = null;
+        PlataformaModel plataforma = null;
 
         try {
-            stmt = conn.prepareStatement("SELECT IDFILIAL, "
-                    + "NOME, "
-                    + "CNPJ, "
-                    + "FROM FILIAL WHERE IDFILIAL = ?");
-
+            stmt = conn.prepareStatement("SELECT IDPLATAFORMA, NOME FROM CATEGORIA WHERE IDPLATAFORMA = ?");
             stmt.setInt(1, id);
 
             rs = stmt.executeQuery();
             while (rs.next()) {
-                filial = new FilialModel(
-                        rs.getInt("IdCliente"),
-                        rs.getString("Nome"),
-                        rs.getString("Cnpj")
-                );
+                plataforma = new PlataformaModel(
+                        rs.getInt("IdPlataforma"),
+                        rs.getString("Nome"));
             }
 
-            return filial;
+            return plataforma;
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt, rs);
             return null;
@@ -55,25 +48,24 @@ public class FilialDAO implements IFilialDao {
     }
 
     @Override
-    public List<FilialModel> obterTodas() {
+    public List<PlataformaModel> obterTodas() {
         Connection conn = conexao.getConnection();
-        FilialModel filial = null;
-        List<FilialModel> filiais = new ArrayList<FilialModel>();
+        PlataformaModel plataforma = null;
+        List<PlataformaModel> plataformas = new ArrayList<PlataformaModel>();
 
         try {
-            stmt = conn.prepareStatement("SELECT IDFILIAL, NOME FROM FILIAL");
+            stmt = conn.prepareStatement("SELECT IDPLATAFORMA, NOME FROM PLATAFORMA");
 
             rs = stmt.executeQuery();
             while (rs.next()) {
-                filial = new FilialModel(
-                        rs.getInt("IdFilial"),
-                        rs.getString("Nome"),
-                        rs.getString("Cnpj"));
+                plataforma = new PlataformaModel(
+                        rs.getInt("IdPlataforma"),
+                        rs.getString("Nome"));
 
-                filiais.add(filial);
+                plataformas.add(plataforma);
             }
 
-            return filiais;
+            return plataformas;
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt, rs);
             return null;
@@ -81,13 +73,12 @@ public class FilialDAO implements IFilialDao {
     }
 
     @Override
-    public void inserir(FilialModel filial) {
+    public void inserir(PlataformaModel plataforma) {
         Connection conn = conexao.getConnection();
 
         try {
-            stmt = conn.prepareStatement("INSERT INTO FILIAL(NOME, CNPJ) VALUES (?, ?)");
-            stmt.setString(1, filial.getNome());
-            stmt.setString(2, filial.getCnpj());
+            stmt = conn.prepareStatement("INSERT INTO PLATAFORMA (NOME) VALUES (?)");
+            stmt.setString(1, plataforma.getNome());
 
             stmt.executeUpdate();
         } catch (SQLException ex) {
@@ -97,13 +88,13 @@ public class FilialDAO implements IFilialDao {
     }
 
     @Override
-    public void alterar(FilialModel filial) {
+    public void alterar(PlataformaModel plataforma) {
         Connection conn = conexao.getConnection();
 
         try {
-            stmt = conn.prepareStatement("UPTADE FILIAL SET NOME, ? WHERE IDCATEGORIA = ?");
-            stmt.setString(1, filial.getNome());
-            
+            stmt = conn.prepareStatement("UPTADE PLATAFORMA SET NOME = ? WHERE IDPLATAFORMA = ?");
+            stmt.setString(1, plataforma.getNome());
+            stmt.setInt(2, plataforma.getIdPlataforma());
 
             stmt.executeUpdate();
         } catch (SQLException ex) {
@@ -113,18 +104,19 @@ public class FilialDAO implements IFilialDao {
     }
 
     @Override
-    public void excluir(FilialModel filial) {
-         Connection conn = conexao.getConnection();
+    public void excluir(PlataformaModel plataforma) {
+        Connection conn = conexao.getConnection();
         
         try {
-            stmt = conn.prepareStatement("DELETE FROM FILIAL WHERE IDFILIAL = ?");
-            stmt.setInt(1, filial.getIdFilial());
+            stmt = conn.prepareStatement("DELETE FROM PLATAFORMA WHERE IDPLATAFORMA = ?");
+            stmt.setInt(1, plataforma.getIdPlataforma());
 
             stmt.executeUpdate();
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt);
             throw new RuntimeException(ex.getMessage());
         }
-    }
 
+    }
+    
 }
