@@ -15,29 +15,27 @@ public class ProdutoModel {
     private String descricao;
     private double precoCompra;
     private double precoVenda;
-    private String plataforma;
     private int idCategoria;
     private CategoriaModel categoria;
     private int idGenero;
     private boolean ativo;
     private int filial;
+    private int idPlataforma;
+    private PlataformaModel plataforma;
 
-    public ProdutoModel(int idProduto, String nome, String descricao, double precoCompra,
-           double precoVenda, String plataforma, int idCategoria, CategoriaModel categoria,
-           int idGenero, boolean ativo, int filial){
-        
+    public ProdutoModel(int idProduto, String nome, String descricao, 
+           double precoCompra, double precoVenda, int idCategoria,
+           int idGenero, boolean ativo, int filial, int idPlataforma){        
         this.idProduto = idProduto;
         this.nome = nome;
         this.descricao = descricao;
         this.precoCompra = precoCompra;
         this.precoVenda = precoVenda;
-        this.plataforma = plataforma;
         this.idCategoria = idCategoria;
-        this.categoria = categoria;
         this.idGenero = idGenero;
         this.ativo = ativo;
         this.filial = filial;
-        
+        this.idPlataforma = idPlataforma;
     }
     /**
      * @return the idProduto
@@ -108,21 +106,7 @@ public class ProdutoModel {
     public void setPrecoVenda(double precoVenda) {
         this.precoVenda = precoVenda;
     }
-
-    /**
-     * @return the plataforma
-     */
-    public String getPlataforma() {
-        return plataforma;
-    }
-
-    /**
-     * @param plataforma the plataforma to set
-     */
-    public void setPlataforma(String plataforma) {
-        this.plataforma = plataforma;
-    }
-
+    
     /**
      * @return the idCategoria
      */
@@ -168,7 +152,7 @@ public class ProdutoModel {
     /**
      * @return the ativo
      */
-    public boolean isAtivo() {
+    public boolean getAtivo() {
         return ativo;
     }
 
@@ -191,6 +175,34 @@ public class ProdutoModel {
      */
     public void setFilial(int filial) {
         this.filial = filial;
+    }
+
+    /**
+     * @return the idPlataforma
+     */
+    public int getIdPlataforma() {
+        return idPlataforma;
+    }
+
+    /**
+     * @param idPlataforma the idPlataforma to set
+     */
+    public void setIdPlataforma(int idPlataforma) {
+        this.idPlataforma = idPlataforma;
+    }
+
+    /**
+     * @return the plataforma
+     */
+    public PlataformaModel getPlataforma() {
+        return plataforma;
+    }
+
+    /**
+     * @param plataforma the plataforma to set
+     */
+    public void setPlataforma(PlataformaModel plataforma) {
+        this.plataforma = plataforma;
     }
     
     

@@ -9,12 +9,9 @@ package Senac.TadesGames.Model;
  *
  * @author Gi
  */
-public class UsuarioModel {
+public class UsuarioModel extends PessoaModel {
 
     private int idUsuario;
-    private String nome;
-    private String cpf;
-    private String email;
     private String filial;
     private String cargo;
     private PermissaoModel permissao;
@@ -49,48 +46,6 @@ public class UsuarioModel {
      */
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
-    }
-
-    /**
-     * @return the nome
-     */
-    public String getNome() {
-        return nome;
-    }
-
-    /**
-     * @param nome the nome to set
-     */
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    /**
-     * @return the cpf
-     */
-    public String getCpf() {
-        return cpf;
-    }
-
-    /**
-     * @param cpf the cpf to set
-     */
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    /**
-     * @return the email
-     */
-    public String getEmail() {
-        return email;
-    }
-
-    /**
-     * @param email the email to set
-     */
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     /**

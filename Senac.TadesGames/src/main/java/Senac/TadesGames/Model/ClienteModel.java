@@ -11,14 +11,11 @@ import java.util.Date;
  *
  * @author Gi
  */
-public class ClienteModel {
+public class ClienteModel extends PessoaModel {
 
     private int idCliente;
-    private String nome;
-    private String cpf;
     private String cnpj;
     private Date dataNasc;
-    private String email;
     private int telefone;
     private int celular;
 
@@ -50,34 +47,6 @@ public class ClienteModel {
     }
 
     /**
-     * @return the nome
-     */
-    public String getNome() {
-        return nome;
-    }
-
-    /**
-     * @param nome the nome to set
-     */
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    /**
-     * @return the cpf
-     */
-    public String getCpf() {
-        return cpf;
-    }
-
-    /**
-     * @param cpf the cpf to set
-     */
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    /**
      * @return the cnpj
      */
     public String getCnpj() {
@@ -103,20 +72,6 @@ public class ClienteModel {
      */
     public void setDataNasc(Date dataNasc) {
         this.dataNasc = dataNasc;
-    }
-
-    /**
-     * @return the email
-     */
-    public String getEmail() {
-        return email;
-    }
-
-    /**
-     * @param email the email to set
-     */
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     /**
