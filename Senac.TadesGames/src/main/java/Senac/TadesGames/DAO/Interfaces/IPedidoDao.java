@@ -16,7 +16,8 @@ public interface IPedidoDao {
     PedidoModel obterPorId(int id);
     List<PedidoModel> obterTodos();
     void inserir(PedidoModel pedido);
-    void finalizarPedido();
-    void cancelarPedido();
     void troca(PedidoModel pedido);
+    void FinalizarPedido (PedidoModel pedido);
+    void CancelarPedido (PedidoModel pedido);
+    
 }
