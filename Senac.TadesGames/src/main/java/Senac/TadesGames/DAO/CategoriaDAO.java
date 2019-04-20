@@ -7,7 +7,7 @@ package Senac.TadesGames.DAO;
 
 import Senac.TadesGames.DAO.Interfaces.ICategoriaDao;
 import Senac.TadesGames.Data.ConexaoDB;
-import Senac.TadesGames.Model.CategoriaModel;
+import Senac.TadesGames.Models.CategoriaModel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

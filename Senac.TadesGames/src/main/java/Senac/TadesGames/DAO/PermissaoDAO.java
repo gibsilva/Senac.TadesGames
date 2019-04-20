@@ -7,7 +7,7 @@ package Senac.TadesGames.DAO;
 
 import Senac.TadesGames.DAO.Interfaces.IPermissaoDao;
 import Senac.TadesGames.Data.ConexaoDB;
-import Senac.TadesGames.Model.PermissaoModel;
+import Senac.TadesGames.Models.PermissaoModel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

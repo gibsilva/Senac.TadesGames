@@ -5,7 +5,7 @@
  */
 package Senac.TadesGames.DAO.Interfaces;
 
-import Senac.TadesGames.Model.PermissaoModel;
+import Senac.TadesGames.Models.PermissaoModel;
 import java.util.List;
 
 /**

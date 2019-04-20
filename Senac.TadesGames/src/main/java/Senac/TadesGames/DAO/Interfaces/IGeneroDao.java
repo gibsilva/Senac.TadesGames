@@ -5,7 +5,7 @@
  */
 package Senac.TadesGames.DAO.Interfaces;
 
-import Senac.TadesGames.Model.GeneroModel;
+import Senac.TadesGames.Models.GeneroModel;
 import java.util.List;
 
 /**

@@ -5,7 +5,7 @@
  */
 package Senac.TadesGames.DAO.Interfaces;
 
-import Senac.TadesGames.Model.ClienteModel;
+import Senac.TadesGames.Models.ClienteModel;
 import java.util.List;
 
 /**

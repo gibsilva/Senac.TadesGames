@@ -5,7 +5,7 @@
  */
 package Senac.TadesGames.DAO.Interfaces;
 
-import Senac.TadesGames.Model.PlataformaModel;
+import Senac.TadesGames.Models.PlataformaModel;
 import java.util.List;
 
 /**
