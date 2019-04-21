@@ -12,7 +12,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- As 3 meta tags acima *devem* vir em primeiro lugar dentro do `head`; qualquer outro conteúdo deve vir *após* essas tags -->
-    <title>Cadastro de Produtos</title>
+    <title>Alterar Produto</title>
 
     <!-- Bootstrap -->
    <link rel="stylesheet" type="text/css" href="resources/css/bootstrap.min.css"/>
@@ -29,7 +29,7 @@
       <%@include file="header.jsp" %>
     <div class="container">
     	 	<div class="page-header">
-          		<h1>Cadastro de Produto</h1>
+          		<h1>Alterar de Produto</h1>
         	</div>
  <form>
   <div class="row justify-content-around">
@@ -39,7 +39,7 @@
     </div>
     <div class="form-group col-md-4">
       <label for="inputTitulo">Nome/Título*</label>
-      <input type="text" class="form-control" maxlength="80"  id="inputTitulo" placeholder="Nome do Produto" required>
+      <input type="text" class="form-control" id="inputTitulo" placeholder="Nome do Produto" required>
     </div>
         <div class="form-group col-md-3">
       <label for="inputPlataforma">Plataforma*</label>
@@ -98,14 +98,15 @@
       <input type="text" class="form-control" id="inputQuantidade" placeholder="00" required>
     </div>
 <div class="col-md-3">
-	<label>Produto Desativado</label>
+	<label>Temporariamente Desativado</label>
 <div class="form-check col-md-3">
-  <input class="form-check-input" type="checkbox" id="desativacao">
-  <label class="form-check-label" for="desativacao" >
+  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+  <label class="form-check-label" for="defaultCheck1" >
     Desativado
   </label>
 </div>
 </div>
+
   <div class="form-group col-md-3">
     <label for="exampleFormControlSelect2">Gêneros*</label>
     <select multiple class="form-control" id="exampleFormControlSelect2" required>
