@@ -58,7 +58,7 @@
                             <a class="dropdown-item" href="#">Cadastro de Usuario</a>
 
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Cadastro de Produto</a>
+                            <a class="dropdown-item" href="cadastroProduto.jsp">Cadastro de Produto</a>
                             <a class="dropdown-item" href="#">Cadastro de Plataforma</a>
                             <a class="dropdown-item" href="#">Cadastro de Categoria</a>
                             <a class="dropdown-item" href="#">Cadastro de Genero</a>
