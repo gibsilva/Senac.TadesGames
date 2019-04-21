@@ -9,6 +9,3 @@
 <div class="container">
     <h1>Página Inicial</h1>
 </div>
-
-<script type="text/javascript" src="resources/js/jquery.min.js"></script>  
-<script type="text/javascript" src="resources/js/bootstrap.min"></script>

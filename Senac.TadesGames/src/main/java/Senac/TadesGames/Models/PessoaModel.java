@@ -13,6 +13,7 @@ public class PessoaModel {
     protected String nome;
     protected String cpf;
     protected String email;
+    protected String sexo;
 
     /**
      * @return the nome
@@ -54,5 +55,19 @@ public class PessoaModel {
      */
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    /**
+     * @return the sexo
+     */
+    public String getSexo() {
+        return sexo;
+    }
+
+    /**
+     * @param sexo the sexo to set
+     */
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
     }
 }

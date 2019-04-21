@@ -35,10 +35,12 @@ public class ClienteDAO implements IClienteDao {
             stmt = conn.prepareStatement("SELECT IDCLIENTE, "
                     + "NOME, "
                     + "CPF, "
+                    +"CNPJ"
                     + "DATANASC, "
                     + "EMAIL, "
                     + "TELEFONE, "
                     + "CELULAR  "
+                    + "SEXO"
                     + "FROM CLIENTE WHERE IDCLIENTE = ?");
 
             stmt.setInt(1, id);
@@ -53,7 +55,8 @@ public class ClienteDAO implements IClienteDao {
                         rs.getDate("DataNasc"),
                         rs.getString("email"),
                         rs.getInt("telefone"),
-                        rs.getInt("celular")
+                        rs.getInt("celular"),
+                        rs.getString("sexo")
                 );
             }
 
@@ -74,10 +77,12 @@ public class ClienteDAO implements IClienteDao {
             stmt = conn.prepareStatement("SELECT IDCLIENTE, "
                     + "NOME, "
                     + "CPF, "
+                    + "CNPJ"
                     + "DATANASC, "
                     + "EMAIL, "
                     + "TELEFONE, "
                     + "CELULAR  "
+                    + "SEXO"
                     + "FROM CLIENTE");
 
             rs = stmt.executeQuery();
@@ -90,7 +95,8 @@ public class ClienteDAO implements IClienteDao {
                         rs.getDate("DataNasc"),
                         rs.getString("email"),
                         rs.getInt("telefone"),
-                        rs.getInt("celular")
+                        rs.getInt("celular"),
+                        rs.getString("sexo")
                 );
             }
 
@@ -113,8 +119,9 @@ public class ClienteDAO implements IClienteDao {
                     + "DATANASC, "
                     + "EMAIL, "
                     + "TELEFONE, "
-                    + "CELULAR) "
-                    + "VALUES (?, ?, ?, ?, ?, ?, ?)");
+                    + "CELULAR)"
+                    + "SEXO "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
             stmt.setString(1, cliente.getNome());
             stmt.setString(2, cliente.getCpf());
             stmt.setString(3, cliente.getCnpj());
@@ -122,6 +129,7 @@ public class ClienteDAO implements IClienteDao {
             stmt.setString(5, cliente.getEmail());
             stmt.setInt(6, cliente.getTelefone());
             stmt.setInt(7, cliente.getCelular());
+            stmt.setString(8, cliente.getSexo());
             
 
             stmt.executeUpdate();
@@ -142,13 +150,15 @@ public class ClienteDAO implements IClienteDao {
                     + "EMAIL,"
                     + "TELEFONE,"
                     + "CELULAR,"
-                    + " = ?, ?, ?, ?, ?, ?, ? WHERE IDCLIENTE = ?");
+                    + "SEXO"
+                    + " = ?, ?, ?, ?, ?, ?, ?, ? WHERE IDCLIENTE = ?");
             stmt.setString(1, cliente.getNome());
             stmt.setDate(2, (Date) cliente.getDataNasc());
             stmt.setString(3, cliente.getEmail());
             stmt.setInt(4, cliente.getTelefone());
             stmt.setInt(5, cliente.getCelular());
             stmt.setInt(6, cliente.getIdCliente());
+            stmt.setString(7, cliente.getSexo());
 
             stmt.executeUpdate();
         } catch (SQLException ex) {

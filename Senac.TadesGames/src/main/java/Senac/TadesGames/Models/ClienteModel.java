@@ -14,13 +14,15 @@ import java.util.Date;
 public class ClienteModel extends PessoaModel {
 
     private int idCliente;
+    private String cpf;
     private String cnpj;
     private Date dataNasc;
     private int telefone;
     private int celular;
+    
 
     public ClienteModel(int idCliente, String nome, String cpf, String cnpj, Date dataNasc,
-            String email, int telefone, int celular) {
+            String email, int telefone, int celular, String sexo) {
         this.idCliente = idCliente;
         this.nome = nome;
         this.cpf = cpf;
@@ -29,6 +31,7 @@ public class ClienteModel extends PessoaModel {
         this.email = email;
         this.telefone = telefone;
         this.celular = celular;
+        this.sexo = sexo;
 
     }
 
@@ -100,6 +103,20 @@ public class ClienteModel extends PessoaModel {
      */
     public void setCelular(int celular) {
         this.celular = celular;
+    }
+
+    /**
+     * @return the cpf
+     */
+    public String getCpf() {
+        return cpf;
+    }
+
+    /**
+     * @param cpf the cpf to set
+     */
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
 }

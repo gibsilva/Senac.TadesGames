@@ -1,12 +1,13 @@
 <%-- 
-    Document   : CadastroCliente
-    Created on : 20/04/2019, 17:36:01
+    Document   : alterarCliente
+    Created on : 20/04/2019, 23:57:57
     Author     : Gi
 --%>
+
 <%@include file="header.jsp" %>
 <div class="container">
     <br>
-    <h2>Novo Cliente</h2>
+    <h2>Alterar Cliente</h2>
     <hr/>
     <form>
         <fieldset>
@@ -17,11 +18,11 @@
                 </div>
                 <div class="form-group col-md-2">
                     <label for="cpf">CPF<h11>*</h11> </label>
-                    <input type="text" class="form-control cpf" name="cpf" id="cpfCnpj" maxlength="11" placeholder="Digite seu CPF" required>
+                    <input type="text" class="form-control cpf" name="cpf" id="cpfCnpj" maxlength="11" placeholder="Digite seu CPF"  disabled>
                 </div>
                 <div class="form-group col-md-3">
                     <label for="cpf">CNPJ<h11>*</h11> </label>
-                    <input type="text" class="form-control cnpj" name="cnpj" id="Cnpj" maxlength="14" placeholder="Digite seu CNPJ">
+                    <input type="text" class="form-control cnpj" name="cnpj" id="Cnpj" maxlength="14" placeholder="Digite seu CNPJ" disabled>
                 </div>
             </div>
 
@@ -34,10 +35,10 @@
                      <label for="Celular">Telefone</label>
                     <input type="text" class="form-control phone_with_ddd" name="telefone" id="telefone" placeholder="Digite seu numero">
                 </div>
-                
+
                 <label for="Sexo">Sexo<h11>*</h11></label>
                 <div class="form-check form-check-inline">
-                    
+
                     <input class="form-check-input" type="radio" name="Sexo" id="Sexo" value="F" required>
                     <label class="form-check-label" for="Feminino">Feminino</label>
                 </div>
@@ -50,22 +51,31 @@
                     <label class="form-check-label" for="Outros">Outros</label>
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="form-group col-md-5">
                     <label for="Email">Email<h11>*</h11></label>
                     <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
                            placeholder="Digite seu Email" required="">
                 </div>
-                
-           
+
+                <fieldset class="form-group">
+                    <label for="status">Status</label>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" 
+                                   value="desativar" checked=""> Desativar
+                        </label>
+                    </div>
+                </fieldset>
+
             </div>
-            
+
             <div class="row">
                 <div class="form-group-inline">
                     <input type="submit" class="btn btn-success" value="Salvar">
                     <input type="reset" class="btn btn-light" value="Cancelar">
-            </div>
+                </div>
         </fieldset>
     </form>
 </div>
