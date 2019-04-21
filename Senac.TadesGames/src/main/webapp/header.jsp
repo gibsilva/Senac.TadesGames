@@ -10,75 +10,67 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Tades Games</title>
-        <link rel="stylesheet" href="resources/css/bootstrap.min.css"/>
+        <!--<link rel="stylesheet" href="resources/css/bootstrap.min.css"/>-->
+        <link rel="stylesheet" href="resources/css/bootsWacth/bootstrap.min.css"/>
     </head>
     <body>
-        <nav class="navbar navbar-inverse">
-            <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">Tades Games</a>
-                </div>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <a class="navbar-brand" href="#">
+                <img alt="Brand" src="resources/img/LogoTadesGamesBranco55x55_1.png">
+            </a>
 
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li><a href="/vendas.jsp">Vendas</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Consultas <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Clientes</a></li>
-                                <li><a href="#">Produtos</a></li>
-                                <li><a href="#">Vendas</a></li>
-                                <li><a href="#">Usuários</a></li>
-                                <li><a href="#">Filiais</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cadastros <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Clientes</a></li>
-                                <li><a href="#">Produtos</a></li>
-                                <li><a href="#">Vendas</a></li>
-                                <li><a href="#">Usuários</a></li>
-                                <li><a href="#">Filiais</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Relatórios <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Clientes</a></li>
-                                <li><a href="#">Produtos</a></li>
-                                <li><a href="#">Vendas</a></li>
-                            </ul>
-                        </li>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">Link</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="#">Separated link</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div><!-- /.navbar-collapse -->
-            </div><!-- /.container-fluid -->
+            <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="home.jsp">Home <span class="sr-only">(current)</span></a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Vendas</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="cadastroCliente.jsp">Cadastro de Cliente</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Consultas</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Cliente</a>
+                            <a class="dropdown-item" href="#">Produto</a>
+                            <a class="dropdown-item" href="#">Vendas</a>  
+                        </div>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Relatorio</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Cliente</a>
+                            <a class="dropdown-item" href="#">Produto</a>
+                            <a class="dropdown-item" href="#">Vendas</a>  
+                        </div>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Administrador</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Cadastro de Usuario</a>
+
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Cadastro de Plataforma</a>
+                            <a class="dropdown-item" href="#">Cadastro de Categoria</a>
+                            <a class="dropdown-item" href="#">Cadastro de Genero</a>
+                        </div>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Login</button>
+                </form>
+            </div>
         </nav>
 
         <script type="text/javascript" src="resources/js/jquery.min.js"></script>  
         <script type="text/javascript" src="resources/js/bootstrap.min.js"></script>
-
+        <script type="text/javascript" src="resources/js/jquery.mask.js"></script> 
     </body>
 </html>
