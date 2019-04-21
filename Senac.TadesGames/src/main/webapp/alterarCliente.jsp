@@ -18,10 +18,10 @@
                 </div>
                 <div class="form-group col-md-2">
                     <label for="cpf">CPF<h11>*</h11> </label>
-                    <input type="text" class="form-control cpf" name="cpf" id="cpfCnpj" maxlength="11" placeholder="Digite seu CPF"  disabled>
+                    <input type="text" class="form-control cpf" name="cpf" id="cpf" maxlength="11" placeholder="Digite seu CPF"  disabled>
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="cpf">CNPJ<h11>*</h11> </label>
+                    <label for="cpf">CNPJ </label>
                     <input type="text" class="form-control cnpj" name="cnpj" id="Cnpj" maxlength="14" placeholder="Digite seu CNPJ" disabled>
                 </div>
             </div>
@@ -39,15 +39,15 @@
                 <label for="Sexo">Sexo<h11>*</h11></label>
                 <div class="form-check form-check-inline">
 
-                    <input class="form-check-input" type="radio" name="Sexo" id="Sexo" value="F" required>
+                    <input class="form-check-input" type="radio" name="Sexo" id="sexo" value="F" required>
                     <label class="form-check-label" for="Feminino">Feminino</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="Sexo" id="Sexo" value="M">
+                    <input class="form-check-input" type="radio" name="Sexo" id="sexo" value="M">
                     <label class="form-check-label" for="Masculino">Masculino</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="Sexo" id="Sexo" value="O">
+                    <input class="form-check-input" type="radio" name="Sexo" id="sexo" value="O">
                     <label class="form-check-label" for="Outros">Outros</label>
                 </div>
             </div>
@@ -59,18 +59,26 @@
                            placeholder="Digite seu Email" required="">
                 </div>
 
-                <fieldset class="form-group">
-                    <label for="status">Status</label>
-                    <div class="form-check">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" 
-                                   value="desativar" checked=""> Desativar
-                        </label>
-                    </div>
-                </fieldset>
+                <div class="form-group col-md-3">
+                    <label for="Data">Data de Nascimento</label>
+                    <input type="date"  class="form-control date" id="dataNasc" placeholder="DD/MM/AAAA" maxlength="8"
+                </div>
 
             </div>
 
+            <fieldset class="form-group">
+                <label for="status">Status</label>
+
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="desativar" value="desativar" checked="">
+                    <label class="custom-control-label" for="desativar">Desativar</label>
+                </div>
+
+            </fieldset>
+
+            </div>
+
+            <hr>
             <div class="row">
                 <div class="form-group-inline">
                     <input type="submit" class="btn btn-success" value="Salvar">

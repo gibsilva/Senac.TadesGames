@@ -1,13 +1,14 @@
 <%-- 
-    Document   : consultaCliente
-    Created on : 20/04/2019, 23:54:54
+    Document   : consultaProduto
+    Created on : 21/04/2019, 00:26:08
     Author     : Gi
 --%>
+
 <%@include file="header.jsp" %>
 <div class="col-md-10">
-    <h2>Consulta de Clientes</h2>
+    <h2>Consulta de Produto</h2>
     <div>
-        <a href="cadastroCliente.jsp" class="btn btn-primary">Novo Cliente</a>
+        <a href="cadastroProduto.jsp" class="btn btn-primary">Novo Produto</a>
     </div>
     <br>
     <div class="input-group col-md-6">
@@ -25,15 +26,13 @@
             <tr>
                 <th scope="col">Id</th>
                 <th scope="col">Nome</th>
-                <th scope="col">CPF</th>
-                <th scope="col">CNPJ</th>
-                <th scope="col">Data Nasc.</th>
-                <th scope="col">Sexo</th>
-                <th scope="col">E-mail</th>
-                <th scope="col">Telefone</th>
-                <th scope="col">Celular</th>
+                <th scope="col">Preço Compra</th>
+                <th scope="col">Preço Venda</th>
+                <th scope="col">Plataforma</th>
+                <th scope="col">Categoria</th>
+                <th scope="col">Genero</th>
+                <th scope="col">Status</th>
                 <th scope="col">#</th>
-                
             </tr>
         </thead>
         <tbody>
@@ -44,15 +43,12 @@
                     <td>${c.cpf}</td>
                     <td>${c.cnpj}</td>
                     <td>${c.dataNasc}</td>
-                    <td>${c.sexo}</td>
                     <td>${c.email}</td>
                     <td>${c.telefone}</td>
                     <td>${c.celular}</td>
-                    
                     <td>
                         <a href="#" class="btn btn-primary">Detalhes</a>
-                        <a href="alterarCliente.jsp" class="btn btn-warning">Editar</a>
-                        
+                        <a href="#" class="btn btn-warning">Editar</a>
                     </td>
                 </tr>
             </c:forEach>
