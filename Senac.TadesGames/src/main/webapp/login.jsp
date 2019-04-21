@@ -40,6 +40,8 @@
   <div class="form-group">
     <input type="password" class="form-control" id="Senha" placeholder="Senha">
   </div>
+
+            <hr>
   <button type="submit" class="btn btn-primary btn-block">Login</button>
 </form>
 

@@ -16,7 +16,7 @@
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <a class="navbar-brand" href="#">
-                <img alt="Brand" src="resources/img/LogoTadesGamesBranco55x55_1.png">
+                <img alt="Brand" src="resources/img/LogoTadesGamesLaranja55x55.png">
             </a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,8 +64,10 @@
                             <a class="dropdown-item" href="#">Cadastro de Genero</a>
                         </div>
                 </ul>
+                
+                
                 <form class="form-inline my-2 my-lg-0">
-                    <a href="login.jsp" class="btn btn-secondary my-2 my-sm-0" type="submit" >Login</a>
+                    <a href="login.jsp" class="btn btn-warning my-2 my-sm-0" type="submit" >Login</a>
                 </form>
             </div>
         </nav>

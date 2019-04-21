@@ -4,18 +4,23 @@
     Author     : Gi
 --%>
 <%@include file="header.jsp" %>
-<div class="col-md-10">
+<div class="col-md-10 container">
     <h2>Consulta de Clientes</h2>
-    <div>
-        <a href="cadastroCliente.jsp" class="btn btn-primary">Novo Cliente</a>
-    </div>
+  
     <br>
-    <div class="input-group col-md-6">
-        <input type="text" class="form-control" placeholder="Pesquisar">
-        <div class="input-group-append">
+    <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
+
+        <div class="input-group-append col-md-6">
+            <input type="text" class="form-control " placeholder="Pesquisar">
             <button class="btn btn-dark" type="button">
                 <i class="fa fa-search"></i> Pesquisar
             </button>
+        </div>
+        <div class="input-group">
+            <div>
+                <a href="cadastroCliente.jsp" class="btn btn-primary">Novo Cliente</a>
+            </div>
+
         </div>
     </div>
     <br>
@@ -33,29 +38,29 @@
                 <th scope="col">Telefone</th>
                 <th scope="col">Celular</th>
                 <th scope="col">#</th>
-                
+
             </tr>
         </thead>
         <tbody>
-            <c:forEach var="c" items="${clientes}">
-                <tr>
-                    <td>${c.idCliente}</td>
-                    <td>${c.nome}</td>
-                    <td>${c.cpf}</td>
-                    <td>${c.cnpj}</td>
-                    <td>${c.dataNasc}</td>
-                    <td>${c.sexo}</td>
-                    <td>${c.email}</td>
-                    <td>${c.telefone}</td>
-                    <td>${c.celular}</td>
-                    
-                    <td>
-                        <a href="#" class="btn btn-primary">Detalhes</a>
-                        <a href="alterarCliente.jsp" class="btn btn-warning">Editar</a>
-                        
-                    </td>
-                </tr>
-            </c:forEach>
+        <c:forEach var="c" items="${clientes}">
+            <tr>
+                <td>${c.idCliente}</td>
+                <td>${c.nome}</td>
+                <td>${c.cpf}</td>
+                <td>${c.cnpj}</td>
+                <td>${c.dataNasc}</td>
+                <td>${c.sexo}</td>
+                <td>${c.email}</td>
+                <td>${c.telefone}</td>
+                <td>${c.celular}</td>
+
+                <td>
+                    <a href="#" class="btn btn-outline-primary">Detalhes</a>
+                    <a href="alterarCliente.jsp" class="btn btn-outline-warning">Editar</a>
+
+                </td>
+            </tr>
+        </c:forEach>
         </tbody>
     </table>
 </div>

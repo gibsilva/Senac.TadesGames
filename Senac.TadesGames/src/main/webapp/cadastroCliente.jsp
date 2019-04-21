@@ -18,22 +18,22 @@
                 </div>
                 <div class="form-group col-md-2">
                     <label for="cpf">CPF<h11>*</h11> </label>
-                    <input type="text" class="form-control cpf" name="cpf" id="cpf" maxlength="11" placeholder="Digite seu CPF" required>
+                    <input type="text" class="form-control " name="cpf" id="cpf" minlength="11" maxlength="11" placeholder="Digite seu CPF" required>
                 </div>
                 <div class="form-group col-md-3">
                     <label for="cpf">CNPJ</label>
-                    <input type="text" class="form-control cnpj" name="cnpj" id="cnpj" maxlength="14" placeholder="Digite seu CNPJ">
+                    <input type="text" class="form-control cnpj" name="cnpj" id="cnpj" minlength="14" maxlength="14" placeholder="Digite seu CNPJ">
                 </div>
             </div>
 
             <div class="row"> 
                 <div class="form-group col-md-2"
                      <label for="Celular">Celular<h11>*</h11></label>
-                    <input type="text" class="form-control sp_celphones" name="celular" id="celular" placeholder="Digite seu numero" required>
+                    <input type="text" class="form-control sp_celphones" name="celular" id="celular" minlength="11" placeholder="Digite seu numero" required>
                 </div>
                 <div class="form-group col-md-2"
-                     <label for="Celular">Telefone</label>
-                    <input type="text" class="form-control phone_with_ddd" name="telefone" id="telefone" placeholder="Digite seu numero">
+                     <label for="Telefone">Telefone</label>
+                    <input type="text" class="form-control phone_with_ddd" name="telefone" id="telefone" minlength="11" placeholder="Digite seu numero">
                 </div>
 
                 <label for="Sexo">Sexo<h11>*</h11></label>
@@ -61,23 +61,23 @@
 
                 <div class="form-group col-md-3">
                     <label for="Data">Data de Nascimento</label>
-                    <input type="date"  class="form-control date" id="dataNasc" placeholder="DD/MM/AAAA" maxlength="8"
+                    <input type="date"  class="form-control " id="dataNasc" placeholder="DD/MM/AAAA">
                 </div>
 
             </div>
-            </div>
-
-
-            <hr
-                <div class="row">
-                <div class="form-group-inline">
+            
+            <hr>
+            <div class="row">
+                <div class="container form-group-inline">
                     <input type="submit" class="btn btn-success" value="Salvar">
                     <input type="reset" class="btn btn-light" value="Cancelar">
                 </div>
             </div>
+
         </fieldset>
     </form>
 </div>
+
 
 
 

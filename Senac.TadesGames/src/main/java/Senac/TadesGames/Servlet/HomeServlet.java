@@ -5,6 +5,7 @@
  */
 package Senac.TadesGames.Servlet;
 
+import Senac.TadesGames.DAO.ClienteDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -27,6 +28,8 @@ public class HomeServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
+        ClienteDAO c = new ClienteDAO();
+        c.obterTodas();
         dispatcher.forward(request, response);
     }
 
