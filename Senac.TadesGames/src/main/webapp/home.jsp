@@ -11,7 +11,7 @@
     <h4>Bem-Vindo(a), The Umbrella Academy!</h4> <!--troca o nome pelo nome do usuario -->
     <h3 class="text-center" ><img src="resources/img/LogoTadesGames.png" class="img-fluid" alt="Responsive image"></h3>
     <hr>
-
+<div class="row justify-content-around">
         <div class="card-deck ">
             <div class="card border-primary mb-3" style="max-width: 20rem;">
                 <div class="card-header bg-primary text-white">Produtos</div>
@@ -40,6 +40,7 @@
                 </div>
             </div>
         </div>
+</div>
     </div>
 
 
