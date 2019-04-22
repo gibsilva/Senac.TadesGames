@@ -63,12 +63,14 @@
             </div>
             
             <hr>
-            <div class="row">
-                <div class="container form-group-inline">
-                    <input type="submit" class="btn btn-success" value="Salvar">
-                    <input type="reset" class="btn btn-light" value="Cancelar">
-                </div>
-            </div>
+            <div class="page-header"></div>
+                <div class="row">
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-success" id="inputSalvar" value="Salvar">
+                    </div>
+                    <div class="form-group col-auto">
+                        <input type="reset" class="btn btn-secondary" id="inputCancelar" value="Cancelar">
+                    </div>
 
         </fieldset>
     </form>

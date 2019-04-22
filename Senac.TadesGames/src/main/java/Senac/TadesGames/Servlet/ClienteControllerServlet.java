@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Christian
+ * @author gi
  */
 @WebServlet("/Clientes")
 public class ClienteControllerServlet extends HttpServlet {
