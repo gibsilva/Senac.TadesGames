@@ -38,8 +38,9 @@
 
                 <div class="form-group col-md-2"
                      <label for="sexo">Sexo<h11>*</h11></label>
-                    <select class="custom-select" id="sexo" name="sexo">
-                        <option selected value="M">Masculino</option>
+                    <select class="custom-select" id="sexo" name="sexo" required>
+                        <option value="">Selecione</option>
+                        <option value="M">Masculino</option>
                         <option value="F">Feminino</option>
                         <option value="O">Outros</option>
                     </select>
