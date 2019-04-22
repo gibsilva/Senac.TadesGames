@@ -36,20 +36,15 @@
                     <input type="text" class="form-control phone_with_ddd" name="telefone" id="telefone" minlength="11" placeholder="Digite seu numero">
                 </div>
 
-                <label for="Sexo">Sexo<h11>*</h11></label>
-                <div class="form-check form-check-inline">
-
-                    <input class="form-check-input" type="radio" name="Sexo" id="sexo" value="F" required>
-                    <label class="form-check-label" for="Feminino">Feminino</label>
+                <div class="form-group col-md-2"
+                     <label for="sexo">Sexo<h11>*</h11></label>
+                    <select class="custom-select" id="sexo" name="sexo">
+                        <option selected value="M">Masculino</option>
+                        <option value="F">Feminino</option>
+                        <option value="O">Outros</option>
+                    </select>
                 </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="Sexo" id="sexo" value="M">
-                    <label class="form-check-label" for="Masculino">Masculino</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="Sexo" id="sexo" value="O">
-                    <label class="form-check-label" for="Outros">Outros</label>
-                </div>
+                
             </div>
 
             <div class="row">
@@ -59,9 +54,9 @@
                            placeholder="Digite seu Email" required="">
                 </div>
 
-                <div class="form-group col-md-3">
+               <div class="form-group col-md-3">
                     <label for="Data">Data de Nascimento</label>
-                    <input type="date"  class="form-control " id="dataNasc" placeholder="DD/MM/AAAA">
+                    <input class="form-control" type="date" value="dataAtual()" id="dataNasc" name="dataNasc">
                 </div>
 
             </div>

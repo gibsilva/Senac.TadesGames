@@ -17,5 +17,7 @@ public interface IClienteDao {
     List<ClienteModel> obterTodas();
     void inserir(ClienteModel cliente);
     void alterar(ClienteModel cliente); 
+    ClienteModel obterPorEmail(String email);
+    ClienteModel obterPorCpf(String cpf); 
     
 }

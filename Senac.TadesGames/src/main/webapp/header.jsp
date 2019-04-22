@@ -56,6 +56,7 @@
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Administrador</a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="#">Cadastro de Usuario</a>
+                            <a class="dropdown-item" href="#">Consulta de Usuario</a>
 
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="cadastroProduto.jsp">Cadastro de Produto</a>

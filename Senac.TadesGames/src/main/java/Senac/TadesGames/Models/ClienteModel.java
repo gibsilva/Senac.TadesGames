@@ -14,15 +14,14 @@ import java.util.Date;
 public class ClienteModel extends PessoaModel {
 
     private int idCliente;
-    private String cpf;
     private String cnpj;
     private Date dataNasc;
-    private int telefone;
-    private int celular;
+    private String telefone;
+    private String celular;
     
 
     public ClienteModel(int idCliente, String nome, String cpf, String cnpj, Date dataNasc,
-            String email, int telefone, int celular, String sexo) {
+            String email, String telefone, String celular, String sexo) {
         this.idCliente = idCliente;
         this.nome = nome;
         this.cpf = cpf;
@@ -32,7 +31,6 @@ public class ClienteModel extends PessoaModel {
         this.telefone = telefone;
         this.celular = celular;
         this.sexo = sexo;
-
     }
 
     /**
@@ -80,43 +78,29 @@ public class ClienteModel extends PessoaModel {
     /**
      * @return the telefone
      */
-    public int getTelefone() {
+    public String getTelefone() {
         return telefone;
     }
 
     /**
      * @param telefone the telefone to set
      */
-    public void setTelefone(int telefone) {
+    public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
 
     /**
      * @return the celular
      */
-    public int getCelular() {
+    public String getCelular() {
         return celular;
     }
 
     /**
      * @param celular the celular to set
      */
-    public void setCelular(int celular) {
+    public void setCelular(String celular) {
         this.celular = celular;
-    }
-
-    /**
-     * @return the cpf
-     */
-    public String getCpf() {
-        return cpf;
-    }
-
-    /**
-     * @param cpf the cpf to set
-     */
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
     }
 
 }

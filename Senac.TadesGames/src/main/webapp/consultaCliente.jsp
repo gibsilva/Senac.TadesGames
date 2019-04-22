@@ -18,7 +18,7 @@
         </div>
         <div class="input-group">
             <div>
-                <a href="cadastroCliente.jsp" class="btn btn-primary">Novo Cliente</a>
+                <a href="cadastroCliente.jsp" class="btn btn-outline-primary">Novo Cliente</a>
             </div>
 
         </div>
@@ -55,7 +55,6 @@
                 <td>${c.celular}</td>
 
                 <td>
-                    <a href="#" class="btn btn-outline-primary">Detalhes</a>
                     <a href="alterarCliente.jsp" class="btn btn-outline-warning">Editar</a>
 
                 </td>

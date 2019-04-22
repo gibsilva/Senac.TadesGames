@@ -23,7 +23,7 @@
         </div>
         <div class="input-group">
             <div>
-                <a href="cadastroCliente.jsp" class="btn btn-primary">Novo Produto</a>
+                <a href="cadastroCliente.jsp" class="btn btn-outline-primary"">Novo Produto</a>
             </div>
 
         </div>
@@ -56,8 +56,7 @@
                 <td>${c.telefone}</td>
                 <td>${c.celular}</td>
                 <td>
-                    <a href="#" class="btn btn-primary">Detalhes</a>
-                    <a href="#" class="btn btn-warning">Editar</a>
+                    <a href="alterarProduto.jsp" class="btn btn-outline-warning">Editar</a>
                 </td>
             </tr>
         </c:forEach>

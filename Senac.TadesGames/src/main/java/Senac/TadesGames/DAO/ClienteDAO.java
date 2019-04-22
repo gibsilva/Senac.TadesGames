@@ -22,7 +22,7 @@ import java.util.List;
  */
 public class ClienteDAO implements IClienteDao {
 
-    private ConexaoDB conexao = new ConexaoDB();
+    private final ConexaoDB conexao = new ConexaoDB();
     private PreparedStatement stmt = null;
     ResultSet rs = null;
 
@@ -35,12 +35,12 @@ public class ClienteDAO implements IClienteDao {
             stmt = conn.prepareStatement("SELECT IDCLIENTE, "
                     + "NOME, "
                     + "CPF, "
-                    +"CNPJ"
+                    + "CNPJ, "
                     + "DATANASC, "
                     + "EMAIL, "
                     + "TELEFONE, "
-                    + "CELULAR  "
-                    + "SEXO"
+                    + "CELULAR,  "
+                    + "SEXO "
                     + "FROM CLIENTE WHERE IDCLIENTE = ?");
 
             stmt.setInt(1, id);
@@ -54,8 +54,90 @@ public class ClienteDAO implements IClienteDao {
                         rs.getString("cnpj"),
                         rs.getDate("DataNasc"),
                         rs.getString("email"),
-                        rs.getInt("telefone"),
-                        rs.getInt("celular"),
+                        rs.getString("telefone"),
+                        rs.getString("celular"),
+                        rs.getString("sexo")
+                );
+            }
+
+            return cliente;
+        } catch (SQLException ex) {
+            conexao.closeConnection(conn, stmt, rs);
+            return null;
+        }
+    }
+
+    @Override
+    public ClienteModel obterPorEmail(String email) {
+        Connection conn = conexao.getConnection();
+        ClienteModel cliente = null;
+
+        try {
+            stmt = conn.prepareStatement("SELECT IDCLIENTE, "
+                    + "NOME, "
+                    + "CPF, "
+                    + "CNPJ, "
+                    + "DATANASC, "
+                    + "EMAIL, "
+                    + "TELEFONE, "
+                    + "CELULAR, "
+                    + "SEXO "
+                    + "FROM CLIENTE WHERE EMAIL = ?");
+
+            stmt.setString(1, email);
+
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                cliente = new ClienteModel(
+                        rs.getInt("IdCliente"),
+                        rs.getString("Nome"),
+                        rs.getString("cpf"),
+                        rs.getString("cnpj"),
+                        rs.getDate("DataNasc"),
+                        rs.getString("email"),
+                        rs.getString("telefone"),
+                        rs.getString("celular"),
+                        rs.getString("sexo")
+                );
+            }
+
+            return cliente;
+        } catch (SQLException ex) {
+            conexao.closeConnection(conn, stmt, rs);
+            return null;
+        }
+    }
+    
+        @Override
+    public ClienteModel obterPorCpf(String cpf) {
+        Connection conn = conexao.getConnection();
+        ClienteModel cliente = null;
+
+        try {
+            stmt = conn.prepareStatement("SELECT IDCLIENTE, "
+                    + "NOME, "
+                    + "CPF, "
+                    + "CNPJ, "
+                    + "DATANASC, "
+                    + "EMAIL, "
+                    + "TELEFONE, "
+                    + "CELULAR, "
+                    + "SEXO "
+                    + "FROM CLIENTE WHERE CPF = ?");
+
+            stmt.setString(1, cpf);
+
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                cliente = new ClienteModel(
+                        rs.getInt("IdCliente"),
+                        rs.getString("Nome"),
+                        rs.getString("cpf"),
+                        rs.getString("cnpj"),
+                        rs.getDate("DataNasc"),
+                        rs.getString("email"),
+                        rs.getString("telefone"),
+                        rs.getString("celular"),
                         rs.getString("sexo")
                 );
             }
@@ -81,7 +163,7 @@ public class ClienteDAO implements IClienteDao {
                     + "DATANASC, "
                     + "EMAIL, "
                     + "TELEFONE, "
-                    + "CELULAR  "
+                    + "CELULAR, "
                     + "SEXO"
                     + "FROM CLIENTE");
 
@@ -94,8 +176,8 @@ public class ClienteDAO implements IClienteDao {
                         rs.getString("cnpj"),
                         rs.getDate("DataNasc"),
                         rs.getString("email"),
-                        rs.getInt("telefone"),
-                        rs.getInt("celular"),
+                        rs.getString("telefone"),
+                        rs.getString("celular"),
                         rs.getString("sexo")
                 );
             }
@@ -119,18 +201,17 @@ public class ClienteDAO implements IClienteDao {
                     + "DATANASC, "
                     + "EMAIL, "
                     + "TELEFONE, "
-                    + "CELULAR)"
-                    + "SEXO "
+                    + "CELULAR, "
+                    + "SEXO) "
                     + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
             stmt.setString(1, cliente.getNome());
             stmt.setString(2, cliente.getCpf());
             stmt.setString(3, cliente.getCnpj());
             stmt.setDate(4, (Date) cliente.getDataNasc());
             stmt.setString(5, cliente.getEmail());
-            stmt.setInt(6, cliente.getTelefone());
-            stmt.setInt(7, cliente.getCelular());
+            stmt.setString(6, cliente.getTelefone());
+            stmt.setString(7, cliente.getCelular());
             stmt.setString(8, cliente.getSexo());
-            
 
             stmt.executeUpdate();
         } catch (SQLException ex) {
@@ -155,8 +236,8 @@ public class ClienteDAO implements IClienteDao {
             stmt.setString(1, cliente.getNome());
             stmt.setDate(2, (Date) cliente.getDataNasc());
             stmt.setString(3, cliente.getEmail());
-            stmt.setInt(4, cliente.getTelefone());
-            stmt.setInt(5, cliente.getCelular());
+            stmt.setString(4, cliente.getTelefone());
+            stmt.setString(5, cliente.getCelular());
             stmt.setInt(6, cliente.getIdCliente());
             stmt.setString(7, cliente.getSexo());
 
