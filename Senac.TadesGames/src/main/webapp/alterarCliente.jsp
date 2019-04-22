@@ -67,7 +67,7 @@
                 <label for="status">Status</label>
 
                 <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="desativar" value="desativar" checked="">
+                    <input type="checkbox" class="custom-control-input" id="desativar" value="desativar">
                     <label class="custom-control-label" for="desativar">Desativar</label>
                 </div>
 
@@ -79,7 +79,7 @@
             <div class="row">
                 <div class="form-group-inline">
                     <input type="submit" class="btn btn-success" value="Salvar">
-                    <input type="reset" class="btn btn-light" value="Cancelar">
+                    <a href="Clientes" class="btn btn-light "  type="submit">Cancelar</a>
                 </div>
         </fieldset>
     </form>

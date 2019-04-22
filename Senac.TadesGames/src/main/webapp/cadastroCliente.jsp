@@ -51,7 +51,7 @@
             <div class="row">
                 <div class="form-group col-md-5">
                     <label for="Email">Email<h11>*</h11></label>
-                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
+                    <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp"
                            placeholder="Digite seu Email" required="">
                 </div>
 
