@@ -7,9 +7,9 @@ package Senac.TadesGames.DAO;
 
 import Senac.TadesGames.DAO.Interfaces.IClienteDao;
 import Senac.TadesGames.Data.ConexaoDB;
+import Senac.TadesGames.Helpers.Utils;
 import Senac.TadesGames.Models.ClienteModel;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -107,8 +107,8 @@ public class ClienteDAO implements IClienteDao {
             return null;
         }
     }
-    
-        @Override
+
+    @Override
     public ClienteModel obterPorCpf(String cpf) {
         Connection conn = conexao.getConnection();
         ClienteModel cliente = null;
@@ -159,12 +159,12 @@ public class ClienteDAO implements IClienteDao {
             stmt = conn.prepareStatement("SELECT IDCLIENTE, "
                     + "NOME, "
                     + "CPF, "
-                    + "CNPJ"
+                    + "CNPJ, "
                     + "DATANASC, "
                     + "EMAIL, "
                     + "TELEFONE, "
                     + "CELULAR, "
-                    + "SEXO"
+                    + "SEXO "
                     + "FROM CLIENTE");
 
             rs = stmt.executeQuery();
@@ -180,6 +180,7 @@ public class ClienteDAO implements IClienteDao {
                         rs.getString("celular"),
                         rs.getString("sexo")
                 );
+                clientes.add(cliente);
             }
 
             return clientes;
@@ -192,6 +193,7 @@ public class ClienteDAO implements IClienteDao {
     @Override
     public void inserir(ClienteModel cliente) {
         Connection conn = conexao.getConnection();
+        Utils util = new Utils();
 
         try {
             stmt = conn.prepareStatement("INSERT INTO CLIENTE("
@@ -207,7 +209,7 @@ public class ClienteDAO implements IClienteDao {
             stmt.setString(1, cliente.getNome());
             stmt.setString(2, cliente.getCpf());
             stmt.setString(3, cliente.getCnpj());
-            stmt.setDate(4, (Date) cliente.getDataNasc());
+            stmt.setString(4, util.converteDateParaStr(cliente.getDataNasc()));
             stmt.setString(5, cliente.getEmail());
             stmt.setString(6, cliente.getTelefone());
             stmt.setString(7, cliente.getCelular());
@@ -223,23 +225,23 @@ public class ClienteDAO implements IClienteDao {
     @Override
     public void alterar(ClienteModel cliente) {
         Connection conn = conexao.getConnection();
-
+        Utils util = new Utils();
         try {
-            stmt = conn.prepareStatement("UPTADE CLIENTE SET "
-                    + "NOME,"
-                    + "DATANASC,"
-                    + "EMAIL,"
-                    + "TELEFONE,"
-                    + "CELULAR,"
-                    + "SEXO"
-                    + " = ?, ?, ?, ?, ?, ?, ?, ? WHERE IDCLIENTE = ?");
+            stmt = conn.prepareStatement("UPDATE CLIENTE SET "
+                    + "NOME = ?,"
+                    + "DATANASC = ?,"
+                    + "EMAIL = ?,"
+                    + "TELEFONE = ?,"
+                    + "CELULAR = ?,"
+                    + "SEXO = ? "
+                    + "WHERE IDCLIENTE = ?");
             stmt.setString(1, cliente.getNome());
-            stmt.setDate(2, (Date) cliente.getDataNasc());
+            stmt.setString(2, util.converteDateParaStr(cliente.getDataNasc()));
             stmt.setString(3, cliente.getEmail());
             stmt.setString(4, cliente.getTelefone());
             stmt.setString(5, cliente.getCelular());
-            stmt.setInt(6, cliente.getIdCliente());
-            stmt.setString(7, cliente.getSexo());
+            stmt.setString(6, cliente.getSexo());
+            stmt.setInt(7, cliente.getIdCliente());
 
             stmt.executeUpdate();
         } catch (SQLException ex) {

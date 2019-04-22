@@ -5,63 +5,60 @@
 --%>
 
 <%@include file="header.jsp" %>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <div class="container">
     <br>
     <h2>Alterar Cliente</h2>
     <hr/>
-    <form>
+    <form action="Clientes" method="post">
+        <input type="hidden" value="${cliente.idCliente}" id="idCliente" name="idCliente">
+        <input type="hidden" value="alterar" id="acao" name="acao">
         <fieldset>
             <div class="row">
                 <div class="form-group col-md-5">
                     <label for="name">Nome <h11>*</h11></label>
-                    <input type="text" class="form-control" name="nome" id="nome" placeholder="Digite seu Nome" maxlength="80" required>
+                    <input type="text" class="form-control" name="nome" id="nome" placeholder="Digite seu Nome" maxlength="80" required value="${cliente.nome}">
                 </div>
                 <div class="form-group col-md-2">
                     <label for="cpf">CPF<h11>*</h11> </label>
-                    <input type="text" class="form-control cpf" name="cpf" id="cpf" maxlength="11" placeholder="Digite seu CPF"  disabled>
+                    <input type="text" class="form-control" name="cpf" id="cpf" maxlength="11" placeholder="Digite seu CPF" readonly value="${cliente.cpf}">
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="cpf">CNPJ </label>
-                    <input type="text" class="form-control cnpj" name="cnpj" id="Cnpj" maxlength="14" placeholder="Digite seu CNPJ" disabled>
+                    <label for="cnpj">CNPJ </label>
+                    <input type="text" class="form-control" name="cnpj" id="cnpj" maxlength="14" placeholder="Digite seu CNPJ" readonly value="${cliente.cnpj}">
                 </div>
             </div>
 
             <div class="row"> 
                 <div class="form-group col-md-2"
                      <label for="Celular">Celular<h11>*</h11></label>
-                    <input type="text" class="form-control sp_celphones" name="celular" id="celular" placeholder="Digite seu numero" required>
+                    <input type="text" class="form-control sp_celphones" name="celular" id="celular" placeholder="Digite seu numero" required value="${cliente.celular}">
                 </div>
                 <div class="form-group col-md-2"
                      <label for="Celular">Telefone</label>
-                    <input type="text" class="form-control phone_with_ddd" name="telefone" id="telefone" placeholder="Digite seu numero">
+                    <input type="text" class="form-control phone_with_ddd" name="telefone" id="telefone" placeholder="Digite seu numero" value="${cliente.telefone}">
                 </div>
 
-                <label for="Sexo">Sexo<h11>*</h11></label>
-                <div class="form-check form-check-inline">
-
-                    <input class="form-check-input" type="radio" name="Sexo" id="sexo" value="F" required>
-                    <label class="form-check-label" for="Feminino">Feminino</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="Sexo" id="sexo" value="M">
-                    <label class="form-check-label" for="Masculino">Masculino</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="Sexo" id="sexo" value="O">
-                    <label class="form-check-label" for="Outros">Outros</label>
+                <div class="form-group col-md-2"
+                     <label for="sexo">Sexo<h11>*</h11></label>
+                    <select class="custom-select" id="sexo" name="sexo" required>
+                        <option value="M">Masculino</option>
+                        <option value="F">Feminino</option>
+                        <option value="O">Outros</option>
+                    </select>
                 </div>
             </div>
 
             <div class="row">
                 <div class="form-group col-md-5">
                     <label for="Email">Email<h11>*</h11></label>
-                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
-                           placeholder="Digite seu Email" required="">
+                    <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp"
+                           placeholder="Digite seu Email" required="" value="${cliente.email}">
                 </div>
 
                 <div class="form-group col-md-3">
                     <label for="Data">Data de Nascimento</label>
-                    <input type="date"  class="form-control date" id="dataNasc" placeholder="DD/MM/AAAA" maxlength="8"
+                    <input type="date"  class="form-control" id="dataNasc" name="dataNasc" placeholder="DD/MM/AAAA" maxlength="8" value=${cliente.dataNasc}
                 </div>
 
             </div>
@@ -93,6 +90,8 @@
 
 <script>
     $(document).ready(function () {
+        preencheData();
+        
         $('.date').mask('00/00/0000');
         $('.time').mask('00:00:00');
         $('.date_time').mask('00/00/0000 00:00:00');
@@ -127,5 +126,13 @@
             }
         });
         $('.selectonfocus').mask("00/00/0000", {selectOnFocus: true});
+        
     });
+    
+    function preencheData(){
+        var date = ${cliente.dataNasc};
+        var currentDate = date.toISOString().slice(0, 10);
+        
+        document.getElementById('dataNasc').value = currentDate;
+    }
 </script>

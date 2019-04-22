@@ -8,7 +8,8 @@
     <br>
     <h2>Novo Cliente</h2>
     <hr/>
-    <form>
+    <form action="Clientes" method="post">
+        <input type="hidden" value="salvar" id="acao" name="acao">
         <fieldset>
             <div class="row">
                 <div class="form-group col-md-5">
@@ -39,8 +40,7 @@
                 <div class="form-group col-md-2"
                      <label for="sexo">Sexo<h11>*</h11></label>
                     <select class="custom-select" id="sexo" name="sexo" required>
-                        <option value="">Selecione</option>
-                        <option value="M">Masculino</option>
+                        <option selected value="M">Masculino</option>
                         <option value="F">Feminino</option>
                         <option value="O">Outros</option>
                     </select>
@@ -63,14 +63,12 @@
             </div>
             
             <hr>
-            <div class="page-header"></div>
-                <div class="row">
-                    <div class="form-group">
-                        <input type="submit" class="btn btn-success" id="inputSalvar" value="Salvar">
-                    </div>
-                    <div class="form-group col-auto">
-                        <input type="reset" class="btn btn-secondary" id="inputCancelar" value="Cancelar">
-                    </div>
+            <div class="row">
+                <div class="container form-group-inline">
+                    <input type="submit" class="btn btn-success" value="Salvar">
+                    <input type="reset" class="btn btn-light" value="Cancelar">
+                </div>
+            </div>
 
         </fieldset>
     </form>

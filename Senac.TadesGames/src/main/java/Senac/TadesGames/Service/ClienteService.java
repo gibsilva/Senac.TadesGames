@@ -8,6 +8,7 @@ package Senac.TadesGames.Service;
 import Senac.TadesGames.DAO.ClienteDAO;
 import Senac.TadesGames.Models.ClienteModel;
 import java.util.InputMismatchException;
+import java.util.List;
 
 /**
  *
@@ -22,15 +23,15 @@ public class ClienteService {
     }
 
     private boolean validaEmailExistente(String email) {
-        return this.clienteDao.obterPorEmail(email) != null;
+        return this.clienteDao.obterPorEmail(email) == null;
     }
 
     private boolean validaCpfExistente(String cpf) {
-        return this.clienteDao.obterPorCpf(cpf) != null;
+        return this.clienteDao.obterPorCpf(cpf) == null;
     }
 
     public boolean validar(ClienteModel cliente) {
-        return !(validaEmailExistente(cliente.getEmail()) || validarCamposNulosOuVazios(cliente.getNome(), cliente.getCpf(), cliente.getCelular(), cliente.getSexo())
+        return (validaEmailExistente(cliente.getEmail()) || validarCamposNulosOuVazios(cliente.getNome(), cliente.getCpf(), cliente.getCelular(), cliente.getSexo())
                 || validaCpfExistente(cliente.getCpf()) || validarCpf(cliente.getCpf()));
     }
 
@@ -45,6 +46,27 @@ public class ClienteService {
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
+    }
+
+    public boolean alterarCliente(ClienteModel cliente) throws Exception {
+        try {
+            if (validar(cliente)) {
+                clienteDao.alterar(cliente);
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    public ClienteModel obterClientePorId(int id) {
+        return clienteDao.obterPorId(id);
+    }
+
+    public List<ClienteModel> obterListaClientes() {
+        return clienteDao.obterTodas();
     }
 
     private boolean validarCamposNulosOuVazios(String nome, String cpf, String celular, String sexo) {
@@ -72,7 +94,7 @@ public class ClienteService {
             sm = 0;
             peso = 10;
             for (i = 0; i < 9; i++) {
-        // converte o i-esimo caractere do cpf em um numero:
+                // converte o i-esimo caractere do cpf em um numero:
                 // por exemplo, transforma o caractere '0' no inteiro 0         
                 // (48 eh a posicao de '0' na tabela ASCII)         
                 num = (int) (cpf.charAt(i) - 48);

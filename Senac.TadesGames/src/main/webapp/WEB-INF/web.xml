@@ -6,7 +6,15 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
-        <url-pattern>/homeservlet</url-pattern>
+        <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ClienteControllerServlet</servlet-name>
+        <servlet-class>Senac.TadesGames.Servlet.ClienteControllerServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ClienteControllerServlet</servlet-name>
+        <url-pattern>/Clientes/*</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

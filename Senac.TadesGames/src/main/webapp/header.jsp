@@ -40,7 +40,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Consultas</a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="consultaCliente.jsp">Cliente</a>
+                            <a class="dropdown-item" href="Clientes">Cliente</a>
                             <a class="dropdown-item" href="consultaProduto.jsp">Produto</a>
                             <a class="dropdown-item" href="#">Vendas</a>  
                         </div>

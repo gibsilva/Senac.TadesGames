@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Senac.TadesGames.Helpers;
+
 import Senac.TadesGames.Servlet.ClienteControllerServlet;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -17,6 +18,7 @@ import java.util.logging.Logger;
  * @author Gi
  */
 public class Utils {
+
     private static Date date;
     private static String dateStr;
 
@@ -38,6 +40,12 @@ public class Utils {
         return dataFormatada;
     }
 
+    public static String converteDateParaStrBR(Date date) {
+        SimpleDateFormat df = new SimpleDateFormat("dd/mm/yyyy");
+        String dataFormatada = df.format(date);
+        return dataFormatada;
+    }
+
     public String removePontosBarraStr(String str) {
         String strFormatada = str.replaceAll("[./()-]", "");
 
@@ -47,6 +55,5 @@ public class Utils {
     public String removeEspacoBranco(String str) {
         return str.replace(" ", "");
     }
-    
-    
+
 }
