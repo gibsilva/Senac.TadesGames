@@ -40,7 +40,8 @@ public class ClienteDAO implements IClienteDao {
                     + "EMAIL, "
                     + "TELEFONE, "
                     + "CELULAR,  "
-                    + "SEXO "
+                    + "SEXO, "
+                    + "ATIVO "
                     + "FROM CLIENTE WHERE IDCLIENTE = ?");
 
             stmt.setInt(1, id);
@@ -56,7 +57,8 @@ public class ClienteDAO implements IClienteDao {
                         rs.getString("email"),
                         rs.getString("telefone"),
                         rs.getString("celular"),
-                        rs.getString("sexo")
+                        rs.getString("sexo"),
+                        rs.getBoolean("ativo")
                 );
             }
 
@@ -81,7 +83,8 @@ public class ClienteDAO implements IClienteDao {
                     + "EMAIL, "
                     + "TELEFONE, "
                     + "CELULAR, "
-                    + "SEXO "
+                    + "SEXO, "
+                    + "ATIVO "
                     + "FROM CLIENTE WHERE EMAIL = ?");
 
             stmt.setString(1, email);
@@ -97,7 +100,51 @@ public class ClienteDAO implements IClienteDao {
                         rs.getString("email"),
                         rs.getString("telefone"),
                         rs.getString("celular"),
-                        rs.getString("sexo")
+                        rs.getString("sexo"),
+                        rs.getBoolean("ativo")
+                );
+            }
+
+            return cliente;
+        } catch (SQLException ex) {
+            conexao.closeConnection(conn, stmt, rs);
+            return null;
+        }
+    }
+
+    public ClienteModel obterPorEmail(String email, int id) {
+        Connection conn = conexao.getConnection();
+        ClienteModel cliente = null;
+
+        try {
+            stmt = conn.prepareStatement("SELECT IDCLIENTE, "
+                    + "NOME, "
+                    + "CPF, "
+                    + "CNPJ, "
+                    + "DATANASC, "
+                    + "EMAIL, "
+                    + "TELEFONE, "
+                    + "CELULAR, "
+                    + "SEXO, "
+                    + "ATIVO "
+                    + "FROM CLIENTE WHERE EMAIL = ? AND IDCLIENTE != ?");
+
+            stmt.setString(1, email);
+            stmt.setInt(2, id);
+
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                cliente = new ClienteModel(
+                        rs.getInt("IdCliente"),
+                        rs.getString("Nome"),
+                        rs.getString("cpf"),
+                        rs.getString("cnpj"),
+                        rs.getDate("DataNasc"),
+                        rs.getString("email"),
+                        rs.getString("telefone"),
+                        rs.getString("celular"),
+                        rs.getString("sexo"),
+                        rs.getBoolean("ativo")
                 );
             }
 
@@ -122,7 +169,8 @@ public class ClienteDAO implements IClienteDao {
                     + "EMAIL, "
                     + "TELEFONE, "
                     + "CELULAR, "
-                    + "SEXO "
+                    + "SEXO, "
+                    + "ATIVO "
                     + "FROM CLIENTE WHERE CPF = ?");
 
             stmt.setString(1, cpf);
@@ -138,7 +186,8 @@ public class ClienteDAO implements IClienteDao {
                         rs.getString("email"),
                         rs.getString("telefone"),
                         rs.getString("celular"),
-                        rs.getString("sexo")
+                        rs.getString("sexo"),
+                        rs.getBoolean("ativo")
                 );
             }
 
@@ -164,7 +213,8 @@ public class ClienteDAO implements IClienteDao {
                     + "EMAIL, "
                     + "TELEFONE, "
                     + "CELULAR, "
-                    + "SEXO "
+                    + "SEXO, "
+                    + "ATIVO "
                     + "FROM CLIENTE");
 
             rs = stmt.executeQuery();
@@ -178,7 +228,8 @@ public class ClienteDAO implements IClienteDao {
                         rs.getString("email"),
                         rs.getString("telefone"),
                         rs.getString("celular"),
-                        rs.getString("sexo")
+                        rs.getString("sexo"),
+                        rs.getBoolean("ativo")
                 );
                 clientes.add(cliente);
             }
@@ -204,8 +255,9 @@ public class ClienteDAO implements IClienteDao {
                     + "EMAIL, "
                     + "TELEFONE, "
                     + "CELULAR, "
-                    + "SEXO) "
-                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+                    + "SEXO, "
+                    + "ATIVO) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
             stmt.setString(1, cliente.getNome());
             stmt.setString(2, cliente.getCpf());
             stmt.setString(3, cliente.getCnpj());
@@ -214,6 +266,7 @@ public class ClienteDAO implements IClienteDao {
             stmt.setString(6, cliente.getTelefone());
             stmt.setString(7, cliente.getCelular());
             stmt.setString(8, cliente.getSexo());
+            stmt.setBoolean(9, cliente.isAtivo());
 
             stmt.executeUpdate();
         } catch (SQLException ex) {
@@ -233,7 +286,8 @@ public class ClienteDAO implements IClienteDao {
                     + "EMAIL = ?,"
                     + "TELEFONE = ?,"
                     + "CELULAR = ?,"
-                    + "SEXO = ? "
+                    + "SEXO = ?, "
+                    + "ATIVO = ? "
                     + "WHERE IDCLIENTE = ?");
             stmt.setString(1, cliente.getNome());
             stmt.setString(2, util.converteDateParaStr(cliente.getDataNasc()));
@@ -241,7 +295,8 @@ public class ClienteDAO implements IClienteDao {
             stmt.setString(4, cliente.getTelefone());
             stmt.setString(5, cliente.getCelular());
             stmt.setString(6, cliente.getSexo());
-            stmt.setInt(7, cliente.getIdCliente());
+            stmt.setBoolean(7, cliente.isAtivo());
+            stmt.setInt(8, cliente.getIdCliente());
 
             stmt.executeUpdate();
         } catch (SQLException ex) {

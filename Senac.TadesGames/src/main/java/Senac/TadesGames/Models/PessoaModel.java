@@ -14,6 +14,7 @@ public class PessoaModel {
     protected String cpf;
     protected String email;
     protected String sexo;
+    protected boolean ativo;
 
     /**
      * @return the nome
@@ -69,5 +70,19 @@ public class PessoaModel {
      */
     public void setSexo(String sexo) {
         this.sexo = sexo;
+    }
+
+    /**
+     * @return the ativo
+     */
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    /**
+     * @param ativo the ativo to set
+     */
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
     }
 }

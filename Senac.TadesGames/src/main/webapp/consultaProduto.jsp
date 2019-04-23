@@ -13,17 +13,16 @@
     <div class="btn-toolbar justify-content-between" role="toolbar" >
 
         <div class="input-group-append col-md-6">
-            
-            <input type="text" class="form-control" placeholder="Pesquisar">
-            
+            <input type="text" class="form-control " placeholder="Pesquisar" id="filtro" name="filtro">
+            <!--
             <button class="btn btn-dark" type="button">
                 <i class="fa fa-search"></i> Pesquisar
             </button>
-            
+            -->
         </div>
         <div class="input-group">
             <div>
-                <a href="cadastroCliente.jsp" class="btn btn-outline-primary"">Novo Produto</a>
+                <a href="cadastroProduto.jsp" class="btn btn-outline-primary">Novo Produto</a>
             </div>
 
         </div>
@@ -55,6 +54,7 @@
                 <td>${c.email}</td>
                 <td>${c.telefone}</td>
                 <td>${c.celular}</td>
+                
                 <td>
                     <a href="alterarProduto.jsp" class="btn btn-outline-warning">Editar</a>
                 </td>

@@ -6,6 +6,7 @@
 package Senac.TadesGames.Service;
 
 import Senac.TadesGames.DAO.ClienteDAO;
+import Senac.TadesGames.Helpers.Notificacao;
 import Senac.TadesGames.Models.ClienteModel;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -17,45 +18,64 @@ import java.util.List;
 public class ClienteService {
 
     private final ClienteDAO clienteDao;
+    private final Notificacao notificacao;
 
     public ClienteService() {
         this.clienteDao = new ClienteDAO();
+        this.notificacao = new Notificacao();
     }
 
-    private boolean validaEmailExistente(String email) {
-        return this.clienteDao.obterPorEmail(email) == null;
+    private void validaEmailExistente(String email) {
+        if (clienteDao.obterPorEmail(email) != null) {
+            this.notificacao.adicionaNotificacao("email", "E-mail já está cadastrado");
+        }
     }
 
-    private boolean validaCpfExistente(String cpf) {
-        return this.clienteDao.obterPorCpf(cpf) == null;
+    private void validaEmailExistente(String email, int id) {
+        if (clienteDao.obterPorEmail(email, id) != null) {
+            this.notificacao.adicionaNotificacao("email", "E-mail já está cadastrado");
+        }
     }
 
-    public boolean validar(ClienteModel cliente) {
-        return (validaEmailExistente(cliente.getEmail()) || validarCamposNulosOuVazios(cliente.getNome(), cliente.getCpf(), cliente.getCelular(), cliente.getSexo())
-                || validaCpfExistente(cliente.getCpf()) || validarCpf(cliente.getCpf()));
+    private void validaCpfExistente(String cpf) {
+        if (clienteDao.obterPorCpf(cpf) != null) {
+            this.notificacao.adicionaNotificacao("cpf", "Esse CPF já está cadastrado");
+        }
     }
 
-    public boolean incluirCliente(ClienteModel cliente) throws Exception {
+    private boolean validarClienteInclusao(ClienteModel cliente) {
+        if (!validarCpf(cliente.getCpf())) {
+            this.notificacao.adicionaNotificacao("cpf", "CPF inválido, por favor digite um CPF válido");
+        }
+
+        validaCpfExistente(cliente.getCpf());
+        validaEmailExistente(cliente.getEmail());
+
+        return this.notificacao.quantidadeNotificacoes() == 0;
+    }
+
+    private boolean validarClienteAlteracao(ClienteModel cliente) {
+        validaEmailExistente(cliente.getEmail(), cliente.getIdCliente());
+        return this.notificacao.quantidadeNotificacoes() == 0;
+    }
+
+    public List<Notificacao> incluirCliente(ClienteModel cliente) throws Exception {
         try {
-            if (validar(cliente)) {
+            if (validarClienteInclusao(cliente)) {
                 clienteDao.inserir(cliente);
-                return true;
-            } else {
-                return false;
             }
+            return this.notificacao.listaNotificacoes();
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
     }
 
-    public boolean alterarCliente(ClienteModel cliente) throws Exception {
+    public List<Notificacao> alterarCliente(ClienteModel cliente) throws Exception {
         try {
-            if (validar(cliente)) {
+            if (validarClienteAlteracao(cliente)) {
                 clienteDao.alterar(cliente);
-                return true;
-            } else {
-                return false;
             }
+            return this.notificacao.listaNotificacoes();
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
@@ -69,8 +89,8 @@ public class ClienteService {
         return clienteDao.obterTodas();
     }
 
-    private boolean validarCamposNulosOuVazios(String nome, String cpf, String celular, String sexo) {
-        return !(nome.equals("") || cpf.equals("") || celular.equals("") || sexo.equals(""));
+    public void limparNotificacoes() {
+        this.notificacao.limparLista();
     }
 
     private boolean validarCpf(String cpf) {

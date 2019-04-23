@@ -3,11 +3,21 @@
     Created on : 20/04/2019, 17:36:01
     Author     : Gi
 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="header.jsp" %>
 <div class="container">
     <br>
     <h2>Novo Cliente</h2>
     <hr/>
+    <!-- notificacoes caso houver erros nas validações -->
+    <div class="form-group">
+        <ul class="text-danger">
+            <c:forEach var = "n" items = "${notificacoes}">
+                <li>${n.valor}</li>
+            </c:forEach>
+        </ul>
+
+    </div>
     <form action="Clientes" method="post">
         <input type="hidden" value="salvar" id="acao" name="acao">
         <fieldset>
@@ -45,7 +55,7 @@
                         <option value="O">Outros</option>
                     </select>
                 </div>
-                
+
             </div>
 
             <div class="row">
@@ -55,13 +65,13 @@
                            placeholder="Digite seu Email" required="">
                 </div>
 
-               <div class="form-group col-md-3">
+                <div class="form-group col-md-3">
                     <label for="Data">Data de Nascimento</label>
                     <input class="form-control" type="date" value="dataAtual()" id="dataNasc" name="dataNasc">
                 </div>
 
             </div>
-            
+
             <hr>
             <div class="row">
                 <div class="container form-group-inline">
@@ -77,9 +87,9 @@
 
 
 
-
 <script>
     $(document).ready(function () {
+
         $('.date').mask('00/00/0000');
         $('.time').mask('00:00:00');
         $('.date_time').mask('00/00/0000 00:00:00');
@@ -115,4 +125,5 @@
         });
         $('.selectonfocus').mask("00/00/0000", {selectOnFocus: true});
     });
+
 </script>

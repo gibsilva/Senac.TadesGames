@@ -5,11 +5,13 @@
  */
 package Senac.TadesGames.Servlet;
 
+import Senac.TadesGames.Helpers.Notificacao;
 import Senac.TadesGames.Helpers.Utils;
 import Senac.TadesGames.Models.ClienteModel;
 import Senac.TadesGames.Service.ClienteService;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -99,21 +101,25 @@ public class ClienteControllerServlet extends HttpServlet {
         String celular = util.removePontosBarraStr(request.getParameter("celular")).replace(" ", "");
         String sexo = util.removePontosBarraStr(request.getParameter("sexo"));
 
-        ClienteModel cliente = new ClienteModel(0, nome, cpf, cnpj, date, email, telefone, celular, sexo);
+        ClienteModel cliente = new ClienteModel(0, nome, cpf, cnpj, date, email, telefone, celular, sexo, true);
 
         try {
-            if (service.incluirCliente(cliente)) {
+            List<Notificacao> notificacoes = service.incluirCliente(cliente);
+            if (notificacoes.isEmpty()) {
                 request.setAttribute("clientes", service.obterListaClientes());
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/consultaCliente.jsp");
                 dispatcher.forward(request, response);
             } else {
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/erro.jsp");
+                request.setAttribute("notificacoes", notificacoes);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/cadastroCliente.jsp");
                 dispatcher.forward(request, response);
             }
 
         } catch (Exception e) {
             RequestDispatcher dispatcher = request.getRequestDispatcher("/erro.jsp");
             dispatcher.forward(request, response);
+        } finally {
+            service.limparNotificacoes();
         }
     }
 
@@ -137,8 +143,8 @@ public class ClienteControllerServlet extends HttpServlet {
     protected void alterarCliente(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Utils util = new Utils();
-        
-        int id = Integer.parseInt(request.getParameter("idCliente"));      
+
+        int id = Integer.parseInt(request.getParameter("idCliente"));
         String nome = util.removePontosBarraStr(request.getParameter("nome"));
         String cpf = util.removePontosBarraStr(request.getParameter("cpf"));
         String cnpj = util.removePontosBarraStr(request.getParameter("cnpj"));
@@ -147,22 +153,29 @@ public class ClienteControllerServlet extends HttpServlet {
         String telefone = util.removePontosBarraStr(request.getParameter("telefone")).replace(" ", "");
         String celular = util.removePontosBarraStr(request.getParameter("celular")).replace(" ", "");
         String sexo = util.removePontosBarraStr(request.getParameter("sexo"));
-        
-        ClienteModel cliente = new ClienteModel(id, nome, cpf, cnpj, date, email, telefone, celular, sexo);
-        
+        boolean ativo = Boolean.parseBoolean(request.getParameter("ativo"));
+
+        ClienteModel cliente = new ClienteModel(id, nome, cpf, cnpj, date, email, telefone, celular, sexo, ativo);
+
         try {
-            if (service.alterarCliente(cliente)) {
+            List<Notificacao> notificacoes = service.alterarCliente(cliente);
+            if (notificacoes.isEmpty()) {
                 request.setAttribute("clientes", service.obterListaClientes());
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/consultaCliente.jsp");
                 dispatcher.forward(request, response);
             } else {
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/erro.jsp");
+                request.setAttribute("notificacoes", notificacoes);
+                request.setAttribute("cliente", cliente);
+                request.setAttribute("dataNascFormatada", Utils.converteDateParaStrBR(cliente.getDataNasc()));
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/alterarCliente.jsp");
                 dispatcher.forward(request, response);
             }
 
         } catch (Exception e) {
             RequestDispatcher dispatcher = request.getRequestDispatcher("/erro.jsp");
             dispatcher.forward(request, response);
+        } finally {
+            service.limparNotificacoes();
         }
     }
 }

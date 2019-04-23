@@ -34,15 +34,15 @@
             <form>
                 <div class="row justify-content-around">
                     <div class="form-group col-md-2">
-                        <label for="IdProduto">ID do protuto*</label>
+                        <label for="IdProduto">ID do protuto<h11 class="text-danger">*</h11></label>
                         <input type="text" class="form-control" id="IdProduto" placeholder="0000" readonly>
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="inputTitulo">Nome/Título*</label>
+                        <label for="inputTitulo">Nome/Título<h11 class="text-danger">*</h11></label>
                         <input type="text" class="form-control" maxlength="80"  id="inputTitulo" placeholder="Nome do Produto" required>
                     </div>
                     <div class="form-group col-md-3">
-                        <label for="inputPlataforma">Plataforma*</label>
+                        <label for="inputPlataforma">Plataforma<h11 class="text-danger">*</h11></label>
                         <select id="inputPlataforma" class="custom-select" required>
                             <option value="">Selecione </option>
                             <option value="1">PlayStation 4 </option>
@@ -58,10 +58,10 @@
                             <option value="11">Nitendo 3DS	  </option>
                             <option value="12">PC/Computador </option>
                         </select>
-                        <div class="invalid-feedback">Escolha uma Plataforma</div>
                     </div>
+                    
                     <div class="form-group col-md-3">
-                        <label for="inputCategoria">Categoria*</label>
+                        <label for="inputCategoria">Categoria<h11 class="text-danger">*</h11></label>
                         <select id="inputCategoria" class="custom-select" required>
                             <option value="">Selecione </option>
                             <option value="1">Jogo 		</option>
@@ -71,10 +71,10 @@
                             <option value="5">Controle	</option>
                             <option value="6">Créditos    </option>
                         </select>
-                        <div class="invalid-feedback">Escolha uma catêgoria</div>
                     </div>
+                    
                     <div class="form-group col-md-3">
-                        <label for="inputValorCompra">Valor de Compra*</label>
+                        <label for="inputValorCompra">Valor de Compra<h11 class="text-danger">*</h11></label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">R$</span>
@@ -84,7 +84,7 @@
                     </div>
 
                     <div class="form-group col-md-3">
-                        <label for="inputValorVenda">Valor de Venda*</label>
+                        <label for="inputValorVenda">Valor de Venda<h11 class="text-danger">*</h11></label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">R$</span>
@@ -94,20 +94,19 @@
                     </div>
 
                     <div class="form-group col-md-3">
-                        <label for="inputQuantidade">Quantidade*</label>
+                        <label for="inputQuantidade">Quantidade<h11 class="text-danger">*</h11></label>
                         <input type="text" class="form-control" id="inputQuantidade" placeholder="00" required>
                     </div>
-                    <div class="col-md-3">
-                        <label>Produto Desativado</label>
-                        <div class="form-check col-md-3">
-                            <input class="form-check-input" type="checkbox" id="desativacao">
-                            <label class="form-check-label" for="desativacao" >
-                                Desativado
-                            </label>
-                        </div>
-                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="inputSexo">Status</label>
+                        <select id="inputCategoria" class="custom-select" required>
+                            <option selected value="A">Ativo</option>
+                            <option value="I">Inativo</option>                           
+                        </select>
+                </div>
+                    
                     <div class="form-group col-md-3">
-                        <label for="exampleFormControlSelect2">Gêneros*</label>
+                        <label for="exampleFormControlSelect2">Gêneros<h11 class="text-danger">*</h11></label>
                         <select multiple class="form-control" id="exampleFormControlSelect2" required>
                             <option>FPS</option>
                             <option>Aventura</option>
@@ -118,7 +117,7 @@
                         </select>
                     </div>
                     <div class="form-group col-md-9">
-                        <label for="input Descrição">Descrição</label>
+                        <label for="input Descrição">Descrição<h11 class="text-danger">*</h11></label>
                         <textarea class="form-control" rows="4" placeholder="Descrição..." required></textarea>
                     </div>
                 </div>
@@ -128,7 +127,7 @@
                         <input type="submit" class="btn btn-success" id="inputSalvar" value="Salvar">
                     </div>
                     <div class="form-group col-auto">
-                        <input type="reset" class="btn btn-secondary" id="inputCancelar" value="Cancelar">
+                        <a href="home.jsp" class="btn btn-light "  type="submit">Cancelar</a>
                     </div>
                 
             </form>

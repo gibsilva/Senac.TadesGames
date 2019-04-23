@@ -10,6 +10,15 @@
     <br>
     <h2>Alterar Cliente</h2>
     <hr/>
+    <!-- notificacoes caso houver erros nas validações -->
+    <div class="form-group">
+        <ul class="text-danger">
+            <c:forEach var = "n" items = "${notificacoes}">
+                <li>${n.valor}</li>
+            </c:forEach>
+        </ul>
+
+    </div>
     <form action="Clientes" method="post">
         <input type="hidden" value="${cliente.idCliente}" id="idCliente" name="idCliente">
         <input type="hidden" value="alterar" id="acao" name="acao">
@@ -63,15 +72,13 @@
 
             </div>
 
-            <fieldset class="form-group">
-                <label for="status">Status</label>
-
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="desativar" value="desativar">
-                    <label class="custom-control-label" for="desativar">Desativar</label>
-                </div>
-
-            </fieldset>
+            <div class="form-group col-md-2">
+                <label for="inputAtivo">Status</label>
+                <select id="ativo" name="ativo" class="custom-select" required>
+                    <option selected value="true">Ativo</option>
+                    <option value="false">Inativo</option>                           
+                </select>
+            </div>
 
             </div>
 
@@ -79,7 +86,7 @@
             <div class="row">
                 <div class="form-group-inline">
                     <input type="submit" class="btn btn-success" value="Salvar">
-                    <a href="Clientes" class="btn btn-light "  type="submit">Cancelar</a>
+                    <a href="Clientes" class="btn btn-light">Cancelar</a>
                 </div>
         </fieldset>
     </form>
@@ -91,7 +98,7 @@
 <script>
     $(document).ready(function () {
         preencheData();
-        
+
         $('.date').mask('00/00/0000');
         $('.time').mask('00:00:00');
         $('.date_time').mask('00/00/0000 00:00:00');
@@ -126,13 +133,14 @@
             }
         });
         $('.selectonfocus').mask("00/00/0000", {selectOnFocus: true});
-        
+
     });
-    
-    function preencheData(){
+
+    function preencheData() {
         var date = ${cliente.dataNasc};
         var currentDate = date.toISOString().slice(0, 10);
-        
+
         document.getElementById('dataNasc').value = currentDate;
     }
+    
 </script>

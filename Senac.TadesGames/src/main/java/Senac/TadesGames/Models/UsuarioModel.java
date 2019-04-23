@@ -13,6 +13,7 @@ public class UsuarioModel extends PessoaModel {
 
     private int idUsuario;
     private String filial;
+    private String setor;
     private String cargo;
     private PermissaoModel permissao;
     private String login;
@@ -21,19 +22,21 @@ public class UsuarioModel extends PessoaModel {
    
 
     public UsuarioModel(int idUsuario, String nome, String cpf,
-            String email, String filial, String cargo,
-            String login, String senha, int idFilial, String sexo) {
+            String email, String filial,String setor, String cargo,
+            String login, String senha, int idFilial, String sexo, boolean ativo) {
 
         this.idUsuario = idUsuario;
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;
         this.filial = filial;
+        this.setor = setor;
         this.cargo = cargo;
         this.login = login;
         this.senha = senha;
         this.idFilial = idFilial;
         this.sexo = sexo;
+        this.ativo = ativo;
     }
 
     /**
@@ -132,6 +135,20 @@ public class UsuarioModel extends PessoaModel {
      */
     public void setIdFilial(int idFilial) {
         this.idFilial = idFilial;
+    }
+
+    /**
+     * @return the setor
+     */
+    public String getSetor() {
+        return setor;
+    }
+
+    /**
+     * @param setor the setor to set
+     */
+    public void setSetor(String setor) {
+        this.setor = setor;
     }
     
 }

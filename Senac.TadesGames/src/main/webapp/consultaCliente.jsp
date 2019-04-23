@@ -40,6 +40,7 @@
                 <th scope="col">E-mail</th>
                 <th scope="col">Telefone</th>
                 <th scope="col">Celular</th>
+                <th scope="col">Status</th>
                 <th scope="col">#</th>
 
             </tr>
@@ -56,14 +57,18 @@
                     <td>${c.email}</td>
                     <td>${c.telefone}</td>
                     <td>${c.celular}</td>
-
+                    <c:if test="${c.ativo == true}">
+                        <td>Ativo</td>
+                    </c:if>
+                    <c:if test="${c.ativo == false}">
+                        <td>Inativo</td>
+                    </c:if>
                     <td>
                         <c:url var="alterarCliente" value="/Clientes">
                             <c:param name="acao" value="alterar" />
                             <c:param name="idCliente" value="${c.idCliente}" />
                         </c:url>
                         <a href="${alterarCliente}" class="btn btn-outline-warning">Editar</a>
-
                     </td>
                 </tr>
             </c:forEach>

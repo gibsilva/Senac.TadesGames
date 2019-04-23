@@ -21,7 +21,8 @@ public class ClienteModel extends PessoaModel {
     
 
     public ClienteModel(int idCliente, String nome, String cpf, String cnpj, Date dataNasc,
-            String email, String telefone, String celular, String sexo) {
+            String email, String telefone, String celular, String sexo, boolean ativo) {
+        
         this.idCliente = idCliente;
         this.nome = nome;
         this.cpf = cpf;
@@ -31,6 +32,7 @@ public class ClienteModel extends PessoaModel {
         this.telefone = telefone;
         this.celular = celular;
         this.sexo = sexo;
+        this.ativo = ativo;
     }
 
     /**

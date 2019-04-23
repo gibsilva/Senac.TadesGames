@@ -36,11 +36,13 @@ public class UsuarioDAO implements IUsuarioDao{
                     + "NOME, "
                     + "CPF, "
                     + "EMAIL, "
-                    + "IDFILIAL, "
+                    + "IDFILIAL,"
+                    + "SETOR, "
                     + "CARGO,"
                     + "LOGIN,"
                     + "SENHA "
                     + "SEXO"
+                    + "ATIVO"
                     + "FROM USUARIO WHERE IDUSUARIO = ?");
 
             stmt.setInt(1, id);
@@ -53,11 +55,13 @@ public class UsuarioDAO implements IUsuarioDao{
                         rs.getString("cpf"),
                         rs.getString("Email"),
                         rs.getString("filial"),
+                        rs.getString("setor"),
                         rs.getString("cargo"),
                         rs.getString("Login"),
                         rs.getString("Senha"),
                         rs.getInt("IdFilial"),
-                        rs.getString("sexo")
+                        rs.getString("sexo"),
+                        rs.getBoolean("ativo")
                 );
             }
 
@@ -79,11 +83,13 @@ public class UsuarioDAO implements IUsuarioDao{
                     + "NOME, "
                     + "CPF, "
                     + "EMAIL, "
-                    + "IDFILIAL, "
+                    + "IDFILIAL,"
+                   + "SETOR, "
                     + "CARGO,"
                     + "LOGIN,"
                     + "SENHA "
                    + "SEXO"
+                   + "ATIVO"
                     + "FROM USUARIO WHERE IDUSUARIO = ?");
 
             rs = stmt.executeQuery();
@@ -94,11 +100,13 @@ public class UsuarioDAO implements IUsuarioDao{
                         rs.getString("cpf"),
                         rs.getString("Email"),
                         rs.getString("filial"),
+                        rs.getString("setor"),
                         rs.getString("cargo"),
                         rs.getString("Login"),
                         rs.getString("Senha"),
                         rs.getInt("IdFilial"),
-                        rs.getString("sexo")
+                        rs.getString("sexo"),
+                        rs.getBoolean("ativo")
                 );
             }
 
@@ -119,20 +127,21 @@ public class UsuarioDAO implements IUsuarioDao{
                     + "CPF, "
                     + "EMAIL, "
                     + "IDFILIAL, "
+                    + "SETOR,"
                     + "CARGO,"
                     + "LOGIN,"
                     + "SENHA"
-                    + "SEXO) "
-                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+                    + "SEXO"
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
             stmt.setString(1, usuario.getNome());
             stmt.setString(2, usuario.getCpf());
             stmt.setString(3, usuario.getEmail());
             stmt.setInt(4, usuario.getIdFilial());
-            stmt.setString(5, usuario.getCargo());
-            stmt.setString(6, usuario.getLogin());
-            stmt.setString(7, usuario.getSenha());
-            stmt.setString(8, usuario.getSexo());
-            
+            stmt.setString(5, usuario.getSetor());
+            stmt.setString(6, usuario.getCargo());
+            stmt.setString(7, usuario.getLogin());
+            stmt.setString(8, usuario.getSenha());
+            stmt.setString(9, usuario.getSexo());
 
             stmt.executeUpdate();
         } catch (SQLException ex) {
@@ -150,19 +159,23 @@ public class UsuarioDAO implements IUsuarioDao{
                     + "NOME,"
                     + "EMAIL,"
                     + "IDFILIAL,"
+                    + "SETOR"
                     + "CARGO,"
                     + "LOGIN,"
                     + "SENHA"
                     + "SEXO"
-                    + " = ?, ?, ?, ?, ?, ?, ? WHERE IDUSUARIO = ?");
+                    + "ATIVO"
+                    + " = ?, ?, ?, ?, ?, ?, ?, ?, ? WHERE IDUSUARIO = ?");
             stmt.setString(1, usuario.getNome());
             stmt.setString(2, usuario.getEmail());
             stmt.setInt(3, usuario.getIdFilial());
+            stmt.setString(5, usuario.getSetor());
             stmt.setString(4, usuario.getCargo());
             stmt.setString(5, usuario.getLogin());
             stmt.setString(6, usuario.getSenha());
             stmt.setInt(7, usuario.getIdUsuario());
             stmt.setString(8, usuario.getSexo());
+            stmt.setBoolean(10, usuario.isAtivo());
 
             stmt.executeUpdate();
         } catch (SQLException ex) {
@@ -196,11 +209,13 @@ public class UsuarioDAO implements IUsuarioDao{
                     + "NOME, "
                     + "CPF, "
                     + "EMAIL, "
-                    + "IDFILIAL, "
+                    + "IDFILIAL,"
+                    + "SETOR "
                     + "CARGO,"
                     + "LOGIN,"
                     + "SENHA "
                     + "SEXO"
+                    + "ATIVO"
                     + "FROM USUARIO WHERE LOGIN = ? AND SENHA = ?");
             
             stmt.setString(1, nomeUsuario);
@@ -214,11 +229,13 @@ public class UsuarioDAO implements IUsuarioDao{
                         rs.getString("cpf"),
                         rs.getString("Email"),
                         rs.getString("filial"),
+                        rs.getString("setor"),
                         rs.getString("cargo"),
                         rs.getString("Login"),
                         rs.getString("Senha"),
                         rs.getInt("IdFilial"),
-                        rs.getString("sexo")
+                        rs.getString("sexo"),
+                        rs.getBoolean("ativo")
                 );
             }
 
