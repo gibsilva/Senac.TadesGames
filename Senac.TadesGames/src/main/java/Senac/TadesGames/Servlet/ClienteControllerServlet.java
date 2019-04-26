@@ -152,7 +152,7 @@ public class ClienteControllerServlet extends HttpServlet {
         String email = request.getParameter("email");
         String telefone = util.removePontosBarraStr(request.getParameter("telefone")).replace(" ", "");
         String celular = util.removePontosBarraStr(request.getParameter("celular")).replace(" ", "");
-        String sexo = util.removePontosBarraStr(request.getParameter("sexo"));
+        String sexo = request.getParameter("sexo");
         boolean ativo = Boolean.parseBoolean(request.getParameter("ativo"));
 
         ClienteModel cliente = new ClienteModel(id, nome, cpf, cnpj, date, email, telefone, celular, sexo, ativo);

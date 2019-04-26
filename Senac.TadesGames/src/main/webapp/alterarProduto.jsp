@@ -98,7 +98,7 @@
                         <input type="text" class="form-control" id="inputQuantidade" placeholder="00" required>
                     </div>
                     <div class="col-md-3">
-                        <label>Temporariamente Desativado</label>
+                        <label>Status</label>
                         <div class="form-check col-md-3">
                             <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
                             <label class="form-check-label" for="defaultCheck1" >

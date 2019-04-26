@@ -23,12 +23,12 @@
         <fieldset>
             <div class="row">
                 <div class="form-group col-md-5">
-                    <label for="name">Nome <h11>*</h11></label>
+                    <label for="name">Nome <h11 class="text-danger">*</h11></label>
                     <input type="text" class="form-control" name="nome" id="nome" placeholder="Digite seu Nome Completo"
                            maxlength="80" required>   
                 </div>
                 <div class="form-group col-md-2">
-                    <label for="cpf">CPF<h11>*</h11> </label>
+                    <label for="cpf">CPF<h11 class="text-danger">*</h11> </label>
                     <input type="text" class="form-control " name="cpf" id="cpf" minlength="11" maxlength="11" placeholder="Digite seu CPF" required>
                 </div>
                 <div class="form-group col-md-3">
@@ -39,7 +39,7 @@
 
             <div class="row"> 
                 <div class="form-group col-md-2"
-                     <label for="Celular">Celular<h11>*</h11></label>
+                     <label for="Celular">Celular<h11 class="text-danger">*</h11></label>
                     <input type="text" class="form-control sp_celphones" name="celular" id="celular" minlength="11" placeholder="Digite seu numero" required>
                 </div>
                 <div class="form-group col-md-2"
@@ -48,9 +48,10 @@
                 </div>
 
                 <div class="form-group col-md-2"
-                     <label for="sexo">Sexo<h11>*</h11></label>
+                     <label for="sexo">Sexo<h11 class="text-danger">*</h11></label>
                     <select class="custom-select" id="sexo" name="sexo" required>
-                        <option selected value="M">Masculino</option>
+                        <option value="">Selecione </option>
+                        <option value="M">Masculino</option>
                         <option value="F">Feminino</option>
                         <option value="O">Outros</option>
                     </select>
@@ -60,14 +61,14 @@
 
             <div class="row">
                 <div class="form-group col-md-5">
-                    <label for="Email">Email<h11>*</h11></label>
+                    <label for="Email">Email<h11 class="text-danger">*</h11></label>
                     <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp"
                            placeholder="Digite seu Email" required="">
                 </div>
 
                 <div class="form-group col-md-3">
-                    <label for="Data">Data de Nascimento</label>
-                    <input class="form-control" type="date" value="dataAtual()" id="dataNasc" name="dataNasc">
+                    <label for="Data">Data de Nascimento<h11 class="text-danger">*</h11></label>
+                    <input class="form-control" type="date" value="dataAtual()" id="dataNasc" name="dataNasc" required>
                 </div>
 
             </div>
@@ -76,7 +77,7 @@
             <div class="row">
                 <div class="container form-group-inline">
                     <input type="submit" class="btn btn-success" value="Salvar">
-                    <input type="reset" class="btn btn-light" value="Cancelar">
+                    <a href="home.jsp" class="btn btn-light "  type="submit">Cancelar</a>
                 </div>
             </div>
 
