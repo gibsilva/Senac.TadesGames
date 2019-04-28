@@ -5,6 +5,9 @@
 --%>
 
 <%@include file="header.jsp" %>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<title>Consulta de Produto</title>
+
 <div class="col-md-10 container">
     <h2>Consulta de Produto</h2>
     
@@ -14,11 +17,7 @@
 
         <div class="input-group-append col-md-6">
             <input type="text" class="form-control " placeholder="Pesquisar" id="filtro" name="filtro">
-            <!--
-            <button class="btn btn-dark" type="button">
-                <i class="fa fa-search"></i> Pesquisar
-            </button>
-            -->
+ 
         </div>
         <div class="input-group">
             <div>

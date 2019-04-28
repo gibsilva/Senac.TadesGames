@@ -3,44 +3,27 @@
     Created on : 21/04/2019, 04:45:49
     Author     : Marcel
 --%>
+<%@include file="header.jsp" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<title>Alterar de Produto</title>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="pt-br">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- As 3 meta tags acima *devem* vir em primeiro lugar dentro do `head`; qualquer outro conteÃºdo deve vir *apÃ³s* essas tags -->
-        <title>Alterar Produto</title>
-
-        <!-- Bootstrap -->
-        <link rel="stylesheet" type="text/css" href="resources/css/bootstrap.min.css"/>
-        <link rel="stylesheet" type="text/css" href="resources/css/estilo.css"/>
-
-        <!-- HTML5 shim e Respond.js para suporte no IE8 de elementos HTML5 e media queries -->
-        <!-- ALERTA: Respond.js nÃ£o funciona se vocÃª visualizar uma pÃ¡gina file:// -->
-        <!--[if lt IE 9]>
-          <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
-    </head>
-    <body>
-        <%@include file="header.jsp" %>
-        <div class="container">
-            <div class="page-header">
-                <h1>Alterar de Produto</h1>
-            </div>
+    <div class="container">
+            <br>
+                <h2>Alterar de Produto</h2>
+                <hr>
+        
             <form>
                 <div class="row justify-content-around">
                     <div class="form-group col-md-2">
                         <label for="IdProduto">ID do protuto*</label>
                         <input type="text" class="form-control" id="IdProduto" placeholder="0000" readonly>
                     </div>
+                    
                     <div class="form-group col-md-4">
-                        <label for="inputTitulo">Nome/TÃ­tulo*</label>
+                        <label for="inputTitulo">Nome/Título*</label>
                         <input type="text" class="form-control" id="inputTitulo" placeholder="Nome do Produto" required>
                     </div>
+                    
                     <div class="form-group col-md-3">
                         <label for="inputPlataforma">Plataforma*</label>
                         <select id="inputPlataforma" class="custom-select" required>
@@ -60,19 +43,21 @@
                         </select>
                         <div class="invalid-feedback">Escolha uma Plataforma</div>
                     </div>
+                    
                     <div class="form-group col-md-3">
                         <label for="inputCategoria">Categoria*</label>
                         <select id="inputCategoria" class="custom-select" required>
                             <option value="">Selecione </option>
                             <option value="1">Jogo 		</option>
                             <option value="2">Console 	</option>
-                            <option value="3">AcessÃ³rio 	</option>
+                            <option value="3">Acessório 	</option>
                             <option value="4">Skin	    </option>
                             <option value="5">Controle	</option>
-                            <option value="6">CrÃ©ditos    </option>
+                            <option value="6">Créditos    </option>
                         </select>
-                        <div class="invalid-feedback">Escolha uma catÃªgoria</div>
+                        <div class="invalid-feedback">Escolha uma catêgoria</div>
                     </div>
+                    
                     <div class="form-group col-md-3">
                         <label for="inputValorCompra">Valor de Compra*</label>
                         <div class="input-group">
@@ -97,6 +82,7 @@
                         <label for="inputQuantidade">Quantidade*</label>
                         <input type="text" class="form-control" id="inputQuantidade" placeholder="00" required>
                     </div>
+                    
                     <div class="col-md-3">
                         <label>Status</label>
                         <div class="form-check col-md-3">
@@ -108,7 +94,7 @@
                     </div>
 
                     <div class="form-group col-md-3">
-                        <label for="exampleFormControlSelect2">GÃªneros*</label>
+                        <label for="exampleFormControlSelect2">Gêneros*</label>
                         <select multiple class="form-control" id="exampleFormControlSelect2" required>
                             <option>FPS</option>
                             <option>Aventura</option>
@@ -119,22 +105,21 @@
                         </select>
                     </div>
                     <div class="form-group col-md-9">
-                        <label for="input DescriÃ§Ã£o">DescriÃ§Ã£o</label>
-                        <textarea class="form-control" rows="4" placeholder="DescriÃ§Ã£o..." required></textarea>
+                        <label for="input Descrição">Descrição</label>
+                        <textarea class="form-control" rows="4" placeholder="Descrição..." required></textarea>
                     </div>
                 </div>
-                <div class="page-header"> </div>
+                
+                <hr>
                 <div class="row">
-                    <div class="form-group col-auto">
+                    <div class="container form-group-inline">
                         <input type="submit" class="btn btn-success" id="inputSalvar" value="Salvar">
-                        <a href="consultaProduto.jsp" class="btn btn-light "  type="submit">Cancelar</a>
+                        <a href="consultaProduto.jsp" class="btn btn-light">Cancelar</a>
                     </div>
-            </form>
+                </div>
+                    
+        </form>
+    </div>
 
-        </div>
-        <!-- jQuery (obrigatÃ³rio para plugins JavaScript do Bootstrap) -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <!-- Inclui todos os plugins compilados (abaixo), ou inclua arquivos separadados se necessÃ¡rio -->
-        <script src="bootstrap/js/bootstrap.min.js"></script>
-    </body>
-</html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>

@@ -13,14 +13,15 @@ import java.util.Date;
  */
 public class RelatorioProdutoModel {
     private int idProduto;
-    private int nomeProduto;
+    private String nomeProduto;
     private int qtdProduto;
     private double totalVendido;
     private String categoria;
-    private Date dataUltimaVenda; 
+    private Date dataUltimaVenda;
+    private boolean ativo;
     
-    public RelatorioProdutoModel(int idProduto, int nomeProduto, int qtdProduto,
-            double totalVendido, String categoria, Date dataultimaVenda){
+    public RelatorioProdutoModel(int idProduto, String nomeProduto, int qtdProduto,
+            double totalVendido, String categoria, Date dataUltimaVenda, boolean ativo){
         
         this.idProduto = idProduto;
         this.nomeProduto = nomeProduto;
@@ -28,6 +29,7 @@ public class RelatorioProdutoModel {
         this.totalVendido = totalVendido;
         this.categoria = categoria;
         this.dataUltimaVenda = dataUltimaVenda;
+        this.ativo = ativo;
     }
 
     /**
@@ -40,7 +42,7 @@ public class RelatorioProdutoModel {
     /**
      * @return the nomeProduto
      */
-    public int getNomeProduto() {
+    public String getNomeProduto() {
         return nomeProduto;
     }
 
@@ -70,6 +72,20 @@ public class RelatorioProdutoModel {
      */
     public Date getDataUltimaVenda() {
         return dataUltimaVenda;
+    }
+
+    /**
+     * @return the ativo
+     */
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    /**
+     * @param ativo the ativo to set
+     */
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
     }
 
 }

@@ -5,6 +5,8 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="header.jsp" %>
+<title>Cadastro de Clientes</title>
+
 <div class="container">
     <br>
     <h2>Novo Cliente</h2>
@@ -14,7 +16,7 @@
         <ul class="text-danger">
             <c:forEach var = "n" items = "${notificacoes}">
                 <li>${n.valor}</li>
-            </c:forEach>
+                </c:forEach>
         </ul>
 
     </div>
@@ -77,7 +79,7 @@
             <div class="row">
                 <div class="container form-group-inline">
                     <input type="submit" class="btn btn-success" value="Salvar">
-                    <a href="home.jsp" class="btn btn-light "  type="submit">Cancelar</a>
+                    <a href="home.jsp" class="btn btn-light" >Cancelar</a>
                 </div>
             </div>
 

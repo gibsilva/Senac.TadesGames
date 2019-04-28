@@ -15,19 +15,23 @@ public class RelatorioClienteModel {
     private int idCliente;
     private String nomeCliente;
     private String cpf;
+    private String cnpj;
     private int qtdPedidos;
     private Date dataUltimoPedido;
     private double totalComprado;
+    private boolean ativo;
     
-    public RelatorioClienteModel(int idCliente, String nomeCliente, String cpf,
-            int qtdPedidos, Date dataUltimoPedido, double totalComprado){
+    public RelatorioClienteModel(int idCliente, String nomeCliente, String cpf, String cnpj,
+            int qtdPedidos, Date dataUltimoPedido, double totalComprado, boolean ativo){
         
         this.idCliente = idCliente;
         this.nomeCliente = nomeCliente;
         this.cpf = cpf;
+        this.cnpj = cnpj;
         this.qtdPedidos = qtdPedidos;
         this.dataUltimoPedido = dataUltimoPedido;
-        this.totalComprado = totalComprado; 
+        this.totalComprado = totalComprado;
+        this.ativo = ativo;
     }
 
     /**
@@ -70,5 +74,19 @@ public class RelatorioClienteModel {
      */
     public double getTotalComprado() {
         return totalComprado;
+    }
+
+    /**
+     * @return the ativo
+     */
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    /**
+     * @param ativo the ativo to set
+     */
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
     }
 }

@@ -6,6 +6,9 @@
 
 <!-- teste de execução de página jsp com o servlet-->
 <%@include file="header.jsp" %>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<title>Home</title>
+
 <div class="container">
     <br>
     <h4>Bem-Vindo(a), The Umbrella Academy!</h4> <!--troca o nome pelo nome do usuario -->
@@ -26,8 +29,8 @@
                 <div class="card-header bg-info text-white">Vendas</div>
                 <div class="card-body">
                     <h4 class="card-title">Controle de Vendas</h4>
-                    <p class="card-text">Total Vendido: </p>
-
+                    <p class="card-text">Total Vendas: </p>
+                    <p class="card-text">Total Vendidos R$: </p>
                 </div>
             </div>
 

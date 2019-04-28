@@ -5,6 +5,9 @@
 --%>
 
 <%@include file="header.jsp" %>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<title>Consulta de Usuarios</title>
+
 <div class="col-md-10 container">
     <h2>Consulta de Usuarios</h2>
 
