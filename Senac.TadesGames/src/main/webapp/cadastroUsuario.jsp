@@ -47,13 +47,13 @@
         </div>
 
         <div class="row">
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-2">
                 <label for="inputFilial">Filial<h11 class="text-danger">*</h11></label>
                 <select id="inputFilial" class="custom-select" required>
                     <option value="">Selecione</option>
                     <option value="1">Matriz</option>
                     <option value="2">Filial 1</option>
-                    <option value="3">AFilial 2</option>
+                    <option value="3">Filial 2</option>
                     <option value="4">Filial 3</option>
                 </select>
             </div>
@@ -61,7 +61,7 @@
 
             <div class="form-group col-md-3">
                 <label for="inputSetor">Setor<h11 class="text-danger">*</h11></label>
-                <select id="inputSetor" class="custom-select" required>
+                <select id="setor" class="custom-select" required>
                     <option value="">Selecione</option>
                     <option value="1">Diretoria</option>
                     <option value="2">Produtos/Serviços/Marketing</option>
@@ -71,26 +71,27 @@
                 </select>
             </div>
 
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-2">
                 <label for="inputCargo">Cargo<h11 class="text-danger">*</h11></label>
-                <select id="inputCargo" class="custom-select" required>
+                <select id="cargo" class="custom-select" required>
                     <option value="">Selecione</option>
-                    <option value="1">Diretor</option>
-                    <option value="2">Gêrente Global</option>
-                    <option value="3">Gerênte Regional</option>
-                    <option value="4">Suporte Técnico</option>
-                    <option value="5">Funcionário</option>
+                    <option value="D">Diretor</option>
+                    <option value="GG">Gerente Global</option>
+                    <option value="GR">Gerente Regional</option>
+                    <option value="ST">Suporte Técnico</option>
+                    <option value="F">Funcionário</option>
+                    <option value="V">Vendedor (a)</option>
                 </select>
             </div>
         </div>
 
         <div class="row ">
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
                 <label for="inputLogin">Login:<h11 class="text-danger">*</h11></label>
                 <input type="text" class="form-control" id="inputNomeFunc" minlength="6" maxlength="15" placeholder="Login" required>
             </div>
 
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
                 <label for="inputSenha">Senha<h11 class="text-danger">*</h11></label>
                 <input type="password" class="form-control" id="inputSenha" minlength="4" maxlength="8" placeholder="Digite sua Senha" required>
             </div>  
@@ -100,7 +101,7 @@
         <div class="row">
             <div class="container form-group-inline">
                 <input type="submit" class="btn btn-success" value="Salvar">
-                <a href="home.jsp" class="btn btn-light "  type="submit">Cancelar</a>
+                <a href="home.jsp" class="btn btn-light">Cancelar</a>
             </div>
         </div>
 
