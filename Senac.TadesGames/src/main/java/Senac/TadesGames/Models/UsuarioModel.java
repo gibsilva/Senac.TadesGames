@@ -39,6 +39,14 @@ public class UsuarioModel extends PessoaModel {
         this.ativo = ativo;
     }
 
+    public UsuarioModel(int id, String nome, String cpf, String email, String sexo, String filial, String setor, String cargo, String login, String senha, boolean ativo, boolean b) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public UsuarioModel(int i, String nome, String cpf, String email, String sexo, String filial, String setor, String cargo, String login, String senha, boolean b) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     /**
      * @return the idUsuario
      */

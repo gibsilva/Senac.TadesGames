@@ -9,7 +9,6 @@ import Senac.TadesGames.DAO.Interfaces.IUsuarioDao;
 import Senac.TadesGames.Data.ConexaoDB;
 import Senac.TadesGames.Models.UsuarioModel;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -46,6 +45,139 @@ public class UsuarioDAO implements IUsuarioDao{
                     + "FROM USUARIO WHERE IDUSUARIO = ?");
 
             stmt.setInt(1, id);
+
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                usuario = new UsuarioModel(
+                        rs.getInt("IdUsuario"),
+                        rs.getString("Nome"),
+                        rs.getString("cpf"),
+                        rs.getString("Email"),
+                        rs.getString("filial"),
+                        rs.getString("setor"),
+                        rs.getString("cargo"),
+                        rs.getString("Login"),
+                        rs.getString("Senha"),
+                        rs.getInt("IdFilial"),
+                        rs.getString("sexo"),
+                        rs.getBoolean("ativo")
+                );
+            }
+
+            return usuario;
+        } catch (SQLException ex) {
+            conexao.closeConnection(conn, stmt, rs);
+            return null;
+        }
+    }
+    public UsuarioModel obterPorEmail(String email) {
+        Connection conn = conexao.getConnection();
+        UsuarioModel usuario = null;
+
+        try {
+            stmt = conn.prepareStatement("SELECT IDUSUARIO, "
+                    + "NOME, "
+                    + "CPF, "
+                    + "EMAIL, "
+                    + "IDFILIAL,"
+                    + "SETOR, "
+                    + "CARGO,"
+                    + "LOGIN,"
+                    + "SENHA "
+                    + "SEXO"
+                    + "ATIVO"
+                    + "FROM USUARIO WHERE EMAIL = ?");
+
+            stmt.setString(1, email);
+
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                usuario = new UsuarioModel(
+                        rs.getInt("IdUsuario"),
+                        rs.getString("Nome"),
+                        rs.getString("cpf"),
+                        rs.getString("Email"),
+                        rs.getString("filial"),
+                        rs.getString("setor"),
+                        rs.getString("cargo"),
+                        rs.getString("Login"),
+                        rs.getString("Senha"),
+                        rs.getInt("IdFilial"),
+                        rs.getString("sexo"),
+                        rs.getBoolean("ativo")
+                );
+            }
+
+            return usuario;
+        } catch (SQLException ex) {
+            conexao.closeConnection(conn, stmt, rs);
+            return null;
+        }
+    }
+    public UsuarioModel obterPorEmail(String email, int id) {
+        Connection conn = conexao.getConnection();
+        UsuarioModel usuario = null;
+
+        try {
+            stmt = conn.prepareStatement("SELECT IDUSUARIO, "
+                    + "NOME, "
+                    + "CPF, "
+                    + "EMAIL, "
+                    + "IDFILIAL,"
+                    + "SETOR, "
+                    + "CARGO,"
+                    + "LOGIN,"
+                    + "SENHA "
+                    + "SEXO"
+                    + "ATIVO"
+                    + "FROM USUARIO WHERE EMAIL = ? AND IDUSUARIO != ?");
+
+            stmt.setString(1, email);
+            stmt.setInt(2, id);
+
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                usuario = new UsuarioModel(
+                        rs.getInt("IdUsuario"),
+                        rs.getString("Nome"),
+                        rs.getString("cpf"),
+                        rs.getString("Email"),
+                        rs.getString("filial"),
+                        rs.getString("setor"),
+                        rs.getString("cargo"),
+                        rs.getString("Login"),
+                        rs.getString("Senha"),
+                        rs.getInt("IdFilial"),
+                        rs.getString("sexo"),
+                        rs.getBoolean("ativo")
+                );
+            }
+
+            return usuario;
+        } catch (SQLException ex) {
+            conexao.closeConnection(conn, stmt, rs);
+            return null;
+        }
+    }
+    public UsuarioModel obterPorCpf(String cpf) {
+        Connection conn = conexao.getConnection();
+        UsuarioModel usuario = null;
+
+        try {
+            stmt = conn.prepareStatement("SELECT IDUSUARIO, "
+                    + "NOME, "
+                    + "CPF, "
+                    + "EMAIL, "
+                    + "IDFILIAL,"
+                    + "SETOR, "
+                    + "CARGO,"
+                    + "LOGIN,"
+                    + "SENHA "
+                    + "SEXO"
+                    + "ATIVO"
+                    + "FROM USUARIO WHERE CPF = ?");
+
+            stmt.setString(1, cpf);
 
             rs = stmt.executeQuery();
             while (rs.next()) {
@@ -245,5 +377,4 @@ public class UsuarioDAO implements IUsuarioDao{
             return null;
         }
     }
-    
 }
