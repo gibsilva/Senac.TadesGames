@@ -16,6 +16,14 @@
         <servlet-name>ClienteControllerServlet</servlet-name>
         <url-pattern>/Clientes/*</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>UsuarioControllerServlet</servlet-name>
+        <servlet-class>Senac.TadesGames.Servlet.UsuarioControllerServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UsuarioControllerServlet</servlet-name>
+        <url-pattern>/Usuarios/*</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

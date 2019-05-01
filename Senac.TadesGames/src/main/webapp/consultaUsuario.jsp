@@ -5,7 +5,7 @@
 --%>
 
 <%@include file="header.jsp" %>
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "u" uri = "http://java.sun.com/jsp/jstl/core" %>
 <title>Consulta de Usuarios</title>
 
 <div class="col-md-10 container">
@@ -48,7 +48,7 @@
             </tr>
         </thead>
         <tbody id="tabela" name="tabela">
-            <c:forEach var="c" items="${usuarios}">
+            <c:forEach var="u" items="${usuarios}">
                 <tr>
                     <td>${u.idUsuario}</td>
                     <td>${u.nome}</td>
@@ -59,13 +59,18 @@
                     <td>${u.cargo}</td>
                     <td>${u.email}</td>
                     <td>${u.login}</td>
-                    <td>${c.status}</td>
-                   
-
+                    <c:if test="${u.ativo == true}">
+                        <td>Ativo</td>
+                    </c:if>
+                    <c:if test="${u.ativo == false}">
+                        <td>Inativo</td>
+                    </c:if>                 
                     <td>
-                       
+                        <c:url var="alterarUsuario" value="/Usuarios">
+                            <c:param name="acao" value="alterar" />
+                            <c:param name="idUsuario" value="${u.idUsuario}" />
+                        </c:url>
                         <a href="alterarUsuario.jsp" class="btn btn-outline-warning">Editar</a>
-
                     </td>
                 </tr>
             </c:forEach>

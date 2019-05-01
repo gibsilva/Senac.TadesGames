@@ -21,13 +21,14 @@
 
             <div class="form-group col-md-5">
                 <label for="inputNomeFunc">Nome<h11 class="text-danger">*</h11></label>
-                <input type="text" class="form-control" id="inputNomeFunc" maxlength="80" placeholder="Nome Comleto" required>
+                <input type="text" class="form-control" id="NomeFunc" maxlength="80" placeholder="Nome Comleto" required>
             </div>
 
             <div class="form-group col-md-2">
                 <label for="inputSexo">Sexo<h11 class="text-danger">*</h11></label>
-                <select id="inputCategoria" class="custom-select" required>
-                    <option selected value="M">Masculino</option>
+                <select id="sexo" class="custom-select" required>
+                    <option selected value="">Selecione</option>
+                    <option value="M">Masculino</option>
                     <option value="F">Feminino</option>
                     <option value="O">Outros</option>
 
@@ -53,7 +54,7 @@
         <div class="row justify-content-around">
             <div class="form-group col-md-4">
                 <label for="inputFilial">Filial<h11 class="text-danger">*</h11></label>
-                <select id="inputFilial" class="custom-select" required>
+                <select id="filial" class="custom-select" required>
                     <option value="">Selecione </option>
                     <option value="1">Matriz  </option>
                     <option value="2">Filial 1   </option>
@@ -66,7 +67,7 @@
 
             <div class="form-group col-md-4">
                 <label for="inputSetor">Setor<h11 class="text-danger">*</h11></label>
-                <select id="inputSetor" class="custom-select" required>
+                <select id="setor" class="custom-select" required>
                     <option value="">Selecione </option>
                     <option value="1">Diretoria    </option>
                     <option value="2">Produtos  </option>
@@ -81,7 +82,7 @@
 
             <div class="form-group col-md-4">
                 <label for="inputCargo">Cargo<h11 class="text-danger">*</h11></label>
-                <select id="inputCargo" class="custom-select" required>
+                <select id="cargo" class="custom-select" required>
                     <option value="">Selecione</option>
                     <option value="1">Diretor</option>
                     <option value="2">Gerente Global</option>
@@ -89,26 +90,24 @@
                     <option value="4">Suporte Técnico</option>
                     <option value="5">Funcionário</option>
                 </select>
-                <div class="invalid-feedback">Escolha um Cargo Válido</div>
-            </div>
         </div>
 
         <div class="row">
             <div class="form-group col-md-4">
                 <label for="inputLogin">Login<h11 class="text-danger">*</h11></label>
-                <input type="text" class="form-control" id="inputNomeFunc" minlength="6" maxlength="15" placeholder="Login" required>
+                <input type="text" class="form-control" id="login" minlength="6" maxlength="15" placeholder="Login" required>
             </div>
 
             <div class="form-group col-md-4">
                 <label for="inputSenha">Senha<h11 class="text-danger">*</h11></label>
-                <input type="password" class="form-control" id="inputSenha" minlength="4" maxlength="8" placeholder="Digite sua Senha" required>
+                <input type="password" class="form-control" id="senha" minlength="4" maxlength="8" placeholder="Digite sua Senha" required>
             </div>
 
             <div class="form-group col-md-2">
                 <label for="inputSexo">Status</label>
-                <select id="inputCategoria" class="custom-select" required>
-                    <option selected value="A">Ativo</option>
-                    <option value="I">Inativo</option>                           
+                <select id="ativo" name="ativo" class="custom-select" required>
+                    <option value="true">Ativo</option>
+                    <option value="false">Inativo</option>                           
                 </select>
             </div>
         </div>
