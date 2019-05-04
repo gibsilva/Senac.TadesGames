@@ -16,6 +16,5 @@ public interface IFilialDao {
     FilialModel obterPorId(int id);
     List<FilialModel> obterTodas();
     void inserir(FilialModel filial);
-    void alterar(FilialModel filial);
-    void excluir(FilialModel filial);  
+    void alterar(FilialModel filial); 
 }

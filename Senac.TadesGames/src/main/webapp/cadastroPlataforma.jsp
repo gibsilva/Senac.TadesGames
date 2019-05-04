@@ -27,16 +27,20 @@
                         <label for="nome">Plataforma<h11 class="text-danger">*</h11></label>
                     </div>
                 </div>
+                
                 <div class="row">
                     <div class="col-3">
                         <input id="idPlataforma" type="text" class="form-control" placeholder="0000" readonly>
                     </div>
+                    
                     <div class="col-6">
                         <input id="nome" type="text" class="form-control" placeholder="Plataforma">
                     </div>
+                    
                     <div class="col-2"> 
                         <input type="submit" class="btn btn-success" value="Salvar">
                     </div>
+                    
                 </div>
             </form>
             <br>

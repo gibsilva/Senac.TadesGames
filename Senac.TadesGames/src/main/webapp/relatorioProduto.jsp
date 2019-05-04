@@ -6,7 +6,8 @@
 <%@include file="header.jsp" %>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <title>Relatorio de Produto</title>
-    <div class="container">
+<div class="container">
+    <br>
     <h2> Relatorio de Produtos</h2>
     <hr>
     <br>
@@ -20,9 +21,9 @@
             <label>Até:</label>
             <input type="date" class="form-control" id="filtroDataFim" name="filtroDataFim">
         </div>
-        
+
     </div>
-   
+
     <br>
 
     <table class="table table-hover">
@@ -37,9 +38,9 @@
                 <th scope="col">Status</th>
             </tr>
         </thead>
-        
+
         <tbody id="tabela" name="tabela">
-      
+
             <tr class="table-dark">
                 <td></td>
                 <td></td>
@@ -49,16 +50,16 @@
                 <td></td>
                 <td></td>      
             </tr>
-           
+
         </tbody>
     </table>
-    
-    <hr>
-         <div class="float-right">
-             <div>
-                <button class="btn btn-primary">Exportar</button>
-            </div>
 
+    <hr>
+    <div class="float-right">
+        <div>
+            <button class="btn btn-primary">Exportar</button>
         </div>
+
+    </div>
 
 </div>

@@ -288,16 +288,16 @@ public class UsuarioDAO implements IUsuarioDao{
 
         try {
             stmt = conn.prepareStatement("UPTADE USUARIO SET "
-                    + "NOME,"
-                    + "EMAIL,"
-                    + "IDFILIAL,"
-                    + "SETOR"
-                    + "CARGO,"
-                    + "LOGIN,"
-                    + "SENHA"
-                    + "SEXO"
-                    + "ATIVO"
-                    + " = ?, ?, ?, ?, ?, ?, ?, ?, ? WHERE IDUSUARIO = ?");
+                    + "NOME = ?,"
+                    + "EMAIL = ?,"
+                    + "IDFILIAL = ?,"
+                    + "SETOR = ?,"
+                    + "CARGO = ?,"
+                    + "LOGIN = ?,"
+                    + "SENHA = ?,"
+                    + "SEXO = ?,"
+                    + "ATIVO = ?"
+                    + " WHERE IDUSUARIO = ?");
             stmt.setString(1, usuario.getNome());
             stmt.setString(2, usuario.getEmail());
             stmt.setInt(3, usuario.getIdFilial());

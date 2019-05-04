@@ -40,7 +40,7 @@
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="Clientes">Cliente</a>
                             <a class="dropdown-item" href="consultaProduto.jsp">Produto</a>
-                            <a class="dropdown-item" href="#">Vendas</a>  
+                            <a class="dropdown-item" href="consultaVendas.jsp">Vendas</a>  
                         </div>
                     </li>
                     
@@ -61,12 +61,14 @@
 
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="cadastroProduto.jsp">Cadastro de Produto</a>
-                            <a class="dropdown-item" href="#">Cadastro de Plataforma</a>
-                            <a class="dropdown-item" href="#">Cadastro de Categoria</a>
-                            <a class="dropdown-item" href="#">Cadastro de Genero</a>
+                            <a class="dropdown-item" href="consultaProduto.jsp">Consulta de Produto</a>
+                            <a class="dropdown-item" href="cadastroPlataforma.jsp">Cadastro de Plataforma</a>
+                            <a class="dropdown-item" href="cadastroCategoria.jsp">Cadastro de Categoria</a>
+                            <a class="dropdown-item" href="cadastroGenero.jsp">Cadastro de Genero</a>
                             
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Cadastro de Filial</a>
+                            <a class="dropdown-item" href="cadastroFilial.jsp">Cadastro de Filial</a>
+                            <a class="dropdown-item" href="consultaFilial.jsp">Consulta de Filial</a>
                         </div>
                         
                 </ul>

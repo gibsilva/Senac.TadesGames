@@ -5,11 +5,11 @@
 --%>
 <%@include file="header.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<title>Alterar de Produto</title>
+<title>Alteração de Produto</title>
 
     <div class="container">
             <br>
-                <h2>Alterar de Produto</h2>
+                <h2>Alteração de Produto</h2>
                 <hr>
         
             <form>

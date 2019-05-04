@@ -5,12 +5,12 @@
 --%>
 <%@include file="header.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<title>Alterar Usuario</title>
+<title>Alteração de Usuario</title>
 
 
 <div class="container">
         <br>
-        <h2>Alterar Usuario</h2>
+        <h2>Alteração de Usuario</h2>
         <hr>
     <form>      
         <div class="row">

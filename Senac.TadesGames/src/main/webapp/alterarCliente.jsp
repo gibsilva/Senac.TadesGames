@@ -6,11 +6,11 @@
 
 <%@include file="header.jsp" %>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-<title>Alterar Cliente</title>
+<title>Alteração de Cliente</title>
 
 <div class="container">
     <br>
-    <h2>Alterar Cliente</h2>
+    <h2>Alteração de Cliente</h2>
     <hr/>
     <!-- notificacoes caso houver erros nas validações -->
     <div class="form-group">
@@ -46,6 +46,7 @@
                      <label for="Celular">Celular<h11 class="text-danger">*</h11></label>
                     <input type="text" class="form-control sp_celphones" name="celular" id="celular" placeholder="Digite seu numero" required value="${cliente.celular}">
                 </div>
+                
                 <div class="form-group col-md-2"
                      <label for="Celular">Telefone</label>
                     <input type="text" class="form-control phone_with_ddd" name="telefone" id="telefone" placeholder="Digite seu numero" value="${cliente.telefone}">
@@ -73,8 +74,6 @@
                     <input type="date"  class="form-control" id="dataNasc" name="dataNasc" placeholder="DD/MM/AAAA" maxlength="8" required value=${cliente.dataNasc}>
                 </div>
 
-
-
                 <div class="form-group col-md-2">
                     <label for="inputAtivo">Status</label>
                     <select id="ativo" name="ativo" class="custom-select" required >
@@ -90,7 +89,6 @@
                     <input type="submit" class="btn btn-success" value="Salvar">
                     <a href="Clientes" class="btn btn-light">Cancelar</a>
                 </div>
-            </div>
             </div>
 
         </fieldset>

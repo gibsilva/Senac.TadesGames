@@ -198,17 +198,17 @@ public class PermissaoDAO implements IPermissaoDao {
 
         try {
             stmt = conn.prepareStatement("UPTADE PERMISSAO SET "
-                    + "IDPERMISSAO,"
-                    + "IDUSUARIO,"
-                    + "RELATORIOVENDA,"
-                    + "RELATORIOPRODUTO,"
-                    + "RELATORIOCLIENTE,"
-                    + "CADASTROCLIENTE,"
-                    + "CADASTROPRODUTO,"
-                    + "REALIZAVENDA,"
-                    + "CADASTROFILIAL,"
-                    + "CADASTROUSUARIO"
-                    + " = ?, ?, ?, ?, ?, ?, ?, ?, ?, ? WHERE IDCLIENTE = ?");
+                    + "IDPERMISSAO = ?,"
+                    + "IDUSUARIO = ?,"
+                    + "RELATORIOVENDA = ?,"
+                    + "RELATORIOPRODUTO = ?,"
+                    + "RELATORIOCLIENTE = ?,"
+                    + "CADASTROCLIENTE = ?,"
+                    + "CADASTROPRODUTO = ?,"
+                    + "REALIZAVENDA = ?,"
+                    + "CADASTROFILIAL = ?,"
+                    + "CADASTROUSUARIO = ?"
+                    + " WHERE IDCLIENTE = ?");
             stmt.setInt(1, permissao.getIdPermissao());
             stmt.setInt(2, permissao.getIdUsuario());
             stmt.setInt(3, permissao.getRelatorioVenda());

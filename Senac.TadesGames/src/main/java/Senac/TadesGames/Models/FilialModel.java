@@ -16,14 +16,29 @@ public class FilialModel {
     private int idFilial;
     private String cnpj;
     private String nome;
+    private String cep;
+    private String longradouro;
+    private int numero;
+    private String complemento;
+    private String bairro;
+    private String cidade;
+    private String estado;
     private List<ProdutoModel> produtos;
     private List<PedidoModel> pedidos;
     private List<UsuarioModel> usuarios;
     
-    public FilialModel(int idFilial, String nome, String cnpj){
+    public FilialModel(int idFilial,String cnpj, String nome, String cep, 
+            String longradouro, int numero, String complemento, String bairro, String cidade, String estado ){
         this.idFilial = idFilial;
         this.cnpj = cnpj;
         this.nome = nome;
+        this.cep = cep;
+        this.longradouro = longradouro;
+        this.numero = numero;
+        this.complemento = complemento;
+        this.bairro = bairro;
+        this.cidade = cidade;
+        this.estado = estado;
         this.produtos = new ArrayList<ProdutoModel>();
         this.pedidos = new ArrayList<PedidoModel>();
         this.usuarios = new ArrayList<UsuarioModel>();
@@ -111,6 +126,104 @@ public class FilialModel {
      */
     public void setUsuarios(List<UsuarioModel> usuarios) {
         this.usuarios = usuarios;
+    }
+
+    /**
+     * @return the cep
+     */
+    public String getCep() {
+        return cep;
+    }
+
+    /**
+     * @param cep the cep to set
+     */
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+
+    /**
+     * @return the longradouro
+     */
+    public String getLongradouro() {
+        return longradouro;
+    }
+
+    /**
+     * @param longradouro the longradouro to set
+     */
+    public void setLongradouro(String longradouro) {
+        this.longradouro = longradouro;
+    }
+
+    /**
+     * @return the numero
+     */
+    public int getNumero() {
+        return numero;
+    }
+
+    /**
+     * @param numero the numero to set
+     */
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+
+    /**
+     * @return the complemento
+     */
+    public String getComplemento() {
+        return complemento;
+    }
+
+    /**
+     * @param complemento the complemento to set
+     */
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
+    }
+
+    /**
+     * @return the bairro
+     */
+    public String getBairro() {
+        return bairro;
+    }
+
+    /**
+     * @param bairro the bairro to set
+     */
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    /**
+     * @return the cidade
+     */
+    public String getCidade() {
+        return cidade;
+    }
+
+    /**
+     * @param cidade the cidade to set
+     */
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    /**
+     * @return the estado
+     */
+    public String getEstado() {
+        return estado;
+    }
+
+    /**
+     * @param estado the estado to set
+     */
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
     
     

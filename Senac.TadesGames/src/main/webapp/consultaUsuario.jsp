@@ -9,18 +9,18 @@
 <title>Consulta de Usuarios</title>
 
 <div class="col-md-10 container">
+    <br>
     <h2>Consulta de Usuarios</h2>
-
     <br>
     <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
 
         <div class="input-group-append col-md-6">
             <input type="text" class="form-control " placeholder="Pesquisar" id="filtro" name="filtro">
-            <!--
+            
             <button class="btn btn-dark" type="button">
                 <i class="fa fa-search"></i> Pesquisar
             </button>
-            -->
+           
         </div>
         <div class="input-group">
             <div>
@@ -30,7 +30,7 @@
         </div>
     </div>
     <br>
-
+    <br>
     <table class="table table-hover">
         <thead> 
             <tr>
@@ -59,12 +59,8 @@
                     <td>${u.cargo}</td>
                     <td>${u.email}</td>
                     <td>${u.login}</td>
-                    <c:if test="${u.ativo == true}">
-                        <td>Ativo</td>
-                    </c:if>
-                    <c:if test="${u.ativo == false}">
-                        <td>Inativo</td>
-                    </c:if>                 
+                    <td>${u.ativo}</td>
+                                    
                     <td>
                         <c:url var="alterarUsuario" value="/Usuarios">
                             <c:param name="acao" value="alterar" />
