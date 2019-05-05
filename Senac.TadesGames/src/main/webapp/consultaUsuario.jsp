@@ -34,34 +34,34 @@
     <table class="table table-hover">
         <thead> 
             <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Nome</th>
-                <th scope="col">CPF</th>
-                <th scope="col">Sexo</th>
-                <th scope="col">Filial</th>
-                <th scope="col">Setor</th>
-                <th scope="col">Cargo</th>
-                <th scope="col">Email</th>
-                <th scope="col">Login</th>
-                <th scope="col">Status</th>
-                <th scope="col">#</th>
+                <th class="text-center" scope="col">Id</th>
+                <th class="text-center" scope="col">Nome</th>
+                <th class="text-center" scope="col">CPF</th>
+                <th class="text-center" scope="col">Sexo</th>
+                <th class="text-center" scope="col">Filial</th>
+                <th class="text-center" scope="col">Setor</th>
+                <th class="text-center" scope="col">Cargo</th>
+                <th class="text-center" scope="col">Email</th>
+                <th class="text-center" scope="col">Login</th>
+                <th class="text-center" scope="col">Status</th>
+                <th class="text-center" scope="col">#</th>
             </tr>
         </thead>
         <tbody id="tabela" name="tabela">
             <c:forEach var="u" items="${usuarios}">
                 <tr>
-                    <td>${u.idUsuario}</td>
-                    <td>${u.nome}</td>
-                    <td>${u.cpf}</td>
-                    <td>${u.sexo}</td>
-                    <td>${u.filial}</td>
-                    <td>${u.setor}</td>
-                    <td>${u.cargo}</td>
-                    <td>${u.email}</td>
-                    <td>${u.login}</td>
-                    <td>${u.ativo}</td>
+                    <td class="text-center">${u.idUsuario}</td>
+                    <td class="text-center">${u.nome}</td>
+                    <td class="text-center">${u.cpf}</td>
+                    <td class="text-center">${u.sexo}</td>
+                    <td class="text-center">${u.filial}</td>
+                    <td class="text-center">${u.setor}</td>
+                    <td class="text-center">${u.cargo}</td>
+                    <td class="text-center">${u.email}</td>
+                    <td class="text-center">${u.login}</td>
+                    <td class="text-center">${u.ativo}</td>
                                     
-                    <td>
+                    <td class="text-center">
                         <c:url var="alterarUsuario" value="/Usuarios">
                             <c:param name="acao" value="alterar" />
                             <c:param name="idUsuario" value="${u.idUsuario}" />

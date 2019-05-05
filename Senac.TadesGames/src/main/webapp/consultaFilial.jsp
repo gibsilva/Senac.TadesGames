@@ -34,33 +34,33 @@
         <table class="table table-hover">
         <thead> 
             <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Nome</th>
-                <th scope="col">CNPJ</th>
-                <th scope="col">CEP</th>
-                <th scope="col">Longradouro</th>
-                <th scope="col">Numero</th>
-                <th scope="col">Complemento</th>
-                <th scope="col">Bairro</th>
-                <th scope="col">Cidade</th>
-                <th scope="col">Estado</th>
-                <th scope="col">#</th>
+                <th class="text-center" scope="col">Id</th>
+                <th class="text-center" scope="col">Nome</th>
+                <th class="text-center" scope="col">CNPJ</th>
+                <th class="text-center" scope="col">CEP</th>
+                <th class="text-center" scope="col">Longradouro</th>
+                <th class="text-center" scope="col">Numero</th>
+                <th class="text-center" scope="col">Complemento</th>
+                <th class="text-center" scope="col">Bairro</th>
+                <th class="text-center" scope="col">Cidade</th>
+                <th class="text-center" scope="col">Estado</th>
+                <th class="text-center" scope="col">#</th>
             </tr>
         </thead>
         <tbody id="tabela" name="tabela">
             <c:forEach var="f" items="${filiais}">
                 <tr>
-                    <td>${f.idFilial}</td>
-                    <td>${f.nome}</td>
-                    <td>${f.cnpj}</td>
-                    <td>${f.cep}</td>
-                    <td>${f.longradouro}</td>
-                    <td>${f.numero}</td>
-                    <td>${f.complemento}</td>
-                    <td>${f.bairro}</td>
-                    <td>${f.cidade}</td>
-                    <td>${f.estado}</td>                 
-                    <td>
+                    <td class="text-center">${f.idFilial}</td>
+                    <td class="text-center">${f.nome}</td>
+                    <td class="text-center">${f.cnpj}</td>
+                    <td class="text-center">${f.cep}</td>
+                    <td class="text-center">${f.longradouro}</td>
+                    <td class="text-center">${f.numero}</td>
+                    <td class="text-center">${f.complemento}</td>
+                    <td class="text-center">${f.bairro}</td>
+                    <td class="text-center">${f.cidade}</td>
+                    <td class="text-center">${f.estado}</td>                 
+                    <td class="text-center">
                         <c:url var="alterarFilial" value="/filiais">
                             <c:param name="acao" value="alterar" />
                             <c:param name="idFilial" value="${f.idFilial}" />

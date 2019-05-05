@@ -12,7 +12,6 @@
     <h2>Consulta de Vendas</h2> 
     <br>
 
-
     <form method="post">
         <div class="row">
             <div class="form-group col-md-2">
@@ -42,33 +41,35 @@
     <table class="table table-hover">
         <thead> 
             <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Cliente</th>
-                <th scope="col">Qtd Produto</th>
-                <th scope="col">Valor Total</th>
-                <th scope="col">Forma de Pagamento</th>
-                <th scope="col">Data e Hora</th>
-                <th scope="col">Vendedor</th>
-                <th scope="col">Status</th>
-                <th scope="col">#</th>
+                <th class="text-center" scope="col">Id</th>
+                <th class="text-center" scope="col">Cliente</th>
+                <th class="text-center" scope="col">CPF/CNPJ</th>
+                <th class="text-center" scope="col">Qtd de Produtos</th>
+                <th class="text-center" scope="col">Valor Total</th>
+                <th class="text-center" scope="col">Forma de Pagamento</th>
+                <th class="text-center" scope="col">Data e Hora</th>
+                <th class="text-center" scope="col">Vendedor</th>
+                <th class="text-center" scope="col">Status</th>
+                <th class="text-center" scope="col">#</th>
             </tr>
         </thead>
 
         <tbody id="tabela" name="tabela">
-
             <tr class="table-light">
-                <td>01</td>
-                <td>The Last of Us</td>
-                <td>Playstation 4</td>
-                <td>1</td>
-                <td>150,00</td>
-                <td>150,00</td>
+                <td class=" text-center">001</td>
+                <td class=" text-center">Fulano</td>
+                <td class=" text-center">617647627131</td>
+                <td class=" text-center">4</td>
+                <td class=" text-center">150,00</td>
+                <td class=" text-center">Credito</td>
+                <td class=" text-center">25/01/2019 16h30</td>
+                <td class=" text-center">Cicrano</td>
+                <td class=" text-center">concluida</td>
 
-                <td>
-                    <button type="button" class="btn btn-outline-warning btn-sm">Detalhes</button>
+                <td class="text-center">
+                    <a href="detalhesVenda.jsp"  class="btn btn-outline-warning btn-sm">Detalhes</a>
                 </td>
             </tr>
-
         </tbody>
     </table>
 </div>

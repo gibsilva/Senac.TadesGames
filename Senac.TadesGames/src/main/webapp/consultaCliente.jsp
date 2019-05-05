@@ -8,9 +8,9 @@
 <title>Consulta de Cliente</title>
 
 <div class="col-md-10 container">
+    <br>
     <h2>Consulta de Clientes</h2>
-
- 
+    <hr>
     <br>
     <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
 
@@ -30,39 +30,39 @@
     <table class="table table-hover">
         <thead> 
             <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Nome</th>
-                <th scope="col">CPF</th>
-                <th scope="col">CNPJ</th>
-                <th scope="col">Data Nasc.</th>
-                <th scope="col">Sexo</th>
-                <th scope="col">E-mail</th>
-                <th scope="col">Telefone</th>
-                <th scope="col">Celular</th>
-                <th scope="col">Status</th>
-                <th scope="col">#</th>
+                <th class="text-center" scope="col">Id</th>
+                <th class="text-center" scope="col">Nome</th>
+                <th class="text-center" scope="col">CPF</th>
+                <th class="text-center" scope="col">CNPJ</th>
+                <th class="text-center" scope="col">Data Nasc.</th>
+                <th class="text-center" scope="col">Sexo</th>
+                <th class="text-center" scope="col">E-mail</th>
+                <th class="text-center" scope="col">Telefone</th>
+                <th class="text-center" scope="col">Celular</th>
+                <th class="text-center" scope="col">Status</th>
+                <th class="text-center" scope="col">#</th>
 
             </tr>
         </thead>
         <tbody id="tabela" name="tabela">
             <c:forEach var="c" items="${clientes}">
                 <tr>
-                    <td>${c.idCliente}</td>
-                    <td>${c.nome}</td>
-                    <td>${c.cpf}</td>
-                    <td>${c.cnpj}</td>
-                    <td>${c.dataNasc}</td>
-                    <td>${c.sexo}</td>
-                    <td>${c.email}</td>
-                    <td>${c.telefone}</td>
-                    <td>${c.celular}</td>
+                    <td class="text-center">${c.idCliente}</td>
+                    <td class="text-center">${c.nome}</td>
+                    <td class="text-center">${c.cpf}</td>
+                    <td class="text-center">${c.cnpj}</td>
+                    <td class="text-center">${c.dataNasc}</td>
+                    <td class="text-center">${c.sexo}</td>
+                    <td class="text-center">${c.email}</td>
+                    <td class="text-center">${c.telefone}</td>
+                    <td class="text-center">${c.celular}</td>
                     <c:if test="${c.ativo == true}">
-                        <td>Ativo</td>
+                        <td class="text-center">Ativo</td>
                     </c:if>
                     <c:if test="${c.ativo == false}">
-                        <td>Inativo</td>
+                        <td class="text-center">Inativo</td>
                     </c:if>
-                    <td>
+                    <td class="text-center">
                         <c:url var="alterarCliente" value="/Clientes">
                             <c:param name="acao" value="alterar" />
                             <c:param name="idCliente" value="${c.idCliente}" />

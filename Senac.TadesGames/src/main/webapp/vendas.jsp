@@ -76,32 +76,33 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th scope="col">ID Produto</th>
-                    <th scope="col">Nome/Titulo</th>
-                    <th scope="col">Plataforma</th>
-                    <th scope="col">Quantidade</th>
-                    <th scope="col">Preço Unitario</th>
-                    <th scope="col">Preço Total</th>
-                    <th scope="cool">#</th>
+                    <th class="text-center" scope="col">ID Produto</th>
+                    <th class="text-center" scope="col">Nome/Titulo</th>
+                    <th class="text-center" scope="col">Categoria</th>
+                    <th class="text-center" scope="col">Plataforma</th>
+                    <th class="text-center" scope="col">Gênero</th>
+                    <th class="text-center" scope="col">Quantidade</th>
+                    <th class="text-center" scope="col">Preço Unitario</th>
+                    <th class="text-center" scope="col">Preço Total</th>
+                    <th class="text-center" scope="cool">#</th>
 
                 </tr>
             </thead>
 
             <tbody id="tabela" name="tabela">
-
                 <tr class="table-light">
-                    <td>01</td>
-                    <td>The Last of Us</td>
-                    <td>Playstation 4</td>
-                    <td>1</td>
-                    <td>150,00</td>
-                    <td>150,00</td>
-
-                    <td>
+                    <td class="text-center">01</td>
+                    <td class="text-center">The Last of Us</td>
+                    <td class="text-center">Console</td>
+                    <td class="text-center">Playstation 4</td>
+                    <td class="text-center">sobrevivencia</td>
+                    <td class="text-center">1</td>
+                    <td class="text-center">150,00</td>
+                    <td class="text-center">150,00</td>
+                    <td class="text-center">
                         <button type="button" class="btn btn-danger btn-sm">excluir</button>
                     </td>
                 </tr>
-
             </tbody>
         </table>
         <hr>
@@ -134,7 +135,7 @@
 
                 <div class="col-md-5">
                     <div class="form-group">
-                        <label for="inputValorUnitario">Dinheiro</label>
+                        <label for="inputValorUnitario">Valor</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">R$</span>
@@ -152,6 +153,7 @@
                             <input type="text" class="form-control" id="troco" placeholder="00,00" readonly>
                         </div>
                     </div>
+                    
                 </div>
             </div>
 

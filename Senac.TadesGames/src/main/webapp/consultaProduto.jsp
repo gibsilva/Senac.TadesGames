@@ -9,8 +9,9 @@
 <title>Consulta de Produto</title>
 
 <div class="col-md-10 container">
-    <br
-    <h2>Consulta de Produto</h2> 
+    <br>
+    <h2>Consulta de Produtos</h2>
+    <hr>
     <br>
     
     <div class="btn-toolbar justify-content-between" role="toolbar" >
@@ -32,30 +33,34 @@
     <table class="table table-hover">
         <thead> 
             <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Nome</th>
-                <th scope="col">Preço Compra</th>
-                <th scope="col">Preço Venda</th>
-                <th scope="col">Plataforma</th>
-                <th scope="col">Categoria</th>
-                <th scope="col">Genero</th>
-                <th scope="col">Status</th>
-                <th scope="col">#</th>
+                <th class="text-center" scope="col">Id</th>
+                <th class="text-center" scope="col">Nome</th>
+                <th class="text-center" scope="col">Preço Compra</th>
+                <th class="text-center" scope="col">Preço Venda</th>
+                <th class="text-center" scope="col">Plataforma</th>
+                <th class="text-center" scope="col">Categoria</th>
+                <th class="text-center" scope="col">Genero</th>
+                <th class="text-center" scope="col">Descrição</th>
+                <th class="text-center" scope="col">Qtd Estoque</th>
+                <th class="text-center" scope="col">Status</th>
+                <th class="text-center" scope="col">#</th>
             </tr>
         </thead>
         <tbody>
         <c:forEach var="p" items="${produtos}">
             <tr>
-                <td>${p.idProduto}</td>
-                <td>${p.nome}</td>
-                <td>${p.precoCompra}</td>
-                <td>${p.precoVenda}</td>
-                <td>${p.plataforma}</td>
-                <td>${p.categoria}</td>
-                <td>${p.genero}</td>
-                <td>${p.status}</td>
+                <td class="text-center">${p.idProduto}</td>
+                <td class="text-center">${p.nome}</td>
+                <td class="text-center">${p.precoCompra}</td>
+                <td class="text-center">${p.precoVenda}</td>
+                <td class="text-center">${p.plataforma}</td>
+                <td class="text-center">${p.categoria}</td>
+                <td class="text-center">${p.genero}</td>
+                <td class="text-center">${p.descricao}</td>
+                <td class="text-center">${p.qtdEstoque}</td>
+                <td class="text-center">${p.status}</td>
        
-                <td>
+                <td class="text-center">
                     <c:url var="alterarProduto" value="/Produtos">
                             <c:param name="acao" value="alterar" />
                             <c:param name="idProduto" value="${p.idProduto}" />

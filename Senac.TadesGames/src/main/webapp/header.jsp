@@ -27,23 +27,35 @@
                         <a class="nav-link" href="home.jsp">Home <span class="sr-only">(current)</span></a>
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="vendas.jsp">Vendas</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="cadastroCliente.jsp">Cadastro de Cliente</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Vendas</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="vendas.jsp">Realizar Venda</a>
+                            <a class="dropdown-item" href="consultaVendas.jsp">Consulta de Vendas</a>
+                        </div>
                     </li>
 
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Consultas</a>
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Cliente</a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="Clientes">Cliente</a>
-                            <a class="dropdown-item" href="consultaProduto.jsp">Produto</a>
-                            <a class="dropdown-item" href="consultaVendas.jsp">Vendas</a>  
+                            <a class="dropdown-item" href="cadastroCliente.jsp">Cadastro de Cliente</a>
+                            <a class="dropdown-item" href="Clientes"> Consulta de Cliente</a>
                         </div>
                     </li>
-                    
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Produto</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="cadastroProduto.jsp">Cadastro de Produto</a>
+                            <a class="dropdown-item" href="consultaProduto.jsp">Consulta de Produto</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="cadastroPlataforma.jsp">Cadastro de Plataforma</a>
+                            <a class="dropdown-item" href="cadastroCategoria.jsp">Cadastro de Categoria</a>
+                            <a class="dropdown-item" href="cadastroGenero.jsp">Cadastro de Genero</a>
+                        </div>
+                    </li>
+
+
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Relatorio</a>
                         <div class="dropdown-menu">
@@ -54,26 +66,26 @@
                     </li>
 
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Administrador</a>
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Usuario</a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="cadastroUsuario.jsp">Cadastro de Usuario</a>
                             <a class="dropdown-item" href="consultaUsuario.jsp">Consulta de Usuario</a>
+                        </div>
+                    </li>
 
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="cadastroProduto.jsp">Cadastro de Produto</a>
-                            <a class="dropdown-item" href="consultaProduto.jsp">Consulta de Produto</a>
-                            <a class="dropdown-item" href="cadastroPlataforma.jsp">Cadastro de Plataforma</a>
-                            <a class="dropdown-item" href="cadastroCategoria.jsp">Cadastro de Categoria</a>
-                            <a class="dropdown-item" href="cadastroGenero.jsp">Cadastro de Genero</a>
-                            
-                            <div class="dropdown-divider"></div>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Filiais</a>
+                        <div class="dropdown-menu">
                             <a class="dropdown-item" href="cadastroFilial.jsp">Cadastro de Filial</a>
                             <a class="dropdown-item" href="consultaFilial.jsp">Consulta de Filial</a>
                         </div>
-                        
+                    </li>
+
+
+
                 </ul>
-                
-                
+
+
                 <form class="form-inline my-2 my-lg-0">
                     <a href="login.jsp" class="btn btn-warning my-2 my-sm-0" type="submit" >Login</a>
                 </form>
