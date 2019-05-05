@@ -11,21 +11,18 @@
     <br>
     <h2>Novo Usuários</h2>
     <hr>
-    <form>
+    <form action="Usuarios" method="post">
+        <input type="hidden" value="salvar" id="acao" name="acao">
+        
         <div class="row">
-            <div class="form-group col-md-2">
-                <label for="IdFuncionario">ID do Funcionário<h11 class="text-danger">*</h11></label>
-                <input type="text" class="form-control" id="IdFuncionario" placeholder="0000" readonly>
-            </div>
-
             <div class="form-group col-md-5">
                 <label for="inputNomeFunc">Nome<h11 class="text-danger">*</h11></label>
-                <input type="text" class="form-control" id="NomeFunc" maxlength="80" placeholder="Nome Comleto" required>
+                <input type="text" class="form-control" id="nome" name="nome" maxlength="80" placeholder="Nome Completo" required>
             </div>
 
             <div class="form-group col-md-2">
                 <label for="inputSexo">Sexo<h11 class="text-danger">*</h11></label>
-                <select id="sexo" class="custom-select" required>
+                <select id="sexo" name="sexo" class="custom-select" required>
                     <option selected value="">Selecione</option>
                     <option value="M">Masculino</option>
                     <option value="F">Feminino</option>
@@ -41,7 +38,7 @@
                        placeholder="Digite seu Email" required="">
             </div>
 
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-3">
                 <label for="inputCPFFunc">CPF<h11 class="text-danger">*</h11></label>
                 <input type="text" class="form-control" name="cpf" id="cpf" minlength="11" maxlength="11" placeholder="Digite seu CPF" required>
             </div>
@@ -50,7 +47,7 @@
         <div class="row">
             <div class="form-group col-md-2">
                 <label for="inputFilial">Filial<h11 class="text-danger">*</h11></label>
-                <select id="filial" class="custom-select" required>
+                <select id="filial" name="filial" class="custom-select">
                     <option value="">Selecione</option>
                     <option value="1">Matriz</option>
                     <option value="2">Filial 1</option>
@@ -62,26 +59,26 @@
 
             <div class="form-group col-md-3">
                 <label for="inputSetor">Setor<h11 class="text-danger">*</h11></label>
-                <select id="setor" class="custom-select" required>
+                <select id="setor" name="setor" class="custom-select" required>
                     <option value="">Selecione</option>
-                    <option value="1">Diretoria</option>
-                    <option value="2">Produtos/Serviços/Marketing</option>
-                    <option value="5">Vendas</option>
-                    <option value="6">T.I</option>
-                    <option value="7">Administrativo</option>
+                    <option value="Diretoria">Diretoria</option>
+                    <option value="Produtos/Serviços/Marketing">Produtos/Serviços/Marketing</option>
+                    <option value="Vendas">Vendas</option>
+                    <option value="T.I">T.I</option>
+                    <option value="Administrativo">Administrativo</option>
                 </select>
             </div>
 
             <div class="form-group col-md-2">
                 <label for="inputCargo">Cargo<h11 class="text-danger">*</h11></label>
-                <select id="cargo" class="custom-select" required>
+                <select id="cargo" name="cargo" class="custom-select" required>
                     <option value="">Selecione</option>
-                    <option value="D">Diretor</option>
-                    <option value="GG">Gerente Global</option>
-                    <option value="GR">Gerente Regional</option>
-                    <option value="ST">Suporte Técnico</option>
-                    <option value="F">Funcionário</option>
-                    <option value="V">Vendedor (a)</option>
+                    <option value="Diretor">Diretor</option>
+                    <option value="Gerente Global">Gerente Global</option>
+                    <option value="Gerente Regional">Gerente Regional</option>
+                    <option value="Suporte Técnico">Suporte Técnico</option>
+                    <option value="Funcionário">Funcionário</option>
+                    <option value="Vendedor (a)">Vendedor (a)</option>
                 </select>
             </div>
         </div>
@@ -89,12 +86,12 @@
         <div class="row ">
             <div class="form-group col-md-4">
                 <label for="inputLogin">Login:<h11 class="text-danger">*</h11></label>
-                <input type="text" class="form-control" id="login" minlength="6" maxlength="15" placeholder="Login" required>
+                <input type="text" class="form-control" id="login" name="login" minlength="6" maxlength="15" placeholder="Login" required>
             </div>
 
             <div class="form-group col-md-4">
                 <label for="inputSenha">Senha<h11 class="text-danger">*</h11></label>
-                <input type="password" class="form-control" id="senha" minlength="4" maxlength="8" placeholder="Digite sua Senha" required>
+                <input type="password" class="form-control" id="senha" name="senha" minlength="4" maxlength="8" placeholder="Digite sua Senha" required>
             </div>  
         </div>
 

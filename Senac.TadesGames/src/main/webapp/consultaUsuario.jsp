@@ -5,7 +5,7 @@
 --%>
 
 <%@include file="header.jsp" %>
-<%@ taglib prefix = "u" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <title>Consulta de Usuarios</title>
 
 <div class="col-md-10 container">
@@ -17,10 +17,10 @@
         <div class="input-group-append col-md-6">
             <input type="text" class="form-control " placeholder="Pesquisar" id="filtro" name="filtro">
             
-            <button class="btn btn-dark" type="button">
+            <!--<button class="btn btn-dark" type="button">
                 <i class="fa fa-search"></i> Pesquisar
             </button>
-           
+               -->
         </div>
         <div class="input-group">
             <div>
@@ -54,19 +54,24 @@
                     <td class="text-center">${u.nome}</td>
                     <td class="text-center">${u.cpf}</td>
                     <td class="text-center">${u.sexo}</td>
-                    <td class="text-center">${u.filial}</td>
+                    <td class="text-center">${u.idFilial}</td>
                     <td class="text-center">${u.setor}</td>
                     <td class="text-center">${u.cargo}</td>
                     <td class="text-center">${u.email}</td>
                     <td class="text-center">${u.login}</td>
-                    <td class="text-center">${u.ativo}</td>
-                                    
+                    
+                    <c:if test="${u.ativo == true}">
+                        <td class="text-center">Ativo</td>
+                    </c:if>
+                    <c:if test="${u.ativo == false}">
+                        <td class="text-center">Inativo</td>
+                    </c:if>
                     <td class="text-center">
                         <c:url var="alterarUsuario" value="/Usuarios">
                             <c:param name="acao" value="alterar" />
                             <c:param name="idUsuario" value="${u.idUsuario}" />
                         </c:url>
-                        <a href="alterarUsuario.jsp" class="btn btn-outline-warning">Editar</a>
+                        <a href="${alterarUsuario}" class="btn btn-outline-warning">Editar</a>
                     </td>
                 </tr>
             </c:forEach>

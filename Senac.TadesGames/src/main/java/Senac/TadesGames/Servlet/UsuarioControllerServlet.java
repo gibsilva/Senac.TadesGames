@@ -10,6 +10,7 @@ import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author adrianne
  */
 @WebServlet("/Usuarios")
-public class UsuarioControllerServlet {
+public class UsuarioControllerServlet extends HttpServlet{
     private final UsuarioService service = new UsuarioService();
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -30,6 +31,7 @@ public class UsuarioControllerServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
@@ -62,6 +64,7 @@ public class UsuarioControllerServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
@@ -83,17 +86,17 @@ public class UsuarioControllerServlet {
     protected void incluirUsuario(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Utils util = new Utils();
-        String nome = util.removePontosBarraStr(request.getParameter("nome"));
+        String nome = request.getParameter("nome");
         String cpf = util.removePontosBarraStr(request.getParameter("cpf"));
         String email = request.getParameter("email");
-        String sexo = util.removePontosBarraStr(request.getParameter("sexo"));
-        String filial = util.removePontosBarraStr(request.getParameter("filial"));
-        String setor = util.removePontosBarraStr(request.getParameter("setor"));
-        String cargo = util.removePontosBarraStr(request.getParameter("cargo"));
+        String sexo = request.getParameter("sexo");
+        int idFilial = Integer.parseInt(request.getParameter("filial"));
+        String setor = request.getParameter("setor");
+        String cargo = request.getParameter("cargo");
         String login = request.getParameter("login");
         String senha = request.getParameter("senha");
 
-        UsuarioModel usuario = new UsuarioModel(0, nome, cpf, email, sexo, filial, setor, cargo, login, senha, true);
+        UsuarioModel usuario = new UsuarioModel(0, nome, cpf, email, setor, cargo, login, senha, 1, sexo, true);
 
         try {
             List<Notificacao> notificacoes = service.incluirUsuario(usuario);
@@ -117,7 +120,8 @@ public class UsuarioControllerServlet {
 
     protected void listarUsuarios(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setAttribute("usuarios", service.obterListaUsuarios());
+        List<UsuarioModel> usuarios = service.obterListaUsuarios();
+        request.setAttribute("usuarios", usuarios);
         request.getRequestDispatcher("consultaUsuario.jsp").forward(request, response);
     }
 
@@ -136,18 +140,18 @@ public class UsuarioControllerServlet {
         Utils util = new Utils();
 
         int id = Integer.parseInt(request.getParameter("idUsuario"));
-        String nome = util.removePontosBarraStr(request.getParameter("nome"));
+        String nome = request.getParameter("nome");
         String cpf = util.removePontosBarraStr(request.getParameter("cpf"));
         String email = request.getParameter("email");
         String sexo = request.getParameter("sexo");
-        String filial = util.removePontosBarraStr(request.getParameter("filial"));
-        String setor = util.removePontosBarraStr(request.getParameter("setor"));
-        String cargo = util.removePontosBarraStr(request.getParameter("cargo"));
+        int idFilial = Integer.parseInt(request.getParameter("filial"));
+        String setor = request.getParameter("setor");
+        String cargo = request.getParameter("cargo");
         String login = request.getParameter("login");
         String senha = request.getParameter("senha");
         boolean ativo = Boolean.parseBoolean(request.getParameter("ativo"));
         
-        UsuarioModel usuario = new UsuarioModel(id, nome, cpf, email, sexo, filial, setor, cargo, login, senha, ativo, true);
+        UsuarioModel usuario = new UsuarioModel(id, nome, cpf, email, setor, cargo, login, senha, idFilial, sexo, ativo);
 
         try {
             List<Notificacao> notificacoes = service.alterarUsuario(usuario);

@@ -4,10 +4,6 @@
         <servlet-name>HomeServlet</servlet-name>
         <servlet-class>Senac.TadesGames.Servlet.HomeServlet</servlet-class>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>HomeServlet</servlet-name>
-        <url-pattern>/home</url-pattern>
-    </servlet-mapping>
     <servlet>
         <servlet-name>ClienteControllerServlet</servlet-name>
         <servlet-class>Senac.TadesGames.Servlet.ClienteControllerServlet</servlet-class>

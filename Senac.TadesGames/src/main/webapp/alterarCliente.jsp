@@ -29,27 +29,32 @@
             <div class="row">
                 <div class="form-group col-md-5">
                     <label for="name">Nome <h11 class="text-danger">*</h11></label>
-                    <input type="text" class="form-control" name="nome" id="nome" placeholder="Digite seu Nome" maxlength="80" required value="${cliente.nome}">
+                    <input type="text" class="form-control" name="nome" id="nome" placeholder="Digite seu Nome" maxlength="80" 
+                           required value="${cliente.nome}">
                 </div>
                 <div class="form-group col-md-2">
                     <label for="cpf">CPF<h11 class="text-danger">*</h11> </label>
-                    <input type="text" class="form-control" name="cpf" id="cpf" maxlength="11" placeholder="Digite seu CPF" readonly value="${cliente.cpf}">
+                    <input type="text" class="form-control" name="cpf" id="cpf" maxlength="11" placeholder="Digite seu CPF" 
+                           readonly value="${cliente.cpf}">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="cnpj">CNPJ </label>
-                    <input type="text" class="form-control" name="cnpj" id="cnpj" maxlength="14" placeholder="Digite seu CNPJ" readonly value="${cliente.cnpj}">
+                    <input type="text" class="form-control" name="cnpj" id="cnpj" maxlength="14" placeholder="Digite seu CNPJ" 
+                           readonly value="${cliente.cnpj}">
                 </div>
             </div>
 
             <div class="row"> 
                 <div class="form-group col-md-2"
                      <label for="Celular">Celular<h11 class="text-danger">*</h11></label>
-                    <input type="text" class="form-control sp_celphones" name="celular" id="celular" placeholder="Digite seu numero" required value="${cliente.celular}">
+                    <input type="text" class="form-control sp_celphones" name="celular" id="celular" placeholder="Digite seu numero" 
+                           required value="${cliente.celular}">
                 </div>
                 
                 <div class="form-group col-md-2"
                      <label for="Celular">Telefone</label>
-                    <input type="text" class="form-control phone_with_ddd" name="telefone" id="telefone" placeholder="Digite seu numero" value="${cliente.telefone}">
+                    <input type="text" class="form-control phone_with_ddd" name="telefone" id="telefone" 
+                           placeholder="Digite seu numero" value="${cliente.telefone}">
                 </div>
 
                 <div class="form-group col-md-2"
@@ -71,7 +76,8 @@
 
                 <div class="form-group col-md-2">
                     <label for="Data">Data de Nascimento<h11 class="text-danger">*</h11></label>
-                    <input type="date"  class="form-control" id="dataNasc" name="dataNasc" placeholder="DD/MM/AAAA" maxlength="8" required value=${cliente.dataNasc}>
+                    <input type="date"  class="form-control" id="dataNasc" name="dataNasc" placeholder="DD/MM/AAAA" 
+                           maxlength="8" required value=${cliente.dataNasc}>
                 </div>
 
                 <div class="form-group col-md-2">

@@ -69,7 +69,7 @@
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Usuario</a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="cadastroUsuario.jsp">Cadastro de Usuario</a>
-                            <a class="dropdown-item" href="consultaUsuario.jsp">Consulta de Usuario</a>
+                            <a class="dropdown-item" href="Usuarios">Consulta de Usuario</a>
                         </div>
                     </li>
 

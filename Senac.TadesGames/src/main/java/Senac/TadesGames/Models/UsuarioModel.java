@@ -12,7 +12,6 @@ package Senac.TadesGames.Models;
 public class UsuarioModel extends PessoaModel {
 
     private int idUsuario;
-    private String filial;
     private String setor;
     private String cargo;
     private PermissaoModel permissao;
@@ -22,14 +21,13 @@ public class UsuarioModel extends PessoaModel {
    
 
     public UsuarioModel(int idUsuario, String nome, String cpf,
-            String email, String filial,String setor, String cargo,
+            String email,String setor, String cargo,
             String login, String senha, int idFilial, String sexo, boolean ativo) {
 
         this.idUsuario = idUsuario;
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;
-        this.filial = filial;
         this.setor = setor;
         this.cargo = cargo;
         this.login = login;
@@ -37,14 +35,6 @@ public class UsuarioModel extends PessoaModel {
         this.idFilial = idFilial;
         this.sexo = sexo;
         this.ativo = ativo;
-    }
-
-    public UsuarioModel(int id, String nome, String cpf, String email, String sexo, String filial, String setor, String cargo, String login, String senha, boolean ativo, boolean b) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public UsuarioModel(int i, String nome, String cpf, String email, String sexo, String filial, String setor, String cargo, String login, String senha, boolean b) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -59,20 +49,6 @@ public class UsuarioModel extends PessoaModel {
      */
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
-    }
-
-    /**
-     * @return the filial
-     */
-    public String getFilial() {
-        return filial;
-    }
-
-    /**
-     * @param filial the filial to set
-     */
-    public void setFilial(String filial) {
-        this.filial = filial;
     }
 
     /**
