@@ -34,13 +34,13 @@ public class FilialDAO implements IFilialDao {
             stmt = conn.prepareStatement("SELECT IDFILIAL, "
                     + "NOME, "
                     + "CNPJ, "
-                    + "CEP"
-                    + "LONGRADOURO"
-                    + "NUMERO"
-                    + "COMPLEMENTO"
-                    + "BAIRRO"
-                    + "CIDADE"
-                    + "ESTADO"
+                    + "CEP, "
+                    + "LONGRADOURO, "
+                    + "NUMERO, "
+                    + "COMPLEMENTO, "
+                    + "BAIRRO, "
+                    + "CIDADE, "
+                    + "ESTADO "
                     + "FROM FILIAL WHERE IDFILIAL = ?");
 
             stmt.setInt(1, id);
@@ -48,9 +48,9 @@ public class FilialDAO implements IFilialDao {
             rs = stmt.executeQuery();
             while (rs.next()) {
                 filial = new FilialModel(
-                        rs.getInt("IdCliente"),
-                        rs.getString("Nome"),
+                        rs.getInt("IdFilial"),
                         rs.getString("Cnpj"),
+                        rs.getString("Nome"),
                         rs.getString("cep"),
                         rs.getString("longradouro"),
                         rs.getInt("numero"),
@@ -75,14 +75,24 @@ public class FilialDAO implements IFilialDao {
         List<FilialModel> filiais = new ArrayList<FilialModel>();
 
         try {
-            stmt = conn.prepareStatement("SELECT IDFILIAL, NOME FROM FILIAL");
+             stmt = conn.prepareStatement("SELECT IDFILIAL, "
+                    + "NOME, "
+                    + "CNPJ, "
+                    + "CEP, "
+                    + "LONGRADOURO, "
+                    + "NUMERO, "
+                    + "COMPLEMENTO, "
+                    + "BAIRRO, "
+                    + "CIDADE, "
+                    + "ESTADO "
+                    + "FROM FILIAL");
 
             rs = stmt.executeQuery();
             while (rs.next()) {
                 filial = new FilialModel(
-                        rs.getInt("IdCliente"),
-                        rs.getString("Nome"),
+                        rs.getInt("IdFilial"),
                         rs.getString("Cnpj"),
+                        rs.getString("Nome"),
                         rs.getString("cep"),
                         rs.getString("longradouro"),
                         rs.getInt("numero"),
@@ -107,19 +117,21 @@ public class FilialDAO implements IFilialDao {
         Connection conn = conexao.getConnection();
 
         try {
-            stmt = conn.prepareStatement("INSERT INTO FILIAL(NOME,"
-                    + "CNPJ"
-                    + "CEP"
-                    + "LONGRADOURO"
-                    + "NUMERO"
-                    + "COMPLEMENTO"
-                    + "BAIRRO"
-                    + "CIDADE"
-                    + "ESTADO) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            stmt = conn.prepareStatement("INSERT INTO FILIAL("
+                    + "NOME, "
+                    + "CNPJ, "
+                    + "CEP, "
+                    + "LONGRADOURO, "
+                    + "NUMERO, "
+                    + "COMPLEMENTO, "
+                    + "BAIRRO, "
+                    + "CIDADE, "
+                    + "ESTADO) "
+                    + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
             stmt.setString(1, filial.getNome());
             stmt.setString(2, filial.getCnpj());
             stmt.setString(3, filial.getCep());
-            stmt.setString(4, filial.getLongradouro());
+            stmt.setString(4, filial.getLogradouro());
             stmt.setInt(5, filial.getNumero());
             stmt.setString(6, filial.getComplemento());
             stmt.setString(7, filial.getBairro());
@@ -138,24 +150,116 @@ public class FilialDAO implements IFilialDao {
         Connection conn = conexao.getConnection();
 
         try {
-            stmt = conn.prepareStatement("UPTADE FILIAL SET "
-                    + "NOME = ?,"
-                    + "CEP = ?,"
-                    + "LONGRADOURO = ?,"
-                    + "NUMERO = ?,"
-                    + "COMPLEMENTO = ?,"
-                    + "BAIRRO = ?,"
-                    + "CIDADE = ?,"
-                    + "ESTADO = ?,"
+            stmt = conn.prepareStatement("UPDATE FILIAL SET "
+                    + "NOME = ?, "
+                    + "CEP = ?, "
+                    + "LONGRADOURO = ?, "
+                    + "NUMERO = ?, "
+                    + "COMPLEMENTO = ?, "
+                    + "BAIRRO = ?, "
+                    + "CIDADE = ?, "
+                    + "ESTADO = ? "
                     + " WHERE IDFILIAL = ?");
             stmt.setString(1, filial.getNome());
+            stmt.setString(2, filial.getCep());
+            stmt.setString(3, filial.getLogradouro());
+            stmt.setInt(4, filial.getNumero());
+            stmt.setString(5, filial.getComplemento());
+            stmt.setString(6, filial.getBairro());
+            stmt.setString(7, filial.getCidade());
+            stmt.setString(8, filial.getEstado());
+            stmt.setInt(9, filial.getIdFilial());
             
-
             stmt.executeUpdate();
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt);
             throw new RuntimeException(ex.getMessage());
         }
     }
+    
+    @Override
+    public FilialModel obterPorCnpj(String cnpj) {
+        Connection conn = conexao.getConnection();
+        FilialModel filial = null;
 
+        try {
+            stmt = conn.prepareStatement("SELECT IDFILIAL, "
+                    + "NOME, "
+                    + "CNPJ, "
+                    + "CEP, "
+                    + "LONGRADOURO, "
+                    + "NUMERO, "
+                    + "COMPLEMENTO, "
+                    + "BAIRRO, "
+                    + "CIDADE, "
+                    + "ESTADO "
+                    + "FROM FILIAL WHERE CNPJ = ?");
+
+            stmt.setString(1, cnpj);
+
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                filial = new FilialModel(
+                        rs.getInt("IdFilial"),
+                        rs.getString("Nome"),
+                        rs.getString("Cnpj"),
+                        rs.getString("cep"),
+                        rs.getString("longradouro"),
+                        rs.getInt("numero"),
+                        rs.getString("complemento"),
+                        rs.getString("bairro"),
+                        rs.getString("cidade"),
+                        rs.getString("estado")        
+                );
+            }
+
+            return filial;
+        } catch (SQLException ex) {
+            conexao.closeConnection(conn, stmt, rs);
+            return null;
+        }
+    }
+    
+    public FilialModel obterPorCnpj(String cnpj, int id) {
+        Connection conn = conexao.getConnection();
+        FilialModel filial = null;
+
+        try {
+            stmt = conn.prepareStatement("SELECT IDFILIAL, "
+                    + "NOME, "
+                    + "CNPJ, "
+                    + "CEP, "
+                    + "LONGRADOURO, "
+                    + "NUMERO, "
+                    + "COMPLEMENTO, "
+                    + "BAIRRO, "
+                    + "CIDADE, "
+                    + "ESTADO "
+                    + "FROM FILIAL WHERE CNPJ = ? AND IDFILIAL != ?");
+
+            stmt.setString(1, cnpj);
+            stmt.setInt(2, id);
+
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                filial = new FilialModel(
+                        rs.getInt("IdFilial"),
+                        rs.getString("Nome"),
+                        rs.getString("Cnpj"),
+                        rs.getString("cep"),
+                        rs.getString("longradouro"),
+                        rs.getInt("numero"),
+                        rs.getString("complemento"),
+                        rs.getString("bairro"),
+                        rs.getString("cidade"),
+                        rs.getString("estado")        
+                );
+            }
+
+            return filial;
+        } catch (SQLException ex) {
+            conexao.closeConnection(conn, stmt, rs);
+            return null;
+        }
+    }
 }

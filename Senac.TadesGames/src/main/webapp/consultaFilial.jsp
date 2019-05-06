@@ -4,7 +4,7 @@
     Author     : Gi
 --%>
 <%@include file="header.jsp" %>
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <title>Consulta de Filiais</title>
 
 <div class="container">
@@ -15,11 +15,6 @@
 
         <div class="input-group-append col-md-6">
             <input type="text" class="form-control " placeholder="Pesquisar" id="filtro" name="filtro">
-            <!--
-            <button class="btn btn-dark" type="button">
-                <i class="fa fa-search"></i> Pesquisar
-            </button>
-            -->
         </div>
         
         <div class="input-group">
@@ -38,8 +33,8 @@
                 <th class="text-center" scope="col">Nome</th>
                 <th class="text-center" scope="col">CNPJ</th>
                 <th class="text-center" scope="col">CEP</th>
-                <th class="text-center" scope="col">Longradouro</th>
-                <th class="text-center" scope="col">Numero</th>
+                <th class="text-center" scope="col">Logradouro</th>
+                <th class="text-center" scope="col">Nº</th>
                 <th class="text-center" scope="col">Complemento</th>
                 <th class="text-center" scope="col">Bairro</th>
                 <th class="text-center" scope="col">Cidade</th>
@@ -54,18 +49,18 @@
                     <td class="text-center">${f.nome}</td>
                     <td class="text-center">${f.cnpj}</td>
                     <td class="text-center">${f.cep}</td>
-                    <td class="text-center">${f.longradouro}</td>
+                    <td class="text-center">${f.logradouro}</td>
                     <td class="text-center">${f.numero}</td>
                     <td class="text-center">${f.complemento}</td>
                     <td class="text-center">${f.bairro}</td>
                     <td class="text-center">${f.cidade}</td>
                     <td class="text-center">${f.estado}</td>                 
                     <td class="text-center">
-                        <c:url var="alterarFilial" value="/filiais">
+                        <c:url var="alterarFilial" value="/Filiais">
                             <c:param name="acao" value="alterar" />
                             <c:param name="idFilial" value="${f.idFilial}" />
                         </c:url>
-                        <a href="alterarFilial.jsp" class="btn btn-outline-warning">Editar</a>
+                        <a href="${alterarFilial}" class="btn btn-outline-warning">Editar</a>
                     </td>
                 </tr>
             </c:forEach>

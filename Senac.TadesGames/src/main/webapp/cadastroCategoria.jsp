@@ -4,64 +4,47 @@
     Author     : Marcel
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@include file="header.jsp" %>
 <html>
     <head>
-
-
-        <title>Cadastro de CatÃªgoria</title>
-
-
-
+        <title>Cadastro de Categoria</title>
     </head>
+
     <body>
-        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-        <%@include file="header.jsp" %>
         <div class=" container">
             <br>
             <h2>Cadastro de Categoria</h2>
             <hr>
-            <form>
+
+            <!-- notificacoes caso houver erros nas validações -->
+            <div class="form-group">
+                <ul class="text-danger">
+                    <c:forEach var = "n" items = "${notificacoes}">
+                        <li>${n.valor}</li>
+                        </c:forEach>
+                </ul>
+            </div>
+
+            <form action="Categorias" method="post">
+                <input type="hidden" value="salvar" id="acao" name="acao">
+                
                 <div class="row">
-                    <div class="col-3">
-                        <label for="idCategoria">Id<h11 class="text-danger">*</h11></label>
-                    </div>
-                    <div class="col-6">
-                        <label for="nome">Categoria<h11 class="text-danger">*</h11></label>
+                    <div class="col-md-5">
+                        <label for="nome">Nome<h11 class="text-danger">*</h11></label>
+                        <input type="text" id="nome" name="nome" class="form-control" placeholder="digite o nome da categoria" required>
                     </div>
                 </div>
+
+                <hr> 
+
                 <div class="row">
-                    <div class="col-3">
-                        <input type="text" id="idCategoria" class="form-control" placeholder="0000" readonly>
-                    </div>
-                    <div class="col-6">
-                        <input type="text" id="nome" class="form-control" placeholder="Categoria">
-                    </div>
-                    <div class="col-2"> 
-                        <input type="submit" class="btn btn-success" value="Salvar">
+                    <div class=" form-group col-md-2"> 
+                        <button type="submit" class="btn btn-success" value="Salvar">Salvar</button>
+                        <button type="reset" class="btn btn-light" value="cancelar">Cancelar</button>
                     </div>
                 </div>
             </form>
-            <br>
-            <table class="table table-hover">
-                <caption>Lista de Categorias</caption>
-                <thead> 
-                    <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">Categoria</th>
-                    </tr>
-                </thead>
-                <tbody id="tabela" name="tabela">
-                    <c:forEach var="c" items="${categoria}">
-                        <tr>
-                            <td>${c.idCategoria}</td>
-                            <td>${c.nome}</td>
-                        </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
         </div>
     </body>
 </html>

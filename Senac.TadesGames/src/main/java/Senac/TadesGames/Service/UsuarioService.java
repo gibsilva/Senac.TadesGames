@@ -34,6 +34,11 @@ public class UsuarioService {
             this.notificacao.adicionaNotificacao("cpf", "Esse CPF já está cadastrado");
         }
     }
+    private void validaLoginExistente(String login){
+        if(usuarioDao.obterPorLogin(login) != null){
+            this.notificacao.adicionaNotificacao("login", "Login já existente");
+        }
+    }
     private boolean validarUsuarioInclusao(UsuarioModel usuario) {
         if (!validarCpf(usuario.getCpf())) {
             this.notificacao.adicionaNotificacao("cpf", "CPF inválido, por favor digite um CPF válido");

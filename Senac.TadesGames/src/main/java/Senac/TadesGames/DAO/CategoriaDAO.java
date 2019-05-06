@@ -24,6 +24,54 @@ public class CategoriaDAO implements ICategoriaDao {
     private ConexaoDB conexao = new ConexaoDB();
     private PreparedStatement stmt = null;
     ResultSet rs = null;
+    
+   
+    public CategoriaModel obterPoNome(String nome) {
+        Connection conn = conexao.getConnection();
+        CategoriaModel categoria = null;
+
+        try {
+            stmt = conn.prepareStatement("SELECT IDCATEGORIA, NOME FROM CATEGORIA WHERE NOME = ?");
+            
+            stmt.setString(1, nome);
+
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                categoria = new CategoriaModel(
+                        rs.getInt("IdCategoria"),
+                        rs.getString("Nome"));
+            }
+
+            return categoria;
+        } catch (SQLException ex) {
+            conexao.closeConnection(conn, stmt, rs);
+            return null;
+        }
+    }
+    
+     public CategoriaModel obterPoNome(String nome, int id) {
+        Connection conn = conexao.getConnection();
+        CategoriaModel categoria = null;
+
+        try {
+            stmt = conn.prepareStatement("SELECT IDCATEGORIA, NOME FROM CATEGORIA WHERE NOME = ? AND IDCATEGORIA != ?");
+            
+            stmt.setString(1, nome);
+            stmt.setInt(2, id);
+
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                categoria = new CategoriaModel(
+                        rs.getInt("IdCategoria"),
+                        rs.getString("Nome"));
+            }
+
+            return categoria;
+        } catch (SQLException ex) {
+            conexao.closeConnection(conn, stmt, rs);
+            return null;
+        }
+    }
 
     @Override
     public CategoriaModel obterPorId(int id) {
@@ -93,7 +141,7 @@ public class CategoriaDAO implements ICategoriaDao {
         Connection conn = conexao.getConnection();
 
         try {
-            stmt = conn.prepareStatement("UPTADE CATEGORIA SET NOME = ? WHERE IDCATEGORIA = ?");
+            stmt = conn.prepareStatement("UPDATE CATEGORIA SET NOME = ? WHERE IDCATEGORIA = ?");
             stmt.setString(1, categoria.getNome());
             stmt.setInt(2, categoria.getIdCategoria());
 

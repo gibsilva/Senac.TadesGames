@@ -24,6 +24,53 @@ public class PlataformaDAO implements IPlataformaDao{
     private PreparedStatement stmt = null;
     ResultSet rs = null;
 
+        public PlataformaModel obterPoNome(String nome) {
+        Connection conn = conexao.getConnection();
+        PlataformaModel plataforma = null;
+
+        try {
+            stmt = conn.prepareStatement("SELECT IDPLATAFORMA, NOME FROM PLATAFORMA WHERE NOME = ?");
+
+            stmt.setString(1, nome);
+
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                plataforma = new PlataformaModel(
+                        rs.getInt("IdPlataforma"),
+                        rs.getString("Nome"));
+            }
+
+            return plataforma;
+        } catch (SQLException ex) {
+            conexao.closeConnection(conn, stmt, rs);
+            return null;
+        }
+    }
+
+    public PlataformaModel obterPoNome(String nome, int id) {
+        Connection conn = conexao.getConnection();
+        PlataformaModel plataforma = null;
+
+        try {
+            stmt = conn.prepareStatement("SELECT IDPLATAFORMA, NOME FROM PLATAFORMA WHERE NOME = ? AND IDPLATAFORMA != ?");
+
+            stmt.setString(1, nome);
+            stmt.setInt(2, id);
+
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                plataforma = new PlataformaModel(
+                        rs.getInt("IdPlataforma"),
+                        rs.getString("Nome"));
+            }
+
+            return plataforma;
+        } catch (SQLException ex) {
+            conexao.closeConnection(conn, stmt, rs);
+            return null;
+        }
+    }
+    
     @Override
     public PlataformaModel obterPorId(int id) {
         Connection conn = conexao.getConnection();
@@ -92,7 +139,7 @@ public class PlataformaDAO implements IPlataformaDao{
         Connection conn = conexao.getConnection();
 
         try {
-            stmt = conn.prepareStatement("UPTADE PLATAFORMA SET NOME = ? WHERE IDPLATAFORMA = ?");
+            stmt = conn.prepareStatement("UPDATE PLATAFORMA SET NOME = ? WHERE IDPLATAFORMA = ?");
             stmt.setString(1, plataforma.getNome());
             stmt.setInt(2, plataforma.getIdPlataforma());
 

@@ -50,8 +50,13 @@
                             <a class="dropdown-item" href="consultaProduto.jsp">Consulta de Produto</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="cadastroPlataforma.jsp">Cadastro de Plataforma</a>
+                            <a class="dropdown-item" href="Plataformas">Consulta de Plataforma</a>
+                            <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="cadastroCategoria.jsp">Cadastro de Categoria</a>
+                            <a class="dropdown-item" href="Categorias">Consulta de Categoria</a>
+                            <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="cadastroGenero.jsp">Cadastro de Genero</a>
+                            <a class="dropdown-item" href="Generos">Consulta de Genero</a>
                         </div>
                     </li>
 
@@ -77,7 +82,7 @@
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Filiais</a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="cadastroFilial.jsp">Cadastro de Filial</a>
-                            <a class="dropdown-item" href="consultaFilial.jsp">Consulta de Filial</a>
+                            <a class="dropdown-item" href="Filiais">Consulta de Filial</a>
                         </div>
                     </li>
 

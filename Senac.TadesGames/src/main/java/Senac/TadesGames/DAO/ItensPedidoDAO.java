@@ -34,10 +34,10 @@ public class ItensPedidoDAO implements IItensPedidoDao {
             stmt = conn.prepareStatement("SELECT "
                     + "IDITENSPEDIDO, "
                     + "IDPRODUTO, "
-                    + "VALORUNITARIO,"
-                    + "QUANTIDADE,"
+                    + "VALORUNITARIO, "
+                    + "QUANTIDADE, "
                     + "IDPEDIDO"
-                    + "FROM ITENSPEDIDO WHERE IDITENSPEDIDO = ?");
+                    + " FROM ITENSPEDIDO WHERE IDITENSPEDIDO = ?");
             stmt.setInt(1, id);
 
             rs = stmt.executeQuery();
@@ -66,11 +66,11 @@ public class ItensPedidoDAO implements IItensPedidoDao {
         try {
             stmt = conn.prepareStatement("SELECT "
                     + "IDITENSPEDIDO, "
-                    + "IDPRODUTO "
-                    + "VALORUNITARIO"
-                    + "QUANTIDADE"
+                    + "IDPRODUTO, "
+                    + "VALORUNITARIO, "
+                    + "QUANTIDADE, "
                     + "IDPEDIDO"
-                    + "FROM ITENSPEDIDO");
+                    + " FROM ITENSPEDIDO");
 
             rs = stmt.executeQuery();
             while (rs.next()) {
@@ -101,12 +101,12 @@ public class ItensPedidoDAO implements IItensPedidoDao {
         try {
             stmt = conn.prepareStatement("SELECT "
                     + "IDITENSPEDIDO, "
-                    + "IDPRODUTO "
-                    + "VALORUNITARIO"
-                    + "QUANTIDADE"
-                    + "IDPEDIDO"
-                    + "FROM ITENSPEDIDO"
-                    + "WHERE IDPEDIDO = ?");
+                    + "IDPRODUTO, "
+                    + "VALORUNITARIO, "
+                    + "QUANTIDADE, "
+                    + "IDPEDIDO, "
+                    + " FROM ITENSPEDIDO"
+                    + " WHERE IDPEDIDO = ?");
             
             stmt.setInt(1, id);
 
@@ -140,7 +140,7 @@ public class ItensPedidoDAO implements IItensPedidoDao {
                     + "VALORUNITARIO, "
                     + "QUANTIDADE, "
                     + "IDPEDIDO) "
-                    + "VALUES (?, ?, ?, ?)");
+                    + " VALUES (?, ?, ?, ?)");
             
             stmt.setInt(1, itensPedido.getIdProduto());
             stmt.setDouble(2, itensPedido.getValorUnitario());

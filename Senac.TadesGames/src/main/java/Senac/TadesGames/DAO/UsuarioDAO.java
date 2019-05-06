@@ -159,6 +159,50 @@ public class UsuarioDAO implements IUsuarioDao {
         }
     }
 
+    public UsuarioModel obterPorLogin(String login) {
+        Connection conn = conexao.getConnection();
+        UsuarioModel usuario = null;
+
+        try {
+            stmt = conn.prepareStatement("SELECT IDUSUARIO, "
+                    + "NOME, "
+                    + "CPF, "
+                    + "EMAIL, "
+                    + "IDFILIAL, "
+                    + "SETOR, "
+                    + "CARGO, "
+                    + "LOGIN, "
+                    + "SENHA, "
+                    + "SEXO, "
+                    + "ATIVO"
+                    + "FROM USUARIO WHERE LOGIN = ?");
+
+            stmt.setString(1, login);
+ 
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                usuario = new UsuarioModel(
+                        rs.getInt("IdUsuario"),
+                        rs.getString("Nome"),
+                        rs.getString("cpf"),
+                        rs.getString("Email"),
+                        rs.getString("setor"),
+                        rs.getString("cargo"),
+                        rs.getString("Login"),
+                        rs.getString("Senha"),
+                        rs.getInt("IdFilial"),
+                        rs.getString("sexo"),
+                        rs.getBoolean("ativo")
+                );
+            }
+
+            return usuario;
+        } catch (SQLException ex) {
+            conexao.closeConnection(conn, stmt, rs);
+            return null;
+        }
+    }
+    
     public UsuarioModel obterPorCpf(String cpf) {
         Connection conn = conexao.getConnection();
         UsuarioModel usuario = null;

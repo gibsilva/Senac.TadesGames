@@ -19,10 +19,58 @@ import java.util.List;
  *
  * @author Gi
  */
-public class GeneroDAO implements IGeneroDao{
+public class GeneroDAO implements IGeneroDao {
+
     private ConexaoDB conexao = new ConexaoDB();
     private PreparedStatement stmt = null;
     ResultSet rs = null;
+
+    public GeneroModel obterPoNome(String nome) {
+        Connection conn = conexao.getConnection();
+        GeneroModel genero = null;
+
+        try {
+            stmt = conn.prepareStatement("SELECT IDGENERO, NOME FROM GENERO WHERE NOME = ?");
+
+            stmt.setString(1, nome);
+
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                genero = new GeneroModel(
+                        rs.getInt("IdGenero"),
+                        rs.getString("Nome"));
+            }
+
+            return genero;
+        } catch (SQLException ex) {
+            conexao.closeConnection(conn, stmt, rs);
+            return null;
+        }
+    }
+
+    public GeneroModel obterPoNome(String nome, int id) {
+        Connection conn = conexao.getConnection();
+        GeneroModel genero = null;
+
+        try {
+            stmt = conn.prepareStatement("SELECT IDGENERO, NOME FROM GENERO WHERE NOME = ? AND IDGENERO != ?");
+
+            stmt.setString(1, nome);
+            stmt.setInt(2, id);
+
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                genero = new GeneroModel(
+                        rs.getInt("IdGenero"),
+                        rs.getString("Nome"));
+            }
+
+            return genero;
+        } catch (SQLException ex) {
+            conexao.closeConnection(conn, stmt, rs);
+            return null;
+        }
+    }
 
     @Override
     public GeneroModel obterPorId(int id) {
@@ -45,7 +93,7 @@ public class GeneroDAO implements IGeneroDao{
             conexao.closeConnection(conn, stmt, rs);
             return null;
         }
-        
+
     }
 
     @Override
@@ -60,7 +108,7 @@ public class GeneroDAO implements IGeneroDao{
             rs = stmt.executeQuery();
             while (rs.next()) {
                 genero = new GeneroModel(
-                        rs.getInt("IdCategoria"),
+                        rs.getInt("IdGenero"),
                         rs.getString("Nome"));
 
                 generos.add(genero);
@@ -93,7 +141,7 @@ public class GeneroDAO implements IGeneroDao{
         Connection conn = conexao.getConnection();
 
         try {
-            stmt = conn.prepareStatement("UPTADE GENERO SET NOME = ? WHERE IDGENERO = ?");
+            stmt = conn.prepareStatement("UPDATE GENERO SET NOME = ? WHERE IDGENERO = ?");
             stmt.setString(1, genero.getNome());
             stmt.setInt(2, genero.getIdGenero());
 
@@ -106,8 +154,8 @@ public class GeneroDAO implements IGeneroDao{
 
     @Override
     public void excluir(GeneroModel genero) {
-         Connection conn = conexao.getConnection();
-        
+        Connection conn = conexao.getConnection();
+
         try {
             stmt = conn.prepareStatement("DELETE FROM GENERO WHERE IDCGENERO = ?");
             stmt.setInt(1, genero.getIdGenero());
@@ -118,6 +166,4 @@ public class GeneroDAO implements IGeneroDao{
             throw new RuntimeException(ex.getMessage());
         }
     }
-    
-    
 }

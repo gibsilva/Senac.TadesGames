@@ -39,7 +39,7 @@ public class PedidoDAO implements IPedidoDao {
                     + "IDCLIENTE, "
                     + "IDFILIAL, "
                     + "IDUSUARIO,"
-                    + "FROM PEDIDO WHERE IDPEDIDO = ?");
+                    + " FROM PEDIDO WHERE IDPEDIDO = ?");
 
             stmt.setInt(1, id);
 
@@ -79,8 +79,8 @@ public class PedidoDAO implements IPedidoDao {
                     + "DATAPEDIDO, "
                     + "IDCLIENTE, "
                     + "IDFILIAL, "
-                    + "IDUSUARIO,"
-                    + "FROM PEDIDO WHERE IDPEDIDO = ?");
+                    + "IDUSUARIO, "
+                    + " FROM PEDIDO WHERE IDPEDIDO = ?");
 
             rs = stmt.executeQuery();
             while (rs.next()) {
@@ -114,7 +114,7 @@ public class PedidoDAO implements IPedidoDao {
                     + "IDFILIAL, "
                     + "IDUSUARIO, "
                     + "FORMAPAGAMENTO)"
-                    + "VALUES (?,?,?,?,?,?)");
+                    + " VALUES (?,?,?,?,?,?)");
             stmt.setInt(1, pedido.getStatus());
             stmt.setDate(2, (Date) pedido.getDataPedido());
             stmt.setInt(3, pedido.getIdCliente());

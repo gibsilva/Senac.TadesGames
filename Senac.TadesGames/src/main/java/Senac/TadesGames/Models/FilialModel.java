@@ -17,7 +17,7 @@ public class FilialModel {
     private String cnpj;
     private String nome;
     private String cep;
-    private String longradouro;
+    private String logradouro;
     private int numero;
     private String complemento;
     private String bairro;
@@ -27,13 +27,13 @@ public class FilialModel {
     private List<PedidoModel> pedidos;
     private List<UsuarioModel> usuarios;
     
-    public FilialModel(int idFilial,String cnpj, String nome, String cep, 
-            String longradouro, int numero, String complemento, String bairro, String cidade, String estado ){
+    public FilialModel(int idFilial, String cnpj, String nome, String cep, 
+            String logradouro, int numero, String complemento, String bairro, String cidade, String estado ){
         this.idFilial = idFilial;
         this.cnpj = cnpj;
         this.nome = nome;
         this.cep = cep;
-        this.longradouro = longradouro;
+        this.logradouro = logradouro;
         this.numero = numero;
         this.complemento = complemento;
         this.bairro = bairro;
@@ -143,17 +143,17 @@ public class FilialModel {
     }
 
     /**
-     * @return the longradouro
+     * @return the logradouro
      */
-    public String getLongradouro() {
-        return longradouro;
+    public String getLogradouro() {
+        return logradouro;
     }
 
     /**
-     * @param longradouro the longradouro to set
+     * @param logradouro the logradouro to set
      */
-    public void setLongradouro(String longradouro) {
-        this.longradouro = longradouro;
+    public void setLogradouro(String logradouro) {
+        this.logradouro = logradouro;
     }
 
     /**

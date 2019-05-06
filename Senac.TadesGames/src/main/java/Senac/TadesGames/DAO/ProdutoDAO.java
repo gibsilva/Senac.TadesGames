@@ -30,8 +30,18 @@ public class ProdutoDAO implements IProdutoDao {
         ProdutoModel produto = null;
 
         try {
-            stmt = conn.prepareStatement("SELECT IDPRODUTO, NOME, DESCRICAO, PRECOCOMPRA, PRECOVENDA, IDCATEGORIA, IDGENERO, "
-                    + "ATIVO, IDFILIAL, IDPLATAFORMA FROM PRODUTO WHERE IDPRODUTO = ?");
+            stmt = conn.prepareStatement("SELECT "
+                    + "IDPRODUTO, "
+                    + "NOME, "
+                    + "DESCRICAO, "
+                    + "PRECOCOMPRA, "
+                    + "PRECOVENDA, "
+                    + "IDCATEGORIA, "
+                    + "IDGENERO, "
+                    + "ATIVO, "
+                    + "IDFILIAL, "
+                    + "IDPLATAFORMA "
+                    + " FROM PRODUTO WHERE IDPRODUTO = ?");
             stmt.setInt(1, id);
 
             rs = stmt.executeQuery();
@@ -64,8 +74,17 @@ public class ProdutoDAO implements IProdutoDao {
         List<ProdutoModel> produtos = new ArrayList<ProdutoModel>();
 
         try {
-            stmt = conn.prepareStatement("SELECT IDPRODUTO, NOME, DESCRICAO, PRECOCOMPRA, PRECOVENDA, IDCATEGORIA, IDGENERO"
-                    + "ATIVO, IDFILIAL, IDPLATAFORMA FROM PRODUTO");
+            stmt = conn.prepareStatement("SELECT IDPRODUTO, "
+                    + "NOME, "
+                    + "DESCRICAO, "
+                    + "PRECOCOMPRA, "
+                    + "PRECOVENDA, "
+                    + "IDCATEGORIA, "
+                    + "IDGENERO"
+                    + "ATIVO, "
+                    + "IDFILIAL, "
+                    + "IDPLATAFORMA "
+                    + " FROM PRODUTO");
 
             rs = stmt.executeQuery();
             while (rs.next()) {
@@ -96,8 +115,17 @@ public class ProdutoDAO implements IProdutoDao {
         Connection conn = conexao.getConnection();
 
         try {
-            stmt = conn.prepareStatement("INSERT INTO PRODUTO(NOME, DESCRICAO, PRECOCOMPRA, PRECOVENDA, IDCATEGORIA, "
-                    + "IDGENERO, ATIVO, IDFILIAL, IDPLATAFORMA) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            stmt = conn.prepareStatement("INSERT INTO PRODUTO("
+                    + "NOME, "
+                    + "DESCRICAO, "
+                    + "PRECOCOMPRA, "
+                    + "PRECOVENDA, "
+                    + "IDCATEGORIA, "
+                    + "IDGENERO, "
+                    + "ATIVO, "
+                    + "IDFILIAL, "
+                    + "IDPLATAFORMA) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
             stmt.setString(1, produto.getNome());
             stmt.setString(2, produto.getDescricao());
             stmt.setDouble(3, produto.getPrecoCompra());

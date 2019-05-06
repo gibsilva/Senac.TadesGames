@@ -1,66 +1,50 @@
 <%-- 
-    Document   : cadastroPlataforma
-    Created on : 03/05/2019, 04:45:14
+    Document   : cadastroCategoria
+    Created on : 03/05/2019, 02:44:06
     Author     : Marcel
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@include file="header.jsp" %>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Cadastro de Plataforma</title>
     </head>
+
     <body>
-        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-        <%@include file="header.jsp" %>
         <div class=" container">
             <br>
             <h2>Cadastro de Plataforma</h2>
             <hr>
-            <form>
-                <div class="row">
-                    <div class="col-3">
-                        <label for="idPlataforma">Id<h11 class="text-danger">*</h11></label>
-                    </div>
-                    <div class="col-6">
-                        <label for="nome">Plataforma<h11 class="text-danger">*</h11></label>
-                    </div>
-                </div>
+            <!-- notificacoes caso houver erros nas validações -->
+            <div class="form-group">
+                <ul class="text-danger">
+                    <c:forEach var = "n" items = "${notificacoes}">
+                        <li>${n.valor}</li>
+                        </c:forEach>
+                </ul>
+
+            </div>
+
+            <form action="Plataformas" method="post">
+                <input type="hidden" value="salvar" id="acao" name="acao">
                 
                 <div class="row">
-                    <div class="col-3">
-                        <input id="idPlataforma" type="text" class="form-control" placeholder="0000" readonly>
+                    <div class="col-md-5">
+                        <label for="nome">Nome<h11 class="text-danger">*</h11></label>
+                        <input type="text" id="nome" name="nome" class="form-control" placeholder="Digite o nome da plataforma" required>
                     </div>
-                    
-                    <div class="col-6">
-                        <input id="nome" type="text" class="form-control" placeholder="Plataforma">
+                </div>
+
+                <hr>    
+
+                <div class="row">
+                    <div class=" form-group col-md-2"> 
+                        <button type="submit" class="btn btn-success" value="Salvar">Salvar</button>
+                        <button type="reset" class="btn btn-light" value="cancelar">Cancelar</button>
                     </div>
-                    
-                    <div class="col-2"> 
-                        <input type="submit" class="btn btn-success" value="Salvar">
-                    </div>
-                    
                 </div>
             </form>
-            <br>
-            <table class="table table-hover">
-                <caption>Lista de Plataforma</caption>
-                <thead> 
-                    <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">Plataforma</th>
-                    </tr>
-                </thead>
-                <tbody id="tabela" name="tabela">
-                    <c:forEach var="p" items="${plataforma}">
-                        <tr>
-                            <td>${g.idPlataforma}</td>
-                            <td>${g.nome}</td>
-                        </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
         </div>
     </body>
 </html>

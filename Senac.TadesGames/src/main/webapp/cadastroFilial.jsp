@@ -11,8 +11,18 @@
     <br>
     <h2>Nova Filial</h2>
     <hr>
+    <!-- notificacoes caso houver erros nas validações -->
+    <div class="form-group">
+        <ul class="text-danger">
+            <c:forEach var = "n" items = "${notificacoes}">
+                <li>${n.valor}</li>
+                </c:forEach>
+        </ul>
 
-    <form>
+    </div>
+    <form action="Filiais" method="post">
+        <input type="hidden" value="salvar" id="acao" name="acao">
+
         <div class="row">
             <div class="form-group col-md-5">
                 <label for="nome">Nome da Filial<h11 class="text-danger">*</h11></label>
@@ -32,8 +42,8 @@
             </div>
 
             <div class="form-group col-md-4">
-                <label for="longradouro">Longradouro<h11 class="text-danger">*</h11></label>
-                <input type="text" class="form-control" id="longradouro" name="longradouro" placeholder="Digite o longradouro" required>
+                <label for="logradouro">Logradouro<h11 class="text-danger">*</h11></label>
+                <input type="text" class="form-control" id="logradouro" name="logradouro" placeholder="logradouro" required readonly>
             </div>
 
             <div class="form-group col-md-2">
@@ -43,7 +53,7 @@
 
             <div class="form-group col-md-3">
                 <label for="complemento">Complemento</label>
-                <input type="text" class="form-control" id="complemento" name="complemento" placeholder="Digite o complemento" required>
+                <input type="text" class="form-control" id="complemento" name="complemento" placeholder="Digite o complemento">
             </div>
 
         </div>
@@ -51,17 +61,17 @@
         <div class="row">
             <div class="form-group col-md-4">
                 <label for="bairro">Bairro<h11 class="text-danger">*</h11></label>
-                <input type="text" class="form-control" id="bairro" name="bairro" placeholder="Digite o bairro" required>
+                <input type="text" class="form-control" id="bairro" name="bairro" placeholder="bairro" required readonly>
             </div>
 
             <div class="form-group col-md-4">
                 <label for="cidade">Cidade<h11 class="text-danger">*</h11></label>
-                <input type="text" class="form-control" id="cidade" name="cidade" placeholder="Digite a cidade" required>
+                <input type="text" class="form-control" id="cidade" name="cidade" placeholder="cidade" required readonly>
             </div>
 
             <div class="form-group col-md-2">
                 <label for="estado">Estado<h11 class="text-danger">*</h11></label>
-                <input type="text" class="form-control" id="estado" name="estado" placeholder="Digite estado" required>
+                <input type="text" class="form-control" id="uf" name="uf" placeholder="estado" required readonly> 
             </div>
 
         </div>
@@ -70,7 +80,7 @@
         <div class="row">
             <div class="container form-group-inline">
                 <input type="submit" class="btn btn-success" value="Salvar">
-                <a href="home.jsp" class="btn btn-light" >Cancelar</a>
+                <button type="reset" class="btn btn-light" >Cancelar</button>
             </div>
         </div>
         
@@ -115,5 +125,52 @@
         });
         $('.selectonfocus').mask("00/00/0000", {selectOnFocus: true});
     });
+    
+    //estamos usando uma api gratuita para a consulta de CEPs
+    $("#cep").focusout(function(){
+        if($("#cep").val() === '00000-000' || $("#cep").val() === '11111-111'){
+            cepInvalido();
+        } else{
+            		//Início do Comando AJAX
+		$.ajax({
+			//O campo URL diz o caminho de onde virá os dados
+			//É importante concatenar o valor digitado no CEP
+			url: 'https://viacep.com.br/ws/'+$(this).val()+'/json/unicode/',
+			//Aqui você deve preencher o tipo de dados que será lido,
+			//no caso, estamos lendo JSON.
+			dataType: 'json',
+			//SUCESS é referente a função que será executada caso
+			//ele consiga ler a fonte de dados com sucesso.
+			//O parâmetro dentro da função se refere ao nome da variável
+			//que você vai dar para ler esse objeto.
+			success: function(resposta){
+				//Agora basta definir os valores que você deseja preencher
+				//automaticamente nos campos acima.
+				$("#logradouro").val(resposta.logradouro);
+				$("#complemento").val(resposta.complemento);
+				$("#bairro").val(resposta.bairro);
+				$("#cidade").val(resposta.localidade);
+				$("#uf").val(resposta.uf);
+				//Vamos incluir para que o Número seja focado automaticamente
+				//melhorando a experiência do usuário
+				$("#numero").focus();
+			},
+                        error: function(resposta){
+                            cepInvalido();
+                        }
+		});
+            }
+	});
+        
+        function cepInvalido(){
+            toastr.warning('Cep inválido', 'Aviso');
+            $('#cep').val('');
+            $("#logradouro").val('');
+            $("#complemento").val('');
+            $("#bairro").val('');
+            $("#cidade").val('');
+            $("#uf").val('');
+            $("#cep").focus();
+        }
 
 </script>

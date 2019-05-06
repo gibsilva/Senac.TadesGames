@@ -40,9 +40,9 @@ public class PermissaoDAO implements IPermissaoDao {
                     + "REALIZAVENDA, "
                     + "RELATORIOPRODUTO, "
                     + "RELATORIOCLIENTE, "
-                    + "RELATORIOVENDA,"
+                    + "RELATORIOVENDA, "
                     + "CADASTROUSUARIO "
-                    + "FROM PERMISSAO WHERE IDPERMISSAO = ?");
+                    + " FROM PERMISSAO WHERE IDPERMISSAO = ?");
 
             stmt.setInt(1, id);
 
@@ -85,9 +85,9 @@ public class PermissaoDAO implements IPermissaoDao {
                     + "REALIZAVENDA, "
                     + "RELATORIOPRODUTO, "
                     + "RELATORIOCLIENTE, "
-                    + "RELATORIOVENDA,"
+                    + "RELATORIOVENDA, "
                     + "CADASTROUSUARIO "
-                    + "FROM PERMISSAO WHERE IDUSUARIO = ?");
+                    + " FROM PERMISSAO WHERE IDUSUARIO = ?");
 
             stmt.setInt(1, id);
 
@@ -130,9 +130,9 @@ public class PermissaoDAO implements IPermissaoDao {
                     + "REALIZAVENDA, "
                     + "RELATORIOPRODUTO, "
                     + "RELATORIOCLIENTE, "
-                    + "RELATORIOVENDA,"
+                    + "RELATORIOVENDA, "
                     + "CADASTROUSUARIO "
-                    + "FROM PERMISSAO");
+                    + " FROM PERMISSAO");
 
             rs = stmt.executeQuery();
             while (rs.next()) {
@@ -165,15 +165,15 @@ public class PermissaoDAO implements IPermissaoDao {
             stmt = conn.prepareStatement("INSERT INTO PERMISSAO("
                     + "IDPERMISSAO, "
                     + "IDUSUARIO, "
-                    + "RELATORIOVENDA,"
-                    + "RELATORIOPRODUTO,"
-                    + "RELATORIOCLIENTE,"
-                    + "CADASTROCLIENTE,"
-                    + "CADASTROPRODUTO,"
-                    + "REALIZAVENDA,"
-                    + "CADASTROFILIAL,"
+                    + "RELATORIOVENDA, "
+                    + "RELATORIOPRODUTO, "
+                    + "RELATORIOCLIENTE, "
+                    + "CADASTROCLIENTE, "
+                    + "CADASTROPRODUTO, "
+                    + "REALIZAVENDA, "
+                    + "CADASTROFILIAL, "
                     + "CADASTROUSUARIO)"
-                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                    + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             stmt.setInt(1, permissao.getIdPermissao());
             stmt.setInt(2, permissao.getIdUsuario());
             stmt.setInt(3, permissao.getRelatorioVenda());
@@ -197,7 +197,7 @@ public class PermissaoDAO implements IPermissaoDao {
         Connection conn = conexao.getConnection();
 
         try {
-            stmt = conn.prepareStatement("UPTADE PERMISSAO SET "
+            stmt = conn.prepareStatement("UPDATE PERMISSAO SET "
                     + "IDPERMISSAO = ?,"
                     + "IDUSUARIO = ?,"
                     + "RELATORIOVENDA = ?,"

@@ -79,7 +79,7 @@
             <div class="row">
                 <div class="container form-group-inline">
                     <input type="submit" class="btn btn-success" value="Salvar">
-                    <a href="home.jsp" class="btn btn-light" >Cancelar</a>
+                    <button type="reset" class="btn btn-light" >Cancelar</button>
                 </div>
             </div>
 

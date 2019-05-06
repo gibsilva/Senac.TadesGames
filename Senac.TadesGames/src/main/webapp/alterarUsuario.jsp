@@ -31,14 +31,14 @@
                 <input type="text" class="form-control" id="nome" name="nome" maxlength="80" placeholder="Nome Completo" 
                        required value="${usuario.nome}">
             </div>
-            
+
             <div class="form-group col-md-3">
                 <label for="inputCPFFunc">CPF<h11 class="text-danger">*</h11></label>
                 <input type="text" class="form-control" name="cpf" id="cpf" minlength="11" 
                        maxlength="11" readonly value="${usuario.cpf}">
             </div>
 
-            
+
         </div>
 
         <div class="row">
@@ -47,7 +47,7 @@
                 <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp"
                        placeholder="Digite seu Email" required value="${usuario.email}">
             </div>
-            
+
             <div class="form-group col-md-2">
                 <label for="inputSexo">Sexo<h11 class="text-danger">*</h11></label>
                 <select id="sexo" name="sexo" class="custom-select" required>
@@ -58,7 +58,7 @@
 
                 </select>
             </div>
-            
+
         </div>
 
         <div class="row">
@@ -99,36 +99,31 @@
                 </select>
             </div>
         </div>
-            <div class="row">
-                <div class="form-group col-md-4">
-                    <label for="inputLogin">Login<h11 class="text-danger">*</h11></label>
-                    <input type="text" class="form-control" id="login" name="login" minlength="6" maxlength="15" placeholder="Login" 
-                           required value="${usuario.login}">
-                </div>
-
-                <div class="form-group col-md-2">
-                    <label for="inputSexo">Status</label>
-                    <select id="ativo" name="ativo" class="custom-select" required>
-                        <option value="true">Ativo</option>
-                        <option value="false">Inativo</option>                           
-                    </select>
-                </div>
+            
+        <div class="row">
+            <div class="form-group col-md-2">
+                <label for="inputSexo">Status</label>
+                <select id="ativo" name="ativo" class="custom-select" required>
+                    <option value="true">Ativo</option>
+                    <option value="false">Inativo</option>                           
+                </select>
             </div>
-            <hr>
-            <div class="row">
-                <div class="container form-group-inline">
-                    <input type="submit" class="btn btn-success" value="Salvar">
-                    <a href="Usuarios" class="btn btn-light" >Cancelar</a>
-                </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="container form-group-inline">
+                <input type="submit" class="btn btn-success" value="Salvar">
+                <a href="Usuarios" class="btn btn-light" >Cancelar</a>
             </div>
+        </div>
     </form>     
-        
-   
+
+
 </div>
 
 <script>
     $(document).ready(function () {
-        document.getElementById('sexo').value = '${usuario.sexo}'; 
+        document.getElementById('sexo').value = '${usuario.sexo}';
         document.getElementById('filial').value = '${usuario.idFilial}';
         document.getElementById('setor').value = '${usuario.setor}';
         document.getElementById('cargo').value = '${usuario.cargo}';
