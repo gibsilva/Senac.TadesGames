@@ -1,4 +1,3 @@
-
 package Senac.TadesGames.Service;
 
 import Senac.TadesGames.DAO.UsuarioDAO;
@@ -12,33 +11,45 @@ import java.util.List;
  * @author adrianne
  */
 public class UsuarioService {
+
     private final UsuarioDAO usuarioDao;
     private final Notificacao notificacao;
-    
-    public UsuarioService(){
+
+    public UsuarioService() {
         this.usuarioDao = new UsuarioDAO();
         this.notificacao = new Notificacao();
     }
-    private void validaEmailExistente(String email){
-        if(usuarioDao.obterPorEmail(email) != null){
+
+    private void validaEmailExistente(String email) {
+        if (usuarioDao.obterPorEmail(email) != null) {
             this.notificacao.adicionaNotificacao("email", "Email já está cadastrado");
         }
     }
-    private void validaEmailExistente(String email, int id){
-        if(usuarioDao.obterPorEmail(email, id) != null){
-            this.notificacao.adicionaNotificacao("email","Email já cadastrado");
+
+    private void validaEmailExistente(String email, int id) {
+        if (usuarioDao.obterPorEmail(email, id) != null) {
+            this.notificacao.adicionaNotificacao("email", "Email já cadastrado");
         }
     }
-    private void validaCpfExistente(String cpf){
-        if(usuarioDao.obterPorCpf(cpf) != null){
+
+    private void validaCpfExistente(String cpf) {
+        if (usuarioDao.obterPorCpf(cpf) != null) {
             this.notificacao.adicionaNotificacao("cpf", "Esse CPF já está cadastrado");
         }
     }
-    private void validaLoginExistente(String login){
-        if(usuarioDao.obterPorLogin(login) != null){
+
+    private void validaLoginExistente(String login) {
+        if (usuarioDao.obterPorLogin(login) != null) {
             this.notificacao.adicionaNotificacao("login", "Login já existente");
         }
     }
+
+    private void validaLoginExistente(String login, int id) {
+        if (usuarioDao.obterPorLogin(login, id) != null) {
+            this.notificacao.adicionaNotificacao("login", "Login já existente");
+        }
+    }
+
     private boolean validarUsuarioInclusao(UsuarioModel usuario) {
         if (!validarCpf(usuario.getCpf())) {
             this.notificacao.adicionaNotificacao("cpf", "CPF inválido, por favor digite um CPF válido");
@@ -46,12 +57,15 @@ public class UsuarioService {
 
         validaCpfExistente(usuario.getCpf());
         validaEmailExistente(usuario.getEmail());
+        validaLoginExistente(usuario.getLogin());
 
         return this.notificacao.quantidadeNotificacoes() == 0;
     }
 
     private boolean validarUsuarioAlteracao(UsuarioModel usuario) {
         validaEmailExistente(usuario.getEmail(), usuario.getIdUsuario());
+        validaLoginExistente(usuario.getLogin(), usuario.getIdUsuario());
+        
         return this.notificacao.quantidadeNotificacoes() == 0;
     }
 

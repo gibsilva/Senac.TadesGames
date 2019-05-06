@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="pt-BR">
     <head>
@@ -73,7 +74,10 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Usuario</a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="cadastroUsuario.jsp">Cadastro de Usuario</a>
+                            <c:url var="salvarUsuario" value="/Usuarios">
+                                <c:param name="acao" value="salvar" />
+                            </c:url>
+                            <a href="${salvarUsuario}" class="dropdown-item">Novo Usuario</a>
                             <a class="dropdown-item" href="Usuarios">Consulta de Usuario</a>
                         </div>
                     </li>

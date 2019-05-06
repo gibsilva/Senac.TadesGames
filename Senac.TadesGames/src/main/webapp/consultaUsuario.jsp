@@ -16,15 +16,14 @@
 
         <div class="input-group-append col-md-6">
             <input type="text" class="form-control " placeholder="Pesquisar" id="filtro" name="filtro">
-            
-            <!--<button class="btn btn-dark" type="button">
-                <i class="fa fa-search"></i> Pesquisar
-            </button>
-               -->
+
         </div>
         <div class="input-group">
             <div>
-                <a href="cadastroUsuario.jsp" class="btn btn-outline-primary">Novo Usuario</a>
+                <c:url var="salvarUsuario" value="/Usuarios">
+                    <c:param name="acao" value="salvar" />
+                </c:url>
+                <a href="${salvarUsuario}" class="btn btn-outline-primary">Novo Usuario</a>
             </div>
 
         </div>
@@ -59,7 +58,7 @@
                     <td class="text-center">${u.cargo}</td>
                     <td class="text-center">${u.email}</td>
                     <td class="text-center">${u.login}</td>
-                    
+
                     <c:if test="${u.ativo == true}">
                         <td class="text-center">Ativo</td>
                     </c:if>
