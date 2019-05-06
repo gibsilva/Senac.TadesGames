@@ -66,10 +66,9 @@
                 <label for="inputFilial">Filial<h11 class="text-danger">*</h11></label>
                 <select id="filial" name="filial" class="custom-select" required>
                     <option value="">Selecione</option>
-                    <option value="1">Matriz</option>
-                    <option value="2">Filial 1</option>
-                    <option value="3">Filial 2</option>
-                    <option value="4">Filial 3</option>
+                    <c:forEach var="f" items="${filiais}">
+                        <option value="${f.idFilial}">${f.nome}</option>
+                    </c:forEach>
                 </select>
             </div>
 

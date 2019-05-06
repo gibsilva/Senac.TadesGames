@@ -1,9 +1,9 @@
-
 package Senac.TadesGames.Servlet;
 
 import Senac.TadesGames.Helpers.Notificacao;
 import Senac.TadesGames.Helpers.Utils;
 import Senac.TadesGames.Models.UsuarioModel;
+import Senac.TadesGames.Service.FilialService;
 import Senac.TadesGames.Service.UsuarioService;
 import java.io.IOException;
 import java.util.List;
@@ -19,8 +19,10 @@ import javax.servlet.http.HttpServletResponse;
  * @author adrianne
  */
 @WebServlet("/Usuarios")
-public class UsuarioControllerServlet extends HttpServlet{
-    private final UsuarioService service = new UsuarioService();
+public class UsuarioControllerServlet extends HttpServlet {
+
+    private final UsuarioService usuarioService = new UsuarioService();
+    private final FilialService filialService = new FilialService();
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -47,6 +49,9 @@ public class UsuarioControllerServlet extends HttpServlet{
                     break;
                 case "alterar":
                     carregarUsuario(request, response);
+                    break;
+                case "salvar":
+                    carregarInclusao(request, response);
                     break;
                 default:
                     listarUsuarios(request, response);
@@ -96,16 +101,17 @@ public class UsuarioControllerServlet extends HttpServlet{
         String login = request.getParameter("login");
         String senha = request.getParameter("senha");
 
-        UsuarioModel usuario = new UsuarioModel(0, nome, cpf, email, setor, cargo, login, senha, 1, sexo, true);
+        UsuarioModel usuario = new UsuarioModel(0, nome, cpf, email, setor, cargo, login, senha, idFilial, sexo, true);
 
         try {
-            List<Notificacao> notificacoes = service.incluirUsuario(usuario);
+            List<Notificacao> notificacoes = usuarioService.incluirUsuario(usuario);
             if (notificacoes.isEmpty()) {
-                request.setAttribute("usuarios", service.obterListaUsuarios());
+                request.setAttribute("usuarios", usuarioService.obterListaUsuarios());
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/consultaUsuario.jsp");
                 dispatcher.forward(request, response);
             } else {
                 request.setAttribute("notificacoes", notificacoes);
+                request.setAttribute("filiais", filialService.obterListaFiliais());
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/cadastroUsuario.jsp");
                 dispatcher.forward(request, response);
             }
@@ -114,13 +120,13 @@ public class UsuarioControllerServlet extends HttpServlet{
             RequestDispatcher dispatcher = request.getRequestDispatcher("/erro.jsp");
             dispatcher.forward(request, response);
         } finally {
-            service.limparNotificacoes();
+            usuarioService.limparNotificacoes();
         }
     }
 
     protected void listarUsuarios(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<UsuarioModel> usuarios = service.obterListaUsuarios();
+        List<UsuarioModel> usuarios = usuarioService.obterListaUsuarios();
         request.setAttribute("usuarios", usuarios);
         request.getRequestDispatcher("consultaUsuario.jsp").forward(request, response);
     }
@@ -128,10 +134,19 @@ public class UsuarioControllerServlet extends HttpServlet{
     protected void carregarUsuario(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("idUsuario"));
-        UsuarioModel usuario = service.obterUsuarioPorId(id);
+        UsuarioModel usuario = usuarioService.obterUsuarioPorId(id);
 
         request.setAttribute("usuario", usuario);
+        request.setAttribute("filiais", filialService.obterListaFiliais());
         RequestDispatcher dispatcher = request.getRequestDispatcher("/alterarUsuario.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    protected void carregarInclusao(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.setAttribute("filiais", filialService.obterListaFiliais());
+        
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/cadastroUsuario.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -150,18 +165,19 @@ public class UsuarioControllerServlet extends HttpServlet{
         String login = request.getParameter("login");
         String senha = request.getParameter("senha");
         boolean ativo = Boolean.parseBoolean(request.getParameter("ativo"));
-        
+
         UsuarioModel usuario = new UsuarioModel(id, nome, cpf, email, setor, cargo, login, senha, idFilial, sexo, ativo);
 
         try {
-            List<Notificacao> notificacoes = service.alterarUsuario(usuario);
+            List<Notificacao> notificacoes = usuarioService.alterarUsuario(usuario);
             if (notificacoes.isEmpty()) {
-                request.setAttribute("usuarios", service.obterListaUsuarios());
+                request.setAttribute("usuarios", usuarioService.obterListaUsuarios());
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/consultaUsuario.jsp");
                 dispatcher.forward(request, response);
             } else {
                 request.setAttribute("notificacoes", notificacoes);
                 request.setAttribute("usuario", usuario);
+                request.setAttribute("filiais", filialService.obterListaFiliais());
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/alterarUsuario.jsp");
                 dispatcher.forward(request, response);
             }
@@ -170,7 +186,7 @@ public class UsuarioControllerServlet extends HttpServlet{
             RequestDispatcher dispatcher = request.getRequestDispatcher("/erro.jsp");
             dispatcher.forward(request, response);
         } finally {
-            service.limparNotificacoes();
+            usuarioService.limparNotificacoes();
         }
     }
 }
