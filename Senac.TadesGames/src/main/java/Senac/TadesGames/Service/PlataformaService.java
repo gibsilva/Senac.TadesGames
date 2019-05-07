@@ -12,46 +12,31 @@ import java.util.List;
 
 /**
  *
- * @author Marcel
+ * @author Gi
  */
 public class PlataformaService {
 
-    private final PlataformaDAO PlataformaDao;
+    private final PlataformaDAO plataformaDao;
     private final Notificacao notificacao;
 
     public PlataformaService() {
-        this.PlataformaDao = new PlataformaDAO();
+        this.plataformaDao = new PlataformaDAO();
         this.notificacao = new Notificacao();
     }
 
     private void validaNomeExistente(String nome) {
-        if (PlataformaDao.obterPoNome(nome) != null) {
-            this.notificacao.adicionaNotificacao("nome", "Plataforma já está cadastrado");
+        if (plataformaDao.obterPoNome(nome) != null) {
+            this.notificacao.adicionaNotificacao("nome", "nome já está cadastrado");
         }
     }
 
     private void validaNomeExistente(String nome, int id) {
-        if (PlataformaDao.obterPoNome(nome, id) != null) {
-            this.notificacao.adicionaNotificacao("nome", "Plataforma já está cadastrado");
+        if (plataformaDao.obterPoNome(nome, id) != null) {
+            this.notificacao.adicionaNotificacao("nome", "nome já está cadastrado");
         }
     }
 
-    public List<PlataformaModel> obterListaPlataformas() {
-        return PlataformaDao.obterTodas();
-    }
-
-    public List<Notificacao> incluirPlataforma(PlataformaModel plataforma) throws Exception {
-        try {
-            if (validarInclusaoPlataforma(plataforma)) {
-                PlataformaDao.inserir(plataforma);
-            }
-            return this.notificacao.listaNotificacoes();
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
-    }
-
-    private boolean validarInclusaoPlataforma(PlataformaModel plataforma) {
+    private boolean validarPlataforma(PlataformaModel plataforma) {
         validaNomeExistente(plataforma.getNome());
 
         return this.notificacao.quantidadeNotificacoes() == 0;
@@ -62,10 +47,10 @@ public class PlataformaService {
         return this.notificacao.quantidadeNotificacoes() == 0;
     }
 
-    public List<Notificacao> alterarPlataforma(PlataformaModel plataforma) throws Exception {
+    public List<Notificacao> incluirPlataforma(PlataformaModel plataforma) throws Exception {
         try {
-            if (validarPlataformaAlteracao(plataforma)) {
-                PlataformaDao.alterar(plataforma);
+            if (validarPlataforma(plataforma)) {
+                plataformaDao.inserir(plataforma);
             }
             return this.notificacao.listaNotificacoes();
         } catch (Exception e) {
@@ -73,8 +58,27 @@ public class PlataformaService {
         }
     }
 
-    public PlataformaModel obterPorId(int id) {
-        return PlataformaDao.obterPorId(id);
+    public List<Notificacao> alterarPlataforma(PlataformaModel plataforma) throws Exception {
+        try {
+            if (validarPlataformaAlteracao(plataforma)) {
+                plataformaDao.alterar(plataforma);
+            }
+            return this.notificacao.listaNotificacoes();
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    public PlataformaModel obterPlataformaPorId(int id) {
+        return plataformaDao.obterPorId(id);
+    }
+
+    public void excluirPlataforma(PlataformaModel plataforma) {
+        plataformaDao.excluir(plataforma);
+    }
+
+    public List<PlataformaModel> obterListaPlataforma() {
+        return plataformaDao.obterTodas();
     }
 
     public void limparNotificacoes() {

@@ -11,6 +11,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="resources/css/bootsWacth/bootstrap.min.css"/>
+        <link rel="stylesheet" href="resources/css/toastr.min.css"/>
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -104,5 +105,6 @@
         <script type="text/javascript" src="resources/js/jquery.min.js"></script>  
         <script type="text/javascript" src="resources/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="resources/js/jquery.mask.js"></script> 
+        <script type="text/javascript" src="resources/js/toastr.min.js"></script> 
     </body>
 </html>

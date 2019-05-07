@@ -15,43 +15,27 @@ import java.util.List;
  * @author Marcel
  */
 public class GeneroService {
-
-    private final GeneroDAO GeneroDao;
+     private final GeneroDAO generoDao;
     private final Notificacao notificacao;
 
     public GeneroService() {
-        this.GeneroDao = new GeneroDAO();
+        this.generoDao = new GeneroDAO();
         this.notificacao = new Notificacao();
     }
 
     private void validaNomeExistente(String nome) {
-        if (GeneroDao.obterPoNome(nome) != null) {
-            this.notificacao.adicionaNotificacao("nome", "Gênero já está cadastrado");
+        if (generoDao.obterPoNome(nome) != null) {
+            this.notificacao.adicionaNotificacao("nome", "nome já está cadastrado");
         }
     }
 
     private void validaNomeExistente(String nome, int id) {
-        if (GeneroDao.obterPoNome(nome, id) != null) {
-            this.notificacao.adicionaNotificacao("nome", "Gênero já está cadastrado");
+        if (generoDao.obterPoNome(nome, id) != null) {
+            this.notificacao.adicionaNotificacao("nome", "nome já está cadastrado");
         }
     }
 
-    public List<GeneroModel> obterListaGeneros() {
-        return GeneroDao.obterTodas();
-    }
-
-    public List<Notificacao> incluirGenero(GeneroModel genero) throws Exception {
-        try {
-            if (validarInclusaoGenero(genero)) {
-                GeneroDao.inserir(genero);
-            }
-            return this.notificacao.listaNotificacoes();
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
-    }
-
-    private boolean validarInclusaoGenero(GeneroModel genero) {
+    private boolean validarGenero(GeneroModel genero) {
         validaNomeExistente(genero.getNome());
 
         return this.notificacao.quantidadeNotificacoes() == 0;
@@ -62,10 +46,10 @@ public class GeneroService {
         return this.notificacao.quantidadeNotificacoes() == 0;
     }
 
-    public List<Notificacao> alterarGenero(GeneroModel genero) throws Exception {
+    public List<Notificacao> incluirGenero(GeneroModel genero) throws Exception {
         try {
-            if (validarGeneroAlteracao(genero)) {
-                GeneroDao.alterar(genero);
+            if (validarGenero(genero)) {
+                generoDao.inserir(genero);
             }
             return this.notificacao.listaNotificacoes();
         } catch (Exception e) {
@@ -73,11 +57,31 @@ public class GeneroService {
         }
     }
 
-    public GeneroModel obterPorId(int id) {
-        return GeneroDao.obterPorId(id);
+    public List<Notificacao> alterarGenero(GeneroModel genero) throws Exception {
+        try {
+            if (validarGeneroAlteracao(genero)) {
+                generoDao.alterar(genero);
+            }
+            return this.notificacao.listaNotificacoes();
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+    
+    public void excluirGenero(GeneroModel genero) {
+        generoDao.excluir(genero);
+    }
+
+    public GeneroModel obterGeneroPorId(int id) {
+        return generoDao.obterPorId(id);
+    }
+
+    public List<GeneroModel> obterListaGenero() {
+        return generoDao.obterTodas();
     }
 
     public void limparNotificacoes() {
         this.notificacao.limparLista();
     }
 }
+    

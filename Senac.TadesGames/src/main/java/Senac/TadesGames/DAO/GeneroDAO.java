@@ -157,7 +157,7 @@ public class GeneroDAO implements IGeneroDao {
         Connection conn = conexao.getConnection();
 
         try {
-            stmt = conn.prepareStatement("DELETE FROM GENERO WHERE IDCGENERO = ?");
+            stmt = conn.prepareStatement("DELETE FROM GENERO WHERE IDGENERO = ?");
             stmt.setInt(1, genero.getIdGenero());
 
             stmt.executeUpdate();

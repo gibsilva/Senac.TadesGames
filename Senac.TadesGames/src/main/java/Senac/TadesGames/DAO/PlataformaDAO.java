@@ -77,7 +77,7 @@ public class PlataformaDAO implements IPlataformaDao{
         PlataformaModel plataforma = null;
 
         try {
-            stmt = conn.prepareStatement("SELECT IDPLATAFORMA, NOME FROM CATEGORIA WHERE IDPLATAFORMA = ?");
+            stmt = conn.prepareStatement("SELECT IDPLATAFORMA, NOME FROM PLATAFORMA WHERE IDPLATAFORMA = ?");
             stmt.setInt(1, id);
 
             rs = stmt.executeQuery();

@@ -17,7 +17,7 @@
 
         <div class="input-group-append col-md-6">
             <input type="text" class="form-control " placeholder="Pesquisar" id="filtro" name="filtro">
-          
+
         </div>
         <div class="input-group">
             <div>
@@ -25,11 +25,11 @@
             </div>
         </div>
     </div>
-    
+
     <br>
     <br>
-    
-    <table class="table table-hover">
+
+    <table id="tabelaGeneros" class="table table-hover">
         <thead> 
             <tr>
                 <th class="text-center" scope="col">Id</th>
@@ -50,16 +50,79 @@
                             <c:param name="idGenero" value="${g.idGenero}" />
                         </c:url>
                         <a href="${alterarGenero}" class="btn btn-sm btn-outline-warning">Editar</a>
-                        
-                          <c:url var="excluir" value="/Generos">
+
+                        <c:url var="excluir" value="/Generos">
                             <c:param name="excluir" value="excluir" />
                             <c:param name="idGenero" value="${g.idGenero}" />
                         </c:url>
-                        <a href="${excluir}" class="btn btn-sm btn-outline-danger">Excluir</a>
+                        <button type="button" class="btn btn-sm btn-outline-danger" onclick="confirmaExclusao(${g.idGenero})">Excluir</button>
                     </td>
                 </tr>
             </c:forEach>
         </tbody>
     </table>
-     
+
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="modalExemplo" name="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Excluir Gênero</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" value="" name="idGeneroModal" id="idGeneroModal">
+                Deseja realmente excluir a plataforma de Id <strong id="idTextGeneroModal"></strong>?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="excluir($('#idGeneroModal').val())">Excluir</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#filtro').on('keyup', function () {
+        var value = $(this).val();
+        var patt = new RegExp(value, "i");
+
+        $('#tabela').find('tr').each(function () {
+            if (!($(this).find('td').text().search(patt) >= 0)) {
+                $(this).not('.myHead').hide();
+            }
+            if (($(this).find('td').text().search(patt) >= 0)) {
+                $(this).show();
+            }
+
+        });
+
+    });
+    
+    function confirmaExclusao(id) {
+        $('#modalExemplo').modal('show');
+        $('#idTextGeneroModal').text(id);
+        $('#idGeneroModal').val(id);
+    }
+
+    function excluir(id) {
+        $.ajax({
+            url: 'Generos?acao=excluir',
+            type: 'POST',
+            data: {'idGenero': id},
+            success: function (data) {
+                $('#modalExemplo').modal('hide');
+                $("#tabelaGeneros").load("Generos #tabelaGeneros");
+                toastr.success('Gênero removido', 'Sucesso');
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                toastr.error('Ocorreu um erro ao remover', 'Erro');
+            }
+        });
+    }
+</script>
+

@@ -6,10 +6,10 @@
 package Senac.TadesGames.Servlet;
 
 import Senac.TadesGames.Helpers.Notificacao;
-import Senac.TadesGames.Helpers.Utils;
 import Senac.TadesGames.Models.GeneroModel;
 import Senac.TadesGames.Service.GeneroService;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -22,24 +22,15 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Marcel
  */
-
 @WebServlet("/Generos")
 public class GeneroControllerServlet extends HttpServlet {
 
     private final GeneroService service = new GeneroService();
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         try {
             String acao = request.getParameter("acao");
 
@@ -49,13 +40,13 @@ public class GeneroControllerServlet extends HttpServlet {
 
             switch (acao) {
                 case "listar":
-                    listarGeneros(request, response);
+                    listarGenero(request, response);
                     break;
                 case "alterar":
                     carregarGenero(request, response);
                     break;
                 default:
-                    listarGeneros(request, response);
+                    listarGenero(request, response);
             }
         } catch (ServletException | IOException e) {
             throw new ServletException(e);
@@ -65,6 +56,7 @@ public class GeneroControllerServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         try {
             String acao = request.getParameter("acao");
 
@@ -72,18 +64,23 @@ public class GeneroControllerServlet extends HttpServlet {
                 case "salvar":
                     incluirGenero(request, response);
                     break;
-//                case "alterar":
-//                    alterarGenero(request, response);
-//                    break;
+                case "alterar":
+                    alterarGenero(request, response);
+                    break;
+                case "excluir":
+                    excluirGenero(request, response);
+                    break;
             }
+
         } catch (ServletException | IOException e) {
             throw new ServletException(e);
         }
+
     }
 
     protected void incluirGenero(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Utils util = new Utils();
+
         String nome = request.getParameter("nome");
 
         GeneroModel genero = new GeneroModel(0, nome);
@@ -91,7 +88,7 @@ public class GeneroControllerServlet extends HttpServlet {
         try {
             List<Notificacao> notificacoes = service.incluirGenero(genero);
             if (notificacoes.isEmpty()) {
-                request.setAttribute("genero", service.obterListaGeneros());
+                request.setAttribute("generos", service.obterListaGenero());
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/consultaGenero.jsp");
                 dispatcher.forward(request, response);
             } else {
@@ -108,16 +105,16 @@ public class GeneroControllerServlet extends HttpServlet {
         }
     }
 
-    protected void listarGeneros(HttpServletRequest request, HttpServletResponse response)
+    protected void listarGenero(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setAttribute("genero", service.obterListaGeneros());
+        request.setAttribute("generos", service.obterListaGenero());
         request.getRequestDispatcher("consultaGenero.jsp").forward(request, response);
     }
 
     protected void carregarGenero(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("idGenero"));
-        GeneroModel genero = service.obterPorId(id);
+        GeneroModel genero = service.obterGeneroPorId(id);
 
         request.setAttribute("genero", genero);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/alterarGenero.jsp");
@@ -125,8 +122,8 @@ public class GeneroControllerServlet extends HttpServlet {
     }
 
     protected void alterarGenero(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, Exception {
-        Utils util = new Utils();
+            throws ServletException, IOException {
+
         int id = Integer.parseInt(request.getParameter("idGenero"));
         String nome = request.getParameter("nome");
 
@@ -135,20 +132,33 @@ public class GeneroControllerServlet extends HttpServlet {
         try {
             List<Notificacao> notificacoes = service.alterarGenero(genero);
             if (notificacoes.isEmpty()) {
-                request.setAttribute("generos", service.obterListaGeneros());
+                request.setAttribute("generos", service.obterListaGenero());
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/consultaGenero.jsp");
                 dispatcher.forward(request, response);
             } else {
                 request.setAttribute("notificacoes", notificacoes);
+                request.setAttribute("genero", genero);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/alterarGenero.jsp");
                 dispatcher.forward(request, response);
             }
 
-        } catch (ServletException | IOException e) {
+        } catch (Exception e) {
             RequestDispatcher dispatcher = request.getRequestDispatcher("/erro.jsp");
             dispatcher.forward(request, response);
         } finally {
             service.limparNotificacoes();
         }
     }
+
+    protected void excluirGenero(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("idGenero"));
+        GeneroModel genero = service.obterGeneroPorId(id);
+
+        service.excluirGenero(genero);
+
+        request.setAttribute("generos", service.obterListaGenero());
+        request.getRequestDispatcher("consultaGenero.jsp").forward(request, response);
+    }
+
 }
