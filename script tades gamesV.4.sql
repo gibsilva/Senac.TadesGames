@@ -1,4 +1,6 @@
-CREATE DATABASE `tadesgames` /*!40100 DEFAULT CHARACTER SET latin1 */;
+CREATE DATABASE tadesgames;
+
+use tadesgames;
 
 CREATE TABLE `cliente` (
   `IdCliente` int(11) NOT NULL AUTO_INCREMENT,
@@ -13,28 +15,44 @@ CREATE TABLE `cliente` (
   `sexo` varchar(50) DEFAULT NULL,
   `ativo` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`IdCliente`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `categoria` (
   `IdCategoria` int(11) NOT NULL AUTO_INCREMENT,
   `Nome` varchar(50) NOT NULL,
   `DataHoraCriacao` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`IdCategoria`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `plataforma` (
   `IdPlataforma` int(11) NOT NULL AUTO_INCREMENT,
   `Nome` varchar(50) NOT NULL,
   `DataHoraCriacao` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`IdPlataforma`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `genero` (
   `IdGenero` int(11) NOT NULL AUTO_INCREMENT,
   `Nome` varchar(50) NOT NULL,
   `DataHoraCriacao` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`IdGenero`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+CREATE TABLE `filial` (
+  `IdFilial` int(11) NOT NULL AUTO_INCREMENT,
+  `Nome` varchar(50) NOT NULL,
+  `Cnpj` varchar(14) NOT NULL,
+  `DataHoraCriacao` datetime DEFAULT CURRENT_TIMESTAMP,
+  `CEP` varchar(8) NOT NULL,
+  `longradouro` varchar(50) NOT NULL,
+  `numero` int(11) NOT NULL,
+  `complemento` varchar(50) DEFAULT NULL,
+  `bairro` varchar(50) NOT NULL,
+  `cidade` varchar(100) NOT NULL,
+  `estado` varchar(60) NOT NULL,
+  PRIMARY KEY (`IdFilial`),
+  UNIQUE KEY `Cnpj` (`Cnpj`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `usuario` (
   `IdUsuario` int(11) NOT NULL AUTO_INCREMENT,
@@ -55,7 +73,7 @@ CREATE TABLE `usuario` (
   UNIQUE KEY `Login` (`Login`),
   KEY `IdFilial` (`IdFilial`),
   CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`IdFilial`) REFERENCES `filial` (`IdFilial`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `permissao` (
   `IdPermissao` int(11) NOT NULL AUTO_INCREMENT,
@@ -74,35 +92,19 @@ CREATE TABLE `permissao` (
   CONSTRAINT `permissao_ibfk_1` FOREIGN KEY (`IdUsuario`) REFERENCES `usuario` (`IdUsuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE `filial` (
-  `IdFilial` int(11) NOT NULL AUTO_INCREMENT,
-  `Nome` varchar(50) NOT NULL,
-  `Cnpj` varchar(14) NOT NULL,
-  `DataHoraCriacao` datetime DEFAULT CURRENT_TIMESTAMP,
-  `CEP` varchar(8) NOT NULL,
-  `longradouro` varchar(50) NOT NULL,
-  `numero` int(11) NOT NULL,
-  `complemento` varchar(50) DEFAULT NULL,
-  `bairro` varchar(50) NOT NULL,
-  `cidade` varchar(100) NOT NULL,
-  `estado` varchar(60) NOT NULL,
-  PRIMARY KEY (`IdFilial`),
-  UNIQUE KEY `Cnpj` (`Cnpj`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 CREATE TABLE `produto` (
   `IdProduto` int(11) NOT NULL AUTO_INCREMENT,
   `Nome` varchar(80) NOT NULL,
   `Descricao` varchar(250) NOT NULL,
   `PrecoCompra` decimal(18,2) NOT NULL,
   `PrecoVenda` decimal(18,2) NOT NULL,
-  `Plataforma` varchar(15) NOT NULL,
   `IdCategoria` int(11) NOT NULL,
   `IdGenero` int(11) NOT NULL,
   `Ativo` tinyint(1) DEFAULT '1',
   `IdFilial` int(11) NOT NULL,
   `DataHoraCriacao` datetime DEFAULT CURRENT_TIMESTAMP,
   `IdPlataforma` int(11) NOT NULL,
+  `QuantidadeEstoque` int(11) NOT NULL,
   PRIMARY KEY (`IdProduto`),
   KEY `IdCategoria` (`IdCategoria`),
   KEY `IdGenero` (`IdGenero`),
@@ -112,7 +114,7 @@ CREATE TABLE `produto` (
   CONSTRAINT `produto_ibfk_1` FOREIGN KEY (`IdCategoria`) REFERENCES `categoria` (`IdCategoria`),
   CONSTRAINT `produto_ibfk_2` FOREIGN KEY (`IdGenero`) REFERENCES `genero` (`IdGenero`),
   CONSTRAINT `produto_ibfk_3` FOREIGN KEY (`IdFilial`) REFERENCES `filial` (`IdFilial`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `pedido` (
   `IdPedido` int(11) NOT NULL AUTO_INCREMENT,
@@ -123,6 +125,8 @@ CREATE TABLE `pedido` (
   `IdFilial` int(11) NOT NULL,
   `IdUsuario` int(11) NOT NULL,
   `DataHoraCriacao` datetime DEFAULT CURRENT_TIMESTAMP,
+  `Parcela` int(11) DEFAULT NULL,
+  `ValorRecebido` decimal(18,2) DEFAULT NULL,
   PRIMARY KEY (`IdPedido`),
   KEY `IdCliente` (`IdCliente`),
   KEY `IdFilial` (`IdFilial`),
@@ -130,7 +134,7 @@ CREATE TABLE `pedido` (
   CONSTRAINT `pedido_ibfk_1` FOREIGN KEY (`IdCliente`) REFERENCES `cliente` (`IdCliente`),
   CONSTRAINT `pedido_ibfk_2` FOREIGN KEY (`IdFilial`) REFERENCES `filial` (`IdFilial`),
   CONSTRAINT `pedido_ibfk_3` FOREIGN KEY (`IdUsuario`) REFERENCES `usuario` (`IdUsuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `itenspedido` (
   `IdItensPedido` int(11) NOT NULL AUTO_INCREMENT,
@@ -144,4 +148,11 @@ CREATE TABLE `itenspedido` (
   KEY `fk_itensPedido_pedido` (`IdPedido`),
   CONSTRAINT `fk_itensPedido_pedido` FOREIGN KEY (`IdPedido`) REFERENCES `pedido` (`IdPedido`),
   CONSTRAINT `itenspedido_ibfk_1` FOREIGN KEY (`IdProduto`) REFERENCES `produto` (`IdProduto`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+
+
+
+
+
+
+
