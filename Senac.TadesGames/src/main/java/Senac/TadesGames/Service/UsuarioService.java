@@ -98,6 +98,10 @@ public class UsuarioService {
     public List<UsuarioModel> obterListaUsuarios() {
         return usuarioDao.obterTodas();
     }
+    
+    public List<UsuarioModel> obterTodosPorCargo(String cargo){
+        return usuarioDao.obterTodosPorCargo(cargo);
+    }
 
     public void limparNotificacoes() {
         this.notificacao.limparLista();

@@ -45,6 +45,8 @@ public class GeneroDAO implements IGeneroDao {
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt, rs);
             return null;
+        } finally{
+            conexao.closeConnection(conn, stmt, rs);
         }
     }
 
@@ -69,6 +71,8 @@ public class GeneroDAO implements IGeneroDao {
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt, rs);
             return null;
+        } finally{
+            conexao.closeConnection(conn, stmt, rs);
         }
     }
 
@@ -92,6 +96,8 @@ public class GeneroDAO implements IGeneroDao {
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt, rs);
             return null;
+        } finally{
+            conexao.closeConnection(conn, stmt, rs);
         }
 
     }
@@ -118,6 +124,8 @@ public class GeneroDAO implements IGeneroDao {
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt, rs);
             return null;
+        } finally{
+            conexao.closeConnection(conn, stmt, rs);
         }
     }
 
@@ -133,6 +141,8 @@ public class GeneroDAO implements IGeneroDao {
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt);
             throw new RuntimeException(ex.getMessage());
+        } finally{
+            conexao.closeConnection(conn, stmt);
         }
     }
 
@@ -149,6 +159,8 @@ public class GeneroDAO implements IGeneroDao {
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt);
             throw new RuntimeException(ex.getMessage());
+        } finally{
+            conexao.closeConnection(conn, stmt);
         }
     }
 
@@ -164,6 +176,8 @@ public class GeneroDAO implements IGeneroDao {
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt);
             throw new RuntimeException(ex.getMessage());
+        } finally{
+            conexao.closeConnection(conn, stmt);
         }
     }
 }

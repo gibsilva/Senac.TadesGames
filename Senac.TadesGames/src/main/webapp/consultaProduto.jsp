@@ -13,16 +13,16 @@
     <h2>Consulta de Produtos</h2>
     <hr>
     <br>
-    
+
     <div class="btn-toolbar justify-content-between" role="toolbar" >
 
         <div class="input-group-append col-md-6">
             <input type="text" class="form-control " placeholder="Pesquisar" id="filtro" name="filtro">
- 
+
         </div>
         <div class="input-group">
             <div>
-                <a href="cadastroProduto.jsp" class="btn btn-outline-primary">Novo Produto</a>
+                <a href="Produtos?acao=salvar" class="btn btn-outline-primary">Novo Produto</a>
             </div>
 
         </div>
@@ -46,29 +46,34 @@
                 <th class="text-center" scope="col">#</th>
             </tr>
         </thead>
-        <tbody>
-        <c:forEach var="p" items="${produtos}">
-            <tr>
-                <td class="text-center">${p.idProduto}</td>
-                <td class="text-center">${p.nome}</td>
-                <td class="text-center">${p.precoCompra}</td>
-                <td class="text-center">${p.precoVenda}</td>
-                <td class="text-center">${p.plataforma}</td>
-                <td class="text-center">${p.categoria}</td>
-                <td class="text-center">${p.genero}</td>
-                <td class="text-center">${p.descricao}</td>
-                <td class="text-center">${p.qtdEstoque}</td>
-                <td class="text-center">${p.status}</td>
-       
-                <td class="text-center">
-                    <c:url var="alterarProduto" value="/Produtos">
+        <tbody id="tabela" name="tabela">
+            <c:forEach var="p" items="${produtos}">
+                <tr>
+                    <td class="text-center">${p.idProduto}</td>
+                    <td class="text-center">${p.nome}</td>
+                    <td class="text-center">${p.precoCompra}</td>
+                    <td class="text-center">${p.precoVenda}</td>
+                    <td class="text-center">${p.plataforma.nome}</td>
+                    <td class="text-center">${p.categoria.nome}</td>
+                    <td class="text-center">${p.genero.nome}</td>
+                    <td class="text-center">${p.descricao}</td>
+                    <td class="text-center">${p.quantidadeEstoque}</td>
+                    <c:if test="${p.ativo == true}">
+                        <td class="text-center">Ativo</td>
+                    </c:if>
+                    <c:if test="${p.ativo == false}">
+                        <td class="text-center">Inativo</td>
+                    </c:if>
+
+                    <td class="text-center">
+                        <c:url var="alterarProduto" value="/Produtos">
                             <c:param name="acao" value="alterar" />
                             <c:param name="idProduto" value="${p.idProduto}" />
                         </c:url>
-                    <a href="alterarProduto.jsp" class="btn btn-outline-warning">Editar</a>
-                </td>
-            </tr>
-        </c:forEach>
+                        <a href="${alterarProduto}" class="btn btn-outline-warning">Editar</a>
+                    </td>
+                </tr>
+            </c:forEach>
         </tbody>
     </table>
 </div>

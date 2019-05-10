@@ -23,6 +23,7 @@ public class ItensPedidoDAO implements IItensPedidoDao {
 
     private ConexaoDB conexao = new ConexaoDB();
     private PreparedStatement stmt = null;
+    private final ProdutoDAO produtoDao = new ProdutoDAO();
     ResultSet rs = null;
 
     @Override
@@ -49,11 +50,14 @@ public class ItensPedidoDAO implements IItensPedidoDao {
                         rs.getInt("Quantidade"),
                         rs.getInt("IdPedido"));
             }
+            itensPedido.setProduto(produtoDao.obterPorId(itensPedido.getIdProduto()));
 
             return itensPedido;
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt, rs);
             return null;
+        } finally {
+            conexao.closeConnection(conn, stmt, rs);
         }
     }
 
@@ -81,6 +85,7 @@ public class ItensPedidoDAO implements IItensPedidoDao {
                         rs.getInt("Quantidade"),
                         rs.getInt("IdPedido")
                 );
+                itensPedido.setProduto(produtoDao.obterPorId(itensPedido.getIdProduto()));
 
                 itensPedidos.add(itensPedido);
             }
@@ -89,10 +94,12 @@ public class ItensPedidoDAO implements IItensPedidoDao {
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt, rs);
             return null;
+        } finally {
+            conexao.closeConnection(conn, stmt, rs);
         }
     }
-    
-        @Override
+
+    @Override
     public List<ItensPedidoModel> obterPorIdPedido(int id) {
         Connection conn = conexao.getConnection();
         ItensPedidoModel itensPedido = null;
@@ -104,21 +111,22 @@ public class ItensPedidoDAO implements IItensPedidoDao {
                     + "IDPRODUTO, "
                     + "VALORUNITARIO, "
                     + "QUANTIDADE, "
-                    + "IDPEDIDO, "
+                    + "IDPEDIDO "
                     + " FROM ITENSPEDIDO"
                     + " WHERE IDPEDIDO = ?");
-            
+
             stmt.setInt(1, id);
 
             rs = stmt.executeQuery();
             while (rs.next()) {
                 itensPedido = new ItensPedidoModel(
-                        rs.getInt("IdCategoria"),
+                        rs.getInt("IdItensPedido"),
                         rs.getInt("IdProduto"),
                         rs.getDouble("ValorUnitario"),
                         rs.getInt("Quantidade"),
                         rs.getInt("IdPedido")
                 );
+                itensPedido.setProduto(produtoDao.obterPorId(itensPedido.getIdProduto()));
 
                 itensPedidos.add(itensPedido);
             }
@@ -127,6 +135,8 @@ public class ItensPedidoDAO implements IItensPedidoDao {
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt, rs);
             return null;
+        } finally {
+            conexao.closeConnection(conn, stmt, rs);
         }
     }
 
@@ -141,7 +151,7 @@ public class ItensPedidoDAO implements IItensPedidoDao {
                     + "QUANTIDADE, "
                     + "IDPEDIDO) "
                     + " VALUES (?, ?, ?, ?)");
-            
+
             stmt.setInt(1, itensPedido.getIdProduto());
             stmt.setDouble(2, itensPedido.getValorUnitario());
             stmt.setInt(3, itensPedido.getQuantidade());
@@ -151,6 +161,8 @@ public class ItensPedidoDAO implements IItensPedidoDao {
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt);
             throw new RuntimeException(ex.getMessage());
+        } finally {
+            conexao.closeConnection(conn, stmt);
         }
     }
 

@@ -11,7 +11,7 @@
     <br>
     <h2>Novo Produto</h2>
     <hr>
-    <form action="Clientes" method="post">
+    <form action="Produtos" method="post">
         <input type="hidden" value="salvar" id="acao" name="acao">
 
         <div class="row">
@@ -25,18 +25,9 @@
                 <label for="inputPlataforma">Plataforma<h11 class="text-danger">*</h11></label>
                 <select id="plataforma" name="plataforma" class="custom-select" required>
                     <option value="">Selecione </option>
-                    <option value="1">PlayStation 4 </option>
-                    <option value="2">PlayStation 3 </option>
-                    <option value="3">PlayStation 2 </option>
-                    <option value="4">PSP			  </option>
-                    <option value="5">PS Vita		  </option>
-                    <option value="6">XBOX 360      </option>
-                    <option value="7">XBOX ONE	  </option>
-                    <option value="8">Nitendo Wii	  </option>
-                    <option value="9">Nitendo Switch</option>
-                    <option value="10">Nitendo DS    </option>
-                    <option value="11">Nitendo 3DS	  </option>
-                    <option value="12">PC/Computador </option>
+                    <c:forEach var="p" items="${plataformas}">
+                        <option value="${p.idPlataforma}">${p.nome}</option>
+                    </c:forEach>
                 </select>
             </div>
 
@@ -44,12 +35,9 @@
                 <label for="inputCategoria">Categoria<h11 class="text-danger">*</h11></label>
                 <select id="categoria" name="categoria" class="custom-select" required>
                     <option value="">Selecione </option>
-                    <option value="1">Jogo 		</option>
-                    <option value="2">Console 	</option>
-                    <option value="3">Acessório 	</option>
-                    <option value="4">Skin	    </option>
-                    <option value="5">Controle	</option>
-                    <option value="6">Créditos    </option>
+                    <c:forEach var="c" items="${categorias}">
+                        <option value="${c.idCategoria}">${c.nome}</option>
+                    </c:forEach>
                 </select>
             </div>
 
@@ -81,20 +69,18 @@
             <div class="form-group col-md-2">
                 <label for="inputSexo">Status</label>
                 <select id="ativo" name="ativo" class="custom-select" required>
-                    <option selected value="A">Ativo</option>
-                    <option value="I">Inativo</option>                           
+                    <option selected value="true">Ativo</option>
+                    <option value="false">Inativo</option>                           
                 </select>
             </div>
 
             <div class="form-group col-md-3">
-                <label for="exampleFormControlSelect2">Gêneros<h11 class="text-danger">*</h11></label>
-                <select multiple class="form-control" id="genero" name="genero" required>
-                    <option>FPS</option>
-                    <option>Aventura</option>
-                    <option>RPG</option>
-                    <option>Arcade</option>
-                    <option>Luta</option>
-                    <option>Outros</option>
+                <label for="genero">Genero<h11 class="text-danger">*</h11></label>
+                <select id="genero" name="genero" class="custom-select" required>
+                    <option value="">Selecione </option>
+                    <c:forEach var="g" items="${generos}">
+                        <option value="${g.idGenero}">${g.nome}</option>
+                    </c:forEach>
                 </select>
             </div>
 

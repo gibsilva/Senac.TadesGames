@@ -66,6 +66,8 @@ public class ClienteDAO implements IClienteDao {
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt, rs);
             return null;
+        } finally {
+            conexao.closeConnection(conn, stmt, rs);
         }
     }
 
@@ -109,6 +111,8 @@ public class ClienteDAO implements IClienteDao {
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt, rs);
             return null;
+        } finally {
+            conexao.closeConnection(conn, stmt, rs);
         }
     }
 
@@ -152,6 +156,8 @@ public class ClienteDAO implements IClienteDao {
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt, rs);
             return null;
+        } finally {
+            conexao.closeConnection(conn, stmt, rs);
         }
     }
 
@@ -195,6 +201,8 @@ public class ClienteDAO implements IClienteDao {
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt, rs);
             return null;
+        } finally {
+            conexao.closeConnection(conn, stmt, rs);
         }
     }
 
@@ -238,6 +246,8 @@ public class ClienteDAO implements IClienteDao {
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt, rs);
             return null;
+        } finally {
+            conexao.closeConnection(conn, stmt, rs);
         }
     }
 
@@ -272,6 +282,8 @@ public class ClienteDAO implements IClienteDao {
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt);
             throw new RuntimeException(ex.getMessage());
+        } finally {
+            conexao.closeConnection(conn, stmt);
         }
     }
 
@@ -302,6 +314,8 @@ public class ClienteDAO implements IClienteDao {
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt);
             throw new RuntimeException(ex.getMessage());
+        } finally {
+            conexao.closeConnection(conn, stmt);
         }
     }
 

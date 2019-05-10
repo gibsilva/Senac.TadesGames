@@ -85,6 +85,10 @@ public class ClienteService {
         return clienteDao.obterPorId(id);
     }
 
+    public ClienteModel obterClientePorCpf(String cpf) {
+        return clienteDao.obterPorCpf(cpf);
+    }
+
     public List<ClienteModel> obterListaClientes() {
         return clienteDao.obterTodas();
     }

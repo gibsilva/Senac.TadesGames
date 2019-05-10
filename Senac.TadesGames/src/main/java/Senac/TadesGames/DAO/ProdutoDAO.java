@@ -20,10 +20,22 @@ import java.util.List;
  * @author Gi
  */
 public class ProdutoDAO implements IProdutoDao {
-    private final ConexaoDB conexao = new ConexaoDB();
+
+    private final ConexaoDB conexao;
+    private final GeneroDAO generoDao;
+    private final PlataformaDAO plataformaDao;
+    private final CategoriaDAO categoriaDao;
+
+    public ProdutoDAO() {
+        this.conexao = new ConexaoDB();
+        this.generoDao = new GeneroDAO();
+        this.plataformaDao = new PlataformaDAO();
+        this.categoriaDao = new CategoriaDAO();
+    }
+
     private PreparedStatement stmt = null;
-    ResultSet rs = null;
-    
+    private ResultSet rs = null;
+
     @Override
     public ProdutoModel obterPorId(int id) {
         Connection conn = conexao.getConnection();
@@ -40,7 +52,8 @@ public class ProdutoDAO implements IProdutoDao {
                     + "IDGENERO, "
                     + "ATIVO, "
                     + "IDFILIAL, "
-                    + "IDPLATAFORMA "
+                    + "IDPLATAFORMA,"
+                    + "QUANTIDADEESTOQUE "
                     + " FROM PRODUTO WHERE IDPRODUTO = ?");
             stmt.setInt(1, id);
 
@@ -56,14 +69,20 @@ public class ProdutoDAO implements IProdutoDao {
                         rs.getInt("IdGenero"),
                         rs.getBoolean("Ativo"),
                         rs.getInt("IdFilial"),
-                        rs.getInt("IdPlataforma")
+                        rs.getInt("IdPlataforma"),
+                        rs.getInt("QuantidadeEstoque")
                 );
+                produto.setCategoria(categoriaDao.obterPorId(produto.getIdCategoria()));
+                produto.setPlataforma(plataformaDao.obterPorId(produto.getIdPlataforma()));
+                produto.setGenero(generoDao.obterPorId(produto.getIdGenero()));
             }
 
             return produto;
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt, rs);
             return null;
+        } finally {
+            conexao.closeConnection(conn, stmt, rs);
         }
     }
 
@@ -80,10 +99,11 @@ public class ProdutoDAO implements IProdutoDao {
                     + "PRECOCOMPRA, "
                     + "PRECOVENDA, "
                     + "IDCATEGORIA, "
-                    + "IDGENERO"
+                    + "IDGENERO, "
                     + "ATIVO, "
                     + "IDFILIAL, "
-                    + "IDPLATAFORMA "
+                    + "IDPLATAFORMA, "
+                    + "QUANTIDADEESTOQUE "
                     + " FROM PRODUTO");
 
             rs = stmt.executeQuery();
@@ -98,8 +118,13 @@ public class ProdutoDAO implements IProdutoDao {
                         rs.getInt("IdGenero"),
                         rs.getBoolean("Ativo"),
                         rs.getInt("IdFilial"),
-                        rs.getInt("IdPlataforma")
+                        rs.getInt("IdPlataforma"),
+                        rs.getInt("QuantidadeEstoque")
                 );
+                produto.setCategoria(categoriaDao.obterPorId(produto.getIdCategoria()));
+                produto.setPlataforma(plataformaDao.obterPorId(produto.getIdPlataforma()));
+                produto.setGenero(generoDao.obterPorId(produto.getIdGenero()));
+                
                 produtos.add(produto);
             }
 
@@ -107,6 +132,8 @@ public class ProdutoDAO implements IProdutoDao {
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt, rs);
             return null;
+        } finally {
+            conexao.closeConnection(conn, stmt, rs);
         }
     }
 
@@ -124,8 +151,9 @@ public class ProdutoDAO implements IProdutoDao {
                     + "IDGENERO, "
                     + "ATIVO, "
                     + "IDFILIAL, "
-                    + "IDPLATAFORMA) "
-                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                    + "IDPLATAFORMA, "
+                    + "QUANTIDADEESTOQUE) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             stmt.setString(1, produto.getNome());
             stmt.setString(2, produto.getDescricao());
             stmt.setDouble(3, produto.getPrecoCompra());
@@ -133,12 +161,16 @@ public class ProdutoDAO implements IProdutoDao {
             stmt.setInt(5, produto.getIdCategoria());
             stmt.setInt(6, produto.getIdGenero());
             stmt.setBoolean(7, produto.getAtivo());
-            stmt.setInt(8, produto.getIdPlataforma());
+            stmt.setInt(8, produto.getIdFilial());
+            stmt.setInt(9, produto.getIdPlataforma());
+            stmt.setInt(10, produto.getQuantidadeEstoque());
 
             stmt.executeUpdate();
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt);
             throw new RuntimeException(ex.getMessage());
+        } finally {
+            conexao.closeConnection(conn, stmt);
         }
     }
 
@@ -148,15 +180,15 @@ public class ProdutoDAO implements IProdutoDao {
 
         try {
             stmt = conn.prepareStatement("UPDATE PRODUTO SET "
-                    + "NOME = ?,"
-                    + "DESCRICAO = ?,"
-                    + "PRECOCOMPRA = ?,"
-                    + "PRECOVENDA = ?,"
-                    + "IDCATEGORIA = ?,"
-                    + "IDGENERO = ?,"
-                    + "ATIVO = ?,"
-                    + "IDFILIAL = ?,"
-                    + "IDPLATAFORMA = ? "
+                    + "NOME = ?, "
+                    + "DESCRICAO = ?, "
+                    + "PRECOCOMPRA = ?, "
+                    + "PRECOVENDA = ?, "
+                    + "IDCATEGORIA = ?, "
+                    + "IDGENERO = ?, "
+                    + "ATIVO = ?, "
+                    + "IDPLATAFORMA = ?, "
+                    + "QUANTIDADEESTOQUE = ? "
                     + "WHERE IDPRODUTO = ?");
             stmt.setString(1, produto.getNome());
             stmt.setString(2, produto.getDescricao());
@@ -166,18 +198,42 @@ public class ProdutoDAO implements IProdutoDao {
             stmt.setInt(6, produto.getIdGenero());
             stmt.setBoolean(7, produto.getAtivo());
             stmt.setInt(8, produto.getIdPlataforma());
-            stmt.setInt(9, produto.getIdProduto());
+            stmt.setInt(9, produto.getQuantidadeEstoque());
+            stmt.setInt(10, produto.getIdProduto());
 
             stmt.executeUpdate();
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt);
             throw new RuntimeException(ex.getMessage());
+        } finally {
+            conexao.closeConnection(conn, stmt);
+        }
+    }
+
+    public void atualizarEstoque(ProdutoModel produto, int quantidade) {
+        Connection conn = conexao.getConnection();
+
+        try {
+            stmt = conn.prepareStatement("UPDATE PRODUTO SET "
+                    + "QUANTIDADEESTOQUE =  ? "
+                    + "WHERE IDPRODUTO = ? AND IDFILIAL = ?");
+
+            stmt.setInt(1, quantidade);
+            stmt.setInt(2, produto.getIdProduto());
+            stmt.setInt(3, produto.getIdFilial());
+
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            conexao.closeConnection(conn, stmt);
+            throw new RuntimeException(ex.getMessage());
+        } finally {
+            conexao.closeConnection(conn, stmt);
         }
     }
 
     @Override
     public void desativar(ProdutoModel produto) {
-       Connection conn = conexao.getConnection();
+        Connection conn = conexao.getConnection();
 
         try {
             stmt = conn.prepareStatement("UPDATE PRODUTO SET "
@@ -189,12 +245,14 @@ public class ProdutoDAO implements IProdutoDao {
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt);
             throw new RuntimeException(ex.getMessage());
+        } finally {
+            conexao.closeConnection(conn, stmt);
         }
     }
 
     @Override
     public void ativar(ProdutoModel produto) {
-       Connection conn = conexao.getConnection();
+        Connection conn = conexao.getConnection();
 
         try {
             stmt = conn.prepareStatement("UPDATE PRODUTO SET "
@@ -206,6 +264,8 @@ public class ProdutoDAO implements IProdutoDao {
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt);
             throw new RuntimeException(ex.getMessage());
+        } finally {
+            conexao.closeConnection(conn, stmt);
         }
     }
 }

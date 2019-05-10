@@ -18,14 +18,17 @@ public class ProdutoModel {
     private int idCategoria;
     private CategoriaModel categoria;
     private int idGenero;
+    private GeneroModel genero;
     private boolean ativo;
-    private int filial;
+    private int idFilial;
+    private FilialModel filial;
     private int idPlataforma;
     private PlataformaModel plataforma;
+    private int quantidadeEstoque;
 
     public ProdutoModel(int idProduto, String nome, String descricao, 
            double precoCompra, double precoVenda, int idCategoria,
-           int idGenero, boolean ativo, int filial, int idPlataforma){        
+           int idGenero, boolean ativo, int idFilial, int idPlataforma, int quantidadeEstoque){        
         this.idProduto = idProduto;
         this.nome = nome;
         this.descricao = descricao;
@@ -34,8 +37,9 @@ public class ProdutoModel {
         this.idCategoria = idCategoria;
         this.idGenero = idGenero;
         this.ativo = ativo;
-        this.filial = filial;
+        this.idFilial = idFilial;
         this.idPlataforma = idPlataforma;
+        this.quantidadeEstoque = quantidadeEstoque;
     }
     /**
      * @return the idProduto
@@ -164,17 +168,17 @@ public class ProdutoModel {
     }
 
     /**
-     * @return the filial
+     * @return the idFilial
      */
-    public int getFilial() {
-        return filial;
+    public int getIdFilial() {
+        return idFilial;
     }
 
     /**
-     * @param filial the filial to set
+     * @param idFilial the filial to set
      */
-    public void setFilial(int filial) {
-        this.filial = filial;
+    public void setIdFilial(int idFilial) {
+        this.idFilial = idFilial;
     }
 
     /**
@@ -205,5 +209,39 @@ public class ProdutoModel {
         this.plataforma = plataforma;
     }
     
+    public void setGenero(GeneroModel genero){
+        this.genero = genero;
+    }
     
+    public GeneroModel getGenero(){
+        return this.genero;
+    }
+
+    /**
+     * @return the quantidadeEstoque
+     */
+    public int getQuantidadeEstoque() {
+        return quantidadeEstoque;
+    }
+
+    /**
+     * @param quantidadeEstoque the quantidadeEstoque to set
+     */
+    public void setQuantidadeEstoque(int quantidadeEstoque) {
+        this.quantidadeEstoque = quantidadeEstoque;
+    }
+
+    /**
+     * @return the filial
+     */
+    public FilialModel getFilial() {
+        return filial;
+    }
+
+    /**
+     * @param filial the filial to set
+     */
+    public void setFilial(FilialModel filial) {
+        this.filial = filial;
+    }
 }

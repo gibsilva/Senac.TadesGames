@@ -32,8 +32,8 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Vendas</a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="vendas.jsp">Realizar Venda</a>
-                            <a class="dropdown-item" href="consultaVendas.jsp">Consulta de Vendas</a>
+                            <a class="dropdown-item" href="Vendas">Realizar Venda</a>
+                            <a class="dropdown-item" href="Vendas?acao=listar">Consulta de Vendas</a>
                         </div>
                     </li>
 
@@ -48,8 +48,8 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Produto</a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="cadastroProduto.jsp">Cadastro de Produto</a>
-                            <a class="dropdown-item" href="consultaProduto.jsp">Consulta de Produto</a>
+                            <a class="dropdown-item" href="Produtos?acao=salvar">Cadastro de Produto</a>
+                            <a class="dropdown-item" href="Produtos">Consulta de Produto</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="cadastroPlataforma.jsp">Cadastro de Plataforma</a>
                             <a class="dropdown-item" href="Plataformas">Consulta de Plataforma</a>

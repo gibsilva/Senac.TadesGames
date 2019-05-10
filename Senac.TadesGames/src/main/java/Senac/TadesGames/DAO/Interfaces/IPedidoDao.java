@@ -19,5 +19,6 @@ public interface IPedidoDao {
     void troca(PedidoModel pedido);
     void FinalizarPedido (PedidoModel pedido);
     void CancelarPedido (PedidoModel pedido);
+    List<PedidoModel> pesquisar(int id, String dataInicio, String dataFim);
     
 }

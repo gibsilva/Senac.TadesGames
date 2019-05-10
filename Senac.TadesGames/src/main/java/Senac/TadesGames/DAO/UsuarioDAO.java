@@ -339,6 +339,54 @@ public class UsuarioDAO implements IUsuarioDao {
         }
     }
 
+    public List<UsuarioModel> obterTodosPorCargo(String cargo) {
+        Connection conn = conexao.getConnection();
+        UsuarioModel usuario = null;
+        List<UsuarioModel> usuarios = new ArrayList<UsuarioModel>();
+
+        try {
+            stmt = conn.prepareStatement("SELECT "
+                    + "IDUSUARIO, "
+                    + "NOME, "
+                    + "CPF, "
+                    + "EMAIL, "
+                    + "IDFILIAL, "
+                    + "SETOR, "
+                    + "CARGO, "
+                    + "LOGIN, "
+                    + "SENHA, "
+                    + "SEXO, "
+                    + "ATIVO"
+                    + " FROM USUARIO WHERE CARGO = ?");
+            
+            stmt.setString(1, cargo);
+
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                usuario = new UsuarioModel(
+                        rs.getInt("IdUsuario"),
+                        rs.getString("Nome"),
+                        rs.getString("cpf"),
+                        rs.getString("Email"),
+                        rs.getString("setor"),
+                        rs.getString("cargo"),
+                        rs.getString("Login"),
+                        rs.getString("Senha"),
+                        rs.getInt("IdFilial"),
+                        rs.getString("sexo"),
+                        rs.getBoolean("ativo")
+                );
+
+                usuarios.add(usuario);
+            }
+
+            return usuarios;
+        } catch (SQLException ex) {
+            conexao.closeConnection(conn, stmt, rs);
+            return null;
+        }
+    }
+
     @Override
     public void inserir(UsuarioModel usuario) {
         Connection conn = conexao.getConnection();

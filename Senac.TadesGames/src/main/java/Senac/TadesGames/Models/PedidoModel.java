@@ -20,14 +20,20 @@ public class PedidoModel {
     private double valorTotal;
     private Date dataPedido;
     private int idCliente;
+    private ClienteModel cliente;
     private List<ItensPedidoModel> itensPedido;
     private int idFilial;
+    private FilialModel filial;
     private int idUsuario;
+    private UsuarioModel usuario;
     private int formaPagamento;
+    private String descFormaPagamento;
+    private int parcela;
+    private double valorRecebido;
 
     public PedidoModel(int idPedido, int status, Date dataPedido,
-            int idCliente, int idFilial, int idUsuario, int formaPagamento) {
-        
+            int idCliente, int idFilial, int idUsuario, int formaPagamento, int parcela, 
+            double valorRecebido) {      
         this.idPedido = idPedido;
         this.status = status;
         this.dataPedido = dataPedido;
@@ -36,6 +42,8 @@ public class PedidoModel {
         this.idFilial = idFilial;
         this.idUsuario = idUsuario;
         this.formaPagamento = formaPagamento;
+        this.parcela = parcela;
+        this.valorRecebido = valorRecebido;
     }
 
     /**
@@ -71,18 +79,11 @@ public class PedidoModel {
      */
     public double getValorTotal() {
         double valor = 0;
-        for(ItensPedidoModel p : itensPedido){
+        for(ItensPedidoModel p : this.itensPedido){
             valor += p.getQuantidade() * p.getValorUnitario();
         }
         
         return valor;
-    }
-
-    /**
-     * @param valorTotal the valorTotal to set
-     */
-    public void setValorTotal(double valorTotal) {
-        this.valorTotal = valorTotal;
     }
 
     /**
@@ -167,6 +168,93 @@ public class PedidoModel {
      */
     public void setFormaPagamento(int formaPagamento) {
         this.formaPagamento = formaPagamento;
+    }
+
+    /**
+     * @return the parcela
+     */
+    public int getParcela() {
+        return parcela;
+    }
+
+    /**
+     * @param parcela the parcelas to set
+     */
+    public void setParcela(int parcela) {
+        this.parcela = parcela;
+    }
+
+    /**
+     * @return the valorRecebido
+     */
+    public double getValorRecebido() {
+        return valorRecebido;
+    }
+
+    /**
+     * @param valorRecebido the valorRecebido to set
+     */
+    public void setValorRecebido(double valorRecebido) {
+        this.valorRecebido = valorRecebido;
+    }
+    
+    public String getDescFormaPagamento(){
+        switch(this.formaPagamento){
+            case 1:
+                return "Débito";
+            case 2:
+                return "Crédito";
+            case 3:
+                return "Dinheiro";
+            default:
+                return "Não informado";
+        }
+    }
+    
+    public int getQtdProdutos(){
+        return itensPedido.size();
+    }
+
+    /**
+     * @return the cliente
+     */
+    public ClienteModel getCliente() {
+        return cliente;
+    }
+
+    /**
+     * @param cliente the cliente to set
+     */
+    public void setCliente(ClienteModel cliente) {
+        this.cliente = cliente;
+    }
+
+    /**
+     * @return the filial
+     */
+    public FilialModel getFilial() {
+        return filial;
+    }
+
+    /**
+     * @param filial the filial to set
+     */
+    public void setFilial(FilialModel filial) {
+        this.filial = filial;
+    }
+
+    /**
+     * @return the usuario
+     */
+    public UsuarioModel getUsuario() {
+        return usuario;
+    }
+
+    /**
+     * @param usuario the usuario to set
+     */
+    public void setUsuario(UsuarioModel usuario) {
+        this.usuario = usuario;
     }
     
 }
