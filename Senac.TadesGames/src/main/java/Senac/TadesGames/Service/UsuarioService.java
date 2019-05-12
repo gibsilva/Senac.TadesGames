@@ -65,7 +65,7 @@ public class UsuarioService {
     private boolean validarUsuarioAlteracao(UsuarioModel usuario) {
         validaEmailExistente(usuario.getEmail(), usuario.getIdUsuario());
         validaLoginExistente(usuario.getLogin(), usuario.getIdUsuario());
-        
+
         return this.notificacao.quantidadeNotificacoes() == 0;
     }
 
@@ -98,8 +98,8 @@ public class UsuarioService {
     public List<UsuarioModel> obterListaUsuarios() {
         return usuarioDao.obterTodas();
     }
-    
-    public List<UsuarioModel> obterTodosPorCargo(String cargo){
+
+    public List<UsuarioModel> obterTodosPorCargo(String cargo) {
         return usuarioDao.obterTodosPorCargo(cargo);
     }
 
@@ -167,5 +167,10 @@ public class UsuarioService {
         } catch (InputMismatchException erro) {
             return (false);
         }
+    }
+
+    public static boolean validarLogin(String login, String senha) {
+        UsuarioDAO dao = new UsuarioDAO();
+        return dao.validarLogin(login, senha);
     }
 }

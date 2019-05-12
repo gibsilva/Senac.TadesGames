@@ -38,22 +38,22 @@
         <div class="row">
             <div class="form-group col-md-3">
                 <label for="cep">CEP<h11 class="text-danger">*</h11></label>
-                <input type="text" class="form-control cep" id="cep" name="cep" placeholder="Digite o cep" required>
+                <input type="text" class="form-control cep" id="cep" name="cep" placeholder="Digite o CEP da Filial" required>
             </div>
 
             <div class="form-group col-md-4">
                 <label for="logradouro">Logradouro<h11 class="text-danger">*</h11></label>
-                <input type="text" class="form-control" id="logradouro" name="logradouro" placeholder="logradouro" required readonly>
+                <input type="text" class="form-control" id="logradouro" name="logradouro" placeholder="Logradouro" required readonly>
             </div>
 
             <div class="form-group col-md-2">
                 <label for="numero">Numero<h11 class="text-danger">*</h11></label>
-                <input type="text" class="form-control" id="numero" name="numero" placeholder="Digite o numero" required>
+                <input type="text" class="form-control" id="numero" name="numero" placeholder="Digite o número" required>
             </div>
 
             <div class="form-group col-md-3">
                 <label for="complemento">Complemento</label>
-                <input type="text" class="form-control" id="complemento" name="complemento" placeholder="Digite o complemento">
+                <input type="text" class="form-control" id="complemento" name="Complemento" placeholder="Digite o complemento">
             </div>
 
         </div>
@@ -61,17 +61,17 @@
         <div class="row">
             <div class="form-group col-md-4">
                 <label for="bairro">Bairro<h11 class="text-danger">*</h11></label>
-                <input type="text" class="form-control" id="bairro" name="bairro" placeholder="bairro" required readonly>
+                <input type="text" class="form-control" id="bairro" name="bairro" placeholder="Bairro" required readonly>
             </div>
 
             <div class="form-group col-md-4">
                 <label for="cidade">Cidade<h11 class="text-danger">*</h11></label>
-                <input type="text" class="form-control" id="cidade" name="cidade" placeholder="cidade" required readonly>
+                <input type="text" class="form-control" id="cidade" name="cidade" placeholder="Cidade" required readonly>
             </div>
 
             <div class="form-group col-md-2">
                 <label for="estado">Estado<h11 class="text-danger">*</h11></label>
-                <input type="text" class="form-control" id="uf" name="uf" placeholder="estado" required readonly> 
+                <input type="text" class="form-control" id="uf" name="uf" placeholder="Estado" required readonly> 
             </div>
 
         </div>

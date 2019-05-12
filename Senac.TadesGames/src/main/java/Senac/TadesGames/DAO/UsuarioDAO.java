@@ -358,7 +358,7 @@ public class UsuarioDAO implements IUsuarioDao {
                     + "SEXO, "
                     + "ATIVO"
                     + " FROM USUARIO WHERE CARGO = ?");
-            
+
             stmt.setString(1, cargo);
 
             rs = stmt.executeQuery();
@@ -509,5 +509,30 @@ public class UsuarioDAO implements IUsuarioDao {
             conexao.closeConnection(conn, stmt, rs);
             return null;
         }
+    }
+
+    @Override
+    public boolean validarLogin(String login, String senha) {
+        Connection conn = conexao.getConnection();
+        boolean condicao = false;
+
+        try {
+            stmt = conn.prepareStatement("SELECT LOGIN, "
+                    + "SENHA "
+                    + "FROM USUARIO WHERE LOGIN = ? AND SENHA = ?");
+
+            stmt.setString(1, login);
+            stmt.setString(2, senha);
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                condicao = true;
+            }
+
+        } catch (SQLException ex) {
+            conexao.closeConnection(conn, stmt, rs);
+
+        }
+        return condicao;
     }
 }

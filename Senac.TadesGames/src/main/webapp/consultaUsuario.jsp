@@ -40,7 +40,7 @@
                 <th class="text-center" scope="col">Filial</th>
                 <th class="text-center" scope="col">Setor</th>
                 <th class="text-center" scope="col">Cargo</th>
-                <th class="text-center" scope="col">Email</th>
+                <th class="text-center" scope="col">E-mail</th>
                 <th class="text-center" scope="col">Login</th>
                 <th class="text-center" scope="col">Status</th>
                 <th class="text-center" scope="col">#</th>

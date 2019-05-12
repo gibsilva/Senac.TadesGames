@@ -57,14 +57,14 @@
                             <a class="dropdown-item" href="cadastroCategoria.jsp">Cadastro de Categoria</a>
                             <a class="dropdown-item" href="Categorias">Consulta de Categoria</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="cadastroGenero.jsp">Cadastro de Genero</a>
-                            <a class="dropdown-item" href="Generos">Consulta de Genero</a>
+                            <a class="dropdown-item" href="cadastroGenero.jsp">Cadastro de Gênero</a>
+                            <a class="dropdown-item" href="Generos">Consulta de Gênero</a>
                         </div>
                     </li>
 
 
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Relatorio</a>
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Relatórios</a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="relatorioCliente.jsp">Cliente</a>
                             <a class="dropdown-item" href="relatorioProduto.jsp">Produto</a>
@@ -73,13 +73,13 @@
                     </li>
 
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Usuario</a>
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Usuário</a>
                         <div class="dropdown-menu">
                             <c:url var="salvarUsuario" value="/Usuarios">
                                 <c:param name="acao" value="salvar" />
                             </c:url>
-                            <a href="${salvarUsuario}" class="dropdown-item">Novo Usuario</a>
-                            <a class="dropdown-item" href="Usuarios">Consulta de Usuario</a>
+                            <a href="${salvarUsuario}" class="dropdown-item">Cadastrar Usuário</a>
+                            <a class="dropdown-item" href="Usuarios">Consulta de Usuário</a>
                         </div>
                     </li>
 

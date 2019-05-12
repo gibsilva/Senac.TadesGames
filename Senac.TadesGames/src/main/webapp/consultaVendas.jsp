@@ -48,8 +48,8 @@
                 <th class="text-center" scope="col">Id</th>
                 <th class="text-center" scope="col">Cliente</th>
                 <th class="text-center" scope="col">CPF/CNPJ</th>
-                <th class="text-center" scope="col">Qtd de Produtos</th>
-                <th class="text-center" scope="col">Valor Total R$</th>
+                <th class="text-center" scope="col">Qtde. de Produtos</th>
+                <th class="text-center" scope="col">Valor Total (R$)</th>
                 <th class="text-center" scope="col">Forma de Pagamento</th>
                 <th class="text-center" scope="col">Data da Venda</th>
                 <th class="text-center" scope="col">Vendedor</th>

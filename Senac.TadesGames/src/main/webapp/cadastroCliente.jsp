@@ -26,7 +26,7 @@
             <div class="row">
                 <div class="form-group col-md-5">
                     <label for="name">Nome <h11 class="text-danger">*</h11></label>
-                    <input type="text" class="form-control" name="nome" id="nome" placeholder="Digite seu Nome Completo"
+                    <input type="text" class="form-control" name="nome" id="nome" placeholder="Digite seu nome completo"
                            maxlength="80" required>   
                 </div>
                 <div class="form-group col-md-2">
@@ -42,11 +42,11 @@
             <div class="row"> 
                 <div class="form-group col-md-2"
                      <label for="Celular">Celular<h11 class="text-danger">*</h11></label>
-                    <input type="text" class="form-control sp_celphones" name="celular" id="celular" minlength="11" placeholder="Digite seu numero" required>
+                    <input type="text" class="form-control sp_celphones" name="celular" id="celular" minlength="11" placeholder="Digite seu número" required>
                 </div>
                 <div class="form-group col-md-2"
                      <label for="Telefone">Telefone</label>
-                    <input type="text" class="form-control phone_with_ddd" name="telefone" id="telefone" minlength="11" placeholder="Digite seu numero">
+                    <input type="text" class="form-control phone_with_ddd" name="telefone" id="telefone" minlength="11" placeholder="Digite seu número">
                 </div>
 
                 <div class="form-group col-md-2"
@@ -65,7 +65,7 @@
                 <div class="form-group col-md-5">
                     <label for="Email">Email<h11 class="text-danger">*</h11></label>
                     <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp"
-                           placeholder="Digite seu Email" required="">
+                           placeholder="Digite seu e-mail" required="">
                 </div>
 
                 <div class="form-group col-md-3">

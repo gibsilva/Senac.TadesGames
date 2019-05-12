@@ -32,7 +32,7 @@
                 <div class="row">
                     <div class="col-md-5">
                         <label for="nome">Nome<h11 class="text-danger">*</h11></label>
-                        <input type="text" id="nome" name="nome" class="form-control" placeholder="digite o nome da categoria" required>
+                        <input type="text" id="nome" name="nome" class="form-control" placeholder="Digite o nome da categoria" required>
                     </div>
                 </div>
 

@@ -9,7 +9,7 @@
 
 <div class="container">
     <br>
-    <h2>Novo Usuários</h2>
+    <h2>Novo Usuário</h2>
     <hr>
     
     <!-- notificacoes caso houver erros nas validações -->
@@ -28,7 +28,7 @@
         <div class="row">
             <div class="form-group col-md-5">
                 <label for="inputNomeFunc">Nome<h11 class="text-danger">*</h11></label>
-                <input type="text" class="form-control" id="nome" name="nome" maxlength="80" placeholder="Nome Completo" required>
+                <input type="text" class="form-control" id="nome" name="nome" maxlength="80" placeholder="Digite seu nome completo" required>
             </div>
 
             <div class="form-group col-md-3">
@@ -41,7 +41,7 @@
             <div class="form-group col-md-5">
                 <label for="Email">Email<h11 class="text-danger">*</h11></label>
                 <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp"
-                       placeholder="Digite seu Email" required="">
+                       placeholder="Digite seu e-mail" required="">
             </div>
 
             <div class="form-group col-md-2">
@@ -103,7 +103,7 @@
 
             <div class="form-group col-md-4">
                 <label for="inputSenha">Senha<h11 class="text-danger">*</h11></label>
-                <input type="password" class="form-control" id="senha" name="senha" minlength="4" maxlength="8" placeholder="Digite sua Senha" required>
+                <input type="password" class="form-control" id="senha" name="senha" minlength="4" maxlength="8" placeholder="Digite sua senha" required>
             </div>  
         </div>
 

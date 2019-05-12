@@ -35,13 +35,13 @@
             <tr>
                 <th class="text-center" scope="col">Id</th>
                 <th class="text-center" scope="col">Nome</th>
-                <th class="text-center" scope="col">Preço Compra</th>
-                <th class="text-center" scope="col">Preço Venda</th>
+                <th class="text-center" scope="col">Preço de Compra</th>
+                <th class="text-center" scope="col">Preço de Venda</th>
                 <th class="text-center" scope="col">Plataforma</th>
                 <th class="text-center" scope="col">Categoria</th>
-                <th class="text-center" scope="col">Genero</th>
+                <th class="text-center" scope="col">Gênero</th>
                 <th class="text-center" scope="col">Descrição</th>
-                <th class="text-center" scope="col">Qtd Estoque</th>
+                <th class="text-center" scope="col">Qtde. Estoque</th>
                 <th class="text-center" scope="col">Status</th>
                 <th class="text-center" scope="col">#</th>
             </tr>

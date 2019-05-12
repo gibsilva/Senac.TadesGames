@@ -21,28 +21,36 @@
             <span class="navbar-toggler-icon"></span>
         </button>
     </nav>
-    
+
     <br>
     <br>
     <br>
 
     <div class="container col-md-3">
-        <form class="form-signin co">
+        <form action="${pageContext.request.contextPath}/doLogin" method="post" class="form-signin co" autocomplete="off">
             <img class="mb-4" src="resources/img/LogoTadesGames.png" alt="" width="72" height="72">
             <h3 class="h3 mb-3 font-weight-normal">Login</h3>
+            <label class="sr-only">Login</label>
+            <tr>
+                <td>
+                    <label for="inputLogin" class="sr-only">Login</label>
+                    <input type="text" id="inputLogin" name="login" value="${Usuario.login}" class="form-control" placeholder="Login" required autofocus>
+                </td>
 
-            <label for="inputEmail" class="sr-only">Login</label>
-            <input type="email" id="inputEmail" class="form-control" placeholder="Login" required autofocus>
-
-            <label for="inputPassword" class="sr-only">Senha</label>
-            <input type="password" id="inputPassword" class="form-control" placeholder="Senha" required>
-
-            <a href="#" class="btn btn-link">Esqueceu sua senha? Clique Aqui</a>
-            <br>
-            <hr>
-
-            <a href="home.jsp" class="btn btn-lg btn-primary btn-block"  type="submit">Sign in</a>
-            <p class="mt-5 mb-3 text-muted">&copy; TadesGames</p>
+                <td>
+                    <label for="inputPassword" class="sr-only">Senha</label>
+                    <input type="password" id="inputPassword" name="senha" value="${Usuario.senha}" class="form-control" placeholder="Senha" required>
+                    <a href="página para redefinir a senha.jsp" class="btn btn-link">Esqueceu sua senha? Clique Aqui</a>
+                    <br>
+                    <hr>
+                    <c:if test="${msgErro != null}">
+                        <div class="erro"><c:out value="${msgErro}" /></div>
+                    </c:if>
+                    <br>
+                    <input class="btn btn-lg btn-primary btn-block" type="submit" value="Sign in">
+                    <p class="mt-5 mb-3 text-muted">&copy; TadesGames</p>
+                </td>
+            </tr>
         </form>
     </div>
 </body>

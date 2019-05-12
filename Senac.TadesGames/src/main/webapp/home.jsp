@@ -11,7 +11,7 @@
 
 <div class="container">
     <br>
-    <h4>Bem-Vindo(a), The Umbrella Academy!</h4> <!--troca o nome pelo nome do usuario -->
+    <h4>Bem-Vindo(a), ${login}</h4> <!--troca o nome pelo nome do usuario -->
     <h3 class="text-center" ><img src="resources/img/LogoTadesGames.png" class="img-fluid" alt="Responsive image"></h3>
     <hr>
 <div class="row justify-content-around">

@@ -19,5 +19,6 @@ public interface IUsuarioDao {
     void alterar(UsuarioModel usuario);
     void inativar(UsuarioModel usuario);
     UsuarioModel autenticar (String nomeUsuario, String senha);
+    boolean validarLogin (String login, String senha);
     
 }

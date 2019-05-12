@@ -29,7 +29,7 @@
             </div>
 
             <div class="form-group col-md-3">
-                <label for="inputCPFFCliente">CPF Cliente</label>
+                <label for="inputCPFFCliente">CPF do Cliente</label>
                 <input type="text" class="form-control" id="cpfCliente" name="cpfCliente" minlength="11" maxlength="11" placeholder="Digite o CPF do cliente">
             </div>
 
@@ -44,18 +44,18 @@
 
         <div class="form-row">
             <div class="form-group col-md-2">
-                <label for="IdProduto">ID do produto<h11 class="text-danger">*</h11></label>
+                <label for="IdProduto">ID do Produto<h11 class="text-danger">*</h11></label>
                 <input type="text" class="form-control" id="idProduto" name="idProduto" placeholder="Digite o ID" onblur="obterProduto()">
             </div>
 
             <div class="form-group col-md-4">
-                <label for="inputNomeFunc">Nome/Titulo<h11 class="text-danger">*</h11></label>
+                <label for="inputNomeFunc">Nome/Título<h11 class="text-danger">*</h11></label>
                 <input type="text" class="form-control" id="nomeProduto" name="nomeProduto" maxlength="80" placeholder="Nome" required readonly>
             </div>
 
 
             <div class="form-group col-md-2">
-                <label for="inputValorUnitario">Valor Unitario</label>
+                <label for="inputValorUnitario">Valor Unitário</label>
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text">R$</span>
@@ -115,13 +115,13 @@
             <thead>
                 <tr>
                     <th class="text-center" scope="col">ID Produto</th>
-                    <th class="text-center" scope="col">Nome/Titulo</th>
+                    <th class="text-center" scope="col">Nome/Título</th>
                     <th class="text-center" scope="col">Categoria</th>
                     <th class="text-center" scope="col">Plataforma</th>
                     <th class="text-center" scope="col">Gênero</th>
                     <th class="text-center" scope="col">Quantidade</th>
-                    <th class="text-center" scope="col">Preço Unitario</th>
-                    <th class="text-center" scope="col">Preço Total R$</th>
+                    <th class="text-center" scope="col">Preço Unitário</th>
+                    <th class="text-center" scope="col">Preço Total (R$)</th>
                     <th class="text-center" scope="cool">#</th>
 
                 </tr>

@@ -18,7 +18,7 @@
             <div class="form-group col-md-4">
                 <label for="inputTitulo">Nome/Título<h11 class="text-danger">*</h11></label>
                 <input type="text" class="form-control" maxlength="80"  id="nome" name="nome" 
-                       placeholder="Nome/Titulo do Produto" required>
+                       placeholder="Nome/Título do Produto" required>
             </div>
 
             <div class="form-group col-md-3">

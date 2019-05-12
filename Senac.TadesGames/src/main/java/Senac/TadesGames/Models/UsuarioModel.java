@@ -5,6 +5,8 @@
  */
 package Senac.TadesGames.Models;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 /**
  *
  * @author Gi
@@ -18,10 +20,9 @@ public class UsuarioModel extends PessoaModel {
     private String login;
     private String senha;
     private int idFilial;
-   
 
     public UsuarioModel(int idUsuario, String nome, String cpf,
-            String email,String setor, String cargo,
+            String email, String setor, String cargo,
             String login, String senha, int idFilial, String sexo, boolean ativo) {
 
         this.idUsuario = idUsuario;
@@ -134,5 +135,4 @@ public class UsuarioModel extends PessoaModel {
     public void setSetor(String setor) {
         this.setor = setor;
     }
-    
 }
