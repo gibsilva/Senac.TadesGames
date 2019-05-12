@@ -29,15 +29,6 @@ public class FilialControllerServlet extends HttpServlet {
 
     private final FilialService service = new FilialService();
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -55,6 +46,9 @@ public class FilialControllerServlet extends HttpServlet {
                 case "alterar":
                     carregarFilial(request, response);
                     break;
+                case "salvar":
+                    criarFilial(request, response);
+                    break;
                 default:
                     listarFiliais(request, response);
             }
@@ -63,14 +57,6 @@ public class FilialControllerServlet extends HttpServlet {
         }
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -91,6 +77,11 @@ public class FilialControllerServlet extends HttpServlet {
             Logger.getLogger(FilialControllerServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    protected void criarFilial(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException{
+        request.getRequestDispatcher("cadastroFilial.jsp").forward(request, response);
+    }   
 
     protected void incluirFilial(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
@@ -110,9 +101,8 @@ public class FilialControllerServlet extends HttpServlet {
         try {
             List<Notificacao> notificacoes = service.incluirFilial(filial);
             if (notificacoes.isEmpty()) {
-                request.setAttribute("filiais", service.obterListaFiliais());
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/consultaFilial.jsp");
-                dispatcher.forward(request, response);
+                request.setAttribute("statusSalvo", true);
+                listarFiliais(request, response);
             } else {
                 request.setAttribute("notificacoes", notificacoes);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/cadastroFilial.jsp");
@@ -152,9 +142,8 @@ public class FilialControllerServlet extends HttpServlet {
         try {
             List<Notificacao> notificacoes = service.alterarFilial(filial);
             if (notificacoes.isEmpty()) {
-                request.setAttribute("filiais", service.obterListaFiliais());
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/consultaFilial.jsp");
-                dispatcher.forward(request, response);
+                request.setAttribute("statusAlterado", true);
+                listarFiliais(request, response);
             } else {
                 request.setAttribute("notificacoes", notificacoes);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/alterarFilial.jsp");

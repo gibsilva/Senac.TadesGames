@@ -16,7 +16,7 @@
 
         <div class="input-group-append col-md-6">
             <input type="text" class="form-control " placeholder="Pesquisar" id="filtro" name="filtro">
-          
+
         </div>
         <div class="input-group">
             <div>
@@ -73,19 +73,24 @@
             </c:forEach>
         </tbody>
     </table>
-    
+
     <hr>
 
 </div>
 
 <script>
-    $(document).ready(function(){
-       var statusOk = '${statusOk}';
-       if(statusOk === 'true'){
-           toastr.success('Cliente salvo com sucesso','Sucesso');
-       }
+
+    $(document).ready(function () {
+        var statusSalvo = '${statusSalvo}';
+        var statusAlterado = '${statusAlterado}';
+        if (statusSalvo === 'true') {
+            toastr.success('Cliente salvo com sucesso', 'Sucesso');
+        } else if (statusAlterado === 'true') {
+            toastr.success('Cliente alterado com sucesso', 'Sucesso');
+        }
+              
     });
-    
+
     $('#filtro').on('keyup', function () {
         var value = $(this).val();
         var patt = new RegExp(value, "i");

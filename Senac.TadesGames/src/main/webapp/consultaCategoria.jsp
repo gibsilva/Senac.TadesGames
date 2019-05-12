@@ -86,6 +86,17 @@
 </div>
 
 <script>
+    $(document).ready(function () {
+        var statusSalvo = '${statusSalvo}';
+        var statusAlterado = '${statusAlterado}';
+        if (statusSalvo === 'true') {
+            toastr.success('Categoria salva com sucesso', 'Sucesso');
+        } else if (statusAlterado === 'true') {
+            toastr.success('Categoria alterada com sucesso', 'Sucesso');
+        }
+              
+    });
+    
     $('#filtro').on('keyup', function () {
         var value = $(this).val();
         var patt = new RegExp(value, "i");

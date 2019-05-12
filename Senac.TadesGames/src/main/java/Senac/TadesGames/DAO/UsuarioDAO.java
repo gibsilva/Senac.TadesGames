@@ -21,9 +21,15 @@ import java.util.List;
  */
 public class UsuarioDAO implements IUsuarioDao {
 
-    private ConexaoDB conexao = new ConexaoDB();
+    private ConexaoDB conexao;
+    private final FilialDAO filialDao;
     private PreparedStatement stmt = null;
     ResultSet rs = null;
+    
+    public UsuarioDAO(){
+        this.conexao = new ConexaoDB();
+        this.filialDao = new FilialDAO();
+    }
 
     @Override
     public UsuarioModel obterPorId(int id) {
@@ -61,6 +67,7 @@ public class UsuarioDAO implements IUsuarioDao {
                         rs.getString("sexo"),
                         rs.getBoolean("ativo")
                 );
+                usuario.setFilial(filialDao.obterPorId(usuario.getIdFilial()));
             }
 
             return usuario;
@@ -105,6 +112,8 @@ public class UsuarioDAO implements IUsuarioDao {
                         rs.getString("sexo"),
                         rs.getBoolean("ativo")
                 );
+                
+                usuario.setFilial(filialDao.obterPorId(usuario.getIdFilial()));
             }
 
             return usuario;
@@ -150,6 +159,8 @@ public class UsuarioDAO implements IUsuarioDao {
                         rs.getString("sexo"),
                         rs.getBoolean("ativo")
                 );
+                
+                usuario.setFilial(filialDao.obterPorId(usuario.getIdFilial()));
             }
 
             return usuario;
@@ -194,6 +205,8 @@ public class UsuarioDAO implements IUsuarioDao {
                         rs.getString("sexo"),
                         rs.getBoolean("ativo")
                 );
+                
+                usuario.setFilial(filialDao.obterPorId(usuario.getIdFilial()));
             }
 
             return usuario;
@@ -239,6 +252,8 @@ public class UsuarioDAO implements IUsuarioDao {
                         rs.getString("sexo"),
                         rs.getBoolean("ativo")
                 );
+                
+                usuario.setFilial(filialDao.obterPorId(usuario.getIdFilial()));
             }
 
             return usuario;
@@ -283,6 +298,8 @@ public class UsuarioDAO implements IUsuarioDao {
                         rs.getString("sexo"),
                         rs.getBoolean("ativo")
                 );
+                
+                usuario.setFilial(filialDao.obterPorId(usuario.getIdFilial()));
             }
 
             return usuario;
@@ -328,7 +345,7 @@ public class UsuarioDAO implements IUsuarioDao {
                         rs.getString("sexo"),
                         rs.getBoolean("ativo")
                 );
-
+                usuario.setFilial(filialDao.obterPorId(usuario.getIdFilial()));
                 usuarios.add(usuario);
             }
 
@@ -376,7 +393,7 @@ public class UsuarioDAO implements IUsuarioDao {
                         rs.getString("sexo"),
                         rs.getBoolean("ativo")
                 );
-
+                usuario.setFilial(filialDao.obterPorId(usuario.getIdFilial()));
                 usuarios.add(usuario);
             }
 

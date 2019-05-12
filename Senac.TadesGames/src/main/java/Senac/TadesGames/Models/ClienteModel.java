@@ -19,7 +19,6 @@ public class ClienteModel extends PessoaModel {
     private String telefone;
     private String celular;
     
-
     public ClienteModel(int idCliente, String nome, String cpf, String cnpj, Date dataNasc,
             String email, String telefone, String celular, String sexo, boolean ativo) {
         

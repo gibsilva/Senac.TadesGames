@@ -43,6 +43,9 @@ public class CategoriaControllerServlet extends HttpServlet {
                 case "alterar":
                     carregarCategoria(request, response);
                     break;
+                case "salvar":
+                    criarCategoria(request, response);
+                    break;
                 default:
                     listarCategoria(request, response);
             }
@@ -76,6 +79,11 @@ public class CategoriaControllerServlet extends HttpServlet {
 
     }
 
+    protected void criarCategoria(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.getRequestDispatcher("cadastroCategoria.jsp").forward(request, response);
+    }
+
     protected void incluirCategoria(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -86,9 +94,8 @@ public class CategoriaControllerServlet extends HttpServlet {
         try {
             List<Notificacao> notificacoes = service.incluirCategoria(categoria);
             if (notificacoes.isEmpty()) {
-                request.setAttribute("categorias", service.obterListaCategoria());
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/consultaCategoria.jsp");
-                dispatcher.forward(request, response);
+                request.setAttribute("statusSalvo", true);
+                listarCategoria(request, response);
             } else {
                 request.setAttribute("notificacoes", notificacoes);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/cadastroCategoria.jsp");
@@ -123,7 +130,7 @@ public class CategoriaControllerServlet extends HttpServlet {
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("idCategoria"));
         CategoriaModel categoria = service.obterCategoriaPorId(id);
-        
+
         service.excluirCategoria(categoria);
 
         request.setAttribute("categorias", service.obterListaCategoria());
@@ -141,9 +148,8 @@ public class CategoriaControllerServlet extends HttpServlet {
         try {
             List<Notificacao> notificacoes = service.alterarCategoria(categoria);
             if (notificacoes.isEmpty()) {
-                request.setAttribute("categorias", service.obterListaCategoria());
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/consultaCategoria.jsp");
-                dispatcher.forward(request, response);
+                request.setAttribute("statusAlterado", true);
+                listarCategoria(request, response);
             } else {
                 request.setAttribute("notificacoes", notificacoes);
                 request.setAttribute("categoria", categoria);

@@ -53,7 +53,7 @@
                     <td class="text-center">${u.nome}</td>
                     <td class="text-center">${u.cpf}</td>
                     <td class="text-center">${u.sexo}</td>
-                    <td class="text-center">${u.idFilial}</td>
+                    <td class="text-center">${u.filial.nome}</td>
                     <td class="text-center">${u.setor}</td>
                     <td class="text-center">${u.cargo}</td>
                     <td class="text-center">${u.email}</td>
@@ -80,6 +80,18 @@
 </div>
 
 <script>
+    $(document).ready(function () {
+        var statusSalvo = '${statusSalvo}';
+        var statusAlterado = '${statusAlterado}';
+        if (statusSalvo === 'true') {
+            toastr.success('Usuário salvo com sucesso', 'Sucesso');
+        } else if (statusAlterado === 'true') {
+            toastr.success('Usuário alterado com sucesso', 'Sucesso');
+        }
+
+    });
+
+
     $('#filtro').on('keyup', function () {
         var value = $(this).val();
         var patt = new RegExp(value, "i");

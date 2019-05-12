@@ -13,6 +13,7 @@ import org.mindrot.jbcrypt.BCrypt;
  */
 public class UsuarioModel extends PessoaModel {
 
+
     private int idUsuario;
     private String setor;
     private String cargo;
@@ -20,6 +21,7 @@ public class UsuarioModel extends PessoaModel {
     private String login;
     private String senha;
     private int idFilial;
+    private FilialModel filial;
 
     public UsuarioModel(int idUsuario, String nome, String cpf,
             String email, String setor, String cargo,
@@ -134,5 +136,19 @@ public class UsuarioModel extends PessoaModel {
      */
     public void setSetor(String setor) {
         this.setor = setor;
+    }
+    
+        /**
+     * @return the filial
+     */
+    public FilialModel getFilial() {
+        return filial;
+    }
+
+    /**
+     * @param filial the filial to set
+     */
+    public void setFilial(FilialModel filial) {
+        this.filial = filial;
     }
 }

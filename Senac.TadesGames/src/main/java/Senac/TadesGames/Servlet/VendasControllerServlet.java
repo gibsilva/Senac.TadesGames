@@ -170,12 +170,7 @@ public class VendasControllerServlet extends HttpServlet {
             itensDePedidos.add(itens);
         }
 
-        ClienteModel cliente;
-        if (cpfCliente.equals("")) {
-            cliente = clienteService.obterClientePorCpf("12345678910");
-        } else {
-            cliente = clienteService.obterClientePorCpf(cpfCliente);
-        }
+        ClienteModel cliente = cpfCliente.equals("") ? clienteService.obterClientePorCpf("12345678910") : clienteService.obterClientePorCpf(cpfCliente);
 
         UsuarioModel usuario = usuarioService.obterUsuarioPorId(idUsuario);
 

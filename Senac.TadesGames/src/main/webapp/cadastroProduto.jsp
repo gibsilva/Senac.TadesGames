@@ -98,7 +98,7 @@
 
             <div class="form-group col-md-7">
                 <label for="input Descrição">Descrição<h11 class="text-danger">*</h11></label>
-                <textarea class="form-control" id="descricao" name="descricao" rows="4" placeholder="Descrição..." required></textarea>
+                <textarea class="form-control" id="descricao" name="descricao" maxlength="250" rows="4" placeholder="Descrição..." required></textarea>
             </div>
         </div>
 

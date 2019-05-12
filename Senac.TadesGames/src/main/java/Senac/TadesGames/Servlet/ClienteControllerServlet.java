@@ -97,9 +97,8 @@ public class ClienteControllerServlet extends HttpServlet {
         try {
             List<Notificacao> notificacoes = service.incluirCliente(cliente);
             if (notificacoes.isEmpty()) {
-                request.setAttribute("clientes", service.obterListaClientes());
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/consultaCliente.jsp");
-                dispatcher.forward(request, response);
+                request.setAttribute("statusSalvo", true);
+                listarClientes(request, response);
             } else {
                 request.setAttribute("notificacoes", notificacoes);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/cadastroCliente.jsp");
@@ -151,7 +150,7 @@ public class ClienteControllerServlet extends HttpServlet {
         try {
             List<Notificacao> notificacoes = service.alterarCliente(cliente);
             if (notificacoes.isEmpty()) {
-                request.setAttribute("statusOk", true);
+                request.setAttribute("statusAlterado", true);
                 listarClientes(request, response);
             } else {
                 request.setAttribute("notificacoes", notificacoes);

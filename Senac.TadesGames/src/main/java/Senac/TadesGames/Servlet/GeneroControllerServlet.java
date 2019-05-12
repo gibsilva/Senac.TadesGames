@@ -45,6 +45,9 @@ public class GeneroControllerServlet extends HttpServlet {
                 case "alterar":
                     carregarGenero(request, response);
                     break;
+                case "salvar":
+                    criarGenero(request, response);
+                    break;
                 default:
                     listarGenero(request, response);
             }
@@ -78,6 +81,11 @@ public class GeneroControllerServlet extends HttpServlet {
 
     }
 
+    protected void criarGenero(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.getRequestDispatcher("cadastroGenero.jsp").forward(request, response);
+    }
+
     protected void incluirGenero(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -88,9 +96,8 @@ public class GeneroControllerServlet extends HttpServlet {
         try {
             List<Notificacao> notificacoes = service.incluirGenero(genero);
             if (notificacoes.isEmpty()) {
-                request.setAttribute("generos", service.obterListaGenero());
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/consultaGenero.jsp");
-                dispatcher.forward(request, response);
+                request.setAttribute("statusSalvo", true);
+                listarGenero(request, response);
             } else {
                 request.setAttribute("notificacoes", notificacoes);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/cadastroGenero.jsp");
@@ -132,9 +139,8 @@ public class GeneroControllerServlet extends HttpServlet {
         try {
             List<Notificacao> notificacoes = service.alterarGenero(genero);
             if (notificacoes.isEmpty()) {
-                request.setAttribute("generos", service.obterListaGenero());
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/consultaGenero.jsp");
-                dispatcher.forward(request, response);
+                request.setAttribute("statusAlterado", true);
+                listarGenero(request, response);
             } else {
                 request.setAttribute("notificacoes", notificacoes);
                 request.setAttribute("genero", genero);

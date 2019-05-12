@@ -16,7 +16,7 @@
         <div class="input-group-append col-md-6">
             <input type="text" class="form-control " placeholder="Pesquisar" id="filtro" name="filtro">
         </div>
-        
+
         <div class="input-group">
             <div>
                 <a href="cadastroFilial.jsp" class="btn btn-outline-primary">Nova Filial</a>
@@ -26,7 +26,7 @@
     </div>
     <br>
     <br>
-        <table class="table table-hover">
+    <table class="table table-hover">
         <thead> 
             <tr>
                 <th class="text-center" scope="col">Id</th>
@@ -69,6 +69,18 @@
 </div>
 
 <script>
+    $(document).ready(function () {
+        var statusSalvo = '${statusSalvo}';
+        var statusAlterado = '${statusAlterado}';
+        if (statusSalvo === 'true') {
+            toastr.success('Filial salva com sucesso', 'Sucesso');
+        } else if (statusAlterado === 'true') {
+            toastr.success('Filial alterada com sucesso', 'Sucesso');
+        }
+
+    });
+
+
     $('#filtro').on('keyup', function () {
         var value = $(this).val();
         var patt = new RegExp(value, "i");

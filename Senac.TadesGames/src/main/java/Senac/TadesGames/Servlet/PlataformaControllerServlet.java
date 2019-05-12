@@ -44,6 +44,9 @@ public class PlataformaControllerServlet extends HttpServlet {
                 case "alterar":
                     carregarPlataforma(request, response);
                     break;
+                case "salvar":
+                    criarPlataforma(request, response);
+                    break;
                 default:
                     listarPlataforma(request, response);
             }
@@ -77,6 +80,11 @@ public class PlataformaControllerServlet extends HttpServlet {
 
     }
 
+    protected void criarPlataforma(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.getRequestDispatcher("cadastroPlataforma.jsp").forward(request, response);
+    }
+
     protected void incluirPlataforma(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -87,9 +95,8 @@ public class PlataformaControllerServlet extends HttpServlet {
         try {
             List<Notificacao> notificacoes = service.incluirPlataforma(plataforma);
             if (notificacoes.isEmpty()) {
-                request.setAttribute("plataformas", service.obterListaPlataforma());
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/consultaPlataforma.jsp");
-                dispatcher.forward(request, response);
+                request.setAttribute("statusSalvo", true);
+                listarPlataforma(request, response);
             } else {
                 request.setAttribute("notificacoes", notificacoes);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/cadastroPlataforma.jsp");
@@ -131,9 +138,8 @@ public class PlataformaControllerServlet extends HttpServlet {
         try {
             List<Notificacao> notificacoes = service.alterarPlataforma(plataforma);
             if (notificacoes.isEmpty()) {
-                request.setAttribute("plataformas", service.obterListaPlataforma());
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/consultaPlataforma.jsp");
-                dispatcher.forward(request, response);
+                request.setAttribute("statusAlterado", true);
+                listarPlataforma(request, response);
             } else {
                 request.setAttribute("notificacoes", notificacoes);
                 request.setAttribute("plataforma", plataforma);
@@ -148,8 +154,8 @@ public class PlataformaControllerServlet extends HttpServlet {
             service.limparNotificacoes();
         }
     }
-    
-     protected void excluirPlataforma(HttpServletRequest request, HttpServletResponse response)
+
+    protected void excluirPlataforma(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("idPlataforma"));
         PlataformaModel plataforma = service.obterPlataformaPorId(id);

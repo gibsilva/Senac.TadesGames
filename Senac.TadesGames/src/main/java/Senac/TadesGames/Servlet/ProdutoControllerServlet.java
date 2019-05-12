@@ -138,6 +138,7 @@ public class ProdutoControllerServlet extends HttpServlet {
         try {
             List<Notificacao> notificacoes = produtoService.incluirOuAlterarProduto(produto);
             if (notificacoes.isEmpty()) {
+                request.setAttribute("statusSalvo", true);
                 listarProdutos(request, response);
             } else {
                 request.setAttribute("notificacoes", notificacoes);
@@ -146,6 +147,7 @@ public class ProdutoControllerServlet extends HttpServlet {
                 dispatcher.forward(request, response);
             }
         } catch (Exception e) {
+            request.getRequestDispatcher("erro.jsp").forward(request, response);
             throw new Exception(e.getMessage());
         } finally {
             this.produtoService.limparNotificacoes();
@@ -171,6 +173,7 @@ public class ProdutoControllerServlet extends HttpServlet {
         try {
             List<Notificacao> notificacoes = produtoService.incluirOuAlterarProduto(produto);
             if (notificacoes.isEmpty()) {
+                request.setAttribute("statusAlterado", true);
                 listarProdutos(request, response);
             } else {
                 request.setAttribute("notificacoes", notificacoes);

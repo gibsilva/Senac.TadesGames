@@ -44,7 +44,7 @@ public class UsuarioControllerServlet extends HttpServlet {
                     carregarUsuario(request, response);
                     break;
                 case "salvar":
-                    carregarInclusao(request, response);
+                    criarUsuario(request, response);
                     break;
                 default:
                     listarUsuarios(request, response);
@@ -91,9 +91,8 @@ public class UsuarioControllerServlet extends HttpServlet {
         try {
             List<Notificacao> notificacoes = usuarioService.incluirUsuario(usuario);
             if (notificacoes.isEmpty()) {
-                request.setAttribute("usuarios", usuarioService.obterListaUsuarios());
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/consultaUsuario.jsp");
-                dispatcher.forward(request, response);
+                request.setAttribute("statusSalvo", true);
+                listarUsuarios(request, response);
             } else {
                 request.setAttribute("notificacoes", notificacoes);
                 request.setAttribute("filiais", filialService.obterListaFiliais());
@@ -127,7 +126,7 @@ public class UsuarioControllerServlet extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
-    protected void carregarInclusao(HttpServletRequest request, HttpServletResponse response)
+    protected void criarUsuario(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setAttribute("filiais", filialService.obterListaFiliais());
         
@@ -156,9 +155,8 @@ public class UsuarioControllerServlet extends HttpServlet {
         try {
             List<Notificacao> notificacoes = usuarioService.alterarUsuario(usuario);
             if (notificacoes.isEmpty()) {
-                request.setAttribute("usuarios", usuarioService.obterListaUsuarios());
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/consultaUsuario.jsp");
-                dispatcher.forward(request, response);
+                request.setAttribute("statusAlterado", true);
+                listarUsuarios(request, response);
             } else {
                 request.setAttribute("notificacoes", notificacoes);
                 request.setAttribute("usuario", usuario);
