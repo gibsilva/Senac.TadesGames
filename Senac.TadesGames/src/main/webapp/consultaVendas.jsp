@@ -14,6 +14,7 @@
 
     <form method="post" action="Vendas" id="pesquisa">
         <input type="hidden" value="pesquisar" name="acao" id="acao">
+        
         <div class="row">
             <div class="form-group col-md-2">
                 <label for="filtroId">Pesquisa por ID</label>

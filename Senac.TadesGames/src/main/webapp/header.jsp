@@ -40,7 +40,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Cliente</a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="cadastroCliente.jsp">Cadastro de Cliente</a>
+                            <a class="dropdown-item" href="Clientes?acao=salvar">Cadastro de Cliente</a>
                             <a class="dropdown-item" href="Clientes"> Consulta de Cliente</a>
                         </div>
                     </li>

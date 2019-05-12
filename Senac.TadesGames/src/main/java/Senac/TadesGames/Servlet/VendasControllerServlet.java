@@ -103,10 +103,11 @@ public class VendasControllerServlet extends HttpServlet {
 
     protected void pesquisarPedidos(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //condicional ternario, uma forma compacta de fazer um if
         int id = request.getParameter("filtroId").equals("") ? 0 : Integer.parseInt(request.getParameter("filtroId"));
         String dataInicio = request.getParameter("filtroDataIni");
         String dataFim = request.getParameter("filtroDataFim");
-
+        
         request.setAttribute("pedidos", pedidoService.pesquisarPedidos(id, dataInicio, dataFim));
         request.getRequestDispatcher("consultaVendas.jsp").forward(request, response);
     }
@@ -202,8 +203,7 @@ public class VendasControllerServlet extends HttpServlet {
 
     protected void criarVenda(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<UsuarioModel> vendedores = usuarioService.obterTodosPorCargo("Vendedor (a)");
-        request.setAttribute("vendedores", vendedores);
+        request.setAttribute("vendedores", usuarioService.obterTodosPorCargo("Vendedor (a)"));
 
         request.getRequestDispatcher("vendas.jsp").forward(request, response);
     }

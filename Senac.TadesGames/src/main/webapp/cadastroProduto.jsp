@@ -40,6 +40,16 @@
                     </c:forEach>
                 </select>
             </div>
+            
+            <div class="form-group col-md-3">
+                <label for="genero">Gênero<h11 class="text-danger">*</h11></label>
+                <select id="genero" name="genero" class="custom-select" required>
+                    <option value="">Selecione </option>
+                    <c:forEach var="g" items="${generos}">
+                        <option value="${g.idGenero}">${g.nome}</option>
+                    </c:forEach>
+                </select>
+            </div>
 
             <div class="form-group col-md-3">
                 <label for="inputValorCompra">Valor de Compra<h11 class="text-danger">*</h11></label>
@@ -61,7 +71,7 @@
                 </div>
             </div>
 
-            <div class="form-group col-md-3">
+            <div class="form-group col-md-2">
                 <label for="inputQuantidade">Quantidade<h11 class="text-danger">*</h11></label>
                 <input type="text" class="form-control" id="quantidade" name="quantidade" placeholder="00" required>
             </div>
@@ -74,17 +84,19 @@
                 </select>
             </div>
 
-            <div class="form-group col-md-3">
-                <label for="genero">Genero<h11 class="text-danger">*</h11></label>
-                <select id="genero" name="genero" class="custom-select" required>
-                    <option value="">Selecione </option>
-                    <c:forEach var="g" items="${generos}">
-                        <option value="${g.idGenero}">${g.nome}</option>
+            
+            
+            <div class="form-group col-md-2">
+                <label for="inputFilial">Filial<h11 class="text-danger">*</h11></label>
+                <select id="filial" name="filial" class="custom-select">
+                    <option value="">Selecione</option>
+                    <c:forEach var="f" items="${filiais}">
+                        <option value="${f.idFilial}">${f.nome}</option>
                     </c:forEach>
                 </select>
             </div>
 
-            <div class="form-group col-md-9">
+            <div class="form-group col-md-7">
                 <label for="input Descrição">Descrição<h11 class="text-danger">*</h11></label>
                 <textarea class="form-control" id="descricao" name="descricao" rows="4" placeholder="Descrição..." required></textarea>
             </div>

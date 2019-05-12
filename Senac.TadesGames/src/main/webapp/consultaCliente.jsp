@@ -20,7 +20,7 @@
         </div>
         <div class="input-group">
             <div>
-                <a href="cadastroCliente.jsp" class="btn btn-outline-primary">Novo Cliente</a>
+                <a href="Clientes?acao=salvar" class="btn btn-outline-primary">Novo Cliente</a>
             </div>
 
         </div>
@@ -79,6 +79,13 @@
 </div>
 
 <script>
+    $(document).ready(function(){
+       var statusOk = '${statusOk}';
+       if(statusOk === 'true'){
+           toastr.success('Cliente salvo com sucesso','Sucesso');
+       }
+    });
+    
     $('#filtro').on('keyup', function () {
         var value = $(this).val();
         var patt = new RegExp(value, "i");

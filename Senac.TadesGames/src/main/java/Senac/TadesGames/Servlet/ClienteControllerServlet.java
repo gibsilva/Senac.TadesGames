@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Gi
  */
-@WebServlet("/Clientes")
+@WebServlet(name = "ClienteControllerServlet", urlPatterns = {"/Clientes"})
 public class ClienteControllerServlet extends HttpServlet {
 
     private final ClienteService service = new ClienteService();
@@ -44,6 +44,9 @@ public class ClienteControllerServlet extends HttpServlet {
                     break;
                 case "alterar":
                     carregarCliente(request, response);
+                    break;
+                case "salvar":
+                    criarCliente(request, response);
                     break;
                 default:
                     listarClientes(request, response);
@@ -70,6 +73,11 @@ public class ClienteControllerServlet extends HttpServlet {
         } catch (ServletException | IOException e) {
             throw new ServletException(e);
         }
+    }
+    
+    protected void criarCliente(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException{
+        request.getRequestDispatcher("cadastroCliente.jsp").forward(request, response);
     }
 
     protected void incluirCliente(HttpServletRequest request, HttpServletResponse response)
@@ -143,9 +151,8 @@ public class ClienteControllerServlet extends HttpServlet {
         try {
             List<Notificacao> notificacoes = service.alterarCliente(cliente);
             if (notificacoes.isEmpty()) {
-                request.setAttribute("clientes", service.obterListaClientes());
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/consultaCliente.jsp");
-                dispatcher.forward(request, response);
+                request.setAttribute("statusOk", true);
+                listarClientes(request, response);
             } else {
                 request.setAttribute("notificacoes", notificacoes);
                 request.setAttribute("cliente", cliente);

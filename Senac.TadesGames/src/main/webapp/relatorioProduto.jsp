@@ -22,6 +22,10 @@
             <input type="date" class="form-control" id="filtroDataFim" name="filtroDataFim">
         </div>
 
+        <div class="form-group col-md-2">
+            <button id="btnPesquisa" style="margin-top: 30px" class="btn btn-primary">Gerar</button>
+        </div>
+
     </div>
 
     <br>
@@ -55,11 +59,5 @@
     </table>
 
     <hr>
-    <div class="float-right">
-        <div>
-            <button class="btn btn-primary">Exportar</button>
-        </div>
-
-    </div>
 
 </div>

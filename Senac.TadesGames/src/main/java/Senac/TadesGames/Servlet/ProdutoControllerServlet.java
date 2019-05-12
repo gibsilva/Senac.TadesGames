@@ -8,6 +8,7 @@ package Senac.TadesGames.Servlet;
 import Senac.TadesGames.Helpers.Notificacao;
 import Senac.TadesGames.Models.ProdutoModel;
 import Senac.TadesGames.Service.CategoriaService;
+import Senac.TadesGames.Service.FilialService;
 import Senac.TadesGames.Service.GeneroService;
 import Senac.TadesGames.Service.PlataformaService;
 import Senac.TadesGames.Service.ProdutoService;
@@ -33,12 +34,14 @@ public class ProdutoControllerServlet extends HttpServlet {
     private final PlataformaService plataformaService;
     private final CategoriaService categoriaService;
     private final GeneroService generoService;
+    private final FilialService filialService;
 
     public ProdutoControllerServlet() {
         this.produtoService = new ProdutoService();
         this.plataformaService = new PlataformaService();
         this.categoriaService = new CategoriaService();
         this.generoService = new GeneroService();
+        this.filialService = new FilialService();
     }
 
     @Override
@@ -100,6 +103,7 @@ public class ProdutoControllerServlet extends HttpServlet {
         request.setAttribute("plataformas", plataformaService.obterListaPlataforma());
         request.setAttribute("generos", generoService.obterListaGenero());
         request.setAttribute("categorias", categoriaService.obterListaCategoria());
+        request.setAttribute("filiais", filialService.obterListaFiliais());
         request.getRequestDispatcher("cadastroProduto.jsp").forward(request, response);
     }
 
@@ -112,7 +116,7 @@ public class ProdutoControllerServlet extends HttpServlet {
         request.setAttribute("plataformas", plataformaService.obterListaPlataforma());
         request.setAttribute("generos", generoService.obterListaGenero());
         request.setAttribute("categorias", categoriaService.obterListaCategoria());
-
+        request.setAttribute("filiais", filialService.obterListaFiliais());
         request.getRequestDispatcher("alterarProduto.jsp").forward(request, response);
     }
 
@@ -127,7 +131,7 @@ public class ProdutoControllerServlet extends HttpServlet {
         boolean ativo = Boolean.parseBoolean(request.getParameter("ativo"));
         int idGenero = Integer.parseInt(request.getParameter("genero"));
         String descricao = request.getParameter("descricao");
-        int idFilial = 1;
+        int idFilial = Integer.parseInt(request.getParameter("filial"));
 
         ProdutoModel produto = new ProdutoModel(0, nome, descricao, valorCompra, valorVenda, idCategoria, idGenero, ativo, idFilial, idPlataforma, quantidade);
 
