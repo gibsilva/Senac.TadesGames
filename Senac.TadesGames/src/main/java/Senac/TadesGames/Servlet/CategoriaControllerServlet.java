@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Gi
  */
-@WebServlet("/Categorias")
+@WebServlet(name = "CategoriaControllerServlet", urlPatterns = {"/Categorias"})
 public class CategoriaControllerServlet extends HttpServlet {
 
     private final CategoriaService service = new CategoriaService();
@@ -81,7 +81,7 @@ public class CategoriaControllerServlet extends HttpServlet {
 
     protected void criarCategoria(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("cadastroCategoria.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/jsp/cadastroCategoria.jsp").forward(request, response);
     }
 
     protected void incluirCategoria(HttpServletRequest request, HttpServletResponse response)
@@ -98,7 +98,7 @@ public class CategoriaControllerServlet extends HttpServlet {
                 listarCategoria(request, response);
             } else {
                 request.setAttribute("notificacoes", notificacoes);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/cadastroCategoria.jsp");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cadastroCategoria.jsp");
                 dispatcher.forward(request, response);
             }
 
@@ -113,7 +113,7 @@ public class CategoriaControllerServlet extends HttpServlet {
     protected void listarCategoria(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setAttribute("categorias", service.obterListaCategoria());
-        request.getRequestDispatcher("consultaCategoria.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/jsp/consultaCategoria.jsp").forward(request, response);
     }
 
     protected void carregarCategoria(HttpServletRequest request, HttpServletResponse response)
@@ -122,7 +122,7 @@ public class CategoriaControllerServlet extends HttpServlet {
         CategoriaModel categoria = service.obterCategoriaPorId(id);
 
         request.setAttribute("categoria", categoria);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/alterarCategoria.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/alterarCategoria.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -134,7 +134,7 @@ public class CategoriaControllerServlet extends HttpServlet {
         service.excluirCategoria(categoria);
 
         request.setAttribute("categorias", service.obterListaCategoria());
-        request.getRequestDispatcher("consultaCategoria.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/jsp/consultaCategoria.jsp").forward(request, response);
     }
 
     protected void alterarCategoria(HttpServletRequest request, HttpServletResponse response)
@@ -153,7 +153,7 @@ public class CategoriaControllerServlet extends HttpServlet {
             } else {
                 request.setAttribute("notificacoes", notificacoes);
                 request.setAttribute("categoria", categoria);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/alterarCategoria.jsp");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/alterarCategoria.jsp");
                 dispatcher.forward(request, response);
             }
 

@@ -1,9 +1,7 @@
 package Senac.TadesGames.Servlet;
 
-import Senac.TadesGames.DAO.UsuarioDAO;
 import Senac.TadesGames.Service.UsuarioService;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,15 +13,13 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Giovanni.Carignato
  */
-@WebServlet(name = "doLogin", urlPatterns = {"/doLogin"})
+@WebServlet(name = "LoginControllerServlet", urlPatterns = {"/Login"})
 public class LoginControllerServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher dispatcher
-                = request.getRequestDispatcher("login.jsp");
-        dispatcher.forward(request, response);
+        request.getRequestDispatcher("login.jsp").forward(request, response);
     }
 
     @Override
@@ -38,7 +34,7 @@ public class LoginControllerServlet extends HttpServlet {
 
         boolean condicao = UsuarioService.validarLogin(login, senha);
 
-        request.setAttribute("doLogin", condicao);
+        request.setAttribute("login", condicao);
 
         if (condicao == true) {
             RequestDispatcher dispatcher
@@ -46,9 +42,7 @@ public class LoginControllerServlet extends HttpServlet {
             dispatcher.forward(request, response);
         } else {
             request.setAttribute("msgErro", "Usuário ou senha inválido!");
-            RequestDispatcher dispatcher
-                    = request.getRequestDispatcher("login.jsp");
-            dispatcher.forward(request, response);
+            request.getRequestDispatcher("login.jsp").forward(request, response);
         }
 
     }

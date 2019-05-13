@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author adrianne
  */
-@WebServlet("/Usuarios")
+@WebServlet(name = "UsuarioControllerServlet", urlPatterns = {"/Usuarios"})
 public class UsuarioControllerServlet extends HttpServlet {
 
     private final UsuarioService usuarioService = new UsuarioService();
@@ -96,7 +96,7 @@ public class UsuarioControllerServlet extends HttpServlet {
             } else {
                 request.setAttribute("notificacoes", notificacoes);
                 request.setAttribute("filiais", filialService.obterListaFiliais());
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/cadastroUsuario.jsp");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cadastroUsuario.jsp");
                 dispatcher.forward(request, response);
             }
 
@@ -112,7 +112,7 @@ public class UsuarioControllerServlet extends HttpServlet {
             throws ServletException, IOException {
         List<UsuarioModel> usuarios = usuarioService.obterListaUsuarios();
         request.setAttribute("usuarios", usuarios);
-        request.getRequestDispatcher("consultaUsuario.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/jsp/consultaUsuario.jsp").forward(request, response);
     }
 
     protected void carregarUsuario(HttpServletRequest request, HttpServletResponse response)
@@ -122,7 +122,7 @@ public class UsuarioControllerServlet extends HttpServlet {
 
         request.setAttribute("usuario", usuario);
         request.setAttribute("filiais", filialService.obterListaFiliais());
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/alterarUsuario.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/alterarUsuario.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -130,7 +130,7 @@ public class UsuarioControllerServlet extends HttpServlet {
             throws ServletException, IOException {
         request.setAttribute("filiais", filialService.obterListaFiliais());
         
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/cadastroUsuario.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cadastroUsuario.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -161,7 +161,7 @@ public class UsuarioControllerServlet extends HttpServlet {
                 request.setAttribute("notificacoes", notificacoes);
                 request.setAttribute("usuario", usuario);
                 request.setAttribute("filiais", filialService.obterListaFiliais());
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/alterarUsuario.jsp");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/alterarUsuario.jsp");
                 dispatcher.forward(request, response);
             }
 

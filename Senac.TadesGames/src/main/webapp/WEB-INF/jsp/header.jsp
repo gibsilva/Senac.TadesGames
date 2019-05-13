@@ -51,13 +51,13 @@
                             <a class="dropdown-item" href="Produtos?acao=salvar">Cadastro de Produto</a>
                             <a class="dropdown-item" href="Produtos">Consulta de Produto</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="cadastroPlataforma.jsp">Cadastro de Plataforma</a>
+                            <a class="dropdown-item" href="Plataformas?acao=salvar">Cadastro de Plataforma</a>
                             <a class="dropdown-item" href="Plataformas">Consulta de Plataforma</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="cadastroCategoria.jsp">Cadastro de Categoria</a>
+                            <a class="dropdown-item" href="Categorias?acao=salvar">Cadastro de Categoria</a>
                             <a class="dropdown-item" href="Categorias">Consulta de Categoria</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="cadastroGenero.jsp">Cadastro de Gênero</a>
+                            <a class="dropdown-item" href="Generos?acao=salvar">Cadastro de Gênero</a>
                             <a class="dropdown-item" href="Generos">Consulta de Gênero</a>
                         </div>
                     </li>
@@ -86,7 +86,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Filiais</a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="cadastroFilial.jsp">Cadastro de Filial</a>
+                            <a class="dropdown-item" href="Filiais?acao=salvar">Cadastro de Filial</a>
                             <a class="dropdown-item" href="Filiais">Consulta de Filial</a>
                         </div>
                     </li>

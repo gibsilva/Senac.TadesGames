@@ -80,7 +80,7 @@ public class FilialControllerServlet extends HttpServlet {
     
     protected void criarFilial(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException{
-        request.getRequestDispatcher("cadastroFilial.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/jsp/cadastroFilial.jsp").forward(request, response);
     }   
 
     protected void incluirFilial(HttpServletRequest request, HttpServletResponse response)
@@ -105,7 +105,7 @@ public class FilialControllerServlet extends HttpServlet {
                 listarFiliais(request, response);
             } else {
                 request.setAttribute("notificacoes", notificacoes);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/cadastroFilial.jsp");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cadastroFilial.jsp");
                 dispatcher.forward(request, response);
             }
 
@@ -120,7 +120,7 @@ public class FilialControllerServlet extends HttpServlet {
     protected void listarFiliais(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setAttribute("filiais", service.obterListaFiliais());
-        request.getRequestDispatcher("consultaFilial.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/jsp/consultaFilial.jsp").forward(request, response);
     }
 
     protected void alterarFilial(HttpServletRequest request, HttpServletResponse response)
@@ -146,7 +146,7 @@ public class FilialControllerServlet extends HttpServlet {
                 listarFiliais(request, response);
             } else {
                 request.setAttribute("notificacoes", notificacoes);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/alterarFilial.jsp");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/alterarFilial.jsp");
                 dispatcher.forward(request, response);
             }
 
@@ -164,7 +164,7 @@ public class FilialControllerServlet extends HttpServlet {
         FilialModel filial = service.obterPorId(id);
 
         request.setAttribute("filial", filial);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/alterarFilial.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/alterarFilial.jsp");
         dispatcher.forward(request, response);
     }
 

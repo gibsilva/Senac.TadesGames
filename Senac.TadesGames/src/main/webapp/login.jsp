@@ -8,6 +8,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" href="resources/css/bootsWacth/bootstrap.min.css"/>
+    <link rel="stylesheet" href="resources/css/toastr.min.css"/>
 </head>
 
 <body class="text-center">
@@ -27,14 +28,14 @@
     <br>
 
     <div class="container col-md-3">
-        <form action="${pageContext.request.contextPath}/doLogin" method="post" class="form-signin co" autocomplete="off">
+        <form action="${pageContext.request.contextPath}/Login" method="post" class="form-signin co" autocomplete="off">
             <img class="mb-4" src="resources/img/LogoTadesGames.png" alt="" width="72" height="72">
             <h3 class="h3 mb-3 font-weight-normal">Login</h3>
             <label class="sr-only">Login</label>
             <tr>
                 <td>
                     <label for="inputLogin" class="sr-only">Login</label>
-                    <input type="text" id="inputLogin" name="login" value="${Usuario.login}" class="form-control" placeholder="Login" required autofocus>
+                    <input type="text" id="login" name="login" value="${Usuario.login}" class="form-control" placeholder="Login" required autofocus>
                 </td>
 
                 <td>
@@ -43,9 +44,6 @@
                     <a href="página para redefinir a senha.jsp" class="btn btn-link">Esqueceu sua senha? Clique Aqui</a>
                     <br>
                     <hr>
-                    <c:if test="${msgErro != null}">
-                        <div class="erro"><c:out value="${msgErro}" /></div>
-                    </c:if>
                     <br>
                     <input class="btn btn-lg btn-primary btn-block" type="submit" value="Sign in">
                     <p class="mt-5 mb-3 text-muted">&copy; TadesGames</p>
@@ -53,5 +51,20 @@
             </tr>
         </form>
     </div>
+
+    <script type="text/javascript" src="resources/js/jquery.min.js"></script>  
+    <script type="text/javascript" src="resources/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="resources/js/toastr.min.js"></script> 
+
+    <script>
+        $(document).ready(function(){
+            $('#login').focus();
+            
+            var msgErro = '${msgErro}';
+            if(msgErro !== ''){
+                toastr.error('Usuário ou senha inválido(s)','Atenção');
+            }
+        })
+    </script>
 </body>
 </html>

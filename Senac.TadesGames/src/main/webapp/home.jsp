@@ -5,7 +5,7 @@
 --%>
 
 <!-- teste de execução de página jsp com o servlet-->
-<%@include file="header.jsp" %>
+<%@include file="WEB-INF/jsp/header.jsp" %>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <title>Home</title>
 

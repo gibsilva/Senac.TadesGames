@@ -95,7 +95,7 @@ public class ProdutoControllerServlet extends HttpServlet {
     protected void listarProdutos(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setAttribute("produtos", produtoService.obterTodos());
-        request.getRequestDispatcher("consultaProduto.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/jsp/consultaProduto.jsp").forward(request, response);
     }
 
     protected void criarProduto(HttpServletRequest request, HttpServletResponse response)
@@ -104,7 +104,7 @@ public class ProdutoControllerServlet extends HttpServlet {
         request.setAttribute("generos", generoService.obterListaGenero());
         request.setAttribute("categorias", categoriaService.obterListaCategoria());
         request.setAttribute("filiais", filialService.obterListaFiliais());
-        request.getRequestDispatcher("cadastroProduto.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/jsp/cadastroProduto.jsp").forward(request, response);
     }
 
     protected void carregarProduto(HttpServletRequest request, HttpServletResponse response)
@@ -117,7 +117,7 @@ public class ProdutoControllerServlet extends HttpServlet {
         request.setAttribute("generos", generoService.obterListaGenero());
         request.setAttribute("categorias", categoriaService.obterListaCategoria());
         request.setAttribute("filiais", filialService.obterListaFiliais());
-        request.getRequestDispatcher("alterarProduto.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/jsp/alterarProduto.jsp").forward(request, response);
     }
 
     protected void incluirProduto(HttpServletRequest request, HttpServletResponse response)
@@ -143,7 +143,7 @@ public class ProdutoControllerServlet extends HttpServlet {
             } else {
                 request.setAttribute("notificacoes", notificacoes);
                 request.setAttribute("produto", produto);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/cadastroProduto.jsp");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cadastroProduto.jsp");
                 dispatcher.forward(request, response);
             }
         } catch (Exception e) {
@@ -178,7 +178,7 @@ public class ProdutoControllerServlet extends HttpServlet {
             } else {
                 request.setAttribute("notificacoes", notificacoes);
                 request.setAttribute("produto", produto);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/alterarProduto.jsp");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/alterarProduto.jsp");
                 dispatcher.forward(request, response);
             }
         } catch (Exception e) {

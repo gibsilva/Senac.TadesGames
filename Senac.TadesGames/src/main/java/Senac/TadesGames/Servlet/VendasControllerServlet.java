@@ -109,7 +109,7 @@ public class VendasControllerServlet extends HttpServlet {
         String dataFim = request.getParameter("filtroDataFim");
         
         request.setAttribute("pedidos", pedidoService.pesquisarPedidos(id, dataInicio, dataFim));
-        request.getRequestDispatcher("consultaVendas.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/jsp/consultaVendas.jsp").forward(request, response);
     }
 
     protected void cancelarPedido(HttpServletRequest request, HttpServletResponse response)
@@ -128,13 +128,13 @@ public class VendasControllerServlet extends HttpServlet {
         int idPedido = Integer.parseInt(request.getParameter("idPedido"));
 
         request.setAttribute("pedido", pedidoService.obterPorId(idPedido));
-        request.getRequestDispatcher("detalhesVenda.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/jsp/detalhesVenda.jsp").forward(request, response);
     }
 
     protected void listarPedidos(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setAttribute("pedidos", pedidoService.obterTodos());
-        request.getRequestDispatcher("consultaVendas.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/jsp/consultaVendas.jsp").forward(request, response);
     }
 
     protected void salvarPedido(HttpServletRequest request, HttpServletResponse response)
@@ -184,7 +184,7 @@ public class VendasControllerServlet extends HttpServlet {
                 criarVenda(request, response);
             } else {
                 request.setAttribute("notificacoes", notificacoes);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/vendas.jsp");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/vendas.jsp");
                 dispatcher.forward(request, response);
             }
         } catch (Exception e) {
@@ -200,7 +200,7 @@ public class VendasControllerServlet extends HttpServlet {
             throws ServletException, IOException {
         request.setAttribute("vendedores", usuarioService.obterTodosPorCargo("Vendedor (a)"));
 
-        request.getRequestDispatcher("vendas.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/jsp/vendas.jsp").forward(request, response);
     }
 
     protected void obterCliente(String cpf, HttpServletResponse response) throws IOException {
