@@ -2,4 +2,4 @@
 Sistema de Vendas Web para o Centro Univeristario Senac no curso de Analise e Desenvolvimento de Sistemas
 
 # Integrantes:
-Girlaine Silva, Marcel Bruno Cardoso, Adriane Alexandre e Caio Gonçalves
+Girlaine Silva, Marcel Bruno Cardoso, Adriane Alexandre, Caio Gonçalves e Giovanni Carignato
