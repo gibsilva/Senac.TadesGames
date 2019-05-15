@@ -150,9 +150,7 @@ CREATE TABLE `itenspedido` (
   CONSTRAINT `itenspedido_ibfk_1` FOREIGN KEY (`IdProduto`) REFERENCES `produto` (`IdProduto`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
+INSERT INTO filial VALUES ('1','filialteste','1111111111111','','1111111','teste',11111111,'teste','teste','teste','teste');
 
-
-
-
-
+INSERT INTO usuario VALUES ('1','USUARIOROOT','12345678901','root@root.com',1,'root','root123','1234','',1,'Masculino','Vendas');
 
