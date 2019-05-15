@@ -1,5 +1,7 @@
 package Senac.TadesGames.Servlet;
 
+import Senac.TadesGames.DAO.UsuarioDAO;
+import Senac.TadesGames.Models.UsuarioModel;
 import Senac.TadesGames.Service.UsuarioService;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
@@ -8,12 +10,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Giovanni.Carignato
  */
-@WebServlet(name = "LoginControllerServlet", urlPatterns = {"/Login"})
+@WebServlet(name = "LoginControllerServlet", urlPatterns = {"/login"})
 public class LoginControllerServlet extends HttpServlet {
 
     @Override
@@ -25,24 +28,18 @@ public class LoginControllerServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         String login = request.getParameter("login");
         String senha = request.getParameter("senha");
-        request.setAttribute("metodoHttp", "POST");
-        request.setAttribute("login", login);
-        request.setAttribute("senha", senha);
-
-        boolean condicao = UsuarioService.validarLogin(login, senha);
-
-        request.setAttribute("login", condicao);
-
-        if (condicao == true) {
-            RequestDispatcher dispatcher
-                    = request.getRequestDispatcher("home.jsp");
-            dispatcher.forward(request, response);
+        UsuarioDAO dao = new UsuarioDAO();
+        UsuarioModel usuario = dao.obterPorLogin(login);
+        if (usuario != null && usuario.validarSenha(senha)) {
+            HttpSession sessao = request.getSession();
+            sessao.setAttribute("usuario", usuario);
+            response.sendRedirect("home.jsp");
         } else {
-            request.setAttribute("msgErro", "Usuário ou senha inválido!");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            request.setAttribute("msgErro", "Usuario ou senha inválido");
+            request.getRequestDispatcher("login.jsp")
+                    .forward(request, response);
         }
 
     }

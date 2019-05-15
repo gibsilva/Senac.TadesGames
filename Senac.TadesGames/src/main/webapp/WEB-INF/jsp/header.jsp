@@ -97,7 +97,7 @@
 
 
                 <form class="form-inline my-2 my-lg-0">
-                    <a href="login.jsp" class="btn btn-warning my-2 my-sm-0" type="submit" >Login</a>
+                    <a href="${pageContext.request.contextPath}/logout" style="color:white" class="btn btn-warning my-2 my-sm-0" type="submit" >Logout</a>
                 </form>
             </div>
         </nav>

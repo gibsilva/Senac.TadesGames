@@ -28,7 +28,7 @@
     <br>
 
     <div class="container col-md-3">
-        <form action="${pageContext.request.contextPath}/Login" method="post" class="form-signin co" autocomplete="off">
+        <form action="${pageContext.request.contextPath}/login" method="post" class="form-signin co" autocomplete="off">
             <img class="mb-4" src="resources/img/LogoTadesGames.png" alt="" width="72" height="72">
             <h3 class="h3 mb-3 font-weight-normal">Login</h3>
             <label class="sr-only">Login</label>
@@ -41,9 +41,7 @@
                 <td>
                     <label for="inputPassword" class="sr-only">Senha</label>
                     <input type="password" id="inputPassword" name="senha" value="${Usuario.senha}" class="form-control" placeholder="Senha" required>
-                    <a href="página para redefinir a senha.jsp" class="btn btn-link">Esqueceu sua senha? Clique Aqui</a>
                     <br>
-                    <hr>
                     <br>
                     <input class="btn btn-lg btn-primary btn-block" type="submit" value="Sign in">
                     <p class="mt-5 mb-3 text-muted">&copy; TadesGames</p>
