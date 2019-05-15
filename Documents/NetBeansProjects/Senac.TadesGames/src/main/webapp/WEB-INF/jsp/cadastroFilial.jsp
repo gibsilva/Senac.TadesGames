@@ -31,7 +31,7 @@
 
             <div class="form-group col-md-3">
                 <label for="cnpj">CNPJ <h11 class="text-danger">*</h11></label>
-                <input type="text" class="form-control cnpj" id="CNPJFilial" name="cnpj" placeholder="Digite o CNPJ da Filial" required> 
+                <input type="text" class="form-control cnpj" id="CNPJFilial" name="cnpj" minlength="14" maxlength="14" placeholder="Digite o CNPJ da Filial" required>
             </div>
         </div>
 
