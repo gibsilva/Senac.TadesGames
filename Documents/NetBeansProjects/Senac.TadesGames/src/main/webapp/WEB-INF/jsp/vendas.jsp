@@ -77,40 +77,6 @@
 
         </span>
         <br>
-        <!--
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th class="text-center" scope="col">ID Produto</th>
-                    <th class="text-center" scope="col">Nome/Titulo</th>
-                    <th class="text-center" scope="col">Categoria</th>
-                    <th class="text-center" scope="col">Plataforma</th>
-                    <th class="text-center" scope="col">Gênero</th>
-                    <th class="text-center" scope="col">Quantidade</th>
-                    <th class="text-center" scope="col">Preço Unitario</th>
-                    <th class="text-center" scope="col">Preço Total</th>
-                    <th class="text-center" scope="cool">#</th>
-
-                </tr>
-            </thead>
-
-            <tbody id="tabela" name="tabela">
-                <tr class="table-light">
-                    <td class="text-center">01</td>
-                    <td class="text-center">The Last of Us</td>
-                    <td class="text-center">Console</td>
-                    <td class="text-center">Playstation 4</td>
-                    <td class="text-center">sobrevivencia</td>
-                    <td class="text-center">1</td>
-                    <td class="text-center">150,00</td>
-                    <td class="text-center">150,00</td>
-                    <td class="text-center">
-                        <button type="button" class="btn btn-danger btn-sm">excluir</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        -->
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -209,6 +175,50 @@
 
 </div>
 
+
+<!-- Modal cadastro cliente -->
+<div class="modal fade" id="modalCliente" name="modalCliente" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Cliente Inativo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Cliente não cadastrado, deseja realizar o cadastro desse cliente?
+            </div>
+            <div class="modal-footer">
+                <a href="Clientes?acao=salvar" class="btn btn-warning">Cadastrar</a>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal cadastro cliente -->
+<div class="modal fade" id="modalEditarCliente" name="modalEditarCliente" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Cadastrar Cliente</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" value="" name="idEditarCliente" id="idEditarCliente">
+                O cliente está <strong>inativo</strong>, deseja editar o cadastro desse cliente?
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-warning" id="linkEditarCliente" onclick="editarClienteInativo($('#idEditarCliente').val())">Editar Cadastro</a>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     var lista = {
         itens: []
@@ -268,6 +278,10 @@
         });
     });
 
+    function editarClienteInativo(id) {
+        $('#linkEditarCliente').attr('href', 'Clientes?acao=alterar&idCliente=' + id);
+    }
+
     function obterCliente() {
         if ($('#cpfCliente').val() === '') {
             toastr.warning('Preencha o campo antes de pesquisar', 'Info');
@@ -281,11 +295,16 @@
                     var cliente = $.parseJSON(data);
                     console.log(cliente);
                     if (cliente !== null) {
-                        toastr.success('Cliente encontrado', 'Aviso');
-                        $('#nomeCliente').val(cliente.nome);
-                    }
-                    else {
-                        toastr.warning('Cliente inválido ou não cadastrado no sistema', 'Aviso');
+                        if (cliente.ativo === false) {
+                            $('#idEditarCliente').val(cliente.idCliente);
+                            $('#modalEditarCliente').modal();
+                        } else {
+                            toastr.success('Cliente encontrado', 'Aviso');
+                            $('#nomeCliente').val(cliente.nome);
+                        }
+                    } else {
+                        //toastr.warning('Cliente inválido ou não cadastrado no sistema', 'Aviso');
+                        $('#modalCliente').modal();
                         $('#nomeCliente').val('');
                         $('#cpfCliente').val('');
                         $('#cpfCliente').focus();

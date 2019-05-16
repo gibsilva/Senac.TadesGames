@@ -35,7 +35,7 @@ public class FilialDAO implements IFilialDao {
                     + "NOME, "
                     + "CNPJ, "
                     + "CEP, "
-                    + "LONGRADOURO, "
+                    + "LOGRADOURO, "
                     + "NUMERO, "
                     + "COMPLEMENTO, "
                     + "BAIRRO, "
@@ -52,7 +52,7 @@ public class FilialDAO implements IFilialDao {
                         rs.getString("Cnpj"),
                         rs.getString("Nome"),
                         rs.getString("cep"),
-                        rs.getString("longradouro"),
+                        rs.getString("logradouro"),
                         rs.getInt("numero"),
                         rs.getString("complemento"),
                         rs.getString("bairro"),
@@ -81,7 +81,7 @@ public class FilialDAO implements IFilialDao {
                     + "NOME, "
                     + "CNPJ, "
                     + "CEP, "
-                    + "LONGRADOURO, "
+                    + "LOGRADOURO, "
                     + "NUMERO, "
                     + "COMPLEMENTO, "
                     + "BAIRRO, "
@@ -96,7 +96,7 @@ public class FilialDAO implements IFilialDao {
                         rs.getString("Cnpj"),
                         rs.getString("Nome"),
                         rs.getString("cep"),
-                        rs.getString("longradouro"),
+                        rs.getString("logradouro"),
                         rs.getInt("numero"),
                         rs.getString("complemento"),
                         rs.getString("bairro"),
@@ -125,7 +125,7 @@ public class FilialDAO implements IFilialDao {
                     + "NOME, "
                     + "CNPJ, "
                     + "CEP, "
-                    + "LONGRADOURO, "
+                    + "LOGRADOURO, "
                     + "NUMERO, "
                     + "COMPLEMENTO, "
                     + "BAIRRO, "
@@ -159,7 +159,7 @@ public class FilialDAO implements IFilialDao {
             stmt = conn.prepareStatement("UPDATE FILIAL SET "
                     + "NOME = ?, "
                     + "CEP = ?, "
-                    + "LONGRADOURO = ?, "
+                    + "LOGRADOURO = ?, "
                     + "NUMERO = ?, "
                     + "COMPLEMENTO = ?, "
                     + "BAIRRO = ?, "
@@ -195,7 +195,7 @@ public class FilialDAO implements IFilialDao {
                     + "NOME, "
                     + "CNPJ, "
                     + "CEP, "
-                    + "LONGRADOURO, "
+                    + "LOGRADOURO, "
                     + "NUMERO, "
                     + "COMPLEMENTO, "
                     + "BAIRRO, "
@@ -212,7 +212,7 @@ public class FilialDAO implements IFilialDao {
                         rs.getString("Nome"),
                         rs.getString("Cnpj"),
                         rs.getString("cep"),
-                        rs.getString("longradouro"),
+                        rs.getString("logradouro"),
                         rs.getInt("numero"),
                         rs.getString("complemento"),
                         rs.getString("bairro"),
@@ -239,7 +239,7 @@ public class FilialDAO implements IFilialDao {
                     + "NOME, "
                     + "CNPJ, "
                     + "CEP, "
-                    + "LONGRADOURO, "
+                    + "LOGRADOURO, "
                     + "NUMERO, "
                     + "COMPLEMENTO, "
                     + "BAIRRO, "
@@ -257,7 +257,7 @@ public class FilialDAO implements IFilialDao {
                         rs.getString("Nome"),
                         rs.getString("Cnpj"),
                         rs.getString("cep"),
-                        rs.getString("longradouro"),
+                        rs.getString("logradouro"),
                         rs.getInt("numero"),
                         rs.getString("complemento"),
                         rs.getString("bairro"),

@@ -9,6 +9,6 @@ package Senac.TadesGames.DAO.Interfaces;
  *
  * @author Gi
  */
-public class IRelatorioVendasDao {
+public interface IRelatorioVendasDao {
     
 }
