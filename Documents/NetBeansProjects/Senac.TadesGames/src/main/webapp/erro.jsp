@@ -3,7 +3,7 @@
     Created on : 21/04/2019, 03:32:21
     Author     : Gi
 --%>
-<%@include file="header.jsp" %>
+<%@include file="WEB-INF/jsp/header.jsp" %>
 <div class="container">
     <br>
     <hr>
