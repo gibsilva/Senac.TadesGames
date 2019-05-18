@@ -20,7 +20,7 @@ public class RelatorioProdutoModel {
     private Date dataUltimaVenda;
     private boolean ativo;
     
-    public void RelatorioProdutoModel(int idProduto, String nomeProduto, int qtdProduto,
+    public RelatorioProdutoModel(int idProduto, String nomeProduto, int qtdProduto,
             double totalVendido, String categoria, Date dataUltimaVenda, boolean ativo){
         
         this.idProduto = idProduto;
@@ -32,29 +32,18 @@ public class RelatorioProdutoModel {
         this.ativo = ativo;
     }
 
-
     /**
      * @return the idProduto
      */
     public int getIdProduto() {
         return idProduto;
     }
-    /**
-     *
-     * @param IdProduto
-     */
-    public void setIdProduto(int IdProduto){
-        this.idProduto = IdProduto;
-    }
+
     /**
      * @return the nomeProduto
      */
     public String getNomeProduto() {
         return nomeProduto;
-    }
-    
-    public void setNomeProduto(String nomeProduto){
-        this.nomeProduto = nomeProduto;
     }
 
     /**
@@ -63,9 +52,6 @@ public class RelatorioProdutoModel {
     public int getQtdProduto() {
         return qtdProduto;
     }
-    public void setQtdProduto(int qtdProduto){
-        this.qtdProduto = qtdProduto;
-    }
 
     /**
      * @return the totalVendido
@@ -73,33 +59,28 @@ public class RelatorioProdutoModel {
     public double getTotalVendido() {
         return totalVendido;
     }
-    public void setTotalVendido(Double totalVendido){
-        this.totalVendido = totalVendido;
-    }
+
     /**
      * @return the categoria
      */
     public String getCategoria() {
         return categoria;
     }
-    public void setCategoria(String categoria){
-        this.categoria = categoria;
-    }
+
     /**
      * @return the dataUltimaVenda
      */
     public Date getDataUltimaVenda() {
         return dataUltimaVenda;
     }
-    public void setDataUltimaVenda(Date dataUltimaVenda){
-        this.dataUltimaVenda = dataUltimaVenda;
-    }
+
     /**
      * @return the ativo
      */
     public boolean isAtivo() {
         return ativo;
     }
+
     /**
      * @param ativo the ativo to set
      */
