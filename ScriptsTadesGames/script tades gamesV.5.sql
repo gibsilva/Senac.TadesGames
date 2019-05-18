@@ -15,28 +15,28 @@ CREATE TABLE `cliente` (
   `sexo` varchar(50) DEFAULT NULL,
   `ativo` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`IdCliente`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+);
 
 CREATE TABLE `categoria` (
   `IdCategoria` int(11) NOT NULL AUTO_INCREMENT,
   `Nome` varchar(50) NOT NULL,
   `DataHoraCriacao` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`IdCategoria`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
+);
 
 CREATE TABLE `plataforma` (
   `IdPlataforma` int(11) NOT NULL AUTO_INCREMENT,
   `Nome` varchar(50) NOT NULL,
   `DataHoraCriacao` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`IdPlataforma`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+);
 
 CREATE TABLE `genero` (
   `IdGenero` int(11) NOT NULL AUTO_INCREMENT,
   `Nome` varchar(50) NOT NULL,
   `DataHoraCriacao` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`IdGenero`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+);
 
 CREATE TABLE `filial` (
   `IdFilial` int(11) NOT NULL AUTO_INCREMENT,
@@ -44,7 +44,7 @@ CREATE TABLE `filial` (
   `Cnpj` varchar(14) NOT NULL,
   `DataHoraCriacao` datetime DEFAULT CURRENT_TIMESTAMP,
   `CEP` varchar(8) NOT NULL,
-  `longradouro` varchar(50) NOT NULL,
+  `logradouro` varchar(50) NOT NULL,
   `numero` int(11) NOT NULL,
   `complemento` varchar(50) DEFAULT NULL,
   `bairro` varchar(50) NOT NULL,
@@ -52,7 +52,7 @@ CREATE TABLE `filial` (
   `estado` varchar(60) NOT NULL,
   PRIMARY KEY (`IdFilial`),
   UNIQUE KEY `Cnpj` (`Cnpj`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+);
 
 CREATE TABLE `usuario` (
   `IdUsuario` int(11) NOT NULL AUTO_INCREMENT,
@@ -62,7 +62,7 @@ CREATE TABLE `usuario` (
   `IdFilial` int(11) NOT NULL,
   `Cargo` varchar(50) DEFAULT NULL,
   `Login` varchar(30) NOT NULL,
-  `Senha` varchar(16) NOT NULL,
+  `Senha` varchar(100) NOT NULL,
   `DataHoraCriacao` datetime DEFAULT CURRENT_TIMESTAMP,
   `ativo` tinyint(1) DEFAULT '1',
   `sexo` varchar(50) DEFAULT NULL,
@@ -73,7 +73,7 @@ CREATE TABLE `usuario` (
   UNIQUE KEY `Login` (`Login`),
   KEY `IdFilial` (`IdFilial`),
   CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`IdFilial`) REFERENCES `filial` (`IdFilial`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+);
 
 CREATE TABLE `permissao` (
   `IdPermissao` int(11) NOT NULL AUTO_INCREMENT,
@@ -90,12 +90,12 @@ CREATE TABLE `permissao` (
   PRIMARY KEY (`IdPermissao`),
   KEY `IdUsuario` (`IdUsuario`),
   CONSTRAINT `permissao_ibfk_1` FOREIGN KEY (`IdUsuario`) REFERENCES `usuario` (`IdUsuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+);
 
 CREATE TABLE `produto` (
   `IdProduto` int(11) NOT NULL AUTO_INCREMENT,
   `Nome` varchar(80) NOT NULL,
-  `Descricao` varchar(250) NOT NULL,
+  `Descricao` varchar(450)NULL,
   `PrecoCompra` decimal(18,2) NOT NULL,
   `PrecoVenda` decimal(18,2) NOT NULL,
   `IdCategoria` int(11) NOT NULL,
@@ -114,7 +114,7 @@ CREATE TABLE `produto` (
   CONSTRAINT `produto_ibfk_1` FOREIGN KEY (`IdCategoria`) REFERENCES `categoria` (`IdCategoria`),
   CONSTRAINT `produto_ibfk_2` FOREIGN KEY (`IdGenero`) REFERENCES `genero` (`IdGenero`),
   CONSTRAINT `produto_ibfk_3` FOREIGN KEY (`IdFilial`) REFERENCES `filial` (`IdFilial`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+);
 
 CREATE TABLE `pedido` (
   `IdPedido` int(11) NOT NULL AUTO_INCREMENT,
@@ -134,7 +134,7 @@ CREATE TABLE `pedido` (
   CONSTRAINT `pedido_ibfk_1` FOREIGN KEY (`IdCliente`) REFERENCES `cliente` (`IdCliente`),
   CONSTRAINT `pedido_ibfk_2` FOREIGN KEY (`IdFilial`) REFERENCES `filial` (`IdFilial`),
   CONSTRAINT `pedido_ibfk_3` FOREIGN KEY (`IdUsuario`) REFERENCES `usuario` (`IdUsuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+);
 
 CREATE TABLE `itenspedido` (
   `IdItensPedido` int(11) NOT NULL AUTO_INCREMENT,
@@ -148,9 +148,26 @@ CREATE TABLE `itenspedido` (
   KEY `fk_itensPedido_pedido` (`IdPedido`),
   CONSTRAINT `fk_itensPedido_pedido` FOREIGN KEY (`IdPedido`) REFERENCES `pedido` (`IdPedido`),
   CONSTRAINT `itenspedido_ibfk_1` FOREIGN KEY (`IdProduto`) REFERENCES `produto` (`IdProduto`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+);
 
-INSERT INTO filial VALUES ('1','filialteste','1111111111111','','1111111','teste',11111111,'teste','teste','teste','teste');
 
-INSERT INTO usuario VALUES ('1','USUARIOROOT','12345678901','root@root.com',1,'root','root123','1234','',1,'Masculino','Vendas');
+INSERT INTO filial (nome, Cnpj, CEP, logradouro, numero, complemento, bairro, cidade, estado) 
+VALUES ('Filial Matriz','70752763000174','01310200','Avenida Paulista',1035,'','Bela Vista','São Paulo','SP');
 
+INSERT INTO filial (nome, Cnpj, CEP, logradouro, numero, complemento, bairro, cidade, estado) 
+VALUES ('Filial Campina Grande','24591363000107','58410410','Rua Luiza Bezerra Motta',80,'','Catolé','Campina Grande','PB');
+
+INSERT INTO filial (nome, Cnpj, CEP, logradouro, numero, complemento, bairro, cidade, estado) 
+VALUES ('Filial Joinvile','94379031000149','89201400','Rua Nove de Março',16,'','Centro','Joinville','SC');
+
+INSERT INTO filial (nome, Cnpj, CEP, logradouro, numero, complemento, bairro, cidade, estado) 
+VALUES ('Filial Brasília','11682322000184','70092900','SBS Quadra',25,'','Asa Sul','Brasília','DF');
+
+INSERT INTO filial (nome, Cnpj, CEP, logradouro, numero, complemento, bairro, cidade, estado) 
+VALUES ('Filial Belo Horizonte','56340748000198','30190922','Avenida Augusto de Lima',744,'','Centro','Belo Horizonte','MG');
+
+INSERT INTO usuario (nome, Cpf, email, idFilial, cargo, setor, login, senha, ativo, sexo) 
+VALUES ('admin','12345678910','admin@admin.com',1,'Suporte Tecnico','TI','admin','admin',1, 'outros');
+
+insert into cliente (nome, cpf, cnpj, datanasc, email, celular, sexo, ativo)
+values('Fantasma', '12345678910', '', '1900-01-01', 'fantasma@tadesgames.com.br', '11955887722', 'M', 1);
