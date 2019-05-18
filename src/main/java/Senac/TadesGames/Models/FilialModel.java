@@ -23,12 +23,13 @@ public class FilialModel {
     private String bairro;
     private String cidade;
     private String estado;
+    private boolean ativo;
     private List<ProdutoModel> produtos;
     private List<PedidoModel> pedidos;
     private List<UsuarioModel> usuarios;
     
     public FilialModel(int idFilial, String cnpj, String nome, String cep, 
-            String logradouro, int numero, String complemento, String bairro, String cidade, String estado ){
+            String logradouro, int numero, String complemento, String bairro, String cidade, String estado, boolean ativo ){
         this.idFilial = idFilial;
         this.cnpj = cnpj;
         this.nome = nome;
@@ -39,6 +40,7 @@ public class FilialModel {
         this.bairro = bairro;
         this.cidade = cidade;
         this.estado = estado;
+        this.ativo = ativo;
         this.produtos = new ArrayList<ProdutoModel>();
         this.pedidos = new ArrayList<PedidoModel>();
         this.usuarios = new ArrayList<UsuarioModel>();
@@ -226,5 +228,18 @@ public class FilialModel {
         this.estado = estado;
     }
     
+    /**
+     * @return the ativo
+     */
+    public boolean getAtivo() {
+        return ativo;
+    }
+
+    /**
+     * @param ativo the ativo to set
+     */
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
     
 }

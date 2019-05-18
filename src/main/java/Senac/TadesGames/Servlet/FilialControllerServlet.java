@@ -95,8 +95,9 @@ public class FilialControllerServlet extends HttpServlet {
         String bairro = request.getParameter("bairro");
         String cidade = request.getParameter("cidade");
         String estado = request.getParameter("uf");
+        boolean ativo = Boolean.parseBoolean(request.getParameter("ativo"));
 
-        FilialModel filial = new FilialModel(0, cnpj, nome, cep, logradouro, numero, complemento, bairro, cidade, estado);
+        FilialModel filial = new FilialModel(0, cnpj, nome, cep, logradouro, numero, complemento, bairro, cidade, estado, ativo);
 
         try {
             List<Notificacao> notificacoes = service.incluirFilial(filial);
@@ -136,8 +137,9 @@ public class FilialControllerServlet extends HttpServlet {
         String bairro = request.getParameter("bairro");
         String cidade = request.getParameter("cidade");
         String estado = request.getParameter("uf");
+        boolean ativo = Boolean.parseBoolean(request.getParameter("ativo"));
 
-        FilialModel filial = new FilialModel(id, cnpj, nome, cep, logradouro, numero, complemento, bairro, cidade, estado);
+        FilialModel filial = new FilialModel(id, cnpj, nome, cep, logradouro, numero, complemento, bairro, cidade, estado, ativo);
 
         try {
             List<Notificacao> notificacoes = service.alterarFilial(filial);

@@ -83,6 +83,14 @@
                 <input type="text" class="form-control" id="uf" name="uf" 
                        placeholder="Digite estado" required value="${filial.estado}" readonly>
             </div>
+            
+            <div class="form-group col-md-2">
+                    <label for="inputAtivo">Status</label>
+                    <select id="ativo" name="ativo" class="custom-select" required >
+                        <option value="true">Ativo</option>
+                        <option value="false">Inativo</option>                           
+                    </select>
+                </div>
 
         </div>
 
@@ -99,7 +107,7 @@
 
 <script>
     $(document).ready(function () {
-
+        document.getElementById('ativo').value = '${filial.ativo}';
         $('.date').mask('00/00/0000');
         $('.time').mask('00:00:00');
         $('.date_time').mask('00/00/0000 00:00:00');
