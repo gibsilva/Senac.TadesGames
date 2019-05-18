@@ -22,7 +22,7 @@
         </div>
         <div class="input-group">
             <div>
-                <a href="cadastroCategoria.jsp" class="btn btn-outline-primary">Nova Categoria</a>
+                <a href="Categorias?acao=salvar" class="btn btn-outline-primary">Nova Categoria</a>
             </div>
         </div>
     </div>
@@ -94,9 +94,9 @@
         } else if (statusAlterado === 'true') {
             toastr.success('Categoria alterada com sucesso', 'Sucesso');
         }
-              
+
     });
-    
+
     $('#filtro').on('keyup', function () {
         var value = $(this).val();
         var patt = new RegExp(value, "i");
@@ -125,11 +125,18 @@
             type: 'POST',
             data: {'idCategoria': id},
             success: function (data) {
-                $('#modalExemplo').modal('hide');
-                $("#tabelaCategorias").load("Categorias #tabelaCategorias");
-                toastr.success('Categoria removida', 'Info');
+                var categoria = $.parseJSON(data);
+                if (categoria.produtos.length !== 0) {
+                    toastr.error('Não é possível excluir a categoria, pois existem ' + categoria.produtos.length + ' produto(s) atribuídos a ela', 'Erro');
+                    $('#modalExemplo').modal('hide');
+                } else {
+                    $('#modalExemplo').modal('hide');
+                    $("#tabelaCategorias").load("Categorias #tabelaCategorias");
+                    toastr.success('Categoria removida', 'Info');
+                }
+
             },
-            error: function (jqXHR, textStatus, errorThrown) {
+            error: function (data) {
                 toastr.error('Ocorreu um erro ao remover', 'Erro');
             }
         });

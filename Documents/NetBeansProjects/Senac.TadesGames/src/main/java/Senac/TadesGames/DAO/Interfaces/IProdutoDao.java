@@ -19,4 +19,7 @@ public interface IProdutoDao {
     void alterar(ProdutoModel produto);
     void desativar(ProdutoModel produto);
     void ativar(ProdutoModel produto);
+    List<ProdutoModel> obterPorIdCategoria(int id);
+    List<ProdutoModel> obterPorIdGenero(int id);
+    List<ProdutoModel> obterPorIdPlataforma(int id);
 }

@@ -5,6 +5,9 @@
  */
 package Senac.TadesGames.Models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Gi
@@ -12,10 +15,12 @@ package Senac.TadesGames.Models;
 public class PlataformaModel {
     private int idPlataforma;
     private String nome;
+    private List<ProdutoModel> produtos;
     
     public PlataformaModel(int idPlataforma, String nome){
         this.idPlataforma = idPlataforma;
         this.nome = nome;
+        this.produtos = new ArrayList<ProdutoModel>();
     }
 
     /**
@@ -44,6 +49,20 @@ public class PlataformaModel {
      */
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    /**
+     * @return the produtos
+     */
+    public List<ProdutoModel> getProdutos() {
+        return produtos;
+    }
+
+    /**
+     * @param produtos the produtos to set
+     */
+    public void setProdutos(List<ProdutoModel> produtos) {
+        this.produtos = produtos;
     }
     
 }

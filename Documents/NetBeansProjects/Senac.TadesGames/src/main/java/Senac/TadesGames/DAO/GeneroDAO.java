@@ -21,11 +21,16 @@ import java.util.List;
  */
 public class GeneroDAO implements IGeneroDao {
 
-    private ConexaoDB conexao = new ConexaoDB();
+    private final ConexaoDB conexao;
+    private ProdutoDAO produtoDao;
     private PreparedStatement stmt = null;
     ResultSet rs = null;
 
-    public GeneroModel obterPoNome(String nome) {
+    public GeneroDAO() {
+        this.conexao = new ConexaoDB();
+    }
+
+    public GeneroModel obterPorNome(String nome) {
         Connection conn = conexao.getConnection();
         GeneroModel genero = null;
 
@@ -39,18 +44,20 @@ public class GeneroDAO implements IGeneroDao {
                 genero = new GeneroModel(
                         rs.getInt("IdGenero"),
                         rs.getString("Nome"));
+                produtoDao = new ProdutoDAO();
+                genero.setProdutos(produtoDao.obterPorIdGenero(genero.getIdGenero()));
             }
 
             return genero;
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt, rs);
             return null;
-        } finally{
+        } finally {
             conexao.closeConnection(conn, stmt, rs);
         }
     }
 
-    public GeneroModel obterPoNome(String nome, int id) {
+    public GeneroModel obterPorNome(String nome, int id) {
         Connection conn = conexao.getConnection();
         GeneroModel genero = null;
 
@@ -65,13 +72,15 @@ public class GeneroDAO implements IGeneroDao {
                 genero = new GeneroModel(
                         rs.getInt("IdGenero"),
                         rs.getString("Nome"));
+                produtoDao = new ProdutoDAO();
+                genero.setProdutos(produtoDao.obterPorIdGenero(genero.getIdGenero()));
             }
 
             return genero;
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt, rs);
             return null;
-        } finally{
+        } finally {
             conexao.closeConnection(conn, stmt, rs);
         }
     }
@@ -90,13 +99,15 @@ public class GeneroDAO implements IGeneroDao {
                 genero = new GeneroModel(
                         rs.getInt("IdGenero"),
                         rs.getString("Nome"));
+                produtoDao = new ProdutoDAO();
+                genero.setProdutos(produtoDao.obterPorIdGenero(genero.getIdGenero()));
             }
 
             return genero;
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt, rs);
             return null;
-        } finally{
+        } finally {
             conexao.closeConnection(conn, stmt, rs);
         }
 
@@ -117,6 +128,9 @@ public class GeneroDAO implements IGeneroDao {
                         rs.getInt("IdGenero"),
                         rs.getString("Nome"));
 
+                produtoDao = new ProdutoDAO();
+                genero.setProdutos(produtoDao.obterPorIdGenero(genero.getIdGenero()));
+
                 generos.add(genero);
             }
 
@@ -124,7 +138,7 @@ public class GeneroDAO implements IGeneroDao {
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt, rs);
             return null;
-        } finally{
+        } finally {
             conexao.closeConnection(conn, stmt, rs);
         }
     }
@@ -141,7 +155,7 @@ public class GeneroDAO implements IGeneroDao {
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt);
             throw new RuntimeException(ex.getMessage());
-        } finally{
+        } finally {
             conexao.closeConnection(conn, stmt);
         }
     }
@@ -159,7 +173,7 @@ public class GeneroDAO implements IGeneroDao {
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt);
             throw new RuntimeException(ex.getMessage());
-        } finally{
+        } finally {
             conexao.closeConnection(conn, stmt);
         }
     }
@@ -176,7 +190,7 @@ public class GeneroDAO implements IGeneroDao {
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt);
             throw new RuntimeException(ex.getMessage());
-        } finally{
+        } finally {
             conexao.closeConnection(conn, stmt);
         }
     }

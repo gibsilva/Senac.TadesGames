@@ -8,7 +8,9 @@ package Senac.TadesGames.Servlet;
 import Senac.TadesGames.Helpers.Notificacao;
 import Senac.TadesGames.Models.CategoriaModel;
 import Senac.TadesGames.Service.CategoriaService;
+import com.google.gson.Gson;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -128,13 +130,22 @@ public class CategoriaControllerServlet extends HttpServlet {
 
     protected void excluirCategoria(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        PrintWriter out = response.getWriter();
+        Gson gson = new Gson();
+
         int id = Integer.parseInt(request.getParameter("idCategoria"));
         CategoriaModel categoria = service.obterCategoriaPorId(id);
 
-        service.excluirCategoria(categoria);
-
-        request.setAttribute("categorias", service.obterListaCategoria());
-        request.getRequestDispatcher("/WEB-INF/jsp/consultaCategoria.jsp").forward(request, response);
+        try {
+            service.excluirCategoria(categoria);
+            out.print(gson.toJson(categoria));
+            out.flush();
+            out.close();
+        } catch (Exception e) {
+            out.print(gson.toJson(categoria));
+            out.flush();
+            out.close();
+        }
     }
 
     protected void alterarCategoria(HttpServletRequest request, HttpServletResponse response)

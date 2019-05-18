@@ -8,7 +8,9 @@ package Senac.TadesGames.Servlet;
 import Senac.TadesGames.Helpers.Notificacao;
 import Senac.TadesGames.Models.PlataformaModel;
 import Senac.TadesGames.Service.PlataformaService;
+import com.google.gson.Gson;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -157,13 +159,22 @@ public class PlataformaControllerServlet extends HttpServlet {
 
     protected void excluirPlataforma(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        PrintWriter out = response.getWriter();
+        Gson gson = new Gson();
+        
         int id = Integer.parseInt(request.getParameter("idPlataforma"));
         PlataformaModel plataforma = service.obterPlataformaPorId(id);
 
-        service.excluirPlataforma(plataforma);
-
-        request.setAttribute("plataformas", service.obterListaPlataforma());
-        request.getRequestDispatcher("/WEB-INF/jsp/consultaPlataforma.jsp").forward(request, response);
+        try {
+            service.excluirPlataforma(plataforma);
+            out.print(gson.toJson(plataforma));
+            out.flush();
+            out.close();
+        } catch (Exception e) {
+            out.print(gson.toJson(plataforma));
+            out.flush();
+            out.close();
+        }
     }
 
 }

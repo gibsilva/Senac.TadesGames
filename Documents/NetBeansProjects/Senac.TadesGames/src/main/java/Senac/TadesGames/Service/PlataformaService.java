@@ -25,14 +25,14 @@ public class PlataformaService {
     }
 
     private void validaNomeExistente(String nome) {
-        if (plataformaDao.obterPoNome(nome) != null) {
-            this.notificacao.adicionaNotificacao("nome", "nome já está cadastrado");
+        if (plataformaDao.obterPorNome(nome) != null) {
+            this.notificacao.adicionaNotificacao("nome", "Nome já está cadastrado");
         }
     }
 
     private void validaNomeExistente(String nome, int id) {
-        if (plataformaDao.obterPoNome(nome, id) != null) {
-            this.notificacao.adicionaNotificacao("nome", "nome já está cadastrado");
+        if (plataformaDao.obterPorNome(nome, id) != null) {
+            this.notificacao.adicionaNotificacao("nome", "Nome já está cadastrado");
         }
     }
 

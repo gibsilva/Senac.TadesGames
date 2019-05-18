@@ -22,17 +22,21 @@ import java.util.List;
 public class CategoriaDAO implements ICategoriaDao {
 
     private ConexaoDB conexao = new ConexaoDB();
+    private ProdutoDAO produtoDao;
     private PreparedStatement stmt = null;
     ResultSet rs = null;
-    
-   
-    public CategoriaModel obterPoNome(String nome) {
+
+    public CategoriaDAO() {
+        this.conexao = new ConexaoDB();
+    }
+
+    public CategoriaModel obterPorNome(String nome) {
         Connection conn = conexao.getConnection();
         CategoriaModel categoria = null;
 
         try {
             stmt = conn.prepareStatement("SELECT IDCATEGORIA, NOME FROM CATEGORIA WHERE NOME = ?");
-            
+
             stmt.setString(1, nome);
 
             rs = stmt.executeQuery();
@@ -40,24 +44,27 @@ public class CategoriaDAO implements ICategoriaDao {
                 categoria = new CategoriaModel(
                         rs.getInt("IdCategoria"),
                         rs.getString("Nome"));
+
+                produtoDao = new ProdutoDAO();
+                categoria.setProdutos(produtoDao.obterPorIdCategoria(categoria.getIdCategoria()));
             }
 
             return categoria;
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt, rs);
             return null;
-        } finally{
+        } finally {
             conexao.closeConnection(conn, stmt, rs);
         }
     }
-    
-     public CategoriaModel obterPoNome(String nome, int id) {
+
+    public CategoriaModel obterPorNome(String nome, int id) {
         Connection conn = conexao.getConnection();
         CategoriaModel categoria = null;
 
         try {
             stmt = conn.prepareStatement("SELECT IDCATEGORIA, NOME FROM CATEGORIA WHERE NOME = ? AND IDCATEGORIA != ?");
-            
+
             stmt.setString(1, nome);
             stmt.setInt(2, id);
 
@@ -66,13 +73,15 @@ public class CategoriaDAO implements ICategoriaDao {
                 categoria = new CategoriaModel(
                         rs.getInt("IdCategoria"),
                         rs.getString("Nome"));
+                produtoDao = new ProdutoDAO();
+                categoria.setProdutos(produtoDao.obterPorIdCategoria(categoria.getIdCategoria()));
             }
 
             return categoria;
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt, rs);
             return null;
-        } finally{
+        } finally {
             conexao.closeConnection(conn, stmt, rs);
         }
     }
@@ -91,13 +100,15 @@ public class CategoriaDAO implements ICategoriaDao {
                 categoria = new CategoriaModel(
                         rs.getInt("IdCategoria"),
                         rs.getString("Nome"));
+                produtoDao = new ProdutoDAO();
+                categoria.setProdutos(produtoDao.obterPorIdCategoria(categoria.getIdCategoria()));
             }
 
             return categoria;
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt, rs);
             return null;
-        } finally{
+        } finally {
             conexao.closeConnection(conn, stmt, rs);
         }
     }
@@ -117,6 +128,9 @@ public class CategoriaDAO implements ICategoriaDao {
                         rs.getInt("IdCategoria"),
                         rs.getString("Nome"));
 
+                produtoDao = new ProdutoDAO();
+                categoria.setProdutos(produtoDao.obterPorIdCategoria(categoria.getIdCategoria()));
+
                 categorias.add(categoria);
             }
 
@@ -124,7 +138,7 @@ public class CategoriaDAO implements ICategoriaDao {
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt, rs);
             return null;
-        } finally{
+        } finally {
             conexao.closeConnection(conn, stmt, rs);
         }
     }
@@ -141,7 +155,7 @@ public class CategoriaDAO implements ICategoriaDao {
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt);
             throw new RuntimeException(ex.getMessage());
-        } finally{
+        } finally {
             conexao.closeConnection(conn, stmt);
         }
     }
@@ -159,7 +173,7 @@ public class CategoriaDAO implements ICategoriaDao {
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt);
             throw new RuntimeException(ex.getMessage());
-        } finally{
+        } finally {
             conexao.closeConnection(conn, stmt);
         }
     }
@@ -167,7 +181,7 @@ public class CategoriaDAO implements ICategoriaDao {
     @Override
     public void excluir(CategoriaModel categoria) {
         Connection conn = conexao.getConnection();
-        
+
         try {
             stmt = conn.prepareStatement("DELETE FROM CATEGORIA WHERE IDCATEGORIA = ?");
             stmt.setInt(1, categoria.getIdCategoria());
@@ -176,10 +190,9 @@ public class CategoriaDAO implements ICategoriaDao {
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt);
             throw new RuntimeException(ex.getMessage());
-        } finally{
+        } finally {
             conexao.closeConnection(conn, stmt);
         }
 
     }
-
 }

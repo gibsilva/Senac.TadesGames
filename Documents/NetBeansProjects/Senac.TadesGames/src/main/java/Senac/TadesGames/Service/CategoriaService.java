@@ -25,14 +25,14 @@ public class CategoriaService {
     }
 
     private void validaNomeExistente(String nome) {
-        if (categoriaDao.obterPoNome(nome) != null) {
-            this.notificacao.adicionaNotificacao("nome", "nome já está cadastrado");
+        if (categoriaDao.obterPorNome(nome) != null) {
+            this.notificacao.adicionaNotificacao("nome", "Nome já está cadastrado");
         }
     }
 
     private void validaNomeExistente(String nome, int id) {
-        if (categoriaDao.obterPoNome(nome, id) != null) {
-            this.notificacao.adicionaNotificacao("nome", "nome já está cadastrado");
+        if (categoriaDao.obterPorNome(nome, id) != null) {
+            this.notificacao.adicionaNotificacao("nome", "Nome já está cadastrado");
         }
     }
 

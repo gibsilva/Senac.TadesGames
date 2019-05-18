@@ -24,14 +24,14 @@ public class GeneroService {
     }
 
     private void validaNomeExistente(String nome) {
-        if (generoDao.obterPoNome(nome) != null) {
-            this.notificacao.adicionaNotificacao("nome", "nome já está cadastrado");
+        if (generoDao.obterPorNome(nome) != null) {
+            this.notificacao.adicionaNotificacao("nome", "Nome já está cadastrado");
         }
     }
 
     private void validaNomeExistente(String nome, int id) {
-        if (generoDao.obterPoNome(nome, id) != null) {
-            this.notificacao.adicionaNotificacao("nome", "nome já está cadastrado");
+        if (generoDao.obterPorNome(nome, id) != null) {
+            this.notificacao.adicionaNotificacao("nome", "Nome já está cadastrado");
         }
     }
 

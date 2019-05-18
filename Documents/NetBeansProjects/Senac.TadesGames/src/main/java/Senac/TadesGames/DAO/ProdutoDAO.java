@@ -124,7 +124,159 @@ public class ProdutoDAO implements IProdutoDao {
                 produto.setCategoria(categoriaDao.obterPorId(produto.getIdCategoria()));
                 produto.setPlataforma(plataformaDao.obterPorId(produto.getIdPlataforma()));
                 produto.setGenero(generoDao.obterPorId(produto.getIdGenero()));
-                
+
+                produtos.add(produto);
+            }
+
+            return produtos;
+        } catch (SQLException ex) {
+            conexao.closeConnection(conn, stmt, rs);
+            return null;
+        } finally {
+            conexao.closeConnection(conn, stmt, rs);
+        }
+    }
+
+    @Override
+    public List<ProdutoModel> obterPorIdCategoria(int id) {
+        Connection conn = conexao.getConnection();
+        ProdutoModel produto = null;
+        List<ProdutoModel> produtos = new ArrayList<ProdutoModel>();
+
+        try {
+            stmt = conn.prepareStatement("SELECT IDPRODUTO, "
+                    + "NOME, "
+                    + "DESCRICAO, "
+                    + "PRECOCOMPRA, "
+                    + "PRECOVENDA, "
+                    + "IDCATEGORIA, "
+                    + "IDGENERO, "
+                    + "ATIVO, "
+                    + "IDFILIAL, "
+                    + "IDPLATAFORMA, "
+                    + "QUANTIDADEESTOQUE "
+                    + " FROM PRODUTO WHERE IDCATEGORIA = ?");
+
+            stmt.setInt(1, id);
+
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                produto = new ProdutoModel(
+                        rs.getInt("IdProduto"),
+                        rs.getString("Nome"),
+                        rs.getString("Descricao"),
+                        rs.getDouble("PrecoCompra"),
+                        rs.getDouble("PrecoVenda"),
+                        rs.getInt("IdCategoria"),
+                        rs.getInt("IdGenero"),
+                        rs.getBoolean("Ativo"),
+                        rs.getInt("IdFilial"),
+                        rs.getInt("IdPlataforma"),
+                        rs.getInt("QuantidadeEstoque")
+                );
+                produto.setPlataforma(plataformaDao.obterPorId(produto.getIdPlataforma()));
+                produto.setGenero(generoDao.obterPorId(produto.getIdGenero()));
+
+                produtos.add(produto);
+            }
+
+            return produtos;
+        } catch (SQLException ex) {
+            conexao.closeConnection(conn, stmt, rs);
+            return null;
+        } finally {
+            conexao.closeConnection(conn, stmt, rs);
+        }
+    }
+
+    @Override
+    public List<ProdutoModel> obterPorIdGenero(int id) {
+        Connection conn = conexao.getConnection();
+        ProdutoModel produto = null;
+        List<ProdutoModel> produtos = new ArrayList<ProdutoModel>();
+
+        try {
+            stmt = conn.prepareStatement("SELECT IDPRODUTO, "
+                    + "NOME, "
+                    + "DESCRICAO, "
+                    + "PRECOCOMPRA, "
+                    + "PRECOVENDA, "
+                    + "IDCATEGORIA, "
+                    + "IDGENERO, "
+                    + "ATIVO, "
+                    + "IDFILIAL, "
+                    + "IDPLATAFORMA, "
+                    + "QUANTIDADEESTOQUE "
+                    + " FROM PRODUTO WHERE IDGENERO = ?");
+
+            stmt.setInt(1, id);
+
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                produto = new ProdutoModel(
+                        rs.getInt("IdProduto"),
+                        rs.getString("Nome"),
+                        rs.getString("Descricao"),
+                        rs.getDouble("PrecoCompra"),
+                        rs.getDouble("PrecoVenda"),
+                        rs.getInt("IdCategoria"),
+                        rs.getInt("IdGenero"),
+                        rs.getBoolean("Ativo"),
+                        rs.getInt("IdFilial"),
+                        rs.getInt("IdPlataforma"),
+                        rs.getInt("QuantidadeEstoque")
+                );
+
+                produtos.add(produto);
+            }
+
+            return produtos;
+        } catch (SQLException ex) {
+            conexao.closeConnection(conn, stmt, rs);
+            return null;
+        } finally {
+            conexao.closeConnection(conn, stmt, rs);
+        }
+    }
+
+    @Override
+    public List<ProdutoModel> obterPorIdPlataforma(int id) {
+        Connection conn = conexao.getConnection();
+        ProdutoModel produto = null;
+        List<ProdutoModel> produtos = new ArrayList<ProdutoModel>();
+
+        try {
+            stmt = conn.prepareStatement("SELECT IDPRODUTO, "
+                    + "NOME, "
+                    + "DESCRICAO, "
+                    + "PRECOCOMPRA, "
+                    + "PRECOVENDA, "
+                    + "IDCATEGORIA, "
+                    + "IDGENERO, "
+                    + "ATIVO, "
+                    + "IDFILIAL, "
+                    + "IDPLATAFORMA, "
+                    + "QUANTIDADEESTOQUE "
+                    + " FROM PRODUTO WHERE IDPLATAFORMA = ?");
+
+            stmt.setInt(1, id);
+
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                produto = new ProdutoModel(
+                        rs.getInt("IdProduto"),
+                        rs.getString("Nome"),
+                        rs.getString("Descricao"),
+                        rs.getDouble("PrecoCompra"),
+                        rs.getDouble("PrecoVenda"),
+                        rs.getInt("IdCategoria"),
+                        rs.getInt("IdGenero"),
+                        rs.getBoolean("Ativo"),
+                        rs.getInt("IdFilial"),
+                        rs.getInt("IdPlataforma"),
+                        rs.getInt("QuantidadeEstoque")
+                );
+
                 produtos.add(produto);
             }
 

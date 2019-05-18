@@ -77,6 +77,40 @@
 
         </span>
         <br>
+        <!--
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th class="text-center" scope="col">ID Produto</th>
+                    <th class="text-center" scope="col">Nome/Titulo</th>
+                    <th class="text-center" scope="col">Categoria</th>
+                    <th class="text-center" scope="col">Plataforma</th>
+                    <th class="text-center" scope="col">Gênero</th>
+                    <th class="text-center" scope="col">Quantidade</th>
+                    <th class="text-center" scope="col">Preço Unitario</th>
+                    <th class="text-center" scope="col">Preço Total</th>
+                    <th class="text-center" scope="cool">#</th>
+
+                </tr>
+            </thead>
+
+            <tbody id="tabela" name="tabela">
+                <tr class="table-light">
+                    <td class="text-center">01</td>
+                    <td class="text-center">The Last of Us</td>
+                    <td class="text-center">Console</td>
+                    <td class="text-center">Playstation 4</td>
+                    <td class="text-center">sobrevivencia</td>
+                    <td class="text-center">1</td>
+                    <td class="text-center">150,00</td>
+                    <td class="text-center">150,00</td>
+                    <td class="text-center">
+                        <button type="button" class="btn btn-danger btn-sm">excluir</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        -->
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -302,7 +336,8 @@
                             toastr.success('Cliente encontrado', 'Aviso');
                             $('#nomeCliente').val(cliente.nome);
                         }
-                    } else {
+                    }
+                    else {
                         //toastr.warning('Cliente inválido ou não cadastrado no sistema', 'Aviso');
                         $('#modalCliente').modal();
                         $('#nomeCliente').val('');
@@ -330,8 +365,15 @@
                     produto = $.parseJSON(data);
                     console.log(produto);
                     if (produto !== null) {
-                        $('#nomeProduto').val(produto.nome);
-                        $('#valorUnitario').val(produto.precoVenda);
+                        if (produto.ativo === false) {
+                            toastr.warning('O produto ' + produto.nome + ' está inativo, não é possível adicionar', 'Atenção');
+                            $('#nomeProduto').val('');
+                            $('#idProduto').val('');
+                            $('#idProduto').focus();
+                        } else {
+                            $('#nomeProduto').val(produto.nome);
+                            $('#valorUnitario').val(produto.precoVenda);
+                        }
                     } else {
                         toastr.warning('Produto não encontrado, verifique o código digitado', 'Atenção');
                         $('#nomeProduto').val('');

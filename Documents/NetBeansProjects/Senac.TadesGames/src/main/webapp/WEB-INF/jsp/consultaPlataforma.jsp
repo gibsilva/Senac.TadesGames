@@ -21,7 +21,7 @@
         </div>
         <div class="input-group">
             <div>
-                <a href="cadastroPlataforma.jsp" class="btn btn-outline-primary">Nova Plataforma</a>
+                <a href="Plataformas?acao=salvar" class="btn btn-outline-primary">Nova Plataforma</a>
             </div>
         </div>
     </div>
@@ -128,9 +128,15 @@
             type: 'POST',
             data: {'idPlataforma': id},
             success: function (data) {
-                $('#modalExemplo').modal('hide');
-                $("#tabelaPlataformas").load("Plataformas #tabelaPlataformas");
-                toastr.success('Plataforma removida', 'Info');
+                var plataforma = $.parseJSON(data);
+                if (plataforma.produtos.length !== 0) {
+                    toastr.error('Não é possível excluir a plataforma, pois existem ' + plataforma.produtos.length + ' produto(s) atribuídos a ela', 'Erro');
+                    $('#modalExemplo').modal('hide');
+                } else {
+                    $('#modalExemplo').modal('hide');
+                    $("#tabelaPlataformas").load("Plataformas #tabelaPlataformas");
+                    toastr.success('Plataforma removida', 'Info');
+                }
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 toastr.error('Ocorreu um erro ao remover', 'Erro');

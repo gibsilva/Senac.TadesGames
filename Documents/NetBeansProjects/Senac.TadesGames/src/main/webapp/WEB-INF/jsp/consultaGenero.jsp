@@ -21,7 +21,7 @@
         </div>
         <div class="input-group">
             <div>
-                <a href="cadastroGenero.jsp" class="btn btn-outline-primary">Novo Gênero</a>
+                <a href="Generos?acao=salvar" class="btn btn-outline-primary">Novo Gênero</a>
             </div>
         </div>
     </div>
@@ -127,9 +127,15 @@
             type: 'POST',
             data: {'idGenero': id},
             success: function (data) {
-                $('#modalExemplo').modal('hide');
-                $("#tabelaGeneros").load("Generos #tabelaGeneros");
-                toastr.success('Gênero removido', 'Sucesso');
+                var genero = $.parseJSON(data);
+                if (genero.produtos.length !== 0) {
+                    toastr.error('Não é possível excluir o gênero, pois existem ' + genero.produtos.length + ' produto(s) atribuídos a ele', 'Erro');
+                    $('#modalExemplo').modal('hide');
+                } else {
+                    $('#modalExemplo').modal('hide');
+                    $("#tabelaGeneros").load("Generos #tabelaGeneros");
+                    toastr.success('Gênero removido', 'Sucesso');
+                }
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 toastr.error('Ocorreu um erro ao remover', 'Erro');

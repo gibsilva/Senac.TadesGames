@@ -19,12 +19,18 @@ import java.util.List;
  *
  * @author Gi
  */
-public class PlataformaDAO implements IPlataformaDao{
-    private ConexaoDB conexao = new ConexaoDB();
-    private PreparedStatement stmt = null;
-    ResultSet rs = null;
+public class PlataformaDAO implements IPlataformaDao {
 
-        public PlataformaModel obterPoNome(String nome) {
+    private final ConexaoDB conexao;
+    private ProdutoDAO produtoDao;
+    private PreparedStatement stmt = null;
+    private ResultSet rs = null;
+
+    public PlataformaDAO() {
+        this.conexao = new ConexaoDB();
+    }
+
+    public PlataformaModel obterPorNome(String nome) {
         Connection conn = conexao.getConnection();
         PlataformaModel plataforma = null;
 
@@ -38,18 +44,20 @@ public class PlataformaDAO implements IPlataformaDao{
                 plataforma = new PlataformaModel(
                         rs.getInt("IdPlataforma"),
                         rs.getString("Nome"));
+                produtoDao = new ProdutoDAO();
+                plataforma.setProdutos(produtoDao.obterPorIdPlataforma(plataforma.getIdPlataforma()));
             }
 
             return plataforma;
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt, rs);
             return null;
-        } finally{
+        } finally {
             conexao.closeConnection(conn, stmt, rs);
         }
     }
 
-    public PlataformaModel obterPoNome(String nome, int id) {
+    public PlataformaModel obterPorNome(String nome, int id) {
         Connection conn = conexao.getConnection();
         PlataformaModel plataforma = null;
 
@@ -64,17 +72,19 @@ public class PlataformaDAO implements IPlataformaDao{
                 plataforma = new PlataformaModel(
                         rs.getInt("IdPlataforma"),
                         rs.getString("Nome"));
+                produtoDao = new ProdutoDAO();
+                plataforma.setProdutos(produtoDao.obterPorIdPlataforma(plataforma.getIdPlataforma()));
             }
 
             return plataforma;
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt, rs);
             return null;
-        } finally{
+        } finally {
             conexao.closeConnection(conn, stmt, rs);
         }
     }
-    
+
     @Override
     public PlataformaModel obterPorId(int id) {
         Connection conn = conexao.getConnection();
@@ -89,13 +99,15 @@ public class PlataformaDAO implements IPlataformaDao{
                 plataforma = new PlataformaModel(
                         rs.getInt("IdPlataforma"),
                         rs.getString("Nome"));
+                produtoDao = new ProdutoDAO();
+                plataforma.setProdutos(produtoDao.obterPorIdPlataforma(plataforma.getIdPlataforma()));
             }
 
             return plataforma;
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt, rs);
             return null;
-        } finally{
+        } finally {
             conexao.closeConnection(conn, stmt, rs);
         }
     }
@@ -115,6 +127,9 @@ public class PlataformaDAO implements IPlataformaDao{
                         rs.getInt("IdPlataforma"),
                         rs.getString("Nome"));
 
+                produtoDao = new ProdutoDAO();
+                plataforma.setProdutos(produtoDao.obterPorIdPlataforma(plataforma.getIdPlataforma()));
+
                 plataformas.add(plataforma);
             }
 
@@ -122,7 +137,7 @@ public class PlataformaDAO implements IPlataformaDao{
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt, rs);
             return null;
-        } finally{
+        } finally {
             conexao.closeConnection(conn, stmt, rs);
         }
     }
@@ -139,7 +154,7 @@ public class PlataformaDAO implements IPlataformaDao{
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt);
             throw new RuntimeException(ex.getMessage());
-        } finally{
+        } finally {
             conexao.closeConnection(conn, stmt);
         }
     }
@@ -157,7 +172,7 @@ public class PlataformaDAO implements IPlataformaDao{
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt);
             throw new RuntimeException(ex.getMessage());
-        } finally{
+        } finally {
             conexao.closeConnection(conn, stmt);
         }
     }
@@ -165,7 +180,7 @@ public class PlataformaDAO implements IPlataformaDao{
     @Override
     public void excluir(PlataformaModel plataforma) {
         Connection conn = conexao.getConnection();
-        
+
         try {
             stmt = conn.prepareStatement("DELETE FROM PLATAFORMA WHERE IDPLATAFORMA = ?");
             stmt.setInt(1, plataforma.getIdPlataforma());
@@ -174,10 +189,10 @@ public class PlataformaDAO implements IPlataformaDao{
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt);
             throw new RuntimeException(ex.getMessage());
-        } finally{
+        } finally {
             conexao.closeConnection(conn, stmt);
         }
 
     }
-    
+
 }

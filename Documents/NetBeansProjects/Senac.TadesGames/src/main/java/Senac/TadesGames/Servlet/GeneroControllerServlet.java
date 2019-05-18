@@ -8,6 +8,7 @@ package Senac.TadesGames.Servlet;
 import Senac.TadesGames.Helpers.Notificacao;
 import Senac.TadesGames.Models.GeneroModel;
 import Senac.TadesGames.Service.GeneroService;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -22,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Marcel
  */
-@WebServlet("/Generos")
+@WebServlet(name = "GeneroControllerServlet", urlPatterns = {"/Generos"})
 public class GeneroControllerServlet extends HttpServlet {
 
     private final GeneroService service = new GeneroService();
@@ -158,13 +159,22 @@ public class GeneroControllerServlet extends HttpServlet {
 
     protected void excluirGenero(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        PrintWriter out = response.getWriter();
+        Gson gson = new Gson();
+
         int id = Integer.parseInt(request.getParameter("idGenero"));
         GeneroModel genero = service.obterGeneroPorId(id);
 
-        service.excluirGenero(genero);
-
-        request.setAttribute("generos", service.obterListaGenero());
-        request.getRequestDispatcher("/WEB-INF/jsp/consultaGenero.jsp").forward(request, response);
+        try {
+            service.excluirGenero(genero);
+            out.print(gson.toJson(genero));
+            out.flush();
+            out.close();
+        } catch (Exception e) {
+            out.print(gson.toJson(genero));
+            out.flush();
+            out.close();
+        }
     }
 
 }
