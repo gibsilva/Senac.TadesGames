@@ -19,7 +19,7 @@
 
         <div class="input-group">
             <div>
-                <a href="cadastroFilial.jsp" class="btn btn-outline-primary">Nova Filial</a>
+                <a href="Filiais?acao=salvar" class="btn btn-outline-primary">Nova Filial</a>
             </div>
 
         </div>
@@ -39,6 +39,7 @@
                 <th class="text-center" scope="col">Bairro</th>
                 <th class="text-center" scope="col">Cidade</th>
                 <th class="text-center" scope="col">Estado</th>
+                <th class="text-center" scope="col">Status</th>
                 <th class="text-center" scope="col">#</th>
             </tr>
         </thead>
@@ -54,8 +55,16 @@
                     <td class="text-center">${f.complemento}</td>
                     <td class="text-center">${f.bairro}</td>
                     <td class="text-center">${f.cidade}</td>
-                    <td class="text-center">${f.estado}</td>                 
+                    <td class="text-center">${f.estado}</td> 
+
+                    <c:if test="${f.ativo == true}">
+                        <td class="text-center">Ativo</td>
+                    </c:if>
+                    <c:if test="${f.ativo == false}">
+                        <td class="text-center">Inativo</td>
+                    </c:if>
                     <td class="text-center">
+
                         <c:url var="alterarFilial" value="/Filiais">
                             <c:param name="acao" value="alterar" />
                             <c:param name="idFilial" value="${f.idFilial}" />

@@ -50,6 +50,7 @@ CREATE TABLE `filial` (
   `bairro` varchar(50) NOT NULL,
   `cidade` varchar(100) NOT NULL,
   `estado` varchar(60) NOT NULL,
+   `ativo` tinyint NOT NULL,
   PRIMARY KEY (`IdFilial`),
   UNIQUE KEY `Cnpj` (`Cnpj`)
 );

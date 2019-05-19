@@ -39,7 +39,7 @@
         <div class="row">
             <div class=" form-group col-md-2"> 
                 <button type="submit" class="btn btn-success" value="Salvar">Salvar</button>
-                <a href="Plataformas" class="btn btn-light" >Cancelar</a>
+                <a href="Plataformas?acao=listar" class="btn btn-light" >Cancelar</a>
             </div>
         </div>
     </form>

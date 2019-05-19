@@ -95,9 +95,8 @@ public class FilialControllerServlet extends HttpServlet {
         String bairro = request.getParameter("bairro");
         String cidade = request.getParameter("cidade");
         String estado = request.getParameter("uf");
-        boolean ativo = Boolean.parseBoolean(request.getParameter("ativo"));
 
-        FilialModel filial = new FilialModel(0, cnpj, nome, cep, logradouro, numero, complemento, bairro, cidade, estado, ativo);
+        FilialModel filial = new FilialModel(0, cnpj, nome, cep, logradouro, numero, complemento, bairro, cidade, estado, true);
 
         try {
             List<Notificacao> notificacoes = service.incluirFilial(filial);

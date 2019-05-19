@@ -93,7 +93,7 @@
             <div class="row">
                 <div class="form-group-inline">
                     <input type="submit" class="btn btn-success" value="Salvar">
-                    <a href="Clientes" class="btn btn-light">Cancelar</a>
+                    <a href="Clientes?acao=listar" class="btn btn-light">Cancelar</a>
                 </div>
             </div>
 

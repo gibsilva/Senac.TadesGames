@@ -112,7 +112,7 @@
         <div class="row">
             <div class="container form-group-inline">
                 <input type="submit" class="btn btn-success" value="Salvar">
-                <a href="Usuarios" class="btn btn-light" >Cancelar</a>
+                <a href="Usuarios?acao=listar" class="btn btn-light" >Cancelar</a>
             </div>
         </div>
     </form>     

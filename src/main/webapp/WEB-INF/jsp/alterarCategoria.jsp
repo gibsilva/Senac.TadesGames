@@ -38,7 +38,7 @@
         <div class="row">
             <div class=" form-group col-md-2"> 
                 <button type="submit" class="btn btn-success" value="Salvar">Salvar</button>
-                <a href="Categorias" class="btn btn-light">Cancelar</a>
+                <a href="Categorias?acao=listar" class="btn btn-light">Cancelar</a>
             </div>
         </div>
     </form>
