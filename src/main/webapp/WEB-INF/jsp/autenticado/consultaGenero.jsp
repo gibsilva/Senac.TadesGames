@@ -6,14 +6,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="header.jsp" %>
 
-<title>Consulta de Categoria</title>
+<title>Consulta de Gênero</title>
 
 <div class="container">
     <br>
-    <h2>Consulta de Categoria</h2>
+    <h2>Consulta de Gênero</h2>
     <hr>
     <br>
-
     <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
 
         <div class="input-group-append col-md-6">
@@ -22,45 +21,47 @@
         </div>
         <div class="input-group">
             <div>
-                <a href="Categorias?acao=salvar" class="btn btn-outline-primary">Nova Categoria</a>
+                <a href="Generos?acao=salvar" class="btn btn-outline-primary">Novo Gênero</a>
             </div>
         </div>
     </div>
+
     <br>
     <br>
-    <table id="tabelaCategorias" class="table table-hover">
+
+    <table id="tabelaGeneros" class="table table-hover">
         <thead> 
             <tr>
-                <th scope="col">Id</th>
+                <th class="text-center" scope="col">Id</th>
                 <th class="text-center" scope="col">Nome</th>
                 <th class="text-center" scope="col">#</th>
+
             </tr>
         </thead>
         <tbody id="tabela" name="tabela">
-            <c:forEach var="cat" items="${categorias}">
+            <c:forEach var="g" items="${generos}">
                 <tr>
-                    <td>${cat.idCategoria}</td>
-                    <td class="text-center" >${cat.nome}</td>
+                    <td class="text-center">${g.idGenero}</td>
+                    <td class="text-center">${g.nome}</td>
 
-                    <td class="text-center"> 
-                        <c:url var="alterarCategoria" value="/Categorias">
+                    <td class="text-center">
+                        <c:url var="alterarGenero" value="/autenticado/Generos">
                             <c:param name="acao" value="alterar" />
-                            <c:param name="idCategoria" value="${cat.idCategoria}" />
+                            <c:param name="idGenero" value="${g.idGenero}" />
                         </c:url>
-                        <a href="${alterarCategoria}" class="btn btn-sm btn-outline-warning">Editar</a>
+                        <a href="${alterarGenero}" class="btn btn-sm btn-outline-warning">Editar</a>
 
-                        <c:url var="excluir" value="/Categorias">
+                        <c:url var="excluir" value="/autenticado/Generos">
                             <c:param name="excluir" value="excluir" />
-                            <c:param name="c" value="${cat.idCategoria}" />
-                            <c:param name="nomeCategoria" value="${cat.nome}" />
+                            <c:param name="idGenero" value="${g.idGenero}" />
                         </c:url>
-                        <button type="button" class="btn btn-sm btn-outline-danger" onclick="confirmaExclusao(${cat.idCategoria})">Excluir</button>
+                        <button type="button" class="btn btn-sm btn-outline-danger" onclick="confirmaExclusao(${g.idGenero})">Excluir</button>
                     </td>
-
                 </tr>
             </c:forEach>
         </tbody>
-    </table>   
+    </table>
+
 </div>
 
 <!-- Modal -->
@@ -68,17 +69,17 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Excluir Categoria</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Excluir Gênero</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <input type="hidden" value="" name="idCategoriaModal" id="idCategoriaModal">
-                Deseja realmente excluir a categoria de Id <strong id="idTextCategoriaModal"></strong>?
+                <input type="hidden" value="" name="idGeneroModal" id="idGeneroModal">
+                Deseja realmente excluir a plataforma de Id <strong id="idTextGeneroModal"></strong>?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" onclick="excluir($('#idCategoriaModal').val())">Excluir</button>
+                <button type="button" class="btn btn-danger" onclick="excluir($('#idGeneroModal').val())">Excluir</button>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
             </div>
         </div>
@@ -90,12 +91,13 @@
         var statusSalvo = '${statusSalvo}';
         var statusAlterado = '${statusAlterado}';
         if (statusSalvo === 'true') {
-            toastr.success('Categoria salva com sucesso', 'Sucesso');
+            toastr.success('Gênero salvo com sucesso', 'Sucesso');
         } else if (statusAlterado === 'true') {
-            toastr.success('Categoria alterada com sucesso', 'Sucesso');
+            toastr.success('Gênero alterado com sucesso', 'Sucesso');
         }
 
     });
+
 
     $('#filtro').on('keyup', function () {
         var value = $(this).val();
@@ -115,30 +117,30 @@
 
     function confirmaExclusao(id) {
         $('#modalExemplo').modal('show');
-        $('#idTextCategoriaModal').text(id);
-        $('#idCategoriaModal').val(id);
+        $('#idTextGeneroModal').text(id);
+        $('#idGeneroModal').val(id);
     }
 
     function excluir(id) {
         $.ajax({
-            url: 'Categorias?acao=excluir',
+            url: 'Generos?acao=excluir',
             type: 'POST',
-            data: {'idCategoria': id},
+            data: {'idGenero': id},
             success: function (data) {
-                var categoria = $.parseJSON(data);
-                if (categoria.produtos.length !== 0) {
-                    toastr.error('Não é possível excluir a categoria, pois existem ' + categoria.produtos.length + ' produto(s) atribuídos a ela', 'Erro');
+                var genero = $.parseJSON(data);
+                if (genero.produtos.length !== 0) {
+                    toastr.error('Não é possível excluir o gênero, pois existem ' + genero.produtos.length + ' produto(s) atribuídos a ele', 'Erro');
                     $('#modalExemplo').modal('hide');
                 } else {
                     $('#modalExemplo').modal('hide');
-                    $("#tabelaCategorias").load("Categorias #tabelaCategorias");
-                    toastr.success('Categoria removida', 'Info');
+                    $("#tabelaGeneros").load("Generos #tabelaGeneros");
+                    toastr.success('Gênero removido', 'Sucesso');
                 }
-
             },
-            error: function (data) {
+            error: function (jqXHR, textStatus, errorThrown) {
                 toastr.error('Ocorreu um erro ao remover', 'Erro');
             }
         });
     }
 </script>
+

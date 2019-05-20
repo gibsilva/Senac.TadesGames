@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Marcel
  */
-@WebServlet(name = "GeneroControllerServlet", urlPatterns = {"/Generos"})
+@WebServlet(name = "GeneroControllerServlet", urlPatterns = {"/autenticado/Generos"})
 public class GeneroControllerServlet extends HttpServlet {
 
     private final GeneroService service = new GeneroService();
@@ -84,7 +84,7 @@ public class GeneroControllerServlet extends HttpServlet {
 
     protected void criarGenero(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/jsp/cadastroGenero.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/jsp/autenticado/cadastroGenero.jsp").forward(request, response);
     }
 
     protected void incluirGenero(HttpServletRequest request, HttpServletResponse response)
@@ -101,7 +101,7 @@ public class GeneroControllerServlet extends HttpServlet {
                 listarGenero(request, response);
             } else {
                 request.setAttribute("notificacoes", notificacoes);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cadastroGenero.jsp");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/autenticado/cadastroGenero.jsp");
                 dispatcher.forward(request, response);
             }
 
@@ -116,7 +116,7 @@ public class GeneroControllerServlet extends HttpServlet {
     protected void listarGenero(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setAttribute("generos", service.obterListaGenero());
-        request.getRequestDispatcher("/WEB-INF/jsp/consultaGenero.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/jsp/autenticado/consultaGenero.jsp").forward(request, response);
     }
 
     protected void carregarGenero(HttpServletRequest request, HttpServletResponse response)
@@ -125,7 +125,7 @@ public class GeneroControllerServlet extends HttpServlet {
         GeneroModel genero = service.obterGeneroPorId(id);
 
         request.setAttribute("genero", genero);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/alterarGenero.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/autenticado/alterarGenero.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -145,7 +145,7 @@ public class GeneroControllerServlet extends HttpServlet {
             } else {
                 request.setAttribute("notificacoes", notificacoes);
                 request.setAttribute("genero", genero);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/alterarGenero.jsp");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/autenticado/alterarGenero.jsp");
                 dispatcher.forward(request, response);
             }
 

@@ -40,6 +40,7 @@ public class FilialDAO implements IFilialDao {
                     + "COMPLEMENTO, "
                     + "BAIRRO, "
                     + "CIDADE, "
+                    + "ESTADO "
                     + "ESTADO, "
                     + "ATIVO "
                     + "FROM FILIAL WHERE IDFILIAL = ?");
@@ -59,8 +60,7 @@ public class FilialDAO implements IFilialDao {
                         rs.getString("bairro"),
                         rs.getString("cidade"),
                         rs.getString("estado"),
-                        rs.getBoolean("Ativo")
-                        
+                        rs.getBoolean("ativo")
                 );
             }
 
@@ -68,7 +68,7 @@ public class FilialDAO implements IFilialDao {
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt, rs);
             return null;
-        } finally{
+        } finally {
             conexao.closeConnection(conn, stmt, rs);
         }
     }
@@ -80,7 +80,7 @@ public class FilialDAO implements IFilialDao {
         List<FilialModel> filiais = new ArrayList<FilialModel>();
 
         try {
-             stmt = conn.prepareStatement("SELECT IDFILIAL, "
+            stmt = conn.prepareStatement("SELECT IDFILIAL, "
                     + "NOME, "
                     + "CNPJ, "
                     + "CEP, "
@@ -106,7 +106,7 @@ public class FilialDAO implements IFilialDao {
                         rs.getString("bairro"),
                         rs.getString("cidade"),
                         rs.getString("estado"),
-                        rs.getBoolean("Ativo")
+                        rs.getBoolean("ativo")
                 );
 
                 filiais.add(filial);
@@ -116,7 +116,7 @@ public class FilialDAO implements IFilialDao {
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt, rs);
             return null;
-        } finally{
+        } finally {
             conexao.closeConnection(conn, stmt, rs);
         }
     }
@@ -137,7 +137,7 @@ public class FilialDAO implements IFilialDao {
                     + "CIDADE, "
                     + "ESTADO, "
                     + "ATIVO) "
-                    + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             stmt.setString(1, filial.getNome());
             stmt.setString(2, filial.getCnpj());
             stmt.setString(3, filial.getCep());
@@ -153,7 +153,7 @@ public class FilialDAO implements IFilialDao {
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt);
             throw new RuntimeException(ex.getMessage());
-        } finally{
+        } finally {
             conexao.closeConnection(conn, stmt);
         }
     }
@@ -184,16 +184,16 @@ public class FilialDAO implements IFilialDao {
             stmt.setString(8, filial.getEstado());
             stmt.setBoolean(9, filial.getAtivo());
             stmt.setInt(10, filial.getIdFilial());
-            
+
             stmt.executeUpdate();
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt);
             throw new RuntimeException(ex.getMessage());
-        } finally{
+        } finally {
             conexao.closeConnection(conn, stmt);
         }
     }
-    
+
     @Override
     public FilialModel obterPorCnpj(String cnpj) {
         Connection conn = conexao.getConnection();
@@ -236,11 +236,11 @@ public class FilialDAO implements IFilialDao {
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt, rs);
             return null;
-        } finally{
+        } finally {
             conexao.closeConnection(conn, stmt, rs);
         }
     }
-    
+
     public FilialModel obterPorCnpj(String cnpj, int id) {
         Connection conn = conexao.getConnection();
         FilialModel filial = null;
@@ -256,7 +256,7 @@ public class FilialDAO implements IFilialDao {
                     + "BAIRRO, "
                     + "CIDADE, "
                     + "ESTADO, "
-                    + "ATIVO"
+                    + "ATIVO "
                     + "FROM FILIAL WHERE CNPJ = ? AND IDFILIAL != ?");
 
             stmt.setString(1, cnpj);
@@ -283,7 +283,7 @@ public class FilialDAO implements IFilialDao {
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt, rs);
             return null;
-        } finally{
+        } finally {
             conexao.closeConnection(conn, stmt, rs);
         }
     }

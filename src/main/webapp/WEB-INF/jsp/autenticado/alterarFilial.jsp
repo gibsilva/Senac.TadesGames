@@ -23,7 +23,7 @@
     <form action="Filiais" method="post">
         <input type="hidden" value="${filial.idFilial}" id="idFilial" name="idFilial">
         <input type="hidden" value="alterar" id="acao" name="acao">
-        
+
         <div class="row">
             <div class="form-group col-md-5">
                 <label for="nome">Nome da Filial<h11 class="text-danger">*</h11></label>
@@ -83,14 +83,14 @@
                 <input type="text" class="form-control" id="uf" name="uf" 
                        placeholder="Digite estado" required value="${filial.estado}" readonly>
             </div>
-            
+
             <div class="form-group col-md-2">
-                    <label for="inputAtivo">Status</label>
-                    <select id="ativo" name="ativo" class="custom-select" required >
-                        <option value="true">Ativo</option>
-                        <option value="false">Inativo</option>                           
-                    </select>
-                </div>
+                <label for="inputAtivo">Status</label>
+                <select id="ativo" name="ativo" class="custom-select" required >
+                    <option value="true">Ativo</option>
+                    <option value="false">Inativo</option>                           
+                </select>
+            </div>
 
         </div>
 
@@ -98,7 +98,7 @@
         <div class="row">
             <div class="container form-group-inline">
                 <input type="submit" class="btn btn-success" value="Salvar">
-                <a href="Filiais?acao=listar" class="btn btn-light" >Cancelar</a>
+                <a href="Filiais" class="btn btn-light" >Cancelar</a>
             </div>
         </div>
 
@@ -107,7 +107,9 @@
 
 <script>
     $(document).ready(function () {
+        
         document.getElementById('ativo').value = '${filial.ativo}';
+
         $('.date').mask('00/00/0000');
         $('.time').mask('00:00:00');
         $('.date_time').mask('00/00/0000 00:00:00');
@@ -143,52 +145,52 @@
         });
         $('.selectonfocus').mask("00/00/0000", {selectOnFocus: true});
     });
-    
-        //estamos usando uma api gratuita para a consulta de CEPs
-    $("#cep").focusout(function(){
-        if($("#cep").val() === '00000-000' || $("#cep").val() === '11111-111'){
+
+    //estamos usando uma api gratuita para a consulta de CEPs
+    $("#cep").focusout(function () {
+        if ($("#cep").val() === '00000-000' || $("#cep").val() === '11111-111') {
             cepInvalido();
-        } else{
-            		//Início do Comando AJAX
-		$.ajax({
-			//O campo URL diz o caminho de onde virá os dados
-			//É importante concatenar o valor digitado no CEP
-			url: 'https://viacep.com.br/ws/'+$(this).val()+'/json/unicode/',
-			//Aqui você deve preencher o tipo de dados que será lido,
-			//no caso, estamos lendo JSON.
-			dataType: 'json',
-			//SUCESS é referente a função que será executada caso
-			//ele consiga ler a fonte de dados com sucesso.
-			//O parâmetro dentro da função se refere ao nome da variável
-			//que você vai dar para ler esse objeto.
-			success: function(resposta){
-				//Agora basta definir os valores que você deseja preencher
-				//automaticamente nos campos acima.
-				$("#logradouro").val(resposta.logradouro);
-				$("#complemento").val(resposta.complemento);
-				$("#bairro").val(resposta.bairro);
-				$("#cidade").val(resposta.localidade);
-				$("#uf").val(resposta.uf);
-				//Vamos incluir para que o Número seja focado automaticamente
-				//melhorando a experiência do usuário
-				$("#numero").focus();
-			},
-                        error: function(resposta){
-                            cepInvalido();
-                        }
-		});
-            }
-	});
-        
-        function cepInvalido(){
-            toastr.warning('Cep inválido', 'Aviso');
-            $('#cep').val('');
-            $("#logradouro").val('');
-            $("#complemento").val('');
-            $("#bairro").val('');
-            $("#cidade").val('');
-            $("#uf").val('');
-            $("#cep").focus();
+        } else {
+            //Início do Comando AJAX
+            $.ajax({
+                //O campo URL diz o caminho de onde virá os dados
+                //É importante concatenar o valor digitado no CEP
+                url: 'https://viacep.com.br/ws/' + $(this).val() + '/json/unicode/',
+                //Aqui você deve preencher o tipo de dados que será lido,
+                //no caso, estamos lendo JSON.
+                dataType: 'json',
+                //SUCESS é referente a função que será executada caso
+                //ele consiga ler a fonte de dados com sucesso.
+                //O parâmetro dentro da função se refere ao nome da variável
+                //que você vai dar para ler esse objeto.
+                success: function (resposta) {
+                    //Agora basta definir os valores que você deseja preencher
+                    //automaticamente nos campos acima.
+                    $("#logradouro").val(resposta.logradouro);
+                    $("#complemento").val(resposta.complemento);
+                    $("#bairro").val(resposta.bairro);
+                    $("#cidade").val(resposta.localidade);
+                    $("#uf").val(resposta.uf);
+                    //Vamos incluir para que o Número seja focado automaticamente
+                    //melhorando a experiência do usuário
+                    $("#numero").focus();
+                },
+                error: function (resposta) {
+                    cepInvalido();
+                }
+            });
         }
+    });
+
+    function cepInvalido() {
+        toastr.warning('Cep inválido', 'Aviso');
+        $('#cep').val('');
+        $("#logradouro").val('');
+        $("#complemento").val('');
+        $("#bairro").val('');
+        $("#cidade").val('');
+        $("#uf").val('');
+        $("#cep").focus();
+    }
 
 </script>

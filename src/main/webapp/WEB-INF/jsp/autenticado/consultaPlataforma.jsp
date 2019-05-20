@@ -6,11 +6,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="header.jsp" %>
 
-<title>Consulta de Gênero</title>
+<title>Consulta de Plataforma</title>
 
 <div class="container">
     <br>
-    <h2>Consulta de Gênero</h2>
+    <h2>Consulta de Plataforma</h2>
     <hr>
     <br>
     <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
@@ -21,7 +21,7 @@
         </div>
         <div class="input-group">
             <div>
-                <a href="Generos?acao=salvar" class="btn btn-outline-primary">Novo Gênero</a>
+                <a href="${pageContext.request.contextPath}/autenticado/Plataformas?acao=salvar" class="btn btn-outline-primary">Nova Plataforma</a>
             </div>
         </div>
     </div>
@@ -29,33 +29,33 @@
     <br>
     <br>
 
-    <table id="tabelaGeneros" class="table table-hover">
+    <table id="tabelaPlataformas" class="table table-hover">
         <thead> 
             <tr>
-                <th class="text-center" scope="col">Id</th>
+                <th scope="col">Id</th>
                 <th class="text-center" scope="col">Nome</th>
                 <th class="text-center" scope="col">#</th>
 
             </tr>
         </thead>
         <tbody id="tabela" name="tabela">
-            <c:forEach var="g" items="${generos}">
+            <c:forEach var="p" items="${plataformas}">
                 <tr>
-                    <td class="text-center">${g.idGenero}</td>
-                    <td class="text-center">${g.nome}</td>
+                    <td>${p.idPlataforma}</td>
+                    <td class="text-center">${p.nome}</td>
 
                     <td class="text-center">
-                        <c:url var="alterarGenero" value="/Generos">
+                        <c:url var="alterarPlataforma" value="/autenticado/Plataformas">
                             <c:param name="acao" value="alterar" />
-                            <c:param name="idGenero" value="${g.idGenero}" />
+                            <c:param name="idPlataforma" value="${p.idPlataforma}" />
                         </c:url>
-                        <a href="${alterarGenero}" class="btn btn-sm btn-outline-warning">Editar</a>
+                        <a href="${alterarPlataforma}" class="btn btn-sm btn-outline-warning">Editar</a>
 
-                        <c:url var="excluir" value="/Generos">
+                        <c:url var="excluir" value="/autenticado/Plataformas">
                             <c:param name="excluir" value="excluir" />
-                            <c:param name="idGenero" value="${g.idGenero}" />
+                            <c:param name="idPlataforma" value="${p.idPlataforma}" />
                         </c:url>
-                        <button type="button" class="btn btn-sm btn-outline-danger" onclick="confirmaExclusao(${g.idGenero})">Excluir</button>
+                        <button type="button" class="btn btn-sm btn-outline-danger" onclick="confirmaExclusao(${p.idPlataforma})">Excluir</button>
                     </td>
                 </tr>
             </c:forEach>
@@ -69,17 +69,17 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Excluir Gênero</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Excluir Plataforma</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <input type="hidden" value="" name="idGeneroModal" id="idGeneroModal">
-                Deseja realmente excluir a plataforma de Id <strong id="idTextGeneroModal"></strong>?
+                <input type="hidden" value="" name="idPlataformaModal" id="idPlataformaModal">
+                Deseja realmente excluir a plataforma de Id <strong id="idTextPlataformaModal"></strong>?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" onclick="excluir($('#idGeneroModal').val())">Excluir</button>
+                <button type="button" class="btn btn-danger" onclick="excluir($('#idPlataformaModal').val())">Excluir</button>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
             </div>
         </div>
@@ -87,13 +87,14 @@
 </div>
 
 <script>
+
     $(document).ready(function () {
         var statusSalvo = '${statusSalvo}';
         var statusAlterado = '${statusAlterado}';
         if (statusSalvo === 'true') {
-            toastr.success('Gênero salvo com sucesso', 'Sucesso');
+            toastr.success('Plataforma salva com sucesso', 'Sucesso');
         } else if (statusAlterado === 'true') {
-            toastr.success('Gênero alterado com sucesso', 'Sucesso');
+            toastr.success('Plataforma alterada com sucesso', 'Sucesso');
         }
 
     });
@@ -117,24 +118,24 @@
 
     function confirmaExclusao(id) {
         $('#modalExemplo').modal('show');
-        $('#idTextGeneroModal').text(id);
-        $('#idGeneroModal').val(id);
+        $('#idTextPlataformaModal').text(id);
+        $('#idPlataformaModal').val(id);
     }
 
     function excluir(id) {
         $.ajax({
-            url: 'Generos?acao=excluir',
+            url: 'Plataformas?acao=excluir',
             type: 'POST',
-            data: {'idGenero': id},
+            data: {'idPlataforma': id},
             success: function (data) {
-                var genero = $.parseJSON(data);
-                if (genero.produtos.length !== 0) {
-                    toastr.error('Não é possível excluir o gênero, pois existem ' + genero.produtos.length + ' produto(s) atribuídos a ele', 'Erro');
+                var plataforma = $.parseJSON(data);
+                if (plataforma.produtos.length !== 0) {
+                    toastr.error('Não é possível excluir a plataforma, pois existem ' + plataforma.produtos.length + ' produto(s) atribuídos a ela', 'Erro');
                     $('#modalExemplo').modal('hide');
                 } else {
                     $('#modalExemplo').modal('hide');
-                    $("#tabelaGeneros").load("Generos #tabelaGeneros");
-                    toastr.success('Gênero removido', 'Sucesso');
+                    $("#tabelaPlataformas").load("Plataformas #tabelaPlataformas");
+                    toastr.success('Plataforma removida', 'Info');
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {
@@ -143,4 +144,3 @@
         });
     }
 </script>
-

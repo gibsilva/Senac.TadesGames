@@ -50,11 +50,21 @@ public class UsuarioService {
         }
     }
 
+    public void validaQuantidadeCaracteresCredenciais(String login, String senha) {
+        if (login.length() > 15 || login.length() < 6) {
+            this.notificacao.adicionaNotificacao("login", "Login deve ter a quantidade de caracteres entre 6 e 15");
+        }
+
+        if (senha.length() > 8 || senha.length() < 4) {
+            this.notificacao.adicionaNotificacao("senha", "Senha deve ter a quantidade de caracteres entre 4 e 8");
+        }
+    }
+
     private boolean validarUsuarioInclusao(UsuarioModel usuario) {
         if (!validarCpf(usuario.getCpf())) {
             this.notificacao.adicionaNotificacao("cpf", "CPF inválido, por favor digite um CPF válido");
         }
-
+        
         validaCpfExistente(usuario.getCpf());
         validaEmailExistente(usuario.getEmail());
         validaLoginExistente(usuario.getLogin());
@@ -169,8 +179,23 @@ public class UsuarioService {
         }
     }
 
-    public static boolean validarLogin(String login, String senha) {
-        UsuarioDAO dao = new UsuarioDAO();
-        return dao.validarLogin(login, senha);
+    public UsuarioModel autenticar(String login, String senha) {
+        return validarAutenticacao(login, senha);
     }
+
+    private UsuarioModel validarAutenticacao(String login, String senha) {
+        if (login.equals("") || senha.equals("")) {
+            this.notificacao.adicionaNotificacao("LoginSenha", "Nome de usuário ou senha não podem ser vazios");
+            return null;
+        } else {
+            UsuarioModel usuario = usuarioDao.obterPorLogin(login);
+            if (usuario != null && usuario.validarSenha(senha)) {
+                return usuario;
+            } else {
+                this.notificacao.adicionaNotificacao("Invalido", "Nome de usuário ou senha incorreto, verifique os dados digitados");
+                return null;
+            }
+        }
+    }
+
 }

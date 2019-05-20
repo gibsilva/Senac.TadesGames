@@ -18,13 +18,11 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author adrianne
  */
-@WebServlet(name = "UsuarioControllerServlet", urlPatterns = {"/Usuarios"})
+@WebServlet(name = "UsuarioControllerServlet", urlPatterns = {"/autenticado/Usuarios"})
 public class UsuarioControllerServlet extends HttpServlet {
 
     private final UsuarioService usuarioService = new UsuarioService();
     private final FilialService filialService = new FilialService();
-
-
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -86,6 +84,8 @@ public class UsuarioControllerServlet extends HttpServlet {
         String login = request.getParameter("login");
         String senha = request.getParameter("senha");
 
+        usuarioService.validaQuantidadeCaracteresCredenciais(login, senha);
+
         UsuarioModel usuario = new UsuarioModel(0, nome, cpf, email, setor, cargo, login, senha, idFilial, sexo, true);
 
         try {
@@ -96,7 +96,7 @@ public class UsuarioControllerServlet extends HttpServlet {
             } else {
                 request.setAttribute("notificacoes", notificacoes);
                 request.setAttribute("filiais", filialService.obterListaFiliais());
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cadastroUsuario.jsp");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/autenticado/cadastroUsuario.jsp");
                 dispatcher.forward(request, response);
             }
 
@@ -112,7 +112,7 @@ public class UsuarioControllerServlet extends HttpServlet {
             throws ServletException, IOException {
         List<UsuarioModel> usuarios = usuarioService.obterListaUsuarios();
         request.setAttribute("usuarios", usuarios);
-        request.getRequestDispatcher("/WEB-INF/jsp/consultaUsuario.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/jsp/autenticado/consultaUsuario.jsp").forward(request, response);
     }
 
     protected void carregarUsuario(HttpServletRequest request, HttpServletResponse response)
@@ -122,15 +122,15 @@ public class UsuarioControllerServlet extends HttpServlet {
 
         request.setAttribute("usuario", usuario);
         request.setAttribute("filiais", filialService.obterListaFiliais());
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/alterarUsuario.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/autenticado/alterarUsuario.jsp");
         dispatcher.forward(request, response);
     }
 
     protected void criarUsuario(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setAttribute("filiais", filialService.obterListaFiliais());
-        
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cadastroUsuario.jsp");
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/autenticado/cadastroUsuario.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -150,6 +150,8 @@ public class UsuarioControllerServlet extends HttpServlet {
         String senha = request.getParameter("senha");
         boolean ativo = Boolean.parseBoolean(request.getParameter("ativo"));
 
+        usuarioService.validaQuantidadeCaracteresCredenciais(login, senha);
+
         UsuarioModel usuario = new UsuarioModel(id, nome, cpf, email, setor, cargo, login, senha, idFilial, sexo, ativo);
 
         try {
@@ -161,12 +163,12 @@ public class UsuarioControllerServlet extends HttpServlet {
                 request.setAttribute("notificacoes", notificacoes);
                 request.setAttribute("usuario", usuario);
                 request.setAttribute("filiais", filialService.obterListaFiliais());
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/alterarUsuario.jsp");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/autenticado/alterarUsuario.jsp");
                 dispatcher.forward(request, response);
             }
 
         } catch (Exception e) {
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/erro.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/erro.jsp");
             dispatcher.forward(request, response);
         } finally {
             usuarioService.limparNotificacoes();

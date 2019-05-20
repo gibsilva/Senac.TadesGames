@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Gih
  */
-@WebServlet("/Filiais")
+@WebServlet(name = "FilialControllerServlet", urlPatterns = {"/autenticado/Filiais"})
 public class FilialControllerServlet extends HttpServlet {
 
     private final FilialService service = new FilialService();
@@ -80,7 +80,7 @@ public class FilialControllerServlet extends HttpServlet {
     
     protected void criarFilial(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException{
-        request.getRequestDispatcher("/WEB-INF/jsp/cadastroFilial.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/jsp/autenticado/cadastroFilial.jsp").forward(request, response);
     }   
 
     protected void incluirFilial(HttpServletRequest request, HttpServletResponse response)
@@ -105,12 +105,12 @@ public class FilialControllerServlet extends HttpServlet {
                 listarFiliais(request, response);
             } else {
                 request.setAttribute("notificacoes", notificacoes);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cadastroFilial.jsp");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/autenticado/cadastroFilial.jsp");
                 dispatcher.forward(request, response);
             }
 
         } catch (ServletException | IOException e) {
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/erro.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/erro.jsp");
             dispatcher.forward(request, response);
         } finally {
             service.limparNotificacoes();
@@ -120,7 +120,7 @@ public class FilialControllerServlet extends HttpServlet {
     protected void listarFiliais(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setAttribute("filiais", service.obterListaFiliais());
-        request.getRequestDispatcher("/WEB-INF/jsp/consultaFilial.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/jsp/autenticado/consultaFilial.jsp").forward(request, response);
     }
 
     protected void alterarFilial(HttpServletRequest request, HttpServletResponse response)
@@ -147,12 +147,12 @@ public class FilialControllerServlet extends HttpServlet {
                 listarFiliais(request, response);
             } else {
                 request.setAttribute("notificacoes", notificacoes);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/alterarFilial.jsp");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/autenticado/alterarFilial.jsp");
                 dispatcher.forward(request, response);
             }
 
         } catch (ServletException | IOException e) {
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/erro.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/erro.jsp");
             dispatcher.forward(request, response);
         } finally {
             service.limparNotificacoes();
@@ -165,7 +165,7 @@ public class FilialControllerServlet extends HttpServlet {
         FilialModel filial = service.obterPorId(id);
 
         request.setAttribute("filial", filial);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/alterarFilial.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/autenticado/alterarFilial.jsp");
         dispatcher.forward(request, response);
     }
 

@@ -22,7 +22,7 @@
 
     </div>
     
-    <form action="Usuarios" method="post">
+    <form action="Usuarios" method="post" id="form">
         <input type="hidden" value="salvar" id="acao" name="acao">
 
         <div class="row">
@@ -97,7 +97,7 @@
 
         <div class="row ">
             <div class="form-group col-md-4">
-                <label for="inputLogin">Login:<h11 class="text-danger">*</h11></label>
+                <label for="inputLogin">Login<h11 class="text-danger">*</h11></label>
                 <input type="text" class="form-control" id="login" name="login" minlength="6" maxlength="15" placeholder="Login" required>
             </div>
 
@@ -120,7 +120,8 @@
 
 <script>
     $(document).ready(function () {
-
+        $('#form')[0].reset();
+        
         $('.date').mask('00/00/0000');
         $('.time').mask('00:00:00');
         $('.date_time').mask('00/00/0000 00:00:00');

@@ -77,40 +77,7 @@
 
         </span>
         <br>
-        <!--
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th class="text-center" scope="col">ID Produto</th>
-                    <th class="text-center" scope="col">Nome/Titulo</th>
-                    <th class="text-center" scope="col">Categoria</th>
-                    <th class="text-center" scope="col">Plataforma</th>
-                    <th class="text-center" scope="col">Gênero</th>
-                    <th class="text-center" scope="col">Quantidade</th>
-                    <th class="text-center" scope="col">Preço Unitario</th>
-                    <th class="text-center" scope="col">Preço Total</th>
-                    <th class="text-center" scope="cool">#</th>
 
-                </tr>
-            </thead>
-
-            <tbody id="tabela" name="tabela">
-                <tr class="table-light">
-                    <td class="text-center">01</td>
-                    <td class="text-center">The Last of Us</td>
-                    <td class="text-center">Console</td>
-                    <td class="text-center">Playstation 4</td>
-                    <td class="text-center">sobrevivencia</td>
-                    <td class="text-center">1</td>
-                    <td class="text-center">150,00</td>
-                    <td class="text-center">150,00</td>
-                    <td class="text-center">
-                        <button type="button" class="btn btn-danger btn-sm">excluir</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        -->
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -128,7 +95,7 @@
             </thead>
 
             <tbody id="tabela" name="tabela">
-
+                <!--preenchido conforme for adicionando produtos-->
             </tbody>
         </table>
 
@@ -224,7 +191,7 @@
                 Cliente não cadastrado, deseja realizar o cadastro desse cliente?
             </div>
             <div class="modal-footer">
-                <a href="Clientes?acao=salvar" class="btn btn-warning">Cadastrar</a>
+                <a href="${pageContext.request.contextPath}/autenticado/Clientes?acao=salvar" class="btn btn-warning">Cadastrar</a>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
             </div>
         </div>
@@ -313,7 +280,7 @@
     });
 
     function editarClienteInativo(id) {
-        $('#linkEditarCliente').attr('href', 'Clientes?acao=alterar&idCliente=' + id);
+        $('#linkEditarCliente').attr('href', '${pageContext.request.contextPath}/autenticado/Clientes?acao=alterar&idCliente=' + id);
     }
 
     function obterCliente() {

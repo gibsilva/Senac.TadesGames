@@ -1,16 +1,16 @@
 <%-- 
-    Document   : consultaCliente
-    Created on : 20/04/2019, 23:54:54
-    Author     : Gi
+    Document   : consultaUsuario
+    Created on : 24/04/2019, 16:15:48
+    Author     : adrianne
 --%>
+
 <%@include file="header.jsp" %>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-<title>Consulta de Cliente</title>
+<title>Consulta de Usuarios</title>
 
 <div class="col-md-10 container">
     <br>
-    <h2>Consulta de Clientes</h2>
-    <hr>
+    <h2>Consulta de Usuarios</h2>
     <br>
     <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
 
@@ -20,7 +20,7 @@
         </div>
         <div class="input-group">
             <div>
-                <a href="Clientes?acao=salvar" class="btn btn-outline-primary">Novo Cliente</a>
+                <a href="${pageContext.request.contextPath}/autenticado/Usuarios?acao=salvar" class="btn btn-outline-primary">Novo Usuario</a>
             </div>
 
         </div>
@@ -33,63 +33,61 @@
                 <th class="text-center" scope="col">Id</th>
                 <th class="text-center" scope="col">Nome</th>
                 <th class="text-center" scope="col">CPF</th>
-                <th class="text-center" scope="col">CNPJ</th>
-                <th class="text-center" scope="col">Data Nasc.</th>
                 <th class="text-center" scope="col">Sexo</th>
+                <th class="text-center" scope="col">Filial</th>
+                <th class="text-center" scope="col">Setor</th>
+                <th class="text-center" scope="col">Cargo</th>
                 <th class="text-center" scope="col">E-mail</th>
-                <th class="text-center" scope="col">Telefone</th>
-                <th class="text-center" scope="col">Celular</th>
+                <th class="text-center" scope="col">Login</th>
                 <th class="text-center" scope="col">Status</th>
                 <th class="text-center" scope="col">#</th>
-
             </tr>
         </thead>
         <tbody id="tabela" name="tabela">
-            <c:forEach var="c" items="${clientes}">
+            <c:forEach var="u" items="${usuarios}">
                 <tr>
-                    <td class="text-center">${c.idCliente}</td>
-                    <td class="text-center">${c.nome}</td>
-                    <td class="text-center">${c.cpf}</td>
-                    <td class="text-center">${c.cnpj}</td>
-                    <td class="text-center">${c.dataNasc}</td>
-                    <td class="text-center">${c.sexo}</td>
-                    <td class="text-center">${c.email}</td>
-                    <td class="text-center">${c.telefone}</td>
-                    <td class="text-center">${c.celular}</td>
-                    <c:if test="${c.ativo == true}">
+                    <td class="text-center">${u.idUsuario}</td>
+                    <td class="text-center">${u.nome}</td>
+                    <td class="text-center">${u.cpf}</td>
+                    <td class="text-center">${u.sexo}</td>
+                    <td class="text-center">${u.filial.nome}</td>
+                    <td class="text-center">${u.setor}</td>
+                    <td class="text-center">${u.cargo}</td>
+                    <td class="text-center">${u.email}</td>
+                    <td class="text-center">${u.login}</td>
+
+                    <c:if test="${u.ativo == true}">
                         <td class="text-center">Ativo</td>
                     </c:if>
-                    <c:if test="${c.ativo == false}">
+                    <c:if test="${u.ativo == false}">
                         <td class="text-center">Inativo</td>
                     </c:if>
                     <td class="text-center">
-                        <c:url var="alterarCliente" value="/Clientes">
+                        <c:url var="alterarUsuario" value="/autenticado/Usuarios">
                             <c:param name="acao" value="alterar" />
-                            <c:param name="idCliente" value="${c.idCliente}" />
+                            <c:param name="idUsuario" value="${u.idUsuario}" />
                         </c:url>
-                        <a href="${alterarCliente}" class="btn btn-outline-warning">Editar</a>
+                        <a href="${alterarUsuario}" class="btn btn-outline-warning">Editar</a>
                     </td>
                 </tr>
             </c:forEach>
         </tbody>
     </table>
 
-    <hr>
-
 </div>
 
 <script>
-
     $(document).ready(function () {
         var statusSalvo = '${statusSalvo}';
         var statusAlterado = '${statusAlterado}';
         if (statusSalvo === 'true') {
-            toastr.success('Cliente salvo com sucesso', 'Sucesso');
+            toastr.success('Usuário salvo com sucesso', 'Sucesso');
         } else if (statusAlterado === 'true') {
-            toastr.success('Cliente alterado com sucesso', 'Sucesso');
+            toastr.success('Usuário alterado com sucesso', 'Sucesso');
         }
-              
+
     });
+
 
     $('#filtro').on('keyup', function () {
         var value = $(this).val();

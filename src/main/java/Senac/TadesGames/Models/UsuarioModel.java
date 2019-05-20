@@ -11,7 +11,7 @@ import org.mindrot.jbcrypt.BCrypt;
  *
  * @author Gi
  */
-public class UsuarioModel extends PessoaModel {
+public final class UsuarioModel extends PessoaModel {
 
     private int idUsuario;
     private String setor;
@@ -33,7 +33,10 @@ public class UsuarioModel extends PessoaModel {
         this.setor = setor;
         this.cargo = cargo;
         this.login = login;
-        setHashSenha(senha);
+        if(senha.length() == 60)
+            this.senha = senha;
+        else
+            setSenhaEncriptada(senha);
         this.idFilial = idFilial;
         this.sexo = sexo;
         this.ativo = ativo;
@@ -99,14 +102,23 @@ public class UsuarioModel extends PessoaModel {
      * @return the senha
      */
     public String getSenha() {
-        return senha;
+        return this.senha;
     }
 
+    private void setSenhaEncriptada(String senha) {
+        this.senha = BCrypt.hashpw(senha, BCrypt.gensalt(12));
+    }
+    
     /**
      * @param senha the senha to set
      */
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public boolean validarSenha(String senha) {
+        boolean senhaValida = BCrypt.checkpw(senha, this.getSenha());
+        return senhaValida;
     }
 
     /**
@@ -151,11 +163,4 @@ public class UsuarioModel extends PessoaModel {
         this.filial = filial;
     }
 
-    public final void setHashSenha(String senhaAberta) {
-        this.senha = BCrypt.hashpw(senhaAberta, BCrypt.gensalt());
-    }
-
-    public boolean validarSenha(String senhaAberta) {
-        return BCrypt.checkpw(senhaAberta, senha);
-    }
 }

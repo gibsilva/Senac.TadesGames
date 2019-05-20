@@ -1,7 +1,11 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package Senac.TadesGames.Servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,14 +17,14 @@ import javax.servlet.http.HttpSession;
  *
  * @author Giovanni.Carignato
  */
-@WebServlet(name = "LogoutServlet", urlPatterns = {"/logout"})
+@WebServlet(name = "LogoutControllerServlet", urlPatterns = {"/autenticado/Logout"})
 public class LogoutControllerServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession sessao = request.getSession();
         sessao.invalidate();
-        response.sendRedirect("login.jsp");
+        response.sendRedirect("WEB-INF/jsp/login.jsp");
     }
 
     @Override

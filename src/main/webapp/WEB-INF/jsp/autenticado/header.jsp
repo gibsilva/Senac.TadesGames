@@ -10,13 +10,13 @@
 <html lang="pt-BR">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="resources/css/bootsWacth/bootstrap.min.css"/>
-        <link rel="stylesheet" href="resources/css/toastr.min.css"/>
+        <link rel="stylesheet" href="../resources/css/bootsWacth/bootstrap.min.css"/>
+        <link rel="stylesheet" href="../resources/css/toastr.min.css"/>
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <a class="navbar-brand" href="#">
-                <img alt="Brand" src="resources/img/LogoTadesGamesLaranja55x55.png">
+                <img alt="Brand" src="../resources/img/LogoTadesGamesLaranja55x55.png">
             </a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,7 +26,7 @@
             <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="home.jsp">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/autenticado/Home">Home <span class="sr-only">(current)</span></a>
                     </li>
 
                     <li class="nav-item dropdown">
@@ -55,7 +55,7 @@
                             <a class="dropdown-item" href="Plataformas">Consulta de Plataforma</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="Categorias?acao=salvar">Cadastro de Categoria</a>
-                            <a class="dropdown-item" href="Categorias">Consulta de Categoria</a>
+                            <a class="dropdown-item" href="Categorias?acao=listar">Consulta de Categoria</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="Generos?acao=salvar">Cadastro de Gênero</a>
                             <a class="dropdown-item" href="Generos">Consulta de Gênero</a>
@@ -75,7 +75,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Usuário</a>
                         <div class="dropdown-menu">
-                            <c:url var="salvarUsuario" value="/Usuarios">
+                            <c:url var="salvarUsuario" value="/autenticado/Usuarios">
                                 <c:param name="acao" value="salvar" />
                             </c:url>
                             <a href="${salvarUsuario}" class="dropdown-item">Cadastrar Usuário</a>
@@ -97,14 +97,14 @@
 
 
                 <form class="form-inline my-2 my-lg-0">
-                    <a href="${pageContext.request.contextPath}/logout" style="color:white" class="btn btn-warning my-2 my-sm-0" type="submit" >Logout</a>
+                    <a href="${pageContext.request.contextPath}/autenticado/Logout" style="color:white" class="btn btn-warning my-2 my-sm-0" type="submit" >Sair</a>
                 </form>
             </div>
         </nav>
 
-        <script type="text/javascript" src="resources/js/jquery.min.js"></script>  
-        <script type="text/javascript" src="resources/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="resources/js/jquery.mask.js"></script> 
-        <script type="text/javascript" src="resources/js/toastr.min.js"></script> 
+        <script type="text/javascript" src="../resources/js/jquery.min.js"></script>  
+        <script type="text/javascript" src="../resources/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../resources/js/jquery.mask.js"></script> 
+        <script type="text/javascript" src="../resources/js/toastr.min.js"></script> 
     </body>
 </html>

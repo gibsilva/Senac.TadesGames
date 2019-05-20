@@ -13,6 +13,7 @@ import java.util.List;
  * @author Gi
  */
 public class FilialModel {
+
     private int idFilial;
     private String cnpj;
     private String nome;
@@ -27,9 +28,9 @@ public class FilialModel {
     private List<ProdutoModel> produtos;
     private List<PedidoModel> pedidos;
     private List<UsuarioModel> usuarios;
-    
-    public FilialModel(int idFilial, String cnpj, String nome, String cep, 
-            String logradouro, int numero, String complemento, String bairro, String cidade, String estado, boolean ativo ){
+
+    public FilialModel(int idFilial, String cnpj, String nome, String cep,
+            String logradouro, int numero, String complemento, String bairro, String cidade, String estado, boolean ativo) {
         this.idFilial = idFilial;
         this.cnpj = cnpj;
         this.nome = nome;
@@ -227,7 +228,7 @@ public class FilialModel {
     public void setEstado(String estado) {
         this.estado = estado;
     }
-    
+
     /**
      * @return the ativo
      */
@@ -241,5 +242,4 @@ public class FilialModel {
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
     }
-    
 }

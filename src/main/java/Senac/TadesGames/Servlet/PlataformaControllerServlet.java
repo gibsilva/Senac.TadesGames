@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Marcel
  */
-@WebServlet(name = "PlataformaControllerServlet", urlPatterns = {"/Plataformas"})
+@WebServlet(name = "PlataformaControllerServlet", urlPatterns = {"/autenticado/Plataformas"})
 public class PlataformaControllerServlet extends HttpServlet {
 
     private final PlataformaService service = new PlataformaService();
@@ -84,7 +84,7 @@ public class PlataformaControllerServlet extends HttpServlet {
 
     protected void criarPlataforma(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/jsp/cadastroPlataforma.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/jsp/autenticado/cadastroPlataforma.jsp").forward(request, response);
     }
 
     protected void incluirPlataforma(HttpServletRequest request, HttpServletResponse response)
@@ -101,7 +101,7 @@ public class PlataformaControllerServlet extends HttpServlet {
                 listarPlataforma(request, response);
             } else {
                 request.setAttribute("notificacoes", notificacoes);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cadastroPlataforma.jsp");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/autenticado/cadastroPlataforma.jsp");
                 dispatcher.forward(request, response);
             }
 
@@ -116,7 +116,7 @@ public class PlataformaControllerServlet extends HttpServlet {
     protected void listarPlataforma(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setAttribute("plataformas", service.obterListaPlataforma());
-        request.getRequestDispatcher("/WEB-INF/jsp/consultaPlataforma.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/jsp/autenticado/consultaPlataforma.jsp").forward(request, response);
     }
 
     protected void carregarPlataforma(HttpServletRequest request, HttpServletResponse response)
@@ -125,7 +125,7 @@ public class PlataformaControllerServlet extends HttpServlet {
         PlataformaModel plataforma = service.obterPlataformaPorId(id);
 
         request.setAttribute("plataforma", plataforma);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/alterarPlataforma.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/autenticado/alterarPlataforma.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -145,7 +145,7 @@ public class PlataformaControllerServlet extends HttpServlet {
             } else {
                 request.setAttribute("notificacoes", notificacoes);
                 request.setAttribute("plataforma", plataforma);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/alterarPlataforma.jsp");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/autenticado/alterarPlataforma.jsp");
                 dispatcher.forward(request, response);
             }
 

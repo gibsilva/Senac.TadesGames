@@ -22,7 +22,7 @@
         </div>
         <div class="input-group">
             <div>
-                <a href="Produtos?acao=salvar" class="btn btn-outline-primary">Novo Produto</a>
+                <a href="${pageContext.request.contextPath}/autenticado/Produtos?acao=salvar" class="btn btn-outline-primary">Novo Produto</a>
             </div>
 
         </div>
@@ -66,7 +66,7 @@
                     </c:if>
 
                     <td class="text-center">
-                        <c:url var="alterarProduto" value="/Produtos">
+                        <c:url var="alterarProduto" value="/autenticado/Produtos">
                             <c:param name="acao" value="alterar" />
                             <c:param name="idProduto" value="${p.idProduto}" />
                         </c:url>

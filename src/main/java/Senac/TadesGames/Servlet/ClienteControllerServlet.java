@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Gi
  */
-@WebServlet(name = "ClienteControllerServlet", urlPatterns = {"/Clientes"})
+@WebServlet(name = "ClienteControllerServlet", urlPatterns = {"/autenticado/Clientes"})
 public class ClienteControllerServlet extends HttpServlet {
 
     private final ClienteService service = new ClienteService();
@@ -74,10 +74,11 @@ public class ClienteControllerServlet extends HttpServlet {
             throw new ServletException(e);
         }
     }
-    
-    protected void criarCliente(HttpServletRequest request, HttpServletResponse response) 
-            throws ServletException, IOException{
-        request.getRequestDispatcher("/WEB-INF/jsp/cadastroCliente.jsp").forward(request, response);
+
+    protected void criarCliente(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/autenticado/cadastroCliente.jsp");
+        dispatcher.forward(request, response);
     }
 
     protected void incluirCliente(HttpServletRequest request, HttpServletResponse response)
@@ -101,7 +102,7 @@ public class ClienteControllerServlet extends HttpServlet {
                 listarClientes(request, response);
             } else {
                 request.setAttribute("notificacoes", notificacoes);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cadastroCliente.jsp");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/autenticado/cadastroCliente.jsp");
                 dispatcher.forward(request, response);
             }
 
@@ -116,7 +117,7 @@ public class ClienteControllerServlet extends HttpServlet {
     protected void listarClientes(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setAttribute("clientes", service.obterListaClientes());
-        request.getRequestDispatcher("/WEB-INF/jsp/consultaCliente.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/jsp/autenticado/consultaCliente.jsp").forward(request, response);
     }
 
     protected void carregarCliente(HttpServletRequest request, HttpServletResponse response)
@@ -126,7 +127,7 @@ public class ClienteControllerServlet extends HttpServlet {
 
         request.setAttribute("cliente", cliente);
         request.setAttribute("dataNascFormatada", Utils.converteDateParaStrBR(cliente.getDataNasc()));
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/alterarCliente.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/autenticado/alterarCliente.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -156,7 +157,7 @@ public class ClienteControllerServlet extends HttpServlet {
                 request.setAttribute("notificacoes", notificacoes);
                 request.setAttribute("cliente", cliente);
                 request.setAttribute("dataNascFormatada", Utils.converteDateParaStrBR(cliente.getDataNasc()));
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/alterarCliente.jsp");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/autenticado/alterarCliente.jsp");
                 dispatcher.forward(request, response);
             }
 
