@@ -11,7 +11,7 @@ import org.mindrot.jbcrypt.BCrypt;
  *
  * @author Gi
  */
-public final class UsuarioModel extends PessoaModel {
+public class UsuarioModel extends PessoaModel {
 
     private int idUsuario;
     private String setor;
@@ -21,6 +21,7 @@ public final class UsuarioModel extends PessoaModel {
     private String senha;
     private int idFilial;
     private FilialModel filial;
+    private String cpf;
 
     public UsuarioModel(int idUsuario, String nome, String cpf,
             String email, String setor, String cargo,
@@ -33,10 +34,7 @@ public final class UsuarioModel extends PessoaModel {
         this.setor = setor;
         this.cargo = cargo;
         this.login = login;
-        if(senha.length() == 60)
-            this.senha = senha;
-        else
-            setSenhaEncriptada(senha);
+        setHashSenha(senha);
         this.idFilial = idFilial;
         this.sexo = sexo;
         this.ativo = ativo;
@@ -102,23 +100,14 @@ public final class UsuarioModel extends PessoaModel {
      * @return the senha
      */
     public String getSenha() {
-        return this.senha;
+        return senha;
     }
 
-    private void setSenhaEncriptada(String senha) {
-        this.senha = BCrypt.hashpw(senha, BCrypt.gensalt(12));
-    }
-    
     /**
      * @param senha the senha to set
      */
     public void setSenha(String senha) {
         this.senha = senha;
-    }
-
-    public boolean validarSenha(String senha) {
-        boolean senhaValida = BCrypt.checkpw(senha, this.getSenha());
-        return senhaValida;
     }
 
     /**
@@ -163,4 +152,25 @@ public final class UsuarioModel extends PessoaModel {
         this.filial = filial;
     }
 
+    public final void setHashSenha(String senhaAberta) {
+        this.senha = BCrypt.hashpw(senhaAberta, BCrypt.gensalt());
+    }
+
+    public boolean validarSenha(String senhaAberta) {
+        return BCrypt.checkpw(senhaAberta, senha);
+    }
+
+    /**
+     * @return the cpf
+     */
+    public String getCpf() {
+        return cpf;
+    }
+
+    /**
+     * @param cpf the cpf to set
+     */
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
 }
