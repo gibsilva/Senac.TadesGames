@@ -14,18 +14,17 @@ import java.util.Date;
 public class ClienteModel extends PessoaModel {
 
     private int idCliente;
-    private String cnpj;
     private Date dataNasc;
     private String telefone;
     private String celular;
+    private String documento;
     
-    public ClienteModel(int idCliente, String nome, String cpf, String cnpj, Date dataNasc,
+    public ClienteModel(int idCliente, String nome, String documento, Date dataNasc,
             String email, String telefone, String celular, String sexo, boolean ativo) {
         
         this.idCliente = idCliente;
         this.nome = nome;
-        this.cpf = cpf;
-        this.cnpj = cnpj;
+        this.documento = documento;
         this.dataNasc = dataNasc;
         this.email = email;
         this.telefone = telefone;
@@ -47,20 +46,22 @@ public class ClienteModel extends PessoaModel {
     public void setIdCliente(int idCliente) {
         this.idCliente = idCliente;
     }
-
-    /**
-     * @return the cnpj
+    
+        /**
+     * @return the documento
      */
-    public String getCnpj() {
-        return cnpj;
+    public String getDocumento() {
+        return documento;
     }
 
     /**
-     * @param cnpj the cnpj to set
+     * @param documento the documento to set
      */
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
+    public void setDocumento(String documento) {
+        this.documento = documento;
     }
+
+
 
     /**
      * @return the dataNasc

@@ -29,13 +29,9 @@
                     <input type="text" class="form-control" name="nome" id="nome" placeholder="Digite seu nome completo"
                            maxlength="80" required>   
                 </div>
-                <div class="form-group col-md-2">
-                    <label for="cpf">CPF<h11 class="text-danger">*</h11> </label>
-                    <input type="text" class="form-control " name="cpf" id="cpf" minlength="11" maxlength="11" placeholder="Digite seu CPF" required>
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="cpf">CNPJ</label>
-                    <input type="text" class="form-control cnpj" name="cnpj" id="cnpj" minlength="14" maxlength="14" placeholder="Digite seu CNPJ">
+                <div class="form-group col-md-4">
+                    <label for="cpf">CPF/CNPJ<h11 class="text-danger">*</h11> </label>
+                    <input type="text" class="form-control" name="documento" id="documento" minlength="11" maxlength="14" placeholder="Digite seu CPF/CNPJ" required>
                 </div>
             </div>
 

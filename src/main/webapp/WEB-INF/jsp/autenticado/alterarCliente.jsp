@@ -32,15 +32,10 @@
                     <input type="text" class="form-control" name="nome" id="nome" placeholder="Digite seu Nome" maxlength="80" 
                            required value="${cliente.nome}">
                 </div>
-                <div class="form-group col-md-2">
-                    <label for="cpf">CPF<h11 class="text-danger">*</h11> </label>
-                    <input type="text" class="form-control" name="cpf" id="cpf" maxlength="11" placeholder="Digite seu CPF" 
-                           readonly value="${cliente.cpf}">
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="cnpj">CNPJ </label>
-                    <input type="text" class="form-control" name="cnpj" id="cnpj" maxlength="14" placeholder="Digite seu CNPJ" 
-                           readonly value="${cliente.cnpj}">
+                <div class="form-group col-md-4">
+                    <label for="cpf">CPF/CNPJ<h11 class="text-danger">*</h11> </label>
+                    <input type="text" class="form-control" name="documento" id="documento" minlength="11" maxlength="14" placeholder="Digite seu CPF" 
+                           readonly value="${cliente.documento}">
                 </div>
             </div>
 

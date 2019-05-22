@@ -14,6 +14,7 @@ import org.mindrot.jbcrypt.BCrypt;
 public final class UsuarioModel extends PessoaModel {
 
     private int idUsuario;
+    private String cpf;
     private String setor;
     private String cargo;
     private PermissaoModel permissao;
@@ -68,6 +69,20 @@ public final class UsuarioModel extends PessoaModel {
      */
     public void setCargo(String cargo) {
         this.cargo = cargo;
+    }
+    
+        /**
+     * @return the cpf
+     */
+    public String getCpf() {
+        return cpf;
+    }
+
+    /**
+     * @param cpf the cpf to set
+     */
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     /**

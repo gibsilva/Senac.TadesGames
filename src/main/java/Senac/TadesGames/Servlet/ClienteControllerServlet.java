@@ -85,15 +85,14 @@ public class ClienteControllerServlet extends HttpServlet {
             throws ServletException, IOException {
         Utils util = new Utils();
         String nome = util.removePontosBarraStr(request.getParameter("nome"));
-        String cpf = util.removePontosBarraStr(request.getParameter("cpf"));
-        String cnpj = util.removePontosBarraStr(request.getParameter("cnpj"));
+        String documento = util.removePontosBarraStr(request.getParameter("documento"));
         Date date = Utils.converteStrParaDate(request.getParameter("dataNasc"));
         String email = request.getParameter("email");
         String telefone = util.removePontosBarraStr(request.getParameter("telefone")).replace(" ", "");
         String celular = util.removePontosBarraStr(request.getParameter("celular")).replace(" ", "");
         String sexo = util.removePontosBarraStr(request.getParameter("sexo"));
 
-        ClienteModel cliente = new ClienteModel(0, nome, cpf, cnpj, date, email, telefone, celular, sexo, true);
+        ClienteModel cliente = new ClienteModel(0, nome, documento, date, email, telefone, celular, sexo, true);
 
         try {
             List<Notificacao> notificacoes = service.incluirCliente(cliente);
@@ -137,8 +136,7 @@ public class ClienteControllerServlet extends HttpServlet {
 
         int id = Integer.parseInt(request.getParameter("idCliente"));
         String nome = util.removePontosBarraStr(request.getParameter("nome"));
-        String cpf = util.removePontosBarraStr(request.getParameter("cpf"));
-        String cnpj = util.removePontosBarraStr(request.getParameter("cnpj"));
+        String documento = util.removePontosBarraStr(request.getParameter("documento"));
         Date date = Utils.converteStrParaDate(request.getParameter("dataNasc"));
         String email = request.getParameter("email");
         String telefone = util.removePontosBarraStr(request.getParameter("telefone")).replace(" ", "");
@@ -146,7 +144,7 @@ public class ClienteControllerServlet extends HttpServlet {
         String sexo = request.getParameter("sexo");
         boolean ativo = Boolean.parseBoolean(request.getParameter("ativo"));
 
-        ClienteModel cliente = new ClienteModel(id, nome, cpf, cnpj, date, email, telefone, celular, sexo, ativo);
+        ClienteModel cliente = new ClienteModel(id, nome, documento, date, email, telefone, celular, sexo, ativo);
 
         try {
             List<Notificacao> notificacoes = service.alterarCliente(cliente);

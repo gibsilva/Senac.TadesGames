@@ -18,6 +18,6 @@ public interface IClienteDao {
     void inserir(ClienteModel cliente);
     void alterar(ClienteModel cliente); 
     ClienteModel obterPorEmail(String email);
-    ClienteModel obterPorCpf(String cpf); 
+    ClienteModel obterPorDocumento(String documento); 
     
 }
