@@ -37,28 +37,18 @@ public class ClienteService {
         }
     }
 
-    private void validaDocumentoExistente(String documento) {
-        if (clienteDao.obterPorDocumento(documento) != null) {
-            this.notificacao.adicionaNotificacao("documento", "Esse CPF/CNPJ já está cadastrado");
+    private void validaCpfExistente(String cpf) {
+        if (clienteDao.obterPorCpf(cpf) != null) {
+            this.notificacao.adicionaNotificacao("cpf", "Esse CPF já está cadastrado");
         }
     }
 
-    private boolean validarClienteFisicoInclusao(ClienteModel cliente) {
-        if (!validarCpf(cliente.getDocumento())) {
-            this.notificacao.adicionaNotificacao("documento", "CPF inválido, por favor digite um CPF válido");
+    private boolean validarClienteInclusao(ClienteModel cliente) {
+        if (!validarCpf(cliente.getCpf())) {
+            this.notificacao.adicionaNotificacao("cpf", "CPF inválido, por favor digite um CPF válido");
         }
 
-        validaDocumentoExistente(cliente.getDocumento());
-        validaEmailExistente(cliente.getEmail());
-
-        return this.notificacao.quantidadeNotificacoes() == 0;
-    }
-        private boolean validarClienteJuridicoInclusao(ClienteModel cliente) {
-        if (!validarCnpj(cliente.getDocumento())) {
-            this.notificacao.adicionaNotificacao("documento", "CNPJ inválido, por favor digite um CNPJ válido");
-        }
-
-        validaDocumentoExistente(cliente.getDocumento());
+        validaCpfExistente(cliente.getCpf());
         validaEmailExistente(cliente.getEmail());
 
         return this.notificacao.quantidadeNotificacoes() == 0;
@@ -71,18 +61,9 @@ public class ClienteService {
 
     public List<Notificacao> incluirCliente(ClienteModel cliente) throws Exception {
         try {
-            if((cliente.getDocumento().length() != 11)&&(cliente.getDocumento().length() != 14)){
-                 this.notificacao.adicionaNotificacao("documento", "CPF/CNPJ invalido, por favor digite um CPF ou CNPJ valido");
-            }
-            else if(cliente.getDocumento().length() == 11){
-            validarClienteFisicoInclusao(cliente);
+            if (validarClienteInclusao(cliente)) {
                 clienteDao.inserir(cliente);
             }
-            else if(cliente.getDocumento().length() == 14) {
-            validarClienteJuridicoInclusao(cliente);
-                clienteDao.inserir(cliente);
-            }
-            
             return this.notificacao.listaNotificacoes();
         } catch (Exception e) {
             throw new Exception(e.getMessage());
@@ -104,8 +85,8 @@ public class ClienteService {
         return clienteDao.obterPorId(id);
     }
 
-    public ClienteModel obterClientePorDocumento(String documento) {
-        return clienteDao.obterPorDocumento(documento);
+    public ClienteModel obterClientePorCpf(String cpf) {
+        return clienteDao.obterPorCpf(cpf);
     }
 
     public List<ClienteModel> obterListaClientes() {
@@ -169,74 +150,6 @@ public class ClienteService {
 
             // Verifica se os digitos calculados conferem com os digitos informados.
             if ((dig10 == cpf.charAt(9)) && (dig11 == cpf.charAt(10))) {
-                return (true);
-            } else {
-                return (false);
-            }
-        } catch (InputMismatchException erro) {
-            return (false);
-        }
-    }
-    
-        private boolean validarCnpj(String cnpj) {
-        // considera-se erro CNPJ's formados por uma sequência de números iguais
-        if (cnpj.equals("00000000000000") || cnpj.equals("11111111111111")
-                || cnpj.equals("22222222222222") || cnpj.equals("33333333333333")
-                || cnpj.equals("44444444444444") || cnpj.equals("55555555555555")
-                || cnpj.equals("66666666666666") || cnpj.equals("77777777777777")
-                || cnpj.equals("88888888888888") || cnpj.equals("99999999999999")
-                || (cnpj.length() != 14)) {
-            return (false);
-        }
-
-        char dig13, dig14;
-        int sm, i, r, num, peso;
-
-        // "try" - protege o código para eventuais erros de conversão de tipo (int)
-        try {
-            // Cálculo do 1º. Dígito Verificador
-            sm = 0;
-            peso = 2;
-            for (i = 11; i >= 0; i--) {
-                // converte o i-ésimo caractere do CNPJ em um número:
-                // por exemplo, transforma o caractere '0' no inteiro 0
-                // (48 eh a posição de '0' na tabela ASCII)
-                num = (int) (cnpj.charAt(i) - 48);
-                sm = sm + (num * peso);
-                peso = peso + 1;
-                if (peso == 10) {
-                    peso = 2;
-                }
-            }
-
-            r = sm % 11;
-            if ((r == 0) || (r == 1)) {
-                dig13 = '0';
-            } else {
-                dig13 = (char) ((11 - r) + 48);
-            }
-
-            // Calculo do 2º. Dígito Verificador
-            sm = 0;
-            peso = 2;
-            for (i = 12; i >= 0; i--) {
-                num = (int) (cnpj.charAt(i) - 48);
-                sm = sm + (num * peso);
-                peso = peso + 1;
-                if (peso == 10) {
-                    peso = 2;
-                }
-            }
-
-            r = sm % 11;
-            if ((r == 0) || (r == 1)) {
-                dig14 = '0';
-            } else {
-                dig14 = (char) ((11 - r) + 48);
-            }
-
-            // Verifica se os dígitos calculados conferem com os dígitos informados.
-            if ((dig13 == cnpj.charAt(12)) && (dig14 == cnpj.charAt(13))) {
                 return (true);
             } else {
                 return (false);

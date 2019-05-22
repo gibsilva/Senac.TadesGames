@@ -34,7 +34,8 @@ public class ClienteDAO implements IClienteDao {
         try {
             stmt = conn.prepareStatement("SELECT IDCLIENTE, "
                     + "NOME, "
-                    + "DOCUMENTO, "
+                    + "CPF, "
+                    + "CNPJ, "
                     + "DATANASC, "
                     + "EMAIL, "
                     + "TELEFONE, "
@@ -50,7 +51,8 @@ public class ClienteDAO implements IClienteDao {
                 cliente = new ClienteModel(
                         rs.getInt("IdCliente"),
                         rs.getString("Nome"),
-                        rs.getString("documento"),
+                        rs.getString("cpf"),
+                        rs.getString("cnpj"),
                         rs.getDate("DataNasc"),
                         rs.getString("email"),
                         rs.getString("telefone"),
@@ -77,7 +79,8 @@ public class ClienteDAO implements IClienteDao {
         try {
             stmt = conn.prepareStatement("SELECT IDCLIENTE, "
                     + "NOME, "
-                    + "DOCUMENTO, "
+                    + "CPF, "
+                    + "CNPJ, "
                     + "DATANASC, "
                     + "EMAIL, "
                     + "TELEFONE, "
@@ -93,7 +96,8 @@ public class ClienteDAO implements IClienteDao {
                 cliente = new ClienteModel(
                         rs.getInt("IdCliente"),
                         rs.getString("Nome"),
-                        rs.getString("documento"),
+                        rs.getString("cpf"),
+                        rs.getString("cnpj"),
                         rs.getDate("DataNasc"),
                         rs.getString("email"),
                         rs.getString("telefone"),
@@ -119,7 +123,8 @@ public class ClienteDAO implements IClienteDao {
         try {
             stmt = conn.prepareStatement("SELECT IDCLIENTE, "
                     + "NOME, "
-                    + "DOCUMENTO, "
+                    + "CPF, "
+                    + "CNPJ, "
                     + "DATANASC, "
                     + "EMAIL, "
                     + "TELEFONE, "
@@ -136,7 +141,8 @@ public class ClienteDAO implements IClienteDao {
                 cliente = new ClienteModel(
                         rs.getInt("IdCliente"),
                         rs.getString("Nome"),
-                        rs.getString("documento"),
+                        rs.getString("cpf"),
+                        rs.getString("cnpj"),
                         rs.getDate("DataNasc"),
                         rs.getString("email"),
                         rs.getString("telefone"),
@@ -156,14 +162,15 @@ public class ClienteDAO implements IClienteDao {
     }
 
     @Override
-    public ClienteModel obterPorDocumento(String documento) {
+    public ClienteModel obterPorCpf(String cpf) {
         Connection conn = conexao.getConnection();
         ClienteModel cliente = null;
 
         try {
             stmt = conn.prepareStatement("SELECT IDCLIENTE, "
                     + "NOME, "
-                    + "DOCUMENTO, "
+                    + "CPF, "
+                    + "CNPJ, "
                     + "DATANASC, "
                     + "EMAIL, "
                     + "TELEFONE, "
@@ -172,14 +179,15 @@ public class ClienteDAO implements IClienteDao {
                     + "ATIVO "
                     + "FROM CLIENTE WHERE CPF = ?");
 
-            stmt.setString(1, documento);
+            stmt.setString(1, cpf);
 
             rs = stmt.executeQuery();
             while (rs.next()) {
                 cliente = new ClienteModel(
                         rs.getInt("IdCliente"),
                         rs.getString("Nome"),
-                        rs.getString("documento"),
+                        rs.getString("cpf"),
+                        rs.getString("cnpj"),
                         rs.getDate("DataNasc"),
                         rs.getString("email"),
                         rs.getString("telefone"),
@@ -207,7 +215,8 @@ public class ClienteDAO implements IClienteDao {
         try {
             stmt = conn.prepareStatement("SELECT IDCLIENTE, "
                     + "NOME, "
-                    + "DOCUMENTO, "
+                    + "CPF, "
+                    + "CNPJ, "
                     + "DATANASC, "
                     + "EMAIL, "
                     + "TELEFONE, "
@@ -221,7 +230,8 @@ public class ClienteDAO implements IClienteDao {
                 cliente = new ClienteModel(
                         rs.getInt("IdCliente"),
                         rs.getString("Nome"),
-                        rs.getString("documento"),
+                        rs.getString("cpf"),
+                        rs.getString("cnpj"),
                         rs.getDate("DataNasc"),
                         rs.getString("email"),
                         rs.getString("telefone"),
@@ -249,22 +259,24 @@ public class ClienteDAO implements IClienteDao {
         try {
             stmt = conn.prepareStatement("INSERT INTO CLIENTE("
                     + "NOME, "
-                    + "DOCUMENTO, "
+                    + "CPF, "
+                    + "CNPJ, "
                     + "DATANASC, "
                     + "EMAIL, "
                     + "TELEFONE, "
                     + "CELULAR, "
                     + "SEXO, "
                     + "ATIVO) "
-                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
             stmt.setString(1, cliente.getNome());
-            stmt.setString(2, cliente.getDocumento());
-            stmt.setString(3, util.converteDateParaStr(cliente.getDataNasc()));
-            stmt.setString(4, cliente.getEmail());
-            stmt.setString(5, cliente.getTelefone());
-            stmt.setString(6, cliente.getCelular());
-            stmt.setString(7, cliente.getSexo());
-            stmt.setBoolean(8, cliente.isAtivo());
+            stmt.setString(2, cliente.getCpf());
+            stmt.setString(3, cliente.getCnpj());
+            stmt.setString(4, util.converteDateParaStr(cliente.getDataNasc()));
+            stmt.setString(5, cliente.getEmail());
+            stmt.setString(6, cliente.getTelefone());
+            stmt.setString(7, cliente.getCelular());
+            stmt.setString(8, cliente.getSexo());
+            stmt.setBoolean(9, cliente.isAtivo());
 
             stmt.executeUpdate();
         } catch (SQLException ex) {
