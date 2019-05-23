@@ -63,7 +63,7 @@
                 <tr class="table-light">
                     <td class=" text-center">${p.idPedido}</td>
                     <td class=" text-center">${p.cliente.nome}</td>
-                    <td class=" text-center">${p.cliente.cpf}</td>
+                    <td class=" text-center">${p.cliente.documento.toString()}</td>
                     <td class=" text-center">${p.itensPedido.size()}</td>
                     <td class=" text-center">${p.valorTotal}</td>
                     <td class=" text-center">${p.descFormaPagamento}</td>

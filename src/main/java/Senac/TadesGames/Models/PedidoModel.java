@@ -27,7 +27,7 @@ public class PedidoModel {
     private int idUsuario;
     private UsuarioModel usuario;
     private int formaPagamento;
-    private String descFormaPagamento;
+    private final String descFormaPagamento;
     private int parcela;
     private double valorRecebido;
 
@@ -44,6 +44,7 @@ public class PedidoModel {
         this.formaPagamento = formaPagamento;
         this.parcela = parcela;
         this.valorRecebido = valorRecebido;
+        this.descFormaPagamento = this.getDescFormaPagamento();
     }
 
     /**
@@ -198,7 +199,7 @@ public class PedidoModel {
         this.valorRecebido = valorRecebido;
     }
     
-    public String getDescFormaPagamento(){
+    public final String getDescFormaPagamento(){
         switch(this.formaPagamento){
             case 1:
                 return "Débito";

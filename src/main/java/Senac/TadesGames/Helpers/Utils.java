@@ -5,13 +5,9 @@
  */
 package Senac.TadesGames.Helpers;
 
-import Senac.TadesGames.Servlet.ClienteControllerServlet;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -22,16 +18,12 @@ public class Utils {
     private static Date date;
     private static String dateStr;
 
-    public static Date converteStrParaDate(String dataStr) {
-        DateFormat df = new SimpleDateFormat("yyyy-mm-dd");
-        date = new Date();
-        try {
-            date = df.parse(dataStr);
-        } catch (ParseException ex) {
-            Logger.getLogger(ClienteControllerServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public static Date converteStrParaDate(String dataStr) throws ParseException {
+        String pattern = "yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 
-        return date;
+        Date data = simpleDateFormat.parse(dataStr);
+        return data;
     }
 
     public String converteDateParaStr(Date date) {

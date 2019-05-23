@@ -5,30 +5,21 @@
  */
 package Senac.TadesGames.Models;
 
-import java.util.Date;
-
 /**
  *
  * @author Gi
  */
 public class RelatorioVendasModel {
-    
-    private int idPedido;
-    private String nomeCliente;
-    private String cpfCliente;
-    private Date dataVenda;
-    private int cnpjFilial;
-    private double valorTotal;
-    
-    public RelatorioVendasModel(String nomeCliente, String cpfCliente, int idPedido, Date dataVenda,
-            int cnpjFilial, double valorTotal){
-        
-        this.nomeCliente = nomeCliente;
-        this.cpfCliente = cpfCliente;
+
+    private final int idPedido;
+    private PedidoModel pedido;
+    private final String dataFormatada;
+    private final double valorTotal;
+
+    public RelatorioVendasModel(int idPedido, double valorTotal, String dataFormatada) {
         this.idPedido = idPedido;
-        this.dataVenda = dataVenda;
-        this.cnpjFilial = cnpjFilial;
-        this.valorTotal = valorTotal;  
+        this.valorTotal = valorTotal;
+        this.dataFormatada = dataFormatada;
     }
 
     /**
@@ -37,40 +28,17 @@ public class RelatorioVendasModel {
     public int getIdPedido() {
         return idPedido;
     }
-
-    /**
-     * @return the nomeCliente
-     */
-    public String getNomeCliente() {
-        return nomeCliente;
+    
+    public String getDataFormatada(){
+        return this.dataFormatada;
     }
 
-    /**
-     * @return the cpfCliente
-     */
-    public String getCpfCliente() {
-        return cpfCliente;
+    public void setPedido(PedidoModel pedido) {
+        this.pedido = pedido;
     }
 
-    /**
-     * @return the dataVenda
-     */
-    public Date getDataVenda() {
-        return dataVenda;
-    }
-
-    /**
-     * @return the cnpjFilial
-     */
-    public int getCnpjFilial() {
-        return cnpjFilial;
-    }
-
-    /**
-     * @return the valorTotal
-     */
     public double getValorTotal() {
         return valorTotal;
     }
-    
+
 }

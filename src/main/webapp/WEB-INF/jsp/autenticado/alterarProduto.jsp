@@ -118,6 +118,7 @@
         
 <script>
     $(document).ready(function(){
+        document.getElementById('filial').value = '${produto.idFilial}';        
         document.getElementById('plataforma').value = '${produto.idPlataforma}';
         document.getElementById('categoria').value = '${produto.idCategoria}';
         document.getElementById('genero').value = '${produto.idGenero}';

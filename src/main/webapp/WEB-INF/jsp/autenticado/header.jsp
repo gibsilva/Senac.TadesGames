@@ -66,9 +66,9 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Relatórios</a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="relatorioCliente.jsp">Cliente</a>
-                            <a class="dropdown-item" href="relatorioProduto.jsp">Produto</a>
-                            <a class="dropdown-item" href="relatorioVendas.jsp">Vendas</a>  
+                            <a class="dropdown-item" href="${pageContext.request.contextPath}/autenticado/Relatorios?acao=clientes">Cliente</a>
+                            <a class="dropdown-item" href="${pageContext.request.contextPath}/autenticado/Relatorios?acao=produtos">Produto</a>
+                            <a class="dropdown-item" href="${pageContext.request.contextPath}/autenticado/Relatorios?acao=vendas">Vendas</a>  
                         </div>
                     </li>
 
@@ -106,5 +106,6 @@
         <script type="text/javascript" src="../resources/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="../resources/js/jquery.mask.js"></script> 
         <script type="text/javascript" src="../resources/js/toastr.min.js"></script> 
+        <script type="text/javascript" src="../resources/js/jquery.table2excel.js"></script> 
     </body>
 </html>

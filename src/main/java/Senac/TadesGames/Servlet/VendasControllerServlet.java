@@ -140,7 +140,7 @@ public class VendasControllerServlet extends HttpServlet {
     protected void salvarPedido(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, JSONException {
         String dados = request.getParameter("listaDeItens");
-        String cpfCliente = request.getParameter("cpfCliente");
+        String documento = request.getParameter("cpfCliente");
         int idUsuario = Integer.parseInt(request.getParameter("vendedor"));
         Date dataPedido = new Date(System.currentTimeMillis());
         int formaPagamento = Integer.parseInt(request.getParameter("formaPagamento"));
@@ -170,7 +170,12 @@ public class VendasControllerServlet extends HttpServlet {
             itensDePedidos.add(itens);
         }
 
-        ClienteModel cliente = cpfCliente.equals("") ? clienteService.obterClientePorCpf("12345678910") : clienteService.obterClientePorCpf(cpfCliente);
+        ClienteModel cliente;
+        if(documento.length() == 11){
+            cliente = documento.equals("") ? clienteService.obterClientePorCpf("12345678910") : clienteService.obterClientePorCpf(documento);
+        } else {
+            cliente = clienteService.obterClientePorCnpj(documento);
+        }
 
         UsuarioModel usuario = usuarioService.obterUsuarioPorId(idUsuario);
 
