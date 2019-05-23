@@ -27,7 +27,7 @@
 
         <div class="form-group col-md-3">
             <label for="cpf">CPF/CNPJ</label>
-            <input type="text" class="form-control " name="cpf" id="cpf" readonly value="${pedido.cliente.cpf}">
+            <input type="text" class="form-control " name="cpf" id="cpf" readonly value="${pedido.cliente.documento.toString()}">
         </div>
     </div>
 

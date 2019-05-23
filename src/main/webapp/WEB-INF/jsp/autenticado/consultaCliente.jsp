@@ -49,8 +49,8 @@
                 <tr>
                     <td class="text-center">${c.idCliente}</td>
                     <td class="text-center">${c.nome}</td>
-                    <td class="text-center">${c.cpf}</td>
-                    <td class="text-center">${c.cnpj}</td>
+                    <td class="text-center">${c.documento.cpf}</td>
+                    <td class="text-center">${c.documento.cnpj}</td>
                     <td class="text-center">${c.dataNasc}</td>
                     <td class="text-center">${c.sexo}</td>
                     <td class="text-center">${c.email}</td>

@@ -203,24 +203,26 @@ public class VendasControllerServlet extends HttpServlet {
         request.getRequestDispatcher("/WEB-INF/jsp/autenticado/vendas.jsp").forward(request, response);
     }
 
-    protected void obterCliente(String cpf, HttpServletResponse response) throws IOException {
-        PrintWriter out = response.getWriter();
-        Gson gson = new Gson();
-        ClienteModel cliente = clienteService.obterClientePorCpf(cpf);
-
-        out.print(gson.toJson(cliente));
-        out.flush();
-        out.close();
+    protected void obterCliente(String doc, HttpServletResponse response) throws IOException {
+        response.setContentType("text/html; charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            Gson gson = new Gson();
+            ClienteModel cliente = doc.length() == 11 ? clienteService.obterClientePorCpf(doc) : clienteService.obterClientePorCnpj(doc);
+            
+            out.print(gson.toJson(cliente));
+            out.flush();
+        }
     }
 
     protected void obterProduto(int idProduto, HttpServletResponse response) throws IOException {
-        PrintWriter out = response.getWriter();
-        Gson gson = new Gson();
-        ProdutoModel produto = produtoService.obterPorId(idProduto);
-
-        out.print(gson.toJson(produto));
-        out.flush();
-        out.close();
+        response.setContentType("text/html; charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            Gson gson = new Gson();
+            ProdutoModel produto = produtoService.obterPorId(idProduto);
+            
+            out.print(gson.toJson(produto));
+            out.flush();
+        }
     }
 
 }

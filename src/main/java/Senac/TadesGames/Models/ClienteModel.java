@@ -5,6 +5,7 @@
  */
 package Senac.TadesGames.Models;
 
+import Senac.TadesGames.Models.ObjetosValor.Documento;
 import java.util.Date;
 
 /**
@@ -14,24 +15,24 @@ import java.util.Date;
 public class ClienteModel extends PessoaModel {
 
     private int idCliente;
-    private String cnpj;
+    private Documento documento;
     private Date dataNasc;
     private String telefone;
     private String celular;
     
-    public ClienteModel(int idCliente, String nome, String cpf, String cnpj, Date dataNasc,
+    public ClienteModel(int idCliente, String nome, Documento documento, Date dataNasc,
             String email, String telefone, String celular, String sexo, boolean ativo) {
         
         this.idCliente = idCliente;
         this.nome = nome;
-        this.cpf = cpf;
-        this.cnpj = cnpj;
+        this.documento = documento;
         this.dataNasc = dataNasc;
         this.email = email;
         this.telefone = telefone;
         this.celular = celular;
         this.sexo = sexo;
         this.ativo = ativo;
+        this.cpf = this.documento.getCpf();
     }
 
     /**
@@ -46,20 +47,6 @@ public class ClienteModel extends PessoaModel {
      */
     public void setIdCliente(int idCliente) {
         this.idCliente = idCliente;
-    }
-
-    /**
-     * @return the cnpj
-     */
-    public String getCnpj() {
-        return cnpj;
-    }
-
-    /**
-     * @param cnpj the cnpj to set
-     */
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
     }
 
     /**
@@ -102,6 +89,20 @@ public class ClienteModel extends PessoaModel {
      */
     public void setCelular(String celular) {
         this.celular = celular;
+    }
+
+    /**
+     * @return the documento
+     */
+    public Documento getDocumento() {
+        return documento;
+    }
+
+    /**
+     * @param documento the documento to set
+     */
+    public void setDocumento(Documento documento) {
+        this.documento = documento;
     }
 
 }

@@ -19,5 +19,6 @@ public interface IClienteDao {
     void alterar(ClienteModel cliente); 
     ClienteModel obterPorEmail(String email);
     ClienteModel obterPorCpf(String cpf); 
+    ClienteModel obterPorCnpj(String cnpj);
     
 }

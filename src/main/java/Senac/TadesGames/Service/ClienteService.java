@@ -44,7 +44,7 @@ public class ClienteService {
     }
 
     private boolean validarClienteInclusao(ClienteModel cliente) {
-        if (!validarCpf(cliente.getCpf())) {
+        if (!validarCpf(cliente.getCpf()) && !cliente.getCpf().equals("")) {
             this.notificacao.adicionaNotificacao("cpf", "CPF inválido, por favor digite um CPF válido");
         }
 
@@ -87,6 +87,10 @@ public class ClienteService {
 
     public ClienteModel obterClientePorCpf(String cpf) {
         return clienteDao.obterPorCpf(cpf);
+    }
+
+    public ClienteModel obterClientePorCnpj(String cnpj) {
+        return clienteDao.obterPorCnpj(cnpj);
     }
 
     public List<ClienteModel> obterListaClientes() {

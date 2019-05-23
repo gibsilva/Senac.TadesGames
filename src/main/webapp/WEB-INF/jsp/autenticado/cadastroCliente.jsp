@@ -30,12 +30,20 @@
                            maxlength="80" required>   
                 </div>
                 <div class="form-group col-md-2">
+                    <label for="sexo">Tipo Cliente<h11 class="text-danger">*</h11></label>
+                    <select class="custom-select" id="tipoCliente" name="tipoCliente" required>
+                        <option value="">Selecione </option>
+                        <option value="F">Físico</option>
+                        <option value="J">Jurídico</option> 
+                    </select>
+                </div>
+                <div class="form-group col-md-2">
                     <label for="cpf">CPF<h11 class="text-danger">*</h11> </label>
-                    <input type="text" class="form-control " name="cpf" id="cpf" minlength="11" maxlength="11" placeholder="Digite seu CPF" required>
+                    <input type="text" class="form-control " name="cpf" id="cpf" minlength="11" maxlength="11" placeholder="Digite seu CPF" readonly>
                 </div>
                 <div class="form-group col-md-3">
                     <label for="cpf">CNPJ</label>
-                    <input type="text" class="form-control cnpj" name="cnpj" id="cnpj" minlength="14" maxlength="14" placeholder="Digite seu CNPJ">
+                    <input type="text" class="form-control cnpj" name="cnpj" id="cnpj" minlength="14" maxlength="14" placeholder="Digite seu CNPJ" readonly>
                 </div>
             </div>
 
@@ -92,6 +100,29 @@
 
 <script>
     $(document).ready(function () {
+
+        $('#tipoCliente').change(function () {
+            if ($('#tipoCliente').val() === 'F') {
+                $('#cpf').attr('required', true);
+                $('#cpf').attr('readonly', false);
+                $('#cnpj').attr('required', false);
+                $('#cnpj').attr('readonly', true);
+                $('#cnpj').val('');
+            } else if ($('#tipoCliente').val() === 'J') {
+                $('#cpf').attr('required', false);
+                $('#cpf').attr('readonly', true);
+                $('#cnpj').attr('required', true);
+                $('#cnpj').attr('readonly', false);
+                $('#cpf').val('');
+            } else {
+                $('#cnpj').attr('required', false);
+                $('#cpf').attr('required', false);
+                $('#cnpj').attr('readonly', true);
+                $('#cpf').attr('readonly', true);
+                $('#cpf').val('');
+                $('#cnpj').val('');
+            }
+        });
 
         $('.date').mask('00/00/0000');
         $('.time').mask('00:00:00');

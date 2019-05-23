@@ -8,10 +8,14 @@ package Senac.TadesGames.Servlet;
 import Senac.TadesGames.Helpers.Notificacao;
 import Senac.TadesGames.Helpers.Utils;
 import Senac.TadesGames.Models.ClienteModel;
+import Senac.TadesGames.Models.ObjetosValor.Documento;
 import Senac.TadesGames.Service.ClienteService;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -72,6 +76,8 @@ public class ClienteControllerServlet extends HttpServlet {
             }
         } catch (ServletException | IOException e) {
             throw new ServletException(e);
+        } catch (ParseException ex) {
+            Logger.getLogger(ClienteControllerServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -82,9 +88,10 @@ public class ClienteControllerServlet extends HttpServlet {
     }
 
     protected void incluirCliente(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, ParseException {
         Utils util = new Utils();
         String nome = util.removePontosBarraStr(request.getParameter("nome"));
+        String tipoCliente = request.getParameter("tipoCliente");
         String cpf = util.removePontosBarraStr(request.getParameter("cpf"));
         String cnpj = util.removePontosBarraStr(request.getParameter("cnpj"));
         Date date = Utils.converteStrParaDate(request.getParameter("dataNasc"));
@@ -92,8 +99,9 @@ public class ClienteControllerServlet extends HttpServlet {
         String telefone = util.removePontosBarraStr(request.getParameter("telefone")).replace(" ", "");
         String celular = util.removePontosBarraStr(request.getParameter("celular")).replace(" ", "");
         String sexo = util.removePontosBarraStr(request.getParameter("sexo"));
-
-        ClienteModel cliente = new ClienteModel(0, nome, cpf, cnpj, date, email, telefone, celular, sexo, true);
+        
+        Documento doc = new Documento(tipoCliente.equals("F") ? cpf : cnpj);
+        ClienteModel cliente = new ClienteModel(0, nome, doc, date, email, telefone, celular, sexo, true);
 
         try {
             List<Notificacao> notificacoes = service.incluirCliente(cliente);
@@ -132,7 +140,7 @@ public class ClienteControllerServlet extends HttpServlet {
     }
 
     protected void alterarCliente(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, ParseException {
         Utils util = new Utils();
 
         int id = Integer.parseInt(request.getParameter("idCliente"));
@@ -145,8 +153,9 @@ public class ClienteControllerServlet extends HttpServlet {
         String celular = util.removePontosBarraStr(request.getParameter("celular")).replace(" ", "");
         String sexo = request.getParameter("sexo");
         boolean ativo = Boolean.parseBoolean(request.getParameter("ativo"));
-
-        ClienteModel cliente = new ClienteModel(id, nome, cpf, cnpj, date, email, telefone, celular, sexo, ativo);
+        
+        Documento doc = new Documento("");
+        ClienteModel cliente = new ClienteModel(id, nome, doc, date, email, telefone, celular, sexo, ativo);
 
         try {
             List<Notificacao> notificacoes = service.alterarCliente(cliente);

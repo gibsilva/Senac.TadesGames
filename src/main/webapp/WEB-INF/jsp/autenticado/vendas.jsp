@@ -29,8 +29,8 @@
             </div>
 
             <div class="form-group col-md-3">
-                <label for="inputCPFFCliente">CPF do Cliente</label>
-                <input type="text" class="form-control" id="cpfCliente" name="cpfCliente" minlength="11" maxlength="11" placeholder="Digite o CPF do cliente">
+                <label for="inputCPFFCliente">CPF/CNPJ do Cliente</label>
+                <input type="text" class="form-control" id="cpfCliente" name="cpfCliente" minlength="11" maxlength="14" placeholder="Digite o CPF do cliente">
             </div>
 
             <div class="form-group col-md-4">
