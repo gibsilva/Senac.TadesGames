@@ -150,9 +150,7 @@ public class UsuarioControllerServlet extends HttpServlet {
         String senha = request.getParameter("senha");
         boolean ativo = Boolean.parseBoolean(request.getParameter("ativo"));
 
-        usuarioService.validaQuantidadeCaracteresCredenciais(login, senha);
-
-        UsuarioModel usuario = new UsuarioModel(id, nome, cpf, email, setor, cargo, login, senha, idFilial, sexo, ativo);
+        UsuarioModel usuario = new UsuarioModel(id, nome, cpf, email, setor, cargo, idFilial, sexo, ativo);
 
         try {
             List<Notificacao> notificacoes = usuarioService.alterarUsuario(usuario);

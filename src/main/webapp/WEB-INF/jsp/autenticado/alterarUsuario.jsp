@@ -17,7 +17,7 @@
         <ul class="text-danger">
             <c:forEach var = "n" items = "${notificacoes}">
                 <li>${n.valor}</li>
-                </c:forEach>
+            </c:forEach>
         </ul>
     </div>
 

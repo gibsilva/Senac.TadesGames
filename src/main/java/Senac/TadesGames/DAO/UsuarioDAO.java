@@ -48,7 +48,7 @@ public class UsuarioDAO implements IUsuarioDao {
                     + "SENHA, "
                     + "SEXO, "
                     + "ATIVO "
-                    + "FROM USUARIO WHERE IDUSUARIO = ?");
+                    + "FROM usuario WHERE IDUSUARIO = ?");
 
             stmt.setInt(1, id);
 
@@ -93,7 +93,7 @@ public class UsuarioDAO implements IUsuarioDao {
                     + "SENHA, "
                     + "SEXO, "
                     + "ATIVO "
-                    + "FROM USUARIO WHERE EMAIL = ?");
+                    + "FROM usuario WHERE EMAIL = ?");
 
             stmt.setString(1, email);
 
@@ -139,7 +139,7 @@ public class UsuarioDAO implements IUsuarioDao {
                     + "SENHA, "
                     + "SEXO, "
                     + "ATIVO "
-                    + "FROM USUARIO WHERE EMAIL = ? AND IDUSUARIO != ?");
+                    + "FROM usuario WHERE EMAIL = ? AND IDUSUARIO != ?");
 
             stmt.setString(1, email);
             stmt.setInt(2, id);
@@ -186,7 +186,7 @@ public class UsuarioDAO implements IUsuarioDao {
                     + "SENHA, "
                     + "SEXO, "
                     + "ATIVO "
-                    + "FROM USUARIO WHERE LOGIN = ?");
+                    + "FROM usuario WHERE LOGIN = ?");
 
             stmt.setString(1, login);
 
@@ -232,7 +232,7 @@ public class UsuarioDAO implements IUsuarioDao {
                     + "SENHA, "
                     + "SEXO, "
                     + "ATIVO "
-                    + "FROM USUARIO WHERE LOGIN = ? AND IDUSUARIO != ?");
+                    + "FROM usuario WHERE LOGIN = ? AND IDUSUARIO != ?");
 
             stmt.setString(1, login);
             stmt.setInt(2, id);
@@ -279,7 +279,7 @@ public class UsuarioDAO implements IUsuarioDao {
                     + "SENHA, "
                     + "SEXO, "
                     + "ATIVO "
-                    + "FROM USUARIO WHERE CPF = ?");
+                    + "FROM usuario WHERE CPF = ?");
 
             stmt.setString(1, cpf);
 
@@ -328,7 +328,7 @@ public class UsuarioDAO implements IUsuarioDao {
                     + "SENHA, "
                     + "SEXO, "
                     + "ATIVO"
-                    + " FROM USUARIO");
+                    + " FROM usuario");
 
             rs = stmt.executeQuery();
             while (rs.next()) {
@@ -374,7 +374,7 @@ public class UsuarioDAO implements IUsuarioDao {
                     + "SENHA, "
                     + "SEXO, "
                     + "ATIVO"
-                    + " FROM USUARIO WHERE CARGO = ?");
+                    + " FROM usuario WHERE CARGO = ?");
 
             stmt.setString(1, cargo);
 
@@ -409,7 +409,7 @@ public class UsuarioDAO implements IUsuarioDao {
         Connection conn = conexao.getConnection();
 
         try {
-            stmt = conn.prepareStatement("INSERT INTO USUARIO("
+            stmt = conn.prepareStatement("INSERT INTO usuario("
                     + "NOME, "
                     + "CPF, "
                     + "EMAIL, "
@@ -442,7 +442,7 @@ public class UsuarioDAO implements IUsuarioDao {
         Connection conn = conexao.getConnection();
 
         try {
-            stmt = conn.prepareStatement("UPDATE USUARIO SET "
+            stmt = conn.prepareStatement("UPDATE usuario SET "
                     + "NOME = ?,"
                     + "EMAIL = ?,"
                     + "IDFILIAL = ?,"
@@ -472,7 +472,7 @@ public class UsuarioDAO implements IUsuarioDao {
         Connection conn = conexao.getConnection();
 
         try {
-            stmt = conn.prepareStatement("UPTADE USUARIO SET ATIVO = 0 WHERE IDUSUARIO = ?");
+            stmt = conn.prepareStatement("UPTADE usuario SET ATIVO = 0 WHERE IDUSUARIO = ?");
             stmt.setInt(1, usuario.getIdUsuario());
 
             stmt.executeUpdate();
@@ -499,7 +499,7 @@ public class UsuarioDAO implements IUsuarioDao {
                     + "SENHA, "
                     + "SEXO, "
                     + "ATIVO "
-                    + "FROM USUARIO WHERE LOGIN = ? AND SENHA = ?");
+                    + "FROM usuario WHERE LOGIN = ? AND SENHA = ?");
 
             stmt.setString(1, nomeUsuario);
             stmt.setString(2, senha);
@@ -536,7 +536,7 @@ public class UsuarioDAO implements IUsuarioDao {
         try {
             stmt = conn.prepareStatement("SELECT LOGIN, "
                     + "SENHA "
-                    + "FROM USUARIO WHERE LOGIN = ? AND SENHA = ?");
+                    + "FROM usuario WHERE LOGIN = ? AND SENHA = ?");
 
             stmt.setString(1, login);
             stmt.setString(2, senha);

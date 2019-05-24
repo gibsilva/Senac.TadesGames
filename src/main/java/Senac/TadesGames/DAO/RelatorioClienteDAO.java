@@ -18,7 +18,7 @@ import java.util.List;
 
 /**
  *
- * @author Giovanni.Carignato
+ * @author Gi
  */
 public class RelatorioClienteDAO {
 

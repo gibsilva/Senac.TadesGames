@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Giovanni.Carignato
+ * @author Gi
  */
 @WebServlet(name = "RelatorioControllerServlet", urlPatterns = {"/autenticado/Relatorios"})
 public class RelatorioControllerServlet extends HttpServlet {

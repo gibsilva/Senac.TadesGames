@@ -48,17 +48,17 @@
             </div>
 
             <div class="row"> 
-                <div class="form-group col-md-2"
-                     <label for="Celular">Celular<h11 class="text-danger">*</h11></label>
+                <div class="form-group col-md-2">
+                    <label for="Celular">Celular<h11 class="text-danger">*</h11></label>
                     <input type="text" class="form-control sp_celphones" name="celular" id="celular" minlength="11" placeholder="Digite seu número" required>
                 </div>
-                <div class="form-group col-md-2"
-                     <label for="Telefone">Telefone</label>
+                <div class="form-group col-md-2">
+                    <label for="Telefone">Telefone</label>
                     <input type="text" class="form-control phone_with_ddd" name="telefone" id="telefone" minlength="11" placeholder="Digite seu número">
                 </div>
 
-                <div class="form-group col-md-2"
-                     <label for="sexo">Sexo<h11 class="text-danger">*</h11></label>
+                <div class="form-group col-md-2">
+                    <label for="sexo">Sexo<h11 class="text-danger">*</h11></label>
                     <select class="custom-select" id="sexo" name="sexo" required>
                         <option value="">Selecione </option>
                         <option value="M">Masculino</option>

@@ -33,10 +33,26 @@ public final class UsuarioModel extends PessoaModel {
         this.setor = setor;
         this.cargo = cargo;
         this.login = login;
-        if(senha.length() == 60)
+        if (senha.length() == 60) {
             this.senha = senha;
-        else
+        } else {
             setSenhaEncriptada(senha);
+        }
+        this.idFilial = idFilial;
+        this.sexo = sexo;
+        this.ativo = ativo;
+    }
+
+    public UsuarioModel(int idUsuario, String nome, String cpf,
+            String email, String setor, String cargo,
+            int idFilial, String sexo, boolean ativo) {
+
+        this.idUsuario = idUsuario;
+        this.nome = nome;
+        this.cpf = cpf;
+        this.email = email;
+        this.setor = setor;
+        this.cargo = cargo;
         this.idFilial = idFilial;
         this.sexo = sexo;
         this.ativo = ativo;
@@ -108,7 +124,7 @@ public final class UsuarioModel extends PessoaModel {
     private void setSenhaEncriptada(String senha) {
         this.senha = BCrypt.hashpw(senha, BCrypt.gensalt(12));
     }
-    
+
     /**
      * @param senha the senha to set
      */

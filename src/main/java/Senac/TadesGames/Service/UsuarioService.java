@@ -64,7 +64,7 @@ public class UsuarioService {
         if (!validarCpf(usuario.getCpf())) {
             this.notificacao.adicionaNotificacao("cpf", "CPF inválido, por favor digite um CPF válido");
         }
-        
+
         validaCpfExistente(usuario.getCpf());
         validaEmailExistente(usuario.getEmail());
         validaLoginExistente(usuario.getLogin());
