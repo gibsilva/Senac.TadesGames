@@ -6,6 +6,8 @@
 package Senac.TadesGames.Servlet;
 
 import Senac.TadesGames.Helpers.Utils;
+import Senac.TadesGames.Models.RelatorioClienteModel;
+import Senac.TadesGames.Models.RelatorioProdutoModel;
 import Senac.TadesGames.Models.RelatorioVendasModel;
 import Senac.TadesGames.Service.RelatorioService;
 import com.google.gson.Gson;
@@ -24,7 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Gi
+ * @author Giovanni.Carignato
  */
 @WebServlet(name = "RelatorioControllerServlet", urlPatterns = {"/autenticado/Relatorios"})
 public class RelatorioControllerServlet extends HttpServlet {
@@ -48,6 +50,18 @@ public class RelatorioControllerServlet extends HttpServlet {
                 case "relatorioVendas":
                     gerarRelatorioVendas(request, response);
                     break;
+                case "produtos":
+                    relatorioProduto(request, response);
+                    break;
+                case "relatorioProdutos":
+                    gerarRelatorioProdutos(request, response);
+                    break;
+                case "clientes":
+                    relatorioCliente(request, response);
+                    break;
+                case "relatorioClientes":
+                    gerarRelatorioClientes(request, response);
+                    break;
             }
         } catch (IOException e) {
             throw new ServletException(e);
@@ -62,6 +76,16 @@ public class RelatorioControllerServlet extends HttpServlet {
         request.getRequestDispatcher("/WEB-INF/jsp/autenticado/relatorioVendas.jsp").forward(request, response);
     }
 
+    protected void relatorioProduto(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.getRequestDispatcher("/WEB-INF/jsp/autenticado/relatorioProduto.jsp").forward(request, response);
+    }
+
+    protected void relatorioCliente(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.getRequestDispatcher("/WEB-INF/jsp/autenticado/relatorioCliente.jsp").forward(request, response);
+    }
+
     protected void gerarRelatorioVendas(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ParseException {
         response.setContentType("text/html; charset=UTF-8");
@@ -71,6 +95,34 @@ public class RelatorioControllerServlet extends HttpServlet {
             Date dataFim = Utils.converteStrParaDate(request.getParameter("dataFim"));
 
             List<RelatorioVendasModel> lista = relatorioService.obterPorDataRelatorioVendas(dataInicio, dataFim);
+            out.print(gson.toJson(lista));
+            out.flush();
+        }
+    }
+
+    protected void gerarRelatorioProdutos(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, ParseException {
+        response.setContentType("text/html; charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            Gson gson = new Gson();
+            Date dataInicio = Utils.converteStrParaDate(request.getParameter("dataInicio"));
+            Date dataFim = Utils.converteStrParaDate(request.getParameter("dataFim"));
+
+            List<RelatorioProdutoModel> lista = relatorioService.obterPorDataRelatorioProduto(dataInicio, dataFim);
+            out.print(gson.toJson(lista));
+            out.flush();
+        }
+    }
+
+    protected void gerarRelatorioClientes(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, ParseException {
+        response.setContentType("text/html; charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            Gson gson = new Gson();
+            Date dataInicio = Utils.converteStrParaDate(request.getParameter("dataInicio"));
+            Date dataFim = Utils.converteStrParaDate(request.getParameter("dataFim"));
+
+            List<RelatorioClienteModel> lista = relatorioService.obterPorDataRelatorioCliente(dataInicio, dataFim);
             out.print(gson.toJson(lista));
             out.flush();
         }

@@ -9,7 +9,7 @@ import java.util.Date;
 
 /**
  *
- * @author Gi
+ * @author Giovanni.Carignato
  */
 public class RelatorioProdutoModel {
     private int idProduto;
@@ -17,11 +17,11 @@ public class RelatorioProdutoModel {
     private int qtdProduto;
     private double totalVendido;
     private String categoria;
-    private Date dataUltimaVenda;
+    private String dataUltimaVenda;
     private boolean ativo;
     
     public RelatorioProdutoModel(int idProduto, String nomeProduto, int qtdProduto,
-            double totalVendido, String categoria, Date dataUltimaVenda, boolean ativo){
+            double totalVendido, String categoria, String dataUltimaVenda, boolean ativo){
         
         this.idProduto = idProduto;
         this.nomeProduto = nomeProduto;
@@ -70,7 +70,7 @@ public class RelatorioProdutoModel {
     /**
      * @return the dataUltimaVenda
      */
-    public Date getDataUltimaVenda() {
+    public String getDataUltimaVenda() {
         return dataUltimaVenda;
     }
 
@@ -79,13 +79,6 @@ public class RelatorioProdutoModel {
      */
     public boolean isAtivo() {
         return ativo;
-    }
-
-    /**
-     * @param ativo the ativo to set
-     */
-    public void setAtivo(boolean ativo) {
-        this.ativo = ativo;
     }
 
 }

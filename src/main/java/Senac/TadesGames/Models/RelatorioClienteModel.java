@@ -5,24 +5,22 @@
  */
 package Senac.TadesGames.Models;
 
-import java.util.Date;
-
 /**
  *
- * @author Gi
+ * @author Giovanni.Carignato
  */
 public class RelatorioClienteModel {
-    private int idCliente;
-    private String nomeCliente;
-    private String cpf;
-    private String cnpj;
-    private int qtdPedidos;
-    private Date dataUltimoPedido;
-    private double totalComprado;
-    private boolean ativo;
+    private final int idCliente;
+    private final String nomeCliente;
+    private final String cpf;
+    private final String cnpj;
+    private final int qtdPedidos;
+    private final String dataUltimoPedido;
+    private final double totalComprado;
+    private final boolean ativo;
     
     public RelatorioClienteModel(int idCliente, String nomeCliente, String cpf, String cnpj,
-            int qtdPedidos, Date dataUltimoPedido, double totalComprado, boolean ativo){
+            int qtdPedidos, String dataUltimoPedido, double totalComprado, boolean ativo){
         
         this.idCliente = idCliente;
         this.nomeCliente = nomeCliente;
@@ -65,7 +63,7 @@ public class RelatorioClienteModel {
     /**
      * @return the dataUltimoPedido
      */
-    public Date getDataUltimoPedido() {
+    public String getDataUltimoPedido() {
         return dataUltimoPedido;
     }
 
@@ -81,12 +79,5 @@ public class RelatorioClienteModel {
      */
     public boolean isAtivo() {
         return ativo;
-    }
-
-    /**
-     * @param ativo the ativo to set
-     */
-    public void setAtivo(boolean ativo) {
-        this.ativo = ativo;
     }
 }
