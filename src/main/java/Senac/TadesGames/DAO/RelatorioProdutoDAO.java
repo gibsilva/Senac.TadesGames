@@ -34,25 +34,25 @@ public class RelatorioProdutoDAO {
         //ainda não foi testado de fato por não haver os dados na base das vendas
         try {
             stmt = conn.prepareStatement("SELECT   \n"
-                    + "	PRODUTO.IDPRODUTO,\n"
-                    + "	PRODUTO.NOME,\n"
-                    + "	(SELECT SUM(QUANTIDADE) FROM ITENSPEDIDO I WHERE I.IDPRODUTO = PRODUTO.IDPRODUTO) AS QTDPRODUTO,\n"
-                    + "	SUM(ITENSPEDIDO.VALORUNITARIO * QUANTIDADE) AS TOTALVENDIDO,\n"
-                    + "	CATEGORIA.NOME AS CATEGORIA,\n"
-                    + "	DATE_FORMAT((SELECT DATE(ITENSPEDIDO.DATAHORACRIACAO) ORDER BY ITENSPEDIDO.DATAHORACRIACAO DESC LIMIT 1), '%d/%m/%Y') AS DATAULTIMAVENDA,\n"
-                    + "	PRODUTO.ATIVO,\n"
-                    + "	DATE(PRODUTO.DATAHORACRIACAO) AS DATAHORACRIACAO\n"
+                    + "	produto.IDPRODUTO,\n"
+                    + "	produto.NOME,\n"
+                    + "	(SELECT SUM(I.QUANTIDADE) FROM itenspedido I WHERE I.IDPRODUTO = produto.IDPRODUTO) AS QTDPRODUTO,\n"
+                    + "	SUM(itenspedido.VALORUNITARIO * itenspedido.QUANTIDADE) AS TOTALVENDIDO,\n"
+                    + "	categoria.NOME AS CATEGORIA,\n"
+                    + "	produto.ATIVO,\n"
+                    + "	DATE_FORMAT((select i.datahoracriacao from itenspedido i where i.idproduto = produto.idproduto limit 1), '%d/%m/%Y') AS DataUltimaVenda,\n"
+                    + "	DATE_FORMAT(produto.DATAHORACRIACAO, '%d/%m/%Y') AS DATAHORACRIACAO\n"
                     + "FROM\n"
-                    + "	PRODUTO\n"
-                    + "INNER JOIN ITENSPEDIDO\n"
-                    + "	ON ITENSPEDIDO.IDPRODUTO = PRODUTO.IDPRODUTO\n"
-                    + "INNER JOIN CATEGORIA\n"
-                    + "	ON CATEGORIA.IDCATEGORIA = PRODUTO.IDCATEGORIA\n"
+                    + "    produto\n"
+                    + "INNER JOIN itenspedido\n"
+                    + "    ON itenspedido.IDPRODUTO = produto.IDPRODUTO\n"
+                    + "INNER JOIN categoria\n"
+                    + "    ON categoria.IDCATEGORIA = produto.IDCATEGORIA\n"
                     + "WHERE\n"
-                    + "	DATE(PRODUTO.DATAHORACRIACAO) BETWEEN ? AND ?\n"
+                    + "    DATE(produto.DATAHORACRIACAO) BETWEEN ? AND ?\n"
                     + "GROUP BY\n"
-                    + "	PRODUTO.IDPRODUTO,\n"
-                    + "    PRODUTO.NOME");
+                    + "    produto.IDPRODUTO,\n"
+                    + "    produto.DataHoraCriacao");
 
             stmt.setString(1, util.converteDateParaStr(dataInicio));
             stmt.setString(2, util.converteDateParaStr(dataFim));

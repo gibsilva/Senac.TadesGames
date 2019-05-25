@@ -9,7 +9,16 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
     <head>
+        <meta charset="utf-8">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="Cache-Control: max-age=3600, must-revalidate" />
+        <!-- Add to homescreen for Safari on iOS -->
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="apple-mobile-web-app-title" content="Tades Games">
+        <!-- CSS -->
         <link rel="stylesheet" href="../resources/css/bootsWacth/bootstrap.min.css"/>
         <link rel="stylesheet" href="../resources/css/toastr.min.css"/>
     </head>

@@ -35,7 +35,7 @@ public class GeneroDAO implements IGeneroDao {
         GeneroModel genero = null;
 
         try {
-            stmt = conn.prepareStatement("SELECT IDGENERO, NOME FROM GENERO WHERE NOME = ?");
+            stmt = conn.prepareStatement("SELECT IDGENERO, NOME FROM genero WHERE NOME = ?");
 
             stmt.setString(1, nome);
 
@@ -62,7 +62,7 @@ public class GeneroDAO implements IGeneroDao {
         GeneroModel genero = null;
 
         try {
-            stmt = conn.prepareStatement("SELECT IDGENERO, NOME FROM GENERO WHERE NOME = ? AND IDGENERO != ?");
+            stmt = conn.prepareStatement("SELECT IDGENERO, NOME FROM genero WHERE NOME = ? AND IDGENERO != ?");
 
             stmt.setString(1, nome);
             stmt.setInt(2, id);
@@ -91,7 +91,7 @@ public class GeneroDAO implements IGeneroDao {
         GeneroModel genero = null;
 
         try {
-            stmt = conn.prepareStatement("SELECT IDGENERO, NOME FROM GENERO WHERE IDGENERO = ?");
+            stmt = conn.prepareStatement("SELECT IDGENERO, NOME FROM genero WHERE IDGENERO = ?");
             stmt.setInt(1, id);
 
             rs = stmt.executeQuery();
@@ -120,7 +120,7 @@ public class GeneroDAO implements IGeneroDao {
         List<GeneroModel> generos = new ArrayList<GeneroModel>();
 
         try {
-            stmt = conn.prepareStatement("SELECT IDGENERO, NOME FROM GENERO");
+            stmt = conn.prepareStatement("SELECT IDGENERO, NOME FROM genero");
 
             rs = stmt.executeQuery();
             while (rs.next()) {
@@ -148,7 +148,7 @@ public class GeneroDAO implements IGeneroDao {
         Connection conn = conexao.getConnection();
 
         try {
-            stmt = conn.prepareStatement("INSERT INTO GENERO(NOME) VALUES (?)");
+            stmt = conn.prepareStatement("INSERT INTO genero(NOME) VALUES (?)");
             stmt.setString(1, genero.getNome());
 
             stmt.executeUpdate();
@@ -165,7 +165,7 @@ public class GeneroDAO implements IGeneroDao {
         Connection conn = conexao.getConnection();
 
         try {
-            stmt = conn.prepareStatement("UPDATE GENERO SET NOME = ? WHERE IDGENERO = ?");
+            stmt = conn.prepareStatement("UPDATE genero SET NOME = ? WHERE IDGENERO = ?");
             stmt.setString(1, genero.getNome());
             stmt.setInt(2, genero.getIdGenero());
 
@@ -183,7 +183,7 @@ public class GeneroDAO implements IGeneroDao {
         Connection conn = conexao.getConnection();
 
         try {
-            stmt = conn.prepareStatement("DELETE FROM GENERO WHERE IDGENERO = ?");
+            stmt = conn.prepareStatement("DELETE FROM genero WHERE IDGENERO = ?");
             stmt.setInt(1, genero.getIdGenero());
 
             stmt.executeUpdate();

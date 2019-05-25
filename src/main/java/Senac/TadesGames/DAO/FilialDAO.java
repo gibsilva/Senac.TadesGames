@@ -43,7 +43,7 @@ public class FilialDAO implements IFilialDao {
                     + "ESTADO "
                     + "ESTADO, "
                     + "ATIVO "
-                    + "FROM FILIAL WHERE IDFILIAL = ?");
+                    + "FROM filial WHERE IDFILIAL = ?");
 
             stmt.setInt(1, id);
 
@@ -91,7 +91,7 @@ public class FilialDAO implements IFilialDao {
                     + "CIDADE, "
                     + "ESTADO, "
                     + "ATIVO "
-                    + "FROM FILIAL");
+                    + "FROM filial");
 
             rs = stmt.executeQuery();
             while (rs.next()) {
@@ -126,7 +126,7 @@ public class FilialDAO implements IFilialDao {
         Connection conn = conexao.getConnection();
 
         try {
-            stmt = conn.prepareStatement("INSERT INTO FILIAL("
+            stmt = conn.prepareStatement("INSERT INTO filial("
                     + "NOME, "
                     + "CNPJ, "
                     + "CEP, "
@@ -163,7 +163,7 @@ public class FilialDAO implements IFilialDao {
         Connection conn = conexao.getConnection();
 
         try {
-            stmt = conn.prepareStatement("UPDATE FILIAL SET "
+            stmt = conn.prepareStatement("UPDATE filial SET "
                     + "NOME = ?, "
                     + "CEP = ?, "
                     + "LOGRADOURO = ?, "
@@ -211,7 +211,7 @@ public class FilialDAO implements IFilialDao {
                     + "CIDADE, "
                     + "ESTADO, "
                     + "ATIVO "
-                    + "FROM FILIAL WHERE CNPJ = ?");
+                    + "FROM filial WHERE CNPJ = ?");
 
             stmt.setString(1, cnpj);
 
@@ -257,7 +257,7 @@ public class FilialDAO implements IFilialDao {
                     + "CIDADE, "
                     + "ESTADO, "
                     + "ATIVO "
-                    + "FROM FILIAL WHERE CNPJ = ? AND IDFILIAL != ?");
+                    + "FROM filial WHERE CNPJ = ? AND IDFILIAL != ?");
 
             stmt.setString(1, cnpj);
             stmt.setInt(2, id);

@@ -35,7 +35,7 @@ public class CategoriaDAO implements ICategoriaDao {
         CategoriaModel categoria = null;
 
         try {
-            stmt = conn.prepareStatement("SELECT IDCATEGORIA, NOME FROM CATEGORIA WHERE NOME = ?");
+            stmt = conn.prepareStatement("SELECT IDCATEGORIA, NOME FROM categoria WHERE NOME = ?");
 
             stmt.setString(1, nome);
 
@@ -63,7 +63,7 @@ public class CategoriaDAO implements ICategoriaDao {
         CategoriaModel categoria = null;
 
         try {
-            stmt = conn.prepareStatement("SELECT IDCATEGORIA, NOME FROM CATEGORIA WHERE NOME = ? AND IDCATEGORIA != ?");
+            stmt = conn.prepareStatement("SELECT IDCATEGORIA, NOME FROM categoria WHERE NOME = ? AND IDCATEGORIA != ?");
 
             stmt.setString(1, nome);
             stmt.setInt(2, id);
@@ -92,7 +92,7 @@ public class CategoriaDAO implements ICategoriaDao {
         CategoriaModel categoria = null;
 
         try {
-            stmt = conn.prepareStatement("SELECT IDCATEGORIA, NOME FROM CATEGORIA WHERE IDCATEGORIA = ?");
+            stmt = conn.prepareStatement("SELECT IDCATEGORIA, NOME FROM categoria WHERE IDCATEGORIA = ?");
             stmt.setInt(1, id);
 
             rs = stmt.executeQuery();
@@ -120,7 +120,7 @@ public class CategoriaDAO implements ICategoriaDao {
         List<CategoriaModel> categorias = new ArrayList<CategoriaModel>();
 
         try {
-            stmt = conn.prepareStatement("SELECT IDCATEGORIA, NOME FROM CATEGORIA");
+            stmt = conn.prepareStatement("SELECT IDCATEGORIA, NOME FROM categoria");
 
             rs = stmt.executeQuery();
             while (rs.next()) {
@@ -148,7 +148,7 @@ public class CategoriaDAO implements ICategoriaDao {
         Connection conn = conexao.getConnection();
 
         try {
-            stmt = conn.prepareStatement("INSERT INTO CATEGORIA(NOME) VALUES (?)");
+            stmt = conn.prepareStatement("INSERT INTO categoria(NOME) VALUES (?)");
             stmt.setString(1, categoria.getNome());
 
             stmt.executeUpdate();
@@ -165,7 +165,7 @@ public class CategoriaDAO implements ICategoriaDao {
         Connection conn = conexao.getConnection();
 
         try {
-            stmt = conn.prepareStatement("UPDATE CATEGORIA SET NOME = ? WHERE IDCATEGORIA = ?");
+            stmt = conn.prepareStatement("UPDATE categoria SET NOME = ? WHERE IDCATEGORIA = ?");
             stmt.setString(1, categoria.getNome());
             stmt.setInt(2, categoria.getIdCategoria());
 
@@ -183,7 +183,7 @@ public class CategoriaDAO implements ICategoriaDao {
         Connection conn = conexao.getConnection();
 
         try {
-            stmt = conn.prepareStatement("DELETE FROM CATEGORIA WHERE IDCATEGORIA = ?");
+            stmt = conn.prepareStatement("DELETE FROM categoria WHERE IDCATEGORIA = ?");
             stmt.setInt(1, categoria.getIdCategoria());
 
             stmt.executeUpdate();

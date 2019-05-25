@@ -52,9 +52,9 @@ public class ProdutoDAO implements IProdutoDao {
                     + "IDGENERO, "
                     + "ATIVO, "
                     + "IDFILIAL, "
-                    + "IDPLATAFORMA,"
+                    + "IDPLATAFORMA, "
                     + "QUANTIDADEESTOQUE "
-                    + " FROM PRODUTO WHERE IDPRODUTO = ?");
+                    + " FROM produto WHERE IDPRODUTO = ?");
             stmt.setInt(1, id);
 
             rs = stmt.executeQuery();
@@ -104,7 +104,7 @@ public class ProdutoDAO implements IProdutoDao {
                     + "IDFILIAL, "
                     + "IDPLATAFORMA, "
                     + "QUANTIDADEESTOQUE "
-                    + " FROM PRODUTO");
+                    + " FROM produto");
 
             rs = stmt.executeQuery();
             while (rs.next()) {
@@ -155,7 +155,7 @@ public class ProdutoDAO implements IProdutoDao {
                     + "IDFILIAL, "
                     + "IDPLATAFORMA, "
                     + "QUANTIDADEESTOQUE "
-                    + " FROM PRODUTO WHERE IDCATEGORIA = ?");
+                    + " FROM produto WHERE IDCATEGORIA = ?");
 
             stmt.setInt(1, id);
 
@@ -207,7 +207,7 @@ public class ProdutoDAO implements IProdutoDao {
                     + "IDFILIAL, "
                     + "IDPLATAFORMA, "
                     + "QUANTIDADEESTOQUE "
-                    + " FROM PRODUTO WHERE IDGENERO = ?");
+                    + " FROM produto WHERE IDGENERO = ?");
 
             stmt.setInt(1, id);
 
@@ -257,7 +257,7 @@ public class ProdutoDAO implements IProdutoDao {
                     + "IDFILIAL, "
                     + "IDPLATAFORMA, "
                     + "QUANTIDADEESTOQUE "
-                    + " FROM PRODUTO WHERE IDPLATAFORMA = ?");
+                    + " FROM produto WHERE IDPLATAFORMA = ?");
 
             stmt.setInt(1, id);
 
@@ -294,7 +294,7 @@ public class ProdutoDAO implements IProdutoDao {
         Connection conn = conexao.getConnection();
 
         try {
-            stmt = conn.prepareStatement("INSERT INTO PRODUTO("
+            stmt = conn.prepareStatement("INSERT INTO produto("
                     + "NOME, "
                     + "DESCRICAO, "
                     + "PRECOCOMPRA, "
@@ -331,7 +331,7 @@ public class ProdutoDAO implements IProdutoDao {
         Connection conn = conexao.getConnection();
 
         try {
-            stmt = conn.prepareStatement("UPDATE PRODUTO SET "
+            stmt = conn.prepareStatement("UPDATE produto SET "
                     + "NOME = ?, "
                     + "DESCRICAO = ?, "
                     + "PRECOCOMPRA = ?, "
@@ -366,7 +366,7 @@ public class ProdutoDAO implements IProdutoDao {
         Connection conn = conexao.getConnection();
 
         try {
-            stmt = conn.prepareStatement("UPDATE PRODUTO SET "
+            stmt = conn.prepareStatement("UPDATE produto SET "
                     + "QUANTIDADEESTOQUE =  ? "
                     + "WHERE IDPRODUTO = ? AND IDFILIAL = ?");
 
@@ -388,7 +388,7 @@ public class ProdutoDAO implements IProdutoDao {
         Connection conn = conexao.getConnection();
 
         try {
-            stmt = conn.prepareStatement("UPDATE PRODUTO SET "
+            stmt = conn.prepareStatement("UPDATE produto SET "
                     + "ATIVO = 0"
                     + "WHERE IDPRODUTO = ?");
             stmt.setInt(1, produto.getIdProduto());
@@ -407,7 +407,7 @@ public class ProdutoDAO implements IProdutoDao {
         Connection conn = conexao.getConnection();
 
         try {
-            stmt = conn.prepareStatement("UPDATE PRODUTO SET "
+            stmt = conn.prepareStatement("UPDATE produto SET "
                     + "ATIVO = 1"
                     + "WHERE IDPRODUTO = ?");
             stmt.setInt(1, produto.getIdProduto());

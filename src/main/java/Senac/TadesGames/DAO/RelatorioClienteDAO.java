@@ -34,23 +34,24 @@ public class RelatorioClienteDAO {
         //ainda não foi testado de fato por não haver os dados na base das vendas
         try {
             stmt = conn.prepareStatement("SELECT\n"
-                    + "	CLIENTE.IDCLIENTE,\n"
-                    + "	CLIENTE.NOME,\n"
-                    + "	CLIENTE.CPF,\n"
-                    + "	CLIENTE.CNPJ,\n"
+                    + "	cliente.IDCLIENTE,\n"
+                    + "	cliente.NOME,\n"
+                    + "	cliente.CPF,\n"
+                    + "	cliente.CNPJ,\n"
                     + "	(select count(1) from pedido p where p.idcliente = cliente.idcliente) AS QTDPEDIDOS,\n"
-                    + "	DATE_FORMAT(PEDIDO.DATAHORACRIACAO, '%d/%m/%Y') AS DATAULTIMOPEDIDO,\n"
-                    + "	SUM(ITENSPEDIDO.VALORUNITARIO * QUANTIDADE) AS TOTALCOMPRADO,\n"
-                    + "	CLIENTE.ATIVO\n"
-                    + "FROM CLIENTE \n"
-                    + "INNER JOIN PEDIDO \n"
-                    + "	ON PEDIDO.IDCLIENTE = CLIENTE.IDCLIENTE \n"
-                    + "INNER JOIN ITENSPEDIDO\n"
-                    + "	ON ITENSPEDIDO.IDPEDIDO = PEDIDO.IDPEDIDO \n"
+                    + "	DATE_FORMAT(pedido.DATAHORACRIACAO, '%d/%m/%Y') AS DATAULTIMOPEDIDO,\n"
+                    + "	SUM(itenspedido.VALORUNITARIO * QUANTIDADE) AS TOTALCOMPRADO,\n"
+                    + "	cliente.ATIVO\n"
+                    + "FROM cliente \n"
+                    + "INNER JOIN pedido \n"
+                    + "	ON pedido.IDCLIENTE = cliente.IDCLIENTE \n"
+                    + "INNER JOIN itenspedido\n"
+                    + "	ON itenspedido.IDPEDIDO = pedido.IDPEDIDO \n"
                     + "WHERE\n"
-                    + "	DATE(CLIENTE.DATAHORACRIACAO) BETWEEN ? AND ?\n"
+                    + "	DATE(cliente.DATAHORACRIACAO) BETWEEN ? AND ?\n"
                     + "GROUP BY \n"
-                    + "	CLIENTE.IDCLIENTE");
+                    + "	cliente.IDCLIENTE,\n"
+                    + " pedido.DATAHORACRIACAO");
 
             stmt.setString(1, util.converteDateParaStr(dataInicio));
             stmt.setString(2, util.converteDateParaStr(dataFim));

@@ -38,7 +38,7 @@ public class ItensPedidoDAO implements IItensPedidoDao {
                     + "VALORUNITARIO, "
                     + "QUANTIDADE, "
                     + "IDPEDIDO"
-                    + " FROM ITENSPEDIDO WHERE IDITENSPEDIDO = ?");
+                    + " FROM itenspedido WHERE IDITENSPEDIDO = ?");
             stmt.setInt(1, id);
 
             rs = stmt.executeQuery();
@@ -74,7 +74,7 @@ public class ItensPedidoDAO implements IItensPedidoDao {
                     + "VALORUNITARIO, "
                     + "QUANTIDADE, "
                     + "IDPEDIDO"
-                    + " FROM ITENSPEDIDO");
+                    + " FROM itenspedido");
 
             rs = stmt.executeQuery();
             while (rs.next()) {
@@ -112,7 +112,7 @@ public class ItensPedidoDAO implements IItensPedidoDao {
                     + "VALORUNITARIO, "
                     + "QUANTIDADE, "
                     + "IDPEDIDO "
-                    + " FROM ITENSPEDIDO"
+                    + " FROM itenspedido"
                     + " WHERE IDPEDIDO = ?");
 
             stmt.setInt(1, id);
@@ -145,7 +145,7 @@ public class ItensPedidoDAO implements IItensPedidoDao {
         Connection conn = conexao.getConnection();
 
         try {
-            stmt = conn.prepareStatement("INSERT INTO ITENSPEDIDO("
+            stmt = conn.prepareStatement("INSERT INTO itenspedido("
                     + "IDPRODUTO, "
                     + "VALORUNITARIO, "
                     + "QUANTIDADE, "

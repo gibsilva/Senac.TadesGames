@@ -47,7 +47,7 @@ public class PedidoDAO implements IPedidoDao {
                     + "IDUSUARIO,"
                     + "PARCELA, "
                     + "VALORRECEBIDO "
-                    + " FROM PEDIDO WHERE IDPEDIDO = ?");
+                    + " FROM pedido WHERE IDPEDIDO = ?");
 
             stmt.setInt(1, id);
 
@@ -95,7 +95,7 @@ public class PedidoDAO implements IPedidoDao {
                     + "IDUSUARIO,"
                     + "PARCELA, "
                     + "VALORRECEBIDO "
-                    + " FROM PEDIDO");
+                    + " FROM pedido");
 
             rs = stmt.executeQuery();
             while (rs.next()) {
@@ -143,7 +143,7 @@ public class PedidoDAO implements IPedidoDao {
                     + "IDUSUARIO,"
                     + "PARCELA, "
                     + "VALORRECEBIDO "
-                    + " FROM PEDIDO WHERE ";
+                    + " FROM pedido WHERE ";
 
             if (id != 0 && dataInicio.equals("") && dataFim.equals("")) {
                 sql += "IDPEDIDO = ?";
@@ -200,7 +200,7 @@ public class PedidoDAO implements IPedidoDao {
         Utils util = new Utils();
 
         try {
-            stmt = conn.prepareStatement("INSERT INTO PEDIDO ("
+            stmt = conn.prepareStatement("INSERT INTO pedido ("
                     + "STATUSPEDIDO, "
                     + "DATAPEDIDO, "
                     + "IDCLIENTE, "
@@ -238,7 +238,7 @@ public class PedidoDAO implements IPedidoDao {
         Connection conn = conexao.getConnection();
 
         try {
-            stmt = conn.prepareStatement("UPDATE PEDIDO SET STATUS = 1 WHERE IDPEDIDO = ?");
+            stmt = conn.prepareStatement("UPDATE pedido SET STATUS = 1 WHERE IDPEDIDO = ?");
             stmt.setInt(1, pedido.getIdPedido());
 
             stmt.executeUpdate();
@@ -255,7 +255,7 @@ public class PedidoDAO implements IPedidoDao {
         Connection conn = conexao.getConnection();
 
         try {
-            stmt = conn.prepareStatement("UPDATE PEDIDO SET STATUSPEDIDO = 0 WHERE IDPEDIDO = ?");
+            stmt = conn.prepareStatement("UPDATE pedido SET STATUSPEDIDO = 0 WHERE IDPEDIDO = ?");
             stmt.setInt(1, pedido.getIdPedido());
 
             stmt.executeUpdate();

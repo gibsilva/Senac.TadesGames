@@ -43,7 +43,7 @@ public class ClienteDAO implements IClienteDao {
                     + "CELULAR,  "
                     + "SEXO, "
                     + "ATIVO "
-                    + "FROM CLIENTE WHERE IDCLIENTE = ?");
+                    + "FROM cliente WHERE IDCLIENTE = ?");
 
             stmt.setInt(1, id);
 
@@ -89,7 +89,7 @@ public class ClienteDAO implements IClienteDao {
                     + "CELULAR, "
                     + "SEXO, "
                     + "ATIVO "
-                    + "FROM CLIENTE WHERE EMAIL = ?");
+                    + "FROM cliente WHERE EMAIL = ?");
 
             stmt.setString(1, email);
 
@@ -134,7 +134,7 @@ public class ClienteDAO implements IClienteDao {
                     + "CELULAR, "
                     + "SEXO, "
                     + "ATIVO "
-                    + "FROM CLIENTE WHERE EMAIL = ? AND IDCLIENTE != ?");
+                    + "FROM cliente WHERE EMAIL = ? AND IDCLIENTE != ?");
 
             stmt.setString(1, email);
             stmt.setInt(2, id);
@@ -181,7 +181,7 @@ public class ClienteDAO implements IClienteDao {
                     + "CELULAR, "
                     + "SEXO, "
                     + "ATIVO "
-                    + "FROM CLIENTE WHERE CPF = ?");
+                    + "FROM cliente WHERE CPF = ?");
 
             stmt.setString(1, cpf);
 
@@ -227,7 +227,7 @@ public class ClienteDAO implements IClienteDao {
                     + "CELULAR, "
                     + "SEXO, "
                     + "ATIVO "
-                    + "FROM CLIENTE WHERE CNPJ = ?");
+                    + "FROM cliente WHERE CNPJ = ?");
 
             stmt.setString(1, cnpj);
 
@@ -274,7 +274,7 @@ public class ClienteDAO implements IClienteDao {
                     + "CELULAR, "
                     + "SEXO, "
                     + "ATIVO "
-                    + "FROM CLIENTE");
+                    + "FROM cliente");
 
             rs = stmt.executeQuery();
             while (rs.next()) {
@@ -309,7 +309,7 @@ public class ClienteDAO implements IClienteDao {
         Utils util = new Utils();
 
         try {
-            stmt = conn.prepareStatement("INSERT INTO CLIENTE("
+            stmt = conn.prepareStatement("INSERT INTO cliente("
                     + "NOME, "
                     + "CPF, "
                     + "CNPJ, "
@@ -344,7 +344,7 @@ public class ClienteDAO implements IClienteDao {
         Connection conn = conexao.getConnection();
         Utils util = new Utils();
         try {
-            stmt = conn.prepareStatement("UPDATE CLIENTE SET "
+            stmt = conn.prepareStatement("UPDATE cliente SET "
                     + "NOME = ?,"
                     + "DATANASC = ?,"
                     + "EMAIL = ?,"

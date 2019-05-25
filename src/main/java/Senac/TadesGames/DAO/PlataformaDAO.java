@@ -35,7 +35,7 @@ public class PlataformaDAO implements IPlataformaDao {
         PlataformaModel plataforma = null;
 
         try {
-            stmt = conn.prepareStatement("SELECT IDPLATAFORMA, NOME FROM PLATAFORMA WHERE NOME = ?");
+            stmt = conn.prepareStatement("SELECT IDPLATAFORMA, NOME FROM plataforma WHERE NOME = ?");
 
             stmt.setString(1, nome);
 
@@ -62,7 +62,7 @@ public class PlataformaDAO implements IPlataformaDao {
         PlataformaModel plataforma = null;
 
         try {
-            stmt = conn.prepareStatement("SELECT IDPLATAFORMA, NOME FROM PLATAFORMA WHERE NOME = ? AND IDPLATAFORMA != ?");
+            stmt = conn.prepareStatement("SELECT IDPLATAFORMA, NOME FROM plataforma WHERE NOME = ? AND IDPLATAFORMA != ?");
 
             stmt.setString(1, nome);
             stmt.setInt(2, id);
@@ -91,7 +91,7 @@ public class PlataformaDAO implements IPlataformaDao {
         PlataformaModel plataforma = null;
 
         try {
-            stmt = conn.prepareStatement("SELECT IDPLATAFORMA, NOME FROM PLATAFORMA WHERE IDPLATAFORMA = ?");
+            stmt = conn.prepareStatement("SELECT IDPLATAFORMA, NOME FROM plataforma WHERE IDPLATAFORMA = ?");
             stmt.setInt(1, id);
 
             rs = stmt.executeQuery();
@@ -119,7 +119,7 @@ public class PlataformaDAO implements IPlataformaDao {
         List<PlataformaModel> plataformas = new ArrayList<PlataformaModel>();
 
         try {
-            stmt = conn.prepareStatement("SELECT IDPLATAFORMA, NOME FROM PLATAFORMA");
+            stmt = conn.prepareStatement("SELECT IDPLATAFORMA, NOME FROM plataforma");
 
             rs = stmt.executeQuery();
             while (rs.next()) {
@@ -147,7 +147,7 @@ public class PlataformaDAO implements IPlataformaDao {
         Connection conn = conexao.getConnection();
 
         try {
-            stmt = conn.prepareStatement("INSERT INTO PLATAFORMA (NOME) VALUES (?)");
+            stmt = conn.prepareStatement("INSERT INTO plataforma (NOME) VALUES (?)");
             stmt.setString(1, plataforma.getNome());
 
             stmt.executeUpdate();
@@ -164,7 +164,7 @@ public class PlataformaDAO implements IPlataformaDao {
         Connection conn = conexao.getConnection();
 
         try {
-            stmt = conn.prepareStatement("UPDATE PLATAFORMA SET NOME = ? WHERE IDPLATAFORMA = ?");
+            stmt = conn.prepareStatement("UPDATE plataforma SET NOME = ? WHERE IDPLATAFORMA = ?");
             stmt.setString(1, plataforma.getNome());
             stmt.setInt(2, plataforma.getIdPlataforma());
 
@@ -182,7 +182,7 @@ public class PlataformaDAO implements IPlataformaDao {
         Connection conn = conexao.getConnection();
 
         try {
-            stmt = conn.prepareStatement("DELETE FROM PLATAFORMA WHERE IDPLATAFORMA = ?");
+            stmt = conn.prepareStatement("DELETE FROM plataforma WHERE IDPLATAFORMA = ?");
             stmt.setInt(1, plataforma.getIdPlataforma());
 
             stmt.executeUpdate();
