@@ -24,9 +24,9 @@ public class UsuarioDAO implements IUsuarioDao {
     private ConexaoDB conexao;
     private final FilialDAO filialDao;
     private PreparedStatement stmt = null;
-    ResultSet rs = null;
-    
-    public UsuarioDAO(){
+    private ResultSet rs = null;
+
+    public UsuarioDAO() {
         this.conexao = new ConexaoDB();
         this.filialDao = new FilialDAO();
     }
@@ -112,7 +112,7 @@ public class UsuarioDAO implements IUsuarioDao {
                         rs.getString("sexo"),
                         rs.getBoolean("ativo")
                 );
-                
+
                 usuario.setFilial(filialDao.obterPorId(usuario.getIdFilial()));
             }
 
@@ -159,7 +159,7 @@ public class UsuarioDAO implements IUsuarioDao {
                         rs.getString("sexo"),
                         rs.getBoolean("ativo")
                 );
-                
+
                 usuario.setFilial(filialDao.obterPorId(usuario.getIdFilial()));
             }
 
@@ -205,7 +205,7 @@ public class UsuarioDAO implements IUsuarioDao {
                         rs.getString("sexo"),
                         rs.getBoolean("ativo")
                 );
-                
+
                 usuario.setFilial(filialDao.obterPorId(usuario.getIdFilial()));
             }
 
@@ -252,7 +252,7 @@ public class UsuarioDAO implements IUsuarioDao {
                         rs.getString("sexo"),
                         rs.getBoolean("ativo")
                 );
-                
+
                 usuario.setFilial(filialDao.obterPorId(usuario.getIdFilial()));
             }
 
@@ -298,7 +298,7 @@ public class UsuarioDAO implements IUsuarioDao {
                         rs.getString("sexo"),
                         rs.getBoolean("ativo")
                 );
-                
+
                 usuario.setFilial(filialDao.obterPorId(usuario.getIdFilial()));
             }
 
@@ -374,7 +374,7 @@ public class UsuarioDAO implements IUsuarioDao {
                     + "SENHA, "
                     + "SEXO, "
                     + "ATIVO"
-                    + " FROM usuario WHERE CARGO = ?");
+                    + " FROM usuario WHERE CARGO = ? AND ATIVO = 1");
 
             stmt.setString(1, cargo);
 
@@ -472,13 +472,31 @@ public class UsuarioDAO implements IUsuarioDao {
         Connection conn = conexao.getConnection();
 
         try {
-            stmt = conn.prepareStatement("UPTADE usuario SET ATIVO = 0 WHERE IDUSUARIO = ?");
+            stmt = conn.prepareStatement("UPDATE usuario SET ATIVO = 0 WHERE IDUSUARIO = ?");
             stmt.setInt(1, usuario.getIdUsuario());
 
             stmt.executeUpdate();
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt);
             throw new RuntimeException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public void alterarSenha(UsuarioModel usuario) {
+        Connection conn = conexao.getConnection();
+
+        try {
+            stmt = conn.prepareStatement("UPDATE usuario SET SENHA = ? WHERE IDUSUARIO = ?");
+            stmt.setString(1, usuario.getSenha());
+            stmt.setInt(2, usuario.getIdUsuario());
+
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            conexao.closeConnection(conn, stmt);
+            throw new RuntimeException(ex.getMessage());
+        } finally {
+        	conexao.closeConnection(conn, stmt);
         }
     }
 
@@ -525,6 +543,8 @@ public class UsuarioDAO implements IUsuarioDao {
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt, rs);
             return null;
+        } finally {
+        	conexao.closeConnection(conn, stmt, rs);
         }
     }
 
@@ -548,7 +568,9 @@ public class UsuarioDAO implements IUsuarioDao {
 
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt, rs);
-
+            return false;
+        } finally {
+        	conexao.closeConnection(conn, stmt, rs);
         }
         return condicao;
     }

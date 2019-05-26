@@ -39,7 +39,7 @@
                 </div>
                 <div class="form-group col-md-2">
                     <label for="cpf">CPF<h11 class="text-danger">*</h11> </label>
-                    <input type="text" class="form-control " name="cpf" id="cpf" minlength="11" maxlength="11" placeholder="Digite seu CPF" readonly>
+                    <input type="text" class="form-control cpf" name="cpf" id="cpf" minlength="11" maxlength="11" placeholder="Digite seu CPF" readonly>
                 </div>
                 <div class="form-group col-md-3">
                     <label for="cpf">CNPJ</label>

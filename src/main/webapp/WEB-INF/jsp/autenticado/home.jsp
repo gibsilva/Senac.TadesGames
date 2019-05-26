@@ -20,8 +20,8 @@
                 <div class="card-header bg-primary text-white">Produtos</div>
                 <div class="card-body">
                     <h4 class="card-title">Controle de Produtos</h4>
-                    <p class="card-text">Total Vendidos: </p>
-                    <p class="card-text">Total Estoque: </p>
+                    <p class="card-text">Total Vendidos: ${totalVendido}</p>
+                    <p class="card-text">Total Estoque: ${totalEstoque}</p>
                 </div>
             </div>
 
@@ -29,17 +29,17 @@
                 <div class="card-header bg-info text-white">Vendas</div>
                 <div class="card-body">
                     <h4 class="card-title">Controle de Vendas</h4>
-                    <p class="card-text">Total Vendas: </p>
-                    <p class="card-text">Total Vendidos R$: </p>
+                    <p class="card-text">Total Vendas: ${qtdVendas}</p>
+                    <p class="card-text">Total Vendido R$: ${totalVendas}</p>
                 </div>
             </div>
 
             <div class="card border-warning mb-3" style="max-width: 20rem;">
-                <div class="card-header bg-warning text-white">Produtos</div>
+                <div class="card-header bg-warning text-white">Vendedores</div>
                 <div class="card-body">
-                    <h4 class="card-title">Controle de Produtos</h4>
-                    <p class="card-text">Total Vendidos: </p>
-                    <p class="card-text">Total Estoque: </p>
+                    <h4 class="card-title">Melhor vendedor: <small><strong>${homeVendedor.nomeVendedor}</strong></small></h4>
+                    <p class="card-text">Total vendidos: R$ ${homeVendedor.totalVendido}</p>
+                    <p class="card-text">Total de vendas: ${homeVendedor.qtdvendas}</p>
                 </div>
             </div>
         </div>

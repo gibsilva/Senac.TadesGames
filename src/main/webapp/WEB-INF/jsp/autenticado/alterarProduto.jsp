@@ -43,7 +43,7 @@
                     </c:forEach>
                 </select>
             </div>
-            
+
             <div class="form-group col-md-3">
                 <label for="genero">Genero<h11 class="text-danger">*</h11></label>
                 <select id="genero" name="genero" class="custom-select" required>
@@ -60,7 +60,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text">R$</span>
                     </div>
-                    <input type="text" class="form-control" id="valorCompra" name="valorCompra" placeholder="00,00" required value="${produto.precoCompra}">
+                    <input type="text" class="form-control money" id="valorCompra" name="valorCompra" placeholder="00,00" required value="${produto.precoCompra}">
                 </div>
             </div>
 
@@ -70,13 +70,13 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text">R$</span>
                     </div>
-                    <input type="text" class="form-control" id="valorVenda" name="valorVenda" placeholder="00,00" required value="${produto.precoVenda}">
+                    <input type="text" class="form-control money" id="valorVenda" name="valorVenda" placeholder="00,00" required value="${produto.precoVenda}">
                 </div>
             </div>
 
             <div class="form-group col-md-3">
                 <label for="inputQuantidade">Quantidade<h11 class="text-danger">*</h11></label>
-                <input type="text" class="form-control" id="quantidade" name="quantidade" placeholder="00" required value="${produto.quantidadeEstoque}">
+                <input type="text" class="form-control number" id="quantidade" name="quantidade" placeholder="00" required value="${produto.quantidadeEstoque}">
             </div>
 
             <div class="form-group col-md-2">
@@ -87,8 +87,8 @@
                 </select>
             </div>
 
-            
-            
+
+
             <div class="form-group col-md-2">
                 <label for="inputFilial">Filial<h11 class="text-danger">*</h11></label>
                 <select id="filial" name="filial" class="custom-select">
@@ -115,14 +115,21 @@
 
     </form>
 </div>
-        
+
 <script>
-    $(document).ready(function(){
-        document.getElementById('filial').value = '${produto.idFilial}';        
+    $(document).ready(function () {
+        document.getElementById('filial').value = '${produto.idFilial}';
         document.getElementById('plataforma').value = '${produto.idPlataforma}';
         document.getElementById('categoria').value = '${produto.idCategoria}';
         document.getElementById('genero').value = '${produto.idGenero}';
         document.getElementById('ativo').value = '${produto.ativo}';
         document.getElementById('descricao').value = '${produto.descricao}';
+
+
+        $('.money').mask('000.000.000.000.000,00', {reverse: true});
+        $('.money2').mask("#.##0,00", {reverse: true});
+        $('.number').mask("0000000000", {reverse: true});
+
+
     });
 </script>

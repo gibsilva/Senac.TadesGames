@@ -19,7 +19,7 @@
 
         <div class="input-group">
             <div>
-                <a href="${pageContext.request.contextPath}/autenticado/Filiais?acao=salvar" class="btn btn-outline-primary">Nova Filial</a>
+                <a href="${pageContext.request.contextPath}/autenticado/Filiais?acao=salvar" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Nova Filial"><i class='fas fa-plus-circle'></i> Nova Filial</a>
             </div>
 
         </div>
@@ -67,7 +67,7 @@
                             <c:param name="acao" value="alterar" />
                             <c:param name="idFilial" value="${f.idFilial}" />
                         </c:url>
-                        <a href="${alterarFilial}" class="btn btn-outline-warning">Editar</a>
+                        <a href="${alterarFilial}" class="btn btn-md btn-warning" data-toggle="tooltip" data-placement="right" title="Alterar Filial"><i class="fas fa-edit"></i></a>
                     </td>
                 </tr>
             </c:forEach>

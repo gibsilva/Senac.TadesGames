@@ -32,15 +32,15 @@
             </div>
 
             <div class="form-group col-md-2">
-                <button id="btnPesquisa" style="margin-top: 30px" class="btn btn-primary">Pesquisar</button>
+                <button id="btnPesquisa" style="margin-top: 30px" class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Pesquisar Venda">Pesquisar</button>
             </div>
             <div class="form-group col-md-2">
-                <a href="Vendas?acao=listar" id="btnPesquisa" style="margin-top: 30px; margin-left: 260px;" class="btn btn-outline-primary">Limpar</a>
+                <a href="Vendas?acao=listar" id="btnPesquisa" style="margin-top: 30px; margin-left: 260px;" class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Limpar Pesquisa">Limpar</a>
             </div>
         </div>  
     </form>
 
-
+    <br>
 
     <table class="table table-hover">
         <thead> 
@@ -60,7 +60,7 @@
 
         <tbody id="tabela" name="tabela">
             <c:forEach var="p" items="${pedidos}">
-                <tr class="table-light">
+                <tr>
                     <td class=" text-center">${p.idPedido}</td>
                     <td class=" text-center">${p.cliente.nome}</td>
                     <td class=" text-center">${p.cliente.documento.toString()}</td>
@@ -80,7 +80,7 @@
                             <c:param name="acao" value="detalhes" />
                             <c:param name="idPedido" value="${p.idPedido}" />
                         </c:url>
-                        <a href="${detalhesVenda}"  class="btn btn-outline-warning btn-sm">Detalhes</a>
+                        <a href="${detalhesVenda}"  class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="right" title="Detalhes de Venda">Detalhes</a>
                     </td>
                 </tr>
             </c:forEach>

@@ -22,7 +22,7 @@
         </div>
         <div class="input-group">
             <div>
-                <a href="${pageContext.request.contextPath}/autenticado/Produtos?acao=salvar" class="btn btn-outline-primary">Novo Produto</a>
+                <a href="${pageContext.request.contextPath}/autenticado/Produtos?acao=salvar" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Novo Produto"><i class='fas fa-plus-circle'></i> Novo Produto</a>
             </div>
 
         </div>
@@ -70,7 +70,7 @@
                             <c:param name="acao" value="alterar" />
                             <c:param name="idProduto" value="${p.idProduto}" />
                         </c:url>
-                        <a href="${alterarProduto}" class="btn btn-outline-warning">Editar</a>
+                        <a href="${alterarProduto}" class="btn btn-md btn-warning" data-toggle="tooltip" data-placement="right" title="Alterar Produto"><i class="fas fa-edit"></i></a>
                     </td>
                 </tr>
             </c:forEach>

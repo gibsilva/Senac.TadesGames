@@ -5,6 +5,8 @@
  */
 package Senac.TadesGames.Models;
 
+import java.util.List;
+
 /**
  *
  * @author Gi

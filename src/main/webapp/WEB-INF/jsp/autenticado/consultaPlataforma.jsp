@@ -21,7 +21,8 @@
         </div>
         <div class="input-group">
             <div>
-                <a href="${pageContext.request.contextPath}/autenticado/Plataformas?acao=salvar" class="btn btn-outline-primary">Nova Plataforma</a>
+                <a href="${pageContext.request.contextPath}/autenticado/Plataformas?acao=salvar" class="btn btn-primary" 
+                   data-toggle="tooltip" data-placement="left" title="Nova Plataforma"><i class='fas fa-plus-circle'></i> Nova Plataforma</a>
             </div>
         </div>
     </div>
@@ -49,13 +50,13 @@
                             <c:param name="acao" value="alterar" />
                             <c:param name="idPlataforma" value="${p.idPlataforma}" />
                         </c:url>
-                        <a href="${alterarPlataforma}" class="btn btn-sm btn-outline-warning">Editar</a>
+                        <a href="${alterarPlataforma}" class="btn btn-md btn-warning" data-toggle="tooltip" data-placement="left" title="Alterar Plataforma"><i class="fas fa-edit"></i></a>
 
                         <c:url var="excluir" value="/autenticado/Plataformas">
                             <c:param name="excluir" value="excluir" />
                             <c:param name="idPlataforma" value="${p.idPlataforma}" />
                         </c:url>
-                        <button type="button" class="btn btn-sm btn-outline-danger" onclick="confirmaExclusao(${p.idPlataforma})">Excluir</button>
+                        <button type="button" class="btn btn-md btn-danger" onclick="confirmaExclusao(${p.idPlataforma})" data-toggle="tooltip" data-placement="right" title="Excluir Plataforma"><i class="far fa-trash-alt"></i></button>
                     </td>
                 </tr>
             </c:forEach>

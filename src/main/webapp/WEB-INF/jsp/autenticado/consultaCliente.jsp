@@ -20,7 +20,7 @@
         </div>
         <div class="input-group">
             <div>
-                <a href="${pageContext.request.contextPath}/autenticado/Clientes?acao=salvar" class="btn btn-outline-primary">Novo Cliente</a>
+                <a href="${pageContext.request.contextPath}/autenticado/Clientes?acao=salvar" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Novo Cliente"><i class="fas fa-user-plus"></i> Novo Cliente</a>
             </div>
 
         </div>
@@ -67,7 +67,7 @@
                             <c:param name="acao" value="alterar" />
                             <c:param name="idCliente" value="${c.idCliente}" />
                         </c:url>
-                        <a href="${alterarCliente}" class="btn btn-outline-warning">Editar</a>
+                        <a href="${alterarCliente}" class="btn btn-md btn-warning" data-toggle="tooltip" data-placement="left" title="Alterar Cliente"><i class="fas fa-user-edit"></i></a>
                     </td>
                 </tr>
             </c:forEach>

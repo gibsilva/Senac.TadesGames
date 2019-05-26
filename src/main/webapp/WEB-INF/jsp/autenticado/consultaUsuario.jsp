@@ -6,11 +6,11 @@
 
 <%@include file="header.jsp" %>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-<title>Consulta de Usuarios</title>
+<title>Consulta de Usuários</title>
 
 <div class="col-md-10 container">
     <br>
-    <h2>Consulta de Usuarios</h2>
+    <h2>Consulta de Usuários</h2>
     <br>
     <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
 
@@ -20,7 +20,7 @@
         </div>
         <div class="input-group">
             <div>
-                <a href="${pageContext.request.contextPath}/autenticado/Usuarios?acao=salvar" class="btn btn-outline-primary">Novo Usuario</a>
+                <a href="${pageContext.request.contextPath}/autenticado/Usuarios?acao=salvar" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Novo Novo Usuário"><i class="fas fa-user-plus"></i> Novo Usuário</a>
             </div>
 
         </div>
@@ -67,7 +67,7 @@
                             <c:param name="acao" value="alterar" />
                             <c:param name="idUsuario" value="${u.idUsuario}" />
                         </c:url>
-                        <a href="${alterarUsuario}" class="btn btn-outline-warning">Editar</a>
+                        <a href="${alterarUsuario}" class="btn btn-md btn-warning" data-toggle="tooltip" data-placement="left" title="Alterar Usuário"><i class="fas fa-user-edit"></i></a>
                     </td>
                 </tr>
             </c:forEach>

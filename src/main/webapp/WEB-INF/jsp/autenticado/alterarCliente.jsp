@@ -34,7 +34,7 @@
                 </div>
                 <div class="form-group col-md-2">
                     <label for="cpf">CPF<h11 class="text-danger">*</h11> </label>
-                    <input type="text" class="form-control" name="cpf" id="cpf" maxlength="11" placeholder="" 
+                    <input type="text" class="form-control cpf" name="cpf" id="cpf" maxlength="11" placeholder="" 
                            readonly value="${cliente.documento.cpf}">
                 </div>
                 <div class="form-group col-md-3">

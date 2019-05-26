@@ -7,8 +7,9 @@ package Senac.TadesGames.Servlet;
 
 import Senac.TadesGames.Models.UsuarioModel;
 import Senac.TadesGames.Service.UsuarioService;
+import com.google.gson.Gson;
 import java.io.IOException;
-import javax.servlet.RequestDispatcher;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,41 +18,39 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Giovanni.Carignato
+ * @author Gi
  */
-@WebServlet(name = "LoginControllerServlet", urlPatterns = {"/Login"})
-public class LoginControllerServlet extends HttpServlet {
+@WebServlet(name = "ResetSenhaControllerServlet", urlPatterns = {"/ResetSenha"})
+public class ResetSenhaControllerServlet extends HttpServlet {
 
     private final UsuarioService usuarioService;
 
-    public LoginControllerServlet() {
+    public ResetSenhaControllerServlet() {
         this.usuarioService = new UsuarioService();
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/jsp/resetSenha.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String login = request.getParameter("login");
-        String senha = request.getParameter("senha");
+        response.setContentType("text/html; charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        Gson gson = new Gson();
 
-        UsuarioModel usuario = usuarioService.autenticar(login, senha);
+        String email = request.getParameter("email");
+        UsuarioModel usuario = usuarioService.obterUsuarioPorEmail(email);
+        
         if (usuario != null) {
-            request.getSession().setAttribute("usuarioLogado", usuario);
-            response.sendRedirect("autenticado/Home");
-            return;
-        } else {
-            request.getSession().invalidate();
-            request.setAttribute("erro", "Nome de usuário ou senha incorretos");
+            usuarioService.resetarSenha(usuario);
         }
-
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
-        rd.forward(request, response);
+        
+        out.print(gson.toJson(usuario));
+        out.flush();
+        out.close();
     }
-
 }

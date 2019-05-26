@@ -21,10 +21,10 @@ import java.util.List;
  */
 public class ItensPedidoDAO implements IItensPedidoDao {
 
-    private ConexaoDB conexao = new ConexaoDB();
+    private final ConexaoDB conexao = new ConexaoDB();
     private PreparedStatement stmt = null;
     private final ProdutoDAO produtoDao = new ProdutoDAO();
-    ResultSet rs = null;
+    private ResultSet rs = null;
 
     @Override
     public ItensPedidoModel obterPorId(int id) {
@@ -79,7 +79,7 @@ public class ItensPedidoDAO implements IItensPedidoDao {
             rs = stmt.executeQuery();
             while (rs.next()) {
                 itensPedido = new ItensPedidoModel(
-                        rs.getInt("IdCategoria"),
+                        rs.getInt("IdItensPedido"),
                         rs.getInt("IdProduto"),
                         rs.getDouble("ValorUnitario"),
                         rs.getInt("Quantidade"),
@@ -163,6 +163,46 @@ public class ItensPedidoDAO implements IItensPedidoDao {
             throw new RuntimeException(ex.getMessage());
         } finally {
             conexao.closeConnection(conn, stmt);
+        }
+    }
+    
+    public List<ItensPedidoModel> obterPorIdProduto(int id) {
+        Connection conn = conexao.getConnection();
+        ItensPedidoModel itensPedido = null;
+        List<ItensPedidoModel> itensPedidos = new ArrayList<ItensPedidoModel>();
+
+        try {
+            stmt = conn.prepareStatement("SELECT "
+                    + "IDITENSPEDIDO, "
+                    + "IDPRODUTO, "
+                    + "VALORUNITARIO, "
+                    + "QUANTIDADE, "
+                    + "IDPEDIDO "
+                    + " FROM itenspedido"
+                    + " WHERE IDPRODUTO = ?");
+
+            stmt.setInt(1, id);
+
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                itensPedido = new ItensPedidoModel(
+                        rs.getInt("IdItensPedido"),
+                        rs.getInt("IdProduto"),
+                        rs.getDouble("ValorUnitario"),
+                        rs.getInt("Quantidade"),
+                        rs.getInt("IdPedido")
+                );
+                itensPedido.setProduto(produtoDao.obterPorId(itensPedido.getIdProduto()));
+
+                itensPedidos.add(itensPedido);
+            }
+
+            return itensPedidos;
+        } catch (SQLException ex) {
+            conexao.closeConnection(conn, stmt, rs);
+            return null;
+        } finally {
+            conexao.closeConnection(conn, stmt, rs);
         }
     }
 

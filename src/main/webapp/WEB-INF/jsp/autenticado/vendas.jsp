@@ -30,7 +30,7 @@
 
             <div class="form-group col-md-3">
                 <label for="inputCPFFCliente">CPF/CNPJ do Cliente</label>
-                <input type="text" class="form-control" id="cpfCliente" name="cpfCliente" minlength="11" maxlength="14" placeholder="Digite o CPF do cliente">
+                <input type="text" class="form-control document" id="cpfCliente" name="cpfCliente" minlength="11" maxlength="14" placeholder="Digite o CPF do cliente">
             </div>
 
             <div class="form-group col-md-4">
@@ -45,7 +45,7 @@
         <div class="form-row">
             <div class="form-group col-md-2">
                 <label for="IdProduto">ID do Produto<h11 class="text-danger">*</h11></label>
-                <input type="text" class="form-control" id="idProduto" name="idProduto" placeholder="Digite o ID" onblur="obterProduto()">
+                <input type="text" class="form-control number" id="idProduto" name="idProduto" placeholder="Digite o ID" onblur="obterProduto()">
             </div>
 
             <div class="form-group col-md-4">
@@ -60,13 +60,13 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text">R$</span>
                     </div>
-                    <input type="text" class="form-control" id="valorUnitario" name="valorUnitario" placeholder="00,00" readonly>
+                    <input type="text" class="form-control money" id="valorUnitario" name="valorUnitario" placeholder="00,00" readonly>
                 </div>
             </div>
 
             <div class="form-group col-md-1">
                 <label for="inputQuantidade">Qtde<h11 class="text-danger">*</h11></label>
-                <input type="text" class="form-control" id="quantidade" name="quantidade" placeholder="0">
+                <input type="text" class="form-control number" id="quantidade" name="quantidade" placeholder="0">
             </div>
             <div class="form-inline">
                 <button type="button" style="margin-top: 11px" class="btn btn-primary" onclick="adicionarItem()">Adicionar</button>
@@ -134,7 +134,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">R$</span>
                             </div>
-                            <input type="text" class="form-control" id="valorRecebido" name="valorRecebido" placeholder="00,00" readonly>
+                            <input type="text" class="form-control money" id="valorRecebido" name="valorRecebido" placeholder="00,00" readonly>
                         </div>
                     </div>
 
@@ -144,7 +144,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">R$</span>
                             </div>
-                            <input type="text" class="form-control" id="troco" name="troco" placeholder="00,00" readonly>
+                            <input type="text" class="form-control money" id="troco" name="troco" placeholder="00,00" readonly>
                         </div>
                     </div>
 
@@ -157,7 +157,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text">R$</span>
                     </div>
-                    <input type="text" class="form-control form-control-lg" id="totalPedido" name="totalPedido" placeholder="00,00" readonly>
+                    <input type="text" class="form-control form-control-lg money" id="totalPedido" name="totalPedido" placeholder="00,00" readonly>
                 </div>
             </div>
         </div>
@@ -228,6 +228,14 @@
     var produtos = [];
 
     $(document).ready(function () {
+        
+        //mascaras
+        $('.money').mask('000.000.000.000.000,00', {reverse: true});
+        $('.money2').mask("#.##0,00", {reverse: true});
+        $('.number').mask("0000000000", {reverse: true});
+        $('.document').mask("00000000000000", {reverse: true});
+        //fim mascaras
+        
         pedidoSalvo();
 
         $('#vendas').submit(function (e) {

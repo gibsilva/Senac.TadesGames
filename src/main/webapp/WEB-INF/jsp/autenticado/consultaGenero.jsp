@@ -21,7 +21,7 @@
         </div>
         <div class="input-group">
             <div>
-                <a href="Generos?acao=salvar" class="btn btn-outline-primary">Novo Gênero</a>
+                <a href="Generos?acao=salvar" class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Novo Gênero"><i class='fas fa-plus-circle'></i> Novo Gênero</a>
             </div>
         </div>
     </div>
@@ -49,13 +49,13 @@
                             <c:param name="acao" value="alterar" />
                             <c:param name="idGenero" value="${g.idGenero}" />
                         </c:url>
-                        <a href="${alterarGenero}" class="btn btn-sm btn-outline-warning">Editar</a>
+                        <a href="${alterarGenero}" class="btn btn-md btn-warning" data-toggle="tooltip" data-placement="right" title="Alterar Gênero"><i class="fas fa-edit"></i></a>
 
                         <c:url var="excluir" value="/autenticado/Generos">
                             <c:param name="excluir" value="excluir" />
                             <c:param name="idGenero" value="${g.idGenero}" />
                         </c:url>
-                        <button type="button" class="btn btn-sm btn-outline-danger" onclick="confirmaExclusao(${g.idGenero})">Excluir</button>
+                        <button type="button" class="btn btn-md btn-danger" onclick="confirmaExclusao(${g.idGenero})" data-toggle="tooltip" data-placement="right" title="Excluir Gênero"><i class="far fa-trash-alt"></i></button>
                     </td>
                 </tr>
             </c:forEach>

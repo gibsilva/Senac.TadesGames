@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -44,6 +45,9 @@ public class UsuarioControllerServlet extends HttpServlet {
                 case "salvar":
                     criarUsuario(request, response);
                     break;
+                case "alterarSenha":
+                    alterarSenha(request, response);
+                    break;
                 default:
                     listarUsuarios(request, response);
             }
@@ -64,6 +68,9 @@ public class UsuarioControllerServlet extends HttpServlet {
                     break;
                 case "alterar":
                     alterarUsuario(request, response);
+                    break;
+                case "alterarSenha":
+                    alterarSenhaPost(request, response);
                     break;
             }
         } catch (ServletException | IOException e) {
@@ -113,6 +120,38 @@ public class UsuarioControllerServlet extends HttpServlet {
         List<UsuarioModel> usuarios = usuarioService.obterListaUsuarios();
         request.setAttribute("usuarios", usuarios);
         request.getRequestDispatcher("/WEB-INF/jsp/autenticado/consultaUsuario.jsp").forward(request, response);
+    }
+
+    protected void alterarSenha(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.getRequestDispatcher("/WEB-INF/jsp/autenticado/alterarSenha.jsp").forward(request, response);
+    }
+
+    protected void alterarSenhaPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String senhaAtual = request.getParameter("senhaAtual");
+        String novaSenha = request.getParameter("novaSenha");
+        String confirmaSenha = request.getParameter("confirmaSenha");
+        int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
+
+        try {
+            List<Notificacao> notificacoes = usuarioService.alterarSenha(senhaAtual, novaSenha, confirmaSenha, idUsuario);
+            if (notificacoes.isEmpty()) {
+                request.setAttribute("statusAlterado", true);
+                HttpSession sessao = request.getSession();
+                sessao.invalidate();
+                response.sendRedirect("WEB-INF/jsp/login.jsp");
+            } else {
+                request.setAttribute("notificacoes", notificacoes);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/autenticado/alterarSenha.jsp");
+                dispatcher.forward(request, response);
+            }
+        } catch (IOException | ServletException e) {
+            RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/erro.jsp");
+            dispatcher.forward(request, response);
+        } finally {
+            this.usuarioService.limparNotificacoes();
+        }
     }
 
     protected void carregarUsuario(HttpServletRequest request, HttpServletResponse response)

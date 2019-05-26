@@ -5,6 +5,8 @@
  */
 package Senac.TadesGames.Models;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.mindrot.jbcrypt.BCrypt;
 
 /**
@@ -121,15 +123,8 @@ public final class UsuarioModel extends PessoaModel {
         return this.senha;
     }
 
-    private void setSenhaEncriptada(String senha) {
+    public void setSenhaEncriptada(String senha) {
         this.senha = BCrypt.hashpw(senha, BCrypt.gensalt(12));
-    }
-
-    /**
-     * @param senha the senha to set
-     */
-    public void setSenha(String senha) {
-        this.senha = senha;
     }
 
     public boolean validarSenha(String senha) {

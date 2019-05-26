@@ -1,6 +1,8 @@
 package Senac.TadesGames.Service;
 
 import Senac.TadesGames.DAO.UsuarioDAO;
+import Senac.TadesGames.Helpers.GeradorSenha;
+import Senac.TadesGames.Helpers.JavaMail;
 import Senac.TadesGames.Helpers.Notificacao;
 import Senac.TadesGames.Models.UsuarioModel;
 import java.util.InputMismatchException;
@@ -101,8 +103,38 @@ public class UsuarioService {
         }
     }
 
+    public List<Notificacao> alterarSenha(String senhaAtual, String novaSenha, String confirmaSenha, int idUsuario) {
+        UsuarioModel usuario = usuarioDao.obterPorId(idUsuario);
+
+        if (usuario != null && !usuario.validarSenha(senhaAtual)) {
+            this.notificacao.adicionaNotificacao("senha", "A senha atual está incorreta");
+        }
+
+        if (!novaSenha.equals(confirmaSenha)) {
+            this.notificacao.adicionaNotificacao("senha", "As senhas não conferem");
+        }
+
+        if (this.notificacao.listaNotificacoes().isEmpty()) {
+            usuario.setSenhaEncriptada(novaSenha);
+            usuarioDao.alterarSenha(usuario);
+        }
+
+        return this.notificacao.listaNotificacoes();
+    }
+
+    public void resetarSenha(UsuarioModel usuario) {
+        String novaSenha = GeradorSenha.getRandomPassword();
+        usuario.setSenhaEncriptada(novaSenha);
+        usuarioDao.alterarSenha(usuario);
+        JavaMail.enviarEmail(usuario, novaSenha);
+    }
+
     public UsuarioModel obterUsuarioPorId(int id) {
         return usuarioDao.obterPorId(id);
+    }
+
+    public UsuarioModel obterUsuarioPorEmail(String email) {
+        return usuarioDao.obterPorEmail(email);
     }
 
     public List<UsuarioModel> obterListaUsuarios() {

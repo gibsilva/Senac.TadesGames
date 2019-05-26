@@ -17,7 +17,7 @@
         <ul class="text-danger">
             <c:forEach var = "n" items = "${notificacoes}">
                 <li>${n.valor}</li>
-                </c:forEach>
+            </c:forEach>
         </ul>
 
     </div>
@@ -60,7 +60,7 @@
         <div class="row">
             <div class="form-group col-md-2">
                 <label for="inputFilial">Filial<h11 class="text-danger">*</h11></label>
-                <select id="filial" name="filial" class="custom-select">
+                <select id="filial" name="filial" class="custom-select" required>
                     <option value="">Selecione</option>
                     <c:forEach var="f" items="${filiais}">
                         <option value="${f.idFilial}">${f.nome}</option>

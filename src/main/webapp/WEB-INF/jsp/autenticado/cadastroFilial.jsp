@@ -48,7 +48,7 @@
 
             <div class="form-group col-md-2">
                 <label for="numero">Numero<h11 class="text-danger">*</h11></label>
-                <input type="text" class="form-control" id="numero" name="numero" placeholder="Digite o número" required>
+                <input type="text" class="form-control number" id="numero" name="numero" placeholder="Digite o número" required>
             </div>
 
             <div class="form-group col-md-3">
@@ -103,6 +103,7 @@
         $('.cnpj').mask('00.000.000/0000-00', {reverse: true});
         $('.money').mask('000.000.000.000.000,00', {reverse: true});
         $('.money2').mask("#.##0,00", {reverse: true});
+        $('.number').mask("0000000000", {reverse: true});
         $('.ip_address').mask('0ZZ.0ZZ.0ZZ.0ZZ', {
             translation: {
                 'Z': {

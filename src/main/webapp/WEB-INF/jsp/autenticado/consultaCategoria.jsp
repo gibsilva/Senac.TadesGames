@@ -22,7 +22,7 @@
         </div>
         <div class="input-group">
             <div>
-                <a href="${pageContext.request.contextPath}/autenticado/Categorias?acao=salvar" class="btn btn-outline-primary">Nova Categoria</a>
+                <a href="${pageContext.request.contextPath}/autenticado/Categorias?acao=salvar" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Nova Categoria"><i class='fas fa-plus-circle'></i> Nova Categoria</a>
             </div>
         </div>
     </div>
@@ -47,14 +47,14 @@
                             <c:param name="acao" value="alterar" />
                             <c:param name="idCategoria" value="${cat.idCategoria}" />
                         </c:url>
-                        <a href="${alterarCategoria}" class="btn btn-sm btn-outline-warning">Editar</a>
+                        <a href="${alterarCategoria}" class="btn btn-md btn-warning" data-toggle="tooltip" data-placement="right" title="Alterar Categoria"><i class="fas fa-edit"></i></a>
 
                         <c:url var="excluir" value="/autenticado/Categorias">
                             <c:param name="excluir" value="excluir" />
                             <c:param name="c" value="${cat.idCategoria}" />
                             <c:param name="nomeCategoria" value="${cat.nome}" />
                         </c:url>
-                        <button type="button" class="btn btn-sm btn-outline-danger" onclick="confirmaExclusao(${cat.idCategoria})">Excluir</button>
+                        <button type="button" class="btn btn-md btn-danger" onclick="confirmaExclusao(${cat.idCategoria})" data-toggle="tooltip" data-placement="right" title="Excluir Categoria"><i class="far fa-trash-alt"></i></button>
                     </td>
 
                 </tr>
