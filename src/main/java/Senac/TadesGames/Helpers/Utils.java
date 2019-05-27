@@ -43,6 +43,11 @@ public class Utils {
 
         return strFormatada;
     }
+    
+    public String formatarValor(String valor){
+        String valorFormatado = valor.replace(".", "");
+        return valorFormatado.replace(",", ".");
+    }
 
     public String removeEspacoBranco(String str) {
         return str.replace(" ", "");

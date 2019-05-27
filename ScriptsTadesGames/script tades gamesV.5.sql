@@ -76,22 +76,6 @@ CREATE TABLE `usuario` (
   CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`IdFilial`) REFERENCES `filial` (`IdFilial`)
 );
 
-CREATE TABLE `permissao` (
-  `IdPermissao` int(11) NOT NULL AUTO_INCREMENT,
-  `IdUsuario` int(11) NOT NULL,
-  `CadastroProduto` tinyint(4) DEFAULT NULL,
-  `CadastroCliente` tinyint(4) DEFAULT NULL,
-  `CadastroFilial` tinyint(4) DEFAULT NULL,
-  `RealizaVenda` tinyint(4) DEFAULT NULL,
-  `RelatorioProduto` tinyint(4) DEFAULT NULL,
-  `RelatorioCliente` tinyint(4) DEFAULT NULL,
-  `RelatorioVenda` tinyint(4) DEFAULT NULL,
-  `DataHoraCriacao` datetime DEFAULT CURRENT_TIMESTAMP,
-  `CadastroUsuario` tinyint(4) DEFAULT NULL,
-  PRIMARY KEY (`IdPermissao`),
-  KEY `IdUsuario` (`IdUsuario`),
-  CONSTRAINT `permissao_ibfk_1` FOREIGN KEY (`IdUsuario`) REFERENCES `usuario` (`IdUsuario`)
-);
 
 CREATE TABLE `produto` (
   `IdProduto` int(11) NOT NULL AUTO_INCREMENT,
@@ -153,7 +137,7 @@ CREATE TABLE `itenspedido` (
 
 
 INSERT INTO filial (nome, Cnpj, CEP, logradouro, numero, complemento, bairro, cidade, estado) 
-VALUES ('Filial Matriz','70752763000174','01310200','Avenida Paulista',1035,'','Bela Vista','São Paulo','SP');
+VALUES ('Matriz','70752763000174','01310200','Avenida Paulista',1035,'','Bela Vista','São Paulo','SP');
 
 INSERT INTO filial (nome, Cnpj, CEP, logradouro, numero, complemento, bairro, cidade, estado) 
 VALUES ('Filial Campina Grande','24591363000107','58410410','Rua Luiza Bezerra Motta',80,'','Catolé','Campina Grande','PB');

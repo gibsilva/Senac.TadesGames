@@ -63,7 +63,7 @@
                             class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
                             role="button" aria-haspopup="true" aria-expanded="false">Produto</a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="Produtos?acao=salvar">Cadastrode Produto</a>
+                            <a class="dropdown-item" href="Produtos?acao=salvar">Cadastro de Produto</a>
                             <a class="dropdown-item" href="Produtos">Consulta de Produto</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="Plataformas?acao=salvar">Cadastro de Plataforma</a> 
@@ -117,7 +117,7 @@
                                 <i class="far fa-user"></i>  ${sessionScope.usuarioLogado.nome}
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="${pageContext.request.contextPath}/autenticado/Usuarios?acao=alterarSenha">Alterar senha</a> 
+                                <a class="dropdown-item" href="${pageContext.request.contextPath}/autenticado/alterar-senha">Alterar senha</a> 
                                 <a class="dropdown-item" href="${pageContext.request.contextPath}/autenticado/Logout" type="submit">Sair</a>
                             </div>
                         </div>

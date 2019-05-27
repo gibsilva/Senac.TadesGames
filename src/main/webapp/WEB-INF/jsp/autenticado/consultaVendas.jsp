@@ -32,10 +32,10 @@
             </div>
 
             <div class="form-group col-md-2">
-                <button id="btnPesquisa" style="margin-top: 30px" class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Pesquisar Venda">Pesquisar</button>
+                <button id="btnPesquisa" style="margin-top: 30px" class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Pesquisar Venda"><i class="fas fa-search"></i></button>
             </div>
             <div class="form-group col-md-2">
-                <a href="Vendas?acao=listar" id="btnPesquisa" style="margin-top: 30px; margin-left: 260px;" class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Limpar Pesquisa">Limpar</a>
+                <a href="Vendas?acao=listar" id="btnPesquisa" style="margin-top: 30px; margin-left: 260px; " class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Limpar Pesquisa"> Limpar</a>
             </div>
         </div>  
     </form>
@@ -76,7 +76,7 @@
                         <td class="text-center">Cancelado</td>
                     </c:if>
                     <td class="text-center">
-                        <c:url var="detalhesVenda" value="/Vendas">
+                        <c:url var="detalhesVenda" value="/autenticado/Vendas">
                             <c:param name="acao" value="detalhes" />
                             <c:param name="idPedido" value="${p.idPedido}" />
                         </c:url>

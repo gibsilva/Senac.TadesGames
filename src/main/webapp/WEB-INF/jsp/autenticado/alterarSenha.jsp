@@ -20,7 +20,7 @@
                 </c:forEach>
         </ul>
     </div>
-    <form action="Usuarios" method="post" id="form">
+    <form action="alterar-senha" method="post" id="form">
         <input type="hidden" value="${sessionScope.usuarioLogado.idUsuario}" id="idUsuario" name="idUsuario">
         <input type="hidden" value="alterarSenha" id="acao" name="acao">
 

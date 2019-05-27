@@ -20,7 +20,7 @@
         </div>
         <div class="input-group">
             <div>
-                <a href="${pageContext.request.contextPath}/autenticado/Usuarios?acao=salvar" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Novo Novo Usuário"><i class="fas fa-user-plus"></i> Novo Usuário</a>
+                <a href="${pageContext.request.contextPath}/autenticado/Usuarios?acao=salvar" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Novo Usuário"><i class="fas fa-user-plus"></i> Novo Usuário</a>
             </div>
 
         </div>

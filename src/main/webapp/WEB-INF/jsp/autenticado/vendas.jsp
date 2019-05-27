@@ -38,7 +38,7 @@
                 <input type="text" class="form-control" name="nomeCliente" id="nomeCliente" minlength="2" placeholder="Digite o nome do cliente" readonly>
             </div>
             <div class="form-inline">
-                <button type="button" style="margin-top: 11px" class="btn btn-primary" onclick="obterCliente()">Procurar</button>
+                <button type="button" style="margin-top: 14px" class="btn btn-primary" onclick="obterCliente()"><i class="fas fa-search"></i></button>
             </div>
         </div>
 
@@ -69,7 +69,7 @@
                 <input type="text" class="form-control number" id="quantidade" name="quantidade" placeholder="0">
             </div>
             <div class="form-inline">
-                <button type="button" style="margin-top: 11px" class="btn btn-primary" onclick="adicionarItem()">Adicionar</button>
+                <button type="button" style="margin-top: 11px" class="btn btn-primary" onclick="adicionarItem()"><i class="fas fa-cart-plus"></i> Adicionar</button>
             </div> 
         </div>
 
@@ -134,7 +134,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">R$</span>
                             </div>
-                            <input type="text" class="form-control money" id="valorRecebido" name="valorRecebido" placeholder="00,00" readonly>
+                            <input type="text" class="form-control" id="valorRecebido" name="valorRecebido" placeholder="00,00" readonly>
                         </div>
                     </div>
 
@@ -144,7 +144,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">R$</span>
                             </div>
-                            <input type="text" class="form-control money" id="troco" name="troco" placeholder="00,00" readonly>
+                            <input type="text" class="form-control" id="troco" name="troco" placeholder="00,00" readonly>
                         </div>
                     </div>
 
@@ -157,7 +157,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text">R$</span>
                     </div>
-                    <input type="text" class="form-control form-control-lg money" id="totalPedido" name="totalPedido" placeholder="00,00" readonly>
+                    <input type="text" class="form-control form-control-lg" id="totalPedido" name="totalPedido" placeholder="00,00" readonly>
                 </div>
             </div>
         </div>
@@ -165,11 +165,11 @@
 
         <div class="btn-toolbar justify-content-between" role="toolbar" >
             <div class="form-group">
-                <button type="reset" class="btn-lg btn-warning">Cancelar</button>
+                <button type="reset" class="btn-lg btn-warning"><i class="fas fa-ban"></i> Cancelar</button>
             </div>
 
             <div class="form-group">
-                <input type="submit" class="btn-lg btn-success" onclick="salvarPedido()" value="Finalizar Venda">
+                <button type="submit" class="btn-lg btn-success" onclick="salvarPedido()"><i class="fas fa-check"></i> Finalizar venda</button>
             </div>  
         </div>
     </form>
@@ -293,7 +293,7 @@
 
     function obterCliente() {
         if ($('#cpfCliente').val() === '') {
-            toastr.warning('Preencha o campo antes de pesquisar', 'Info');
+            toastr.warning('Preencha o documento do cliente antes de pesquisar', 'Atenção');
         } else {
             $.ajax({
                 url: "Vendas?acao=obterCliente",
@@ -394,7 +394,8 @@
                 valorUnitario: parseFloat($('#valorUnitario').val()),
                 precoTotal: 0
             };
-
+            
+            item.precoTotal.toFixed(2);         
             item.precoTotal = item.quantidade * item.valorUnitario;
             this.produto.quantidadeEstoque = this.produto.quantidadeEstoque - item.quantidade;
 
@@ -411,7 +412,7 @@
                 s += '<td class="text-center">' + lista.itens[i].quantidade + '</td>';
                 s += '<td class="text-center">' + lista.itens[i].valorUnitario + '</td>';
                 s += '<td class="text-center">' + parseFloat(lista.itens[i].precoTotal) + '</td>';
-                s += '<td class="text-center">' + '<button type="button" class="btn btn-danger btn-sm" onclick="removerItem(' + i + ')">excluir</button>' + '</td>';
+                s += '<td class="text-center">' + '<button type="button" class="btn btn-danger btn-sm" onclick="removerItem(' + i + ')"><i class="fas fa-times"></i></button>' + '</td>';
             }
             $('#tabela').html(s);
 
@@ -451,6 +452,7 @@
             for (var i = 0; i < lista.itens.length; i++) {
                 total += lista.itens[i].precoTotal;
             }
+            total.toFixed(2);
             $('#totalPedido').val(total);
             $('#valorRecebido').val(total);
         }

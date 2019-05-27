@@ -76,8 +76,7 @@
                     <option value="Diretoria">Diretoria</option>
                     <option value="Produtos/Serviços/Marketing">Produtos/Serviços/Marketing</option>
                     <option value="Vendas">Vendas</option>
-                    <option value="T.I">T.I</option>
-                    <option value="Administrativo">Administrativo</option>
+                    <option value="T.I">T.I</option>                    
                 </select>
             </div>
 

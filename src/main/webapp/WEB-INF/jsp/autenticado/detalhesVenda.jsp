@@ -56,7 +56,7 @@
             <label for="name">Status</label>
             <input type="text" class="form-control" name="status" id="status" readonly value="">   
         </div>
-        <button id="btnCancelar" class="btn btn-outline-danger" style="margin-left: 1040px">Cancelar</button>
+        <button id="btnCancelar" class="btn btn-lg btn-warning" style="margin-left: 1040px">Cancelar</button>
     </div>
 
     <br>

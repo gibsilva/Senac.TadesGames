@@ -6,6 +6,7 @@
 package Senac.TadesGames.Servlet;
 
 import Senac.TadesGames.Helpers.Notificacao;
+import Senac.TadesGames.Helpers.Utils;
 import Senac.TadesGames.Models.ProdutoModel;
 import Senac.TadesGames.Service.CategoriaService;
 import Senac.TadesGames.Service.FilialService;
@@ -122,11 +123,13 @@ public class ProdutoControllerServlet extends HttpServlet {
 
     protected void incluirProduto(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
+        Utils utils = new Utils();
+        
         String nome = request.getParameter("nome");
         int idPlataforma = Integer.parseInt(request.getParameter("plataforma"));
         int idCategoria = Integer.parseInt(request.getParameter("categoria"));
-        double valorCompra = Double.parseDouble(request.getParameter("valorCompra"));
-        double valorVenda = Double.parseDouble(request.getParameter("valorVenda"));
+        double valorCompra = Double.parseDouble(utils.formatarValor(request.getParameter("valorCompra")));
+        double valorVenda = Double.parseDouble(utils.formatarValor(request.getParameter("valorVenda")));
         int quantidade = Integer.parseInt(request.getParameter("quantidade"));
         boolean ativo = Boolean.parseBoolean(request.getParameter("ativo"));
         int idGenero = Integer.parseInt(request.getParameter("genero"));
@@ -156,12 +159,14 @@ public class ProdutoControllerServlet extends HttpServlet {
 
     protected void alterarProduto(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
+        Utils utils = new Utils();
+        
         int id = Integer.parseInt(request.getParameter("idProduto"));
         String nome = request.getParameter("nome");
         int idPlataforma = Integer.parseInt(request.getParameter("plataforma"));
         int idCategoria = Integer.parseInt(request.getParameter("categoria"));
-        double valorCompra = Double.parseDouble(request.getParameter("valorCompra"));
-        double valorVenda = Double.parseDouble(request.getParameter("valorVenda"));
+        double valorCompra = Double.parseDouble(utils.formatarValor(request.getParameter("valorCompra")));
+        double valorVenda = Double.parseDouble(utils.formatarValor(request.getParameter("valorVenda")));
         int quantidade = Integer.parseInt(request.getParameter("quantidade"));
         boolean ativo = Boolean.parseBoolean(request.getParameter("ativo"));
         int idGenero = Integer.parseInt(request.getParameter("genero"));
