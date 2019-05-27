@@ -5,6 +5,7 @@ import Senac.TadesGames.Helpers.GeradorSenha;
 import Senac.TadesGames.Helpers.JavaMail;
 import Senac.TadesGames.Helpers.Notificacao;
 import Senac.TadesGames.Models.UsuarioModel;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 
@@ -228,6 +229,31 @@ public class UsuarioService {
                 return null;
             }
         }
+    }
+
+    public List<String> cargosPorSetor(String setor) {
+        List<String> cargos = new ArrayList<>();
+        switch (setor) {
+            case "Diretoria":
+                cargos.add("Diretor");
+                break;
+            case "Produtos/Serviços/Marketing":
+                cargos.add("Gerente Global");
+                cargos.add("Gerente Regional");
+                cargos.add("Funcionário");
+                break;
+            case "Vendas":
+                cargos.add("Gerente Global");
+                cargos.add("Gerente Regional");
+                cargos.add("Vendedor (a)");
+                break;
+            case "T.I":
+                cargos.add("Gerente Global");
+                cargos.add("Gerente Regional");
+                cargos.add("Suporte Técnico");
+                break;
+        }
+        return cargos;
     }
 
 }

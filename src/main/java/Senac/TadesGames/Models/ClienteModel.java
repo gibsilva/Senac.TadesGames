@@ -45,7 +45,7 @@ public class ClienteModel extends PessoaModel {
     /**
      * @param idCliente the idCliente to set
      */
-    public void setIdCliente(int idCliente) {
+    private void setIdCliente(int idCliente) {
         this.idCliente = idCliente;
     }
 
@@ -59,7 +59,7 @@ public class ClienteModel extends PessoaModel {
     /**
      * @param dataNasc the dataNasc to set
      */
-    public void setDataNasc(Date dataNasc) {
+    private void setDataNasc(Date dataNasc) {
         this.dataNasc = dataNasc;
     }
 
@@ -73,7 +73,7 @@ public class ClienteModel extends PessoaModel {
     /**
      * @param telefone the telefone to set
      */
-    public void setTelefone(String telefone) {
+    private void setTelefone(String telefone) {
         this.telefone = telefone;
     }
 
@@ -87,7 +87,7 @@ public class ClienteModel extends PessoaModel {
     /**
      * @param celular the celular to set
      */
-    public void setCelular(String celular) {
+    private void setCelular(String celular) {
         this.celular = celular;
     }
 
@@ -101,7 +101,7 @@ public class ClienteModel extends PessoaModel {
     /**
      * @param documento the documento to set
      */
-    public void setDocumento(Documento documento) {
+    private void setDocumento(Documento documento) {
         this.documento = documento;
     }
 

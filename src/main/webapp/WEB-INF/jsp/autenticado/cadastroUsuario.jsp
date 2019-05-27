@@ -11,17 +11,17 @@
     <br>
     <h2>Novo Usuário</h2>
     <hr>
-    
+
     <!-- notificacoes caso houver erros nas validações -->
     <div class="form-group">
         <ul class="text-danger">
             <c:forEach var = "n" items = "${notificacoes}">
                 <li>${n.valor}</li>
-            </c:forEach>
+                </c:forEach>
         </ul>
 
     </div>
-    
+
     <form action="Usuarios" method="post" id="form">
         <input type="hidden" value="salvar" id="acao" name="acao">
 
@@ -84,12 +84,6 @@
                 <label for="inputCargo">Cargo<h11 class="text-danger">*</h11></label>
                 <select id="cargo" name="cargo" class="custom-select" required>
                     <option value="">Selecione</option>
-                    <option value="Diretor">Diretor</option>
-                    <option value="Gerente Global">Gerente Global</option>
-                    <option value="Gerente Regional">Gerente Regional</option>
-                    <option value="Suporte Técnico">Suporte Técnico</option>
-                    <option value="Funcionário">Funcionário</option>
-                    <option value="Vendedor (a)">Vendedor (a)</option>
                 </select>
             </div>
         </div>
@@ -118,9 +112,23 @@
 </div>
 
 <script>
+    var lista = '';
+
     $(document).ready(function () {
+        $('#setor').blur(function () {
+            if ($('#setor').val() !== '') {
+                obterCargos($('#setor').val());
+            } else {
+                document.getElementById("cargo").options.length = 0;
+                $('#cargo').append($('<option>', {
+                    value: '',
+                    text: 'Selecione'
+                }));
+            }
+        });
+
         $('#form')[0].reset();
-        
+
         $('.date').mask('00/00/0000');
         $('.time').mask('00:00:00');
         $('.date_time').mask('00/00/0000 00:00:00');
@@ -156,6 +164,38 @@
         });
         $('.selectonfocus').mask("00/00/0000", {selectOnFocus: true});
     });
+
+    function obterCargos(setor) {
+        $.ajax({
+            url: 'Usuarios?acao=cargosPorSetor',
+            type: "GET",
+            contentType: 'application/json',
+            data: {'setor': setor},
+            success: function (data) {
+                lista = $.parseJSON(data);
+                console.log(lista);
+                carregarCargos(lista);
+            },
+            error: function () {
+                toastr.error('Ocorreu um erro ao buscar os cargos', 'Erro');
+            }
+        });
+    }
+
+    function carregarCargos(lista) {
+        document.getElementById("cargo").options.length = 0;
+        $('#cargo').append($('<option>', {
+            value: '',
+            text: 'Selecione'
+        }));
+
+        for (var i = 0; i < lista.length; i++) {
+            $('#cargo').append($('<option>', {
+                value: lista[i].toString(),
+                text: lista[i].toString()
+            }));
+        }
+    }
 
 </script>
 

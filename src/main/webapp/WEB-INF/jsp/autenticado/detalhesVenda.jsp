@@ -39,7 +39,7 @@
 
         <div class="form-group col-md-2">
             <label for="Data">Data</label>
-            <input type="date" class="form-control"  id="Data" name="Data" readonly value="${pedido.dataPedido}">
+            <input type="date" class="form-control"  id="data" name="data" readonly value="${pedido.dataPedido}">
         </div>
 
         <div class="form-group col-md-3">
@@ -56,7 +56,7 @@
             <label for="name">Status</label>
             <input type="text" class="form-control" name="status" id="status" readonly value="">   
         </div>
-        <button id="btnCancelar" class="btn btn-lg btn-warning" style="margin-left: 1040px">Cancelar</button>
+        <button type="button" id="btnCancelar" name="btnCancelar" class="btn btn-md btn-danger" style="margin-left: 1040px">Cancelar</button>
     </div>
 
     <br>
@@ -75,7 +75,7 @@
         <tbody id="tabela" name="tabela">
             <c:forEach var="p" items="${pedido.itensPedido}">
                 <tr>
-                    <td class=" text-center">${p.idItensPedido}</td>
+                    <td class=" text-center">${p.produto.idProduto}</td>
                     <td class=" text-center">${p.produto.nome}</td>
                     <td class=" text-center">${p.produto.categoria.nome}</td>
                     <td class=" text-center">${p.produto.plataforma.nome}</td>
@@ -118,7 +118,16 @@
 
         if (${pedido.status} === 1) {
             $('#status').val('Concluído');
-            $('#btnCancelar').prop('disabled', false);
+            if ('${sessionScope.usuarioLogado.cargo}' === 'Vendedor (a)') {
+                $('#btnCancelar').prop('disabled', true);
+            } else {
+                $('#btnCancelar').prop('disabled', false);
+            }
+            if (getDataAtual() > $('#data').val()) {
+                $('#btnCancelar').prop('disabled', true);
+            } else {
+                $('#btnCancelar').prop('disabled', false);
+            }
         } else {
             $('#status').val('Cancelado');
             $('#btnCancelar').prop('disabled', true);
@@ -140,12 +149,16 @@
                 $('#status').val('Cancelado');
                 $('#btnCancelar').prop('disabled', true);
             },
-            error: function (jqXHR, textStatus, errorThrown) {
+            error: function () {
                 $('#modalCancelar').modal('hide');
                 toastr.error('Ocorreu um erro ao cancelar a venda.', 'Erro');
             }
         });
     }
 
+    function getDataAtual() {
+        var dataAtual = new Date().toISOString().slice(0, 10);
+        return dataAtual;
+    }
 
 </script>

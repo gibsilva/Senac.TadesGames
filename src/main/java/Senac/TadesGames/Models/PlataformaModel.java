@@ -33,7 +33,7 @@ public class PlataformaModel {
     /**
      * @param idPlataforma the idPlataforma to set
      */
-    public void setIdPlataforma(int idPlataforma) {
+    private void setIdPlataforma(int idPlataforma) {
         this.idPlataforma = idPlataforma;
     }
 
@@ -47,7 +47,7 @@ public class PlataformaModel {
     /**
      * @param nome the nome to set
      */
-    public void setNome(String nome) {
+    private void setNome(String nome) {
         this.nome = nome;
     }
 

@@ -60,7 +60,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text">R$</span>
                     </div>
-                    <input type="text" class="form-control money" id="valorCompra" name="valorCompra" placeholder="00,00" required value="${produto.precoCompra}">
+                    <input type="text" class="form-control money" id="valorCompra" name="valorCompra" placeholder="00,00" required value="">
                 </div>
             </div>
 
@@ -70,7 +70,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text">R$</span>
                     </div>
-                    <input type="text" class="form-control money" id="valorVenda" name="valorVenda" placeholder="00,00" required value="${produto.precoVenda}">
+                    <input type="text" class="form-control money" id="valorVenda" name="valorVenda" placeholder="00,00" required value="">
                 </div>
             </div>
 
@@ -125,11 +125,16 @@
         document.getElementById('ativo').value = '${produto.ativo}';
         document.getElementById('descricao').value = '${produto.descricao}';
 
+        var valorCompra = Number('${produto.precoCompra.toString()}'.toString());
+        var valorVenda = Number('${produto.precoVenda.toString()}'.toString());
 
         $('.money').mask('000.000.000.000.000,00', {reverse: true});
         $('.money2').mask("#.##0,00", {reverse: true});
         $('.number').mask("0000000000", {reverse: true});
 
-
+        $('#valorCompra').val(valorCompra.toLocaleString('pt-br', {minimumFractionDigits: 2}));
+        $('#valorVenda').val(valorVenda.toLocaleString('pt-br', {minimumFractionDigits: 2}));
     });
+
+
 </script>

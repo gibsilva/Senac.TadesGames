@@ -32,19 +32,22 @@ public class HomeDAO {
 
         try {
             stmt = conn.prepareStatement("SELECT\n"
-                    + "	count(pedido.idUsuario) as QtdVendas, \n"
+                    + "	(select count(p.idpedido) from pedido p where p.idusuario = usuario.idusuario) as QtdVendas, \n"
                     + "    usuario.IdUsuario,\n"
                     + "    usuario.nome as Nome,\n"
                     + "    sum(ValorUnitario * quantidade) as TotalVendido,\n"
                     + "    usuario.IdFilial\n"
                     + "from pedido\n"
                     + "inner join usuario\n"
-                    + "	on usuario.IdUsuario = pedido.IdUsuario\n"
+                    + "    on usuario.IdUsuario = pedido.IdUsuario\n"
                     + "inner join itenspedido\n"
-                    + "	on itenspedido.idpedido = pedido.idpedido\n"
-                    + "group by pedido.idusuario\n"
-                    + "order by sum(ValorUnitario * quantidade) desc\n"
-                    + "limit 1");
+                    + "    on itenspedido.idpedido = pedido.idpedido\n"
+                    + "where pedido.statuspedido != 0\n"
+                    + "group by \n"
+                    + "	pedido.idusuario\n"
+                    + "order by \n"
+                    + "	sum(ValorUnitario * quantidade) desc\n"
+                    + "	limit 1");
 
             rs = stmt.executeQuery();
 

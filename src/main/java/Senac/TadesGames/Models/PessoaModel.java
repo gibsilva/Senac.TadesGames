@@ -26,7 +26,7 @@ public class PessoaModel {
     /**
      * @param nome the nome to set
      */
-    public void setNome(String nome) {
+    protected void setNome(String nome) {
         this.nome = nome;
     }
 
@@ -40,7 +40,7 @@ public class PessoaModel {
     /**
      * @param cpf the cpf to set
      */
-    public void setCpf(String cpf) {
+    protected void setCpf(String cpf) {
         this.cpf = cpf;
     }
 
@@ -54,7 +54,7 @@ public class PessoaModel {
     /**
      * @param email the email to set
      */
-    public void setEmail(String email) {
+    protected void setEmail(String email) {
         this.email = email;
     }
 
@@ -68,7 +68,7 @@ public class PessoaModel {
     /**
      * @param sexo the sexo to set
      */
-    public void setSexo(String sexo) {
+    protected void setSexo(String sexo) {
         this.sexo = sexo;
     }
 
@@ -82,7 +82,7 @@ public class PessoaModel {
     /**
      * @param ativo the ativo to set
      */
-    public void setAtivo(boolean ativo) {
+    protected void setAtivo(boolean ativo) {
         this.ativo = ativo;
     }
 }

@@ -64,8 +64,7 @@ public class ProdutoControllerServlet extends HttpServlet {
                     break;
                 case "salvar":
                     criarProduto(request, response);
-                default:
-                    listarProdutos(request, response);
+                    break;
             }
         } catch (ServletException | IOException e) {
             throw new ServletException(e);

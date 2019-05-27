@@ -5,8 +5,6 @@
  */
 package Senac.TadesGames.Models;
 
-import java.util.List;
-
 /**
  *
  * @author Gi
@@ -53,7 +51,7 @@ public class ProdutoModel {
     /**
      * @param idProduto the idProduto to set
      */
-    public void setIdProduto(int idProduto) {
+    private void setIdProduto(int idProduto) {
         this.idProduto = idProduto;
     }
 
@@ -67,7 +65,7 @@ public class ProdutoModel {
     /**
      * @param nome the nome to set
      */
-    public void setNome(String nome) {
+    private void setNome(String nome) {
         this.nome = nome;
     }
 
@@ -81,7 +79,7 @@ public class ProdutoModel {
     /**
      * @param descricao the descricao to set
      */
-    public void setDescricao(String descricao) {
+    private void setDescricao(String descricao) {
         this.descricao = descricao;
     }
 
@@ -95,7 +93,7 @@ public class ProdutoModel {
     /**
      * @param precoCompra the precoCompra to set
      */
-    public void setPrecoCompra(double precoCompra) {
+    private void setPrecoCompra(double precoCompra) {
         this.precoCompra = precoCompra;
     }
 
@@ -109,7 +107,7 @@ public class ProdutoModel {
     /**
      * @param precoVenda the precoVenda to set
      */
-    public void setPrecoVenda(double precoVenda) {
+    private void setPrecoVenda(double precoVenda) {
         this.precoVenda = precoVenda;
     }
     
@@ -123,7 +121,7 @@ public class ProdutoModel {
     /**
      * @param idCategoria the idCategoria to set
      */
-    public void setIdCategoria(int idCategoria) {
+    private void setIdCategoria(int idCategoria) {
         this.idCategoria = idCategoria;
     }
 
@@ -151,7 +149,7 @@ public class ProdutoModel {
     /**
      * @param idGenero the idGenero to set
      */
-    public void setIdGenero(int idGenero) {
+    private void setIdGenero(int idGenero) {
         this.idGenero = idGenero;
     }
 
@@ -165,7 +163,7 @@ public class ProdutoModel {
     /**
      * @param ativo the ativo to set
      */
-    public void setAtivo(boolean ativo) {
+    private void setAtivo(boolean ativo) {
         this.ativo = ativo;
     }
 
@@ -179,7 +177,7 @@ public class ProdutoModel {
     /**
      * @param idFilial the filial to set
      */
-    public void setIdFilial(int idFilial) {
+    private void setIdFilial(int idFilial) {
         this.idFilial = idFilial;
     }
 
@@ -193,7 +191,7 @@ public class ProdutoModel {
     /**
      * @param idPlataforma the idPlataforma to set
      */
-    public void setIdPlataforma(int idPlataforma) {
+    private void setIdPlataforma(int idPlataforma) {
         this.idPlataforma = idPlataforma;
     }
 
@@ -229,7 +227,7 @@ public class ProdutoModel {
     /**
      * @param quantidadeEstoque the quantidadeEstoque to set
      */
-    public void setQuantidadeEstoque(int quantidadeEstoque) {
+    private void setQuantidadeEstoque(int quantidadeEstoque) {
         this.quantidadeEstoque = quantidadeEstoque;
     }
 

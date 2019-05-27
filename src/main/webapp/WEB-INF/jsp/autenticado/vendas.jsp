@@ -302,7 +302,6 @@
                 data: {'cpfCliente': $("#cpfCliente").val()},
                 success: function (data) {
                     var cliente = $.parseJSON(data);
-                    console.log(cliente);
                     if (cliente !== null) {
                         if (cliente.ativo === false) {
                             $('#idEditarCliente').val(cliente.idCliente);

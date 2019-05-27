@@ -57,7 +57,7 @@ public class PedidoModel {
     /**
      * @param idPedido the idPedido to set
      */
-    public void setIdPedido(int idPedido) {
+    private void setIdPedido(int idPedido) {
         this.idPedido = idPedido;
     }
 
@@ -71,7 +71,7 @@ public class PedidoModel {
     /**
      * @param status the status to set
      */
-    public void setStatus(int status) {
+    private void setStatus(int status) {
         this.status = status;
     }
 
@@ -97,7 +97,7 @@ public class PedidoModel {
     /**
      * @param dataPedido the dataPedido to set
      */
-    public void setDataPedido(Date dataPedido) {
+    private void setDataPedido(Date dataPedido) {
         this.dataPedido = dataPedido;
     }
 
@@ -111,7 +111,7 @@ public class PedidoModel {
     /**
      * @param idCliente the idCliente to set
      */
-    public void setIdCliente(int idCliente) {
+    private void setIdCliente(int idCliente) {
         this.idCliente = idCliente;
     }
 
@@ -139,7 +139,7 @@ public class PedidoModel {
     /**
      * @param idFilial the idFilial to set
      */
-    public void setIdFilial(int idFilial) {
+    private void setIdFilial(int idFilial) {
         this.idFilial = idFilial;
     }
 
@@ -153,7 +153,7 @@ public class PedidoModel {
     /**
      * @param idUsuario the idUsuario to set
      */
-    public void setIdUsuario(int idUsuario) {
+    private void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
 
@@ -167,7 +167,7 @@ public class PedidoModel {
     /**
      * @param formaPagamento the formaPagamento to set
      */
-    public void setFormaPagamento(int formaPagamento) {
+    private void setFormaPagamento(int formaPagamento) {
         this.formaPagamento = formaPagamento;
     }
 
@@ -181,7 +181,7 @@ public class PedidoModel {
     /**
      * @param parcela the parcelas to set
      */
-    public void setParcela(int parcela) {
+    private void setParcela(int parcela) {
         this.parcela = parcela;
     }
 
@@ -195,7 +195,7 @@ public class PedidoModel {
     /**
      * @param valorRecebido the valorRecebido to set
      */
-    public void setValorRecebido(double valorRecebido) {
+    private void setValorRecebido(double valorRecebido) {
         this.valorRecebido = valorRecebido;
     }
     

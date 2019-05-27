@@ -64,7 +64,7 @@
                             role="button" aria-haspopup="true" aria-expanded="false">Produto</a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="Produtos?acao=salvar">Cadastro de Produto</a>
-                            <a class="dropdown-item" href="Produtos">Consulta de Produto</a>
+                            <a class="dropdown-item" href="Produtos?acao=listar">Consulta de Produto</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="Plataformas?acao=salvar">Cadastro de Plataforma</a> 
                             <a class="dropdown-item" href="Plataformas">Consulta de Plataforma</a>

@@ -17,7 +17,7 @@
         <ul class="text-danger">
             <c:forEach var = "n" items = "${notificacoes}">
                 <li>${n.valor}</li>
-            </c:forEach>
+                </c:forEach>
         </ul>
     </div>
 
@@ -88,16 +88,10 @@
                 <label for="inputCargo">Cargo<h11 class="text-danger">*</h11></label>
                 <select id="cargo" name="cargo" class="custom-select" required>
                     <option value="">Selecione</option>
-                    <option value="Diretor">Diretor</option>
-                    <option value="Gerente Global">Gerente Global</option>
-                    <option value="Gerente Regional">Gerente Regional</option>
-                    <option value="Suporte Técnico">Suporte Técnico</option>
-                    <option value="Funcionário">Funcionário</option>
-                    <option value="Vendedor (a)">Vendedor (a)</option>
                 </select>
             </div>
         </div>
-            
+
         <div class="row">
             <div class="form-group col-md-2">
                 <label for="inputSexo">Status</label>
@@ -120,12 +114,27 @@
 </div>
 
 <script>
+    var lista = '';
     $(document).ready(function () {
+
         document.getElementById('sexo').value = '${usuario.sexo}';
         document.getElementById('filial').value = '${usuario.idFilial}';
         document.getElementById('setor').value = '${usuario.setor}';
-        document.getElementById('cargo').value = '${usuario.cargo}';
+        document.getElementById("cargo").options.length = 0;
+        var option = new Option('${usuario.cargo}', '${usuario.cargo}'); $('#cargo').append($(option));
         document.getElementById('ativo').value = '${usuario.ativo}';
+
+        $('#setor').blur(function () {
+            if ($('#setor').val() !== '') {
+                obterCargos($('#setor').val());
+            } else {
+                document.getElementById("cargo").options.length = 0;
+                $('#cargo').append($('<option>', {
+                    value: '',
+                    text: 'Selecione'
+                }));
+            }
+        });
 
         $('.date').mask('00/00/0000');
         $('.time').mask('00:00:00');
@@ -163,5 +172,37 @@
         $('.selectonfocus').mask("00/00/0000", {selectOnFocus: true});
 
     });
+
+    function obterCargos(setor) {
+        $.ajax({
+            url: 'Usuarios?acao=cargosPorSetor',
+            type: "GET",
+            contentType: 'application/json',
+            data: {'setor': setor},
+            success: function (data, textStatus, jqXHR) {
+                lista = $.parseJSON(data);
+                console.log(lista);
+                carregarCargos(lista);
+            },
+            error: function () {
+                toastr.error('Ocorreu um erro ao buscar os cargos', 'Erro');
+            }
+        });
+    }
+
+    function carregarCargos(lista) {
+        document.getElementById("cargo").options.length = 0;
+        $('#cargo').append($('<option>', {
+            value: '',
+            text: 'Selecione'
+        }));
+
+        for (var i = 0; i < lista.length; i++) {
+            $('#cargo').append($('<option>', {
+                value: lista[i].toString(),
+                text: lista[i].toString()
+            }));
+        }
+    }
 
 </script>

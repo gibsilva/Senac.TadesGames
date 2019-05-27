@@ -5,20 +5,18 @@
  */
 package Senac.TadesGames.Models;
 
-import java.util.Date;
-
 /**
  *
  * @author Giovanni.Carignato
  */
 public class RelatorioProdutoModel {
-    private int idProduto;
-    private String nomeProduto;
-    private int qtdProduto;
-    private double totalVendido;
-    private String categoria;
-    private String dataUltimaVenda;
-    private boolean ativo;
+    private final int idProduto;
+    private final String nomeProduto;
+    private final int qtdProduto;
+    private final double totalVendido;
+    private final String categoria;
+    private final String dataUltimaVenda;
+    private final boolean ativo;
     
     public RelatorioProdutoModel(int idProduto, String nomeProduto, int qtdProduto,
             double totalVendido, String categoria, String dataUltimaVenda, boolean ativo){

@@ -34,7 +34,7 @@ public class GeneroModel {
     /**
      * @param idGenero the idGenero to set
      */
-    public void setIdGenero(int idGenero) {
+    private void setIdGenero(int idGenero) {
         this.idGenero = idGenero;
     }
 
@@ -48,7 +48,7 @@ public class GeneroModel {
     /**
      * @param nome the nome to set
      */
-    public void setNome(String nome) {
+    private void setNome(String nome) {
         this.nome = nome;
     }
 

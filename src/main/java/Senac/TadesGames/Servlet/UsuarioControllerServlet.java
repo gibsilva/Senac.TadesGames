@@ -5,7 +5,9 @@ import Senac.TadesGames.Helpers.Utils;
 import Senac.TadesGames.Models.UsuarioModel;
 import Senac.TadesGames.Service.FilialService;
 import Senac.TadesGames.Service.UsuarioService;
+import com.google.gson.Gson;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -47,6 +49,9 @@ public class UsuarioControllerServlet extends HttpServlet {
                     break;
                 case "alterarSenha":
                     alterarSenha(request, response);
+                    break;
+                case "cargosPorSetor":
+                    cargosPorSetor(request, response);
                     break;
                 default:
                     listarUsuarios(request, response);
@@ -171,6 +176,19 @@ public class UsuarioControllerServlet extends HttpServlet {
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/autenticado/cadastroUsuario.jsp");
         dispatcher.forward(request, response);
+    }
+
+    protected void cargosPorSetor(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html; charset=UTF-8");
+        String setor = request.getParameter("setor");
+
+        try (PrintWriter out = response.getWriter()) {
+            List<String> cargos = usuarioService.cargosPorSetor(setor);
+            Gson gson = new Gson();
+            out.print(gson.toJson(cargos));
+            out.flush();
+        }
     }
 
     protected void alterarUsuario(HttpServletRequest request, HttpServletResponse response)

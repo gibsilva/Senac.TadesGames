@@ -21,5 +21,6 @@ public interface IPedidoDao {
     void CancelarPedido (PedidoModel pedido);
     List<PedidoModel> pesquisar(int id, String dataInicio, String dataFim);
     List<PedidoModel> obterTodosPorIdUsuario(int id);
+    List<PedidoModel> obterTodosConcluidos();
     
 }

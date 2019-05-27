@@ -22,8 +22,6 @@ import Senac.TadesGames.Service.HomeService;
 import Senac.TadesGames.Service.ItensPedidoService;
 import Senac.TadesGames.Service.PedidoService;
 import Senac.TadesGames.Service.ProdutoService;
-import Senac.TadesGames.Service.UsuarioService;
-import java.util.stream.Stream;
 
 /**
  *
@@ -48,9 +46,9 @@ public class HomeControllerServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         List<ProdutoModel> produtos = produtoService.obterTodos();
-        List<PedidoModel> pedidos = pedidoService.obterTodos();       
+        List<PedidoModel> pedidos = pedidoService.obterTodosConcluidos();       
         
-        int totalVendidoProduto = itensPedidoService.obterTodos().size();
+        int totalVendidoProduto = 0;
         int totalEstoque = 0;
         int qtdVendas = pedidos.size();
         double totalVendas = 0.0;
@@ -61,6 +59,7 @@ public class HomeControllerServlet extends HttpServlet {
         
         for(PedidoModel p : pedidos){
             totalVendas += p.getValorTotal();
+            totalVendidoProduto += p.getQtdProdutos();
         }
         
         HomeModel homeVendedor = homeService.obterHomeVendedor();      

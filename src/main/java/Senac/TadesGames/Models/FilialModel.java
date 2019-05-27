@@ -57,7 +57,7 @@ public class FilialModel {
     /**
      * @param idFilial the idFilial to set
      */
-    public void setIdFilial(int idFilial) {
+    private void setIdFilial(int idFilial) {
         this.idFilial = idFilial;
     }
 
@@ -71,7 +71,7 @@ public class FilialModel {
     /**
      * @param cnpj the cnpj to set
      */
-    public void setCnpj(String cnpj) {
+    private void setCnpj(String cnpj) {
         this.cnpj = cnpj;
     }
 
@@ -85,7 +85,7 @@ public class FilialModel {
     /**
      * @param nome the nome to set
      */
-    public void setNome(String nome) {
+    private void setNome(String nome) {
         this.nome = nome;
     }
 
@@ -141,7 +141,7 @@ public class FilialModel {
     /**
      * @param cep the cep to set
      */
-    public void setCep(String cep) {
+    private void setCep(String cep) {
         this.cep = cep;
     }
 
@@ -155,7 +155,7 @@ public class FilialModel {
     /**
      * @param logradouro the logradouro to set
      */
-    public void setLogradouro(String logradouro) {
+    private void setLogradouro(String logradouro) {
         this.logradouro = logradouro;
     }
 
@@ -169,7 +169,7 @@ public class FilialModel {
     /**
      * @param numero the numero to set
      */
-    public void setNumero(int numero) {
+    private void setNumero(int numero) {
         this.numero = numero;
     }
 
@@ -183,7 +183,7 @@ public class FilialModel {
     /**
      * @param complemento the complemento to set
      */
-    public void setComplemento(String complemento) {
+    private void setComplemento(String complemento) {
         this.complemento = complemento;
     }
 
@@ -197,7 +197,7 @@ public class FilialModel {
     /**
      * @param bairro the bairro to set
      */
-    public void setBairro(String bairro) {
+    private void setBairro(String bairro) {
         this.bairro = bairro;
     }
 
@@ -211,7 +211,7 @@ public class FilialModel {
     /**
      * @param cidade the cidade to set
      */
-    public void setCidade(String cidade) {
+    private void setCidade(String cidade) {
         this.cidade = cidade;
     }
 
@@ -225,7 +225,7 @@ public class FilialModel {
     /**
      * @param estado the estado to set
      */
-    public void setEstado(String estado) {
+    private void setEstado(String estado) {
         this.estado = estado;
     }
 
@@ -239,7 +239,7 @@ public class FilialModel {
     /**
      * @param ativo the ativo to set
      */
-    public void setAtivo(boolean ativo) {
+    private void setAtivo(boolean ativo) {
         this.ativo = ativo;
     }
 }

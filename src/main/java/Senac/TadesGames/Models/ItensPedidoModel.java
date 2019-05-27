@@ -38,7 +38,7 @@ public class ItensPedidoModel {
     /**
      * @param idItensPedido the idItensPedido to set
      */
-    public void setIdItensPedido(int idItensPedido) {
+    private void setIdItensPedido(int idItensPedido) {
         this.idItensPedido = idItensPedido;
     }
 
@@ -52,7 +52,7 @@ public class ItensPedidoModel {
     /**
      * @param idProduto the idProduto to set
      */
-    public void setIdProduto(int idProduto) {
+    private void setIdProduto(int idProduto) {
         this.idProduto = idProduto;
     }
 
@@ -66,7 +66,7 @@ public class ItensPedidoModel {
     /**
      * @param valorUnitario the valorUnitario to set
      */
-    public void setValorUnitario(double valorUnitario) {
+    private void setValorUnitario(double valorUnitario) {
         this.valorUnitario = valorUnitario;
     }
 
@@ -80,7 +80,7 @@ public class ItensPedidoModel {
     /**
      * @param quantidade the quantidade to set
      */
-    public void setQuantidade(int quantidade) {
+    private void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
     }
 

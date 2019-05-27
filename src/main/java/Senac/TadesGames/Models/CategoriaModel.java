@@ -32,7 +32,7 @@ public class CategoriaModel {
     /**
      * @param idCategoria the idCategoria to set
      */
-    public void setIdCategoria(int idCategoria) {
+    private void setIdCategoria(int idCategoria) {
         this.idCategoria = idCategoria;
     }
 
@@ -46,7 +46,7 @@ public class CategoriaModel {
     /**
      * @param nome the nome to set
      */
-    public void setNome(String nome) {
+    private void setNome(String nome) {
         this.nome = nome;
     }
 

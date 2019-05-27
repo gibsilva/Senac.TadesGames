@@ -126,6 +126,54 @@ public class PedidoDAO implements IPedidoDao {
             conexao.closeConnection(conn, stmt, rs);
         }
     }
+    
+        @Override
+    public List<PedidoModel> obterTodosConcluidos() {
+        Connection conn = conexao.getConnection();
+        PedidoModel pedido = null;
+        List<PedidoModel> pedidos = new ArrayList<PedidoModel>();
+
+        try {
+            stmt = conn.prepareStatement("SELECT IDPEDIDO, "
+                    + "FORMAPAGAMENTO, "
+                    + "STATUSPEDIDO, "
+                    + "DATAPEDIDO, "
+                    + "IDCLIENTE, "
+                    + "IDFILIAL, "
+                    + "IDUSUARIO,"
+                    + "PARCELA, "
+                    + "VALORRECEBIDO "
+                    + " FROM pedido WHERE STATUSPEDIDO = 1");
+
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                pedido = new PedidoModel(
+                        rs.getInt("IdPedido"),
+                        rs.getInt("StatusPedido"),
+                        rs.getDate("DataPedido"),
+                        rs.getInt("IdCliente"),
+                        rs.getInt("IdFilial"),
+                        rs.getInt("IdUsuario"),
+                        rs.getInt("FormaPagamento"),
+                        rs.getInt("Parcela"),
+                        rs.getDouble("ValorRecebido")
+                );
+                pedido.setItensPedido(itensPedidoDao.obterPorIdPedido(pedido.getIdPedido()));
+                pedido.setCliente(clienteDao.obterPorId(pedido.getIdCliente()));
+                pedido.setFilial(filialDao.obterPorId(pedido.getIdFilial()));
+                pedido.setUsuario(usuarioDao.obterPorId(pedido.getIdUsuario()));
+
+                pedidos.add(pedido);
+            }
+
+            return pedidos;
+        } catch (SQLException ex) {
+            conexao.closeConnection(conn, stmt, rs);
+            return null;
+        } finally {
+            conexao.closeConnection(conn, stmt, rs);
+        }
+    }
 
     @Override
     public List<PedidoModel> obterTodosPorIdUsuario(int id) {

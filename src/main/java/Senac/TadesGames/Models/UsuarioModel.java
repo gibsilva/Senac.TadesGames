@@ -5,8 +5,6 @@
  */
 package Senac.TadesGames.Models;
 
-import java.util.ArrayList;
-import java.util.List;
 import org.mindrot.jbcrypt.BCrypt;
 
 /**
@@ -18,7 +16,6 @@ public final class UsuarioModel extends PessoaModel {
     private int idUsuario;
     private String setor;
     private String cargo;
-    private PermissaoModel permissao;
     private String login;
     private String senha;
     private int idFilial;
@@ -86,20 +83,6 @@ public final class UsuarioModel extends PessoaModel {
      */
     public void setCargo(String cargo) {
         this.cargo = cargo;
-    }
-
-    /**
-     * @return the permissao
-     */
-    public PermissaoModel getPermissao() {
-        return permissao;
-    }
-
-    /**
-     * @param permissao the permissao to set
-     */
-    public void setPermissao(PermissaoModel permissao) {
-        this.permissao = permissao;
     }
 
     /**
