@@ -42,9 +42,9 @@
 
     <br>
 
-    <table class="table table-hover">
+    <table class="table table-hover border border-primary">
         <thead> 
-            <tr>
+            <tr class="table-primary">
                 <th class="text-center" scope="col">Id</th>
                 <th class="text-center" scope="col">Cliente</th>
                 <th class="text-center" scope="col">CPF/CNPJ</th>
@@ -63,7 +63,7 @@
 
         <tbody id="tabela" name="tabela">
             <c:forEach var="p" items="${pedidos}">
-                <tr>
+                <tr >
                     <td class=" text-center">${p.idPedido}</td>
                     <td class=" text-center">${p.cliente.nome}</td>
                     <td class=" text-center">${p.cliente.documento.toString()}</td>

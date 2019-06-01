@@ -35,9 +35,9 @@
 
     <br>
 
-    <table class="table table-hover" id="table">
+    <table class="table table-hover border border-primary" id="table">
         <thead>
-            <tr>
+            <tr class="table-primary ">
                 <th scope="col">ID</th>
                 <th scope="col">Nome</th>
                 <th scope="col">CPF</th>
@@ -89,7 +89,7 @@
         var s = '';
         var total = 0;
         for (var i = 0; i < lista.length; i++) {
-            s += '<tr class="table-light text-center">';
+            s += '<tr class=" text-center">';
             s += '<td class="text-center">' + lista[i].idCliente + '</td>';
             s += '<td class="text-center">' + lista[i].nomeCliente + '</td>';
             s += '<td class="text-center">' + lista[i].cpf + '</td>';
@@ -106,7 +106,7 @@
             total += lista[i].totalComprado;
         }
         var foot = '';
-        foot += '<tr> <td><strong>Total:</strong></td><td>R$ ' + total + '</td> </tr>';
+        foot += '<tr class="blockquote"> <td><strong>Total:</strong></td><td>R$ ' + total + '</td> </tr>';
         $('#totalTabela').html(foot);
     }
 

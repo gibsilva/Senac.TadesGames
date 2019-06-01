@@ -48,9 +48,9 @@
         
     </div>
 
-    <table class="table table-hover" id="table">
+    <table class="table table-hover border border-primary" id="table">
         <thead>
-            <tr>
+            <tr class="table-primary">
                 <th scope="col">ID Venda</th>
                 <th scope="col">Nome do Cliente</th>
                 <th scope="col">CPF/CNPJ Cliente</th>
@@ -133,7 +133,7 @@
             var documento = lista[i].pedido.cliente.documento.cpf === '' ? lista[i].pedido.cliente.documento.cnpj : lista[i].pedido.cliente.documento.cpf;
             var valorParcela = lista[i].pedido.parcela === 0 ? 0 : (lista[i].valorTotal / lista[i].pedido.parcela).toLocaleString('pt-br', {minimumFractionDigits: 2});
             var status = lista[i].pedido.status === 1 ? 'Concluído' : 'Cancelado';
-            s += '<tr class="table-light text-center">';
+            s += '<tr class=" text-center">';
             s += '<td class="text-center">' + lista[i].pedido.idPedido + '</td>';
             s += '<td class="text-center">' + lista[i].pedido.cliente.nome + '</td>';
             s += '<td class="text-center">' + documento + '</td>';
@@ -149,7 +149,7 @@
             total += lista[i].valorTotal;
         }
         var foot = '';
-        foot += '<tr> <td><strong>Total do Período:</strong></td><td>R$ ' + total.toLocaleString('pt-br', {minimumFractionDigits: 2}) + '</td> </tr>';
+        foot += '<tr class="blockquote"> <td><strong>Total do Período:</strong></td><td>R$ ' + total.toLocaleString('pt-br', {minimumFractionDigits: 2}) + '</td> </tr>';
         $('#totalTabela').html(foot);
     }
 

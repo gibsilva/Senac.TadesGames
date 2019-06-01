@@ -27,9 +27,9 @@
     </div>
     <br>
     <br>
-    <table class="table table-hover">
+    <table class="table table-hover border border-primary">
         <thead> 
-            <tr>
+            <tr class="table-primary ">
                 <th class="text-center" scope="col">Id</th>
                 <th class="text-center" scope="col">Nome</th>
                 <th class="text-center" scope="col">CPF</th>
@@ -45,7 +45,7 @@
         </thead>
         <tbody id="tabela" name="tabela">
             <c:forEach var="u" items="${usuarios}">
-                <tr>
+                <tr >
                     <td class="text-center">${u.idUsuario}</td>
                     <td class="text-center">${u.nome}</td>
                     <td class="text-center">${u.cpf}</td>

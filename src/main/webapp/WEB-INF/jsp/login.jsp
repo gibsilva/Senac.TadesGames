@@ -45,8 +45,6 @@
                     <button type="button" class="btn btn-link" onclick="abreModal()">Esqueceu sua senha? Clique Aqui</button>
                     <input class="btn btn-lg btn-primary btn-block" type="submit" value="Entrar" onsubmit="limparForm()">
                     <br>
-                    
-                    <p class="mt-5 mb-3 text-muted">&copy; TadesGames</p>
                 </td>
             </tr>
         </form>
@@ -82,6 +80,8 @@
             </div>
         </div>
     </div>
+    
+    <%@include file="/WEB-INF/jsp/autenticado/rodape.jsp" %>
 
     <script type="text/javascript" src="resources/js/jquery.min.js"></script>  
     <script type="text/javascript" src="resources/js/bootstrap.min.js"></script>

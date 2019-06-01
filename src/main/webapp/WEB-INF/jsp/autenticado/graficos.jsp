@@ -16,8 +16,8 @@
             <select id="grafico" name="grafico" class="custom-select">
                 <option value="">Selecione</option>
                 <option value="VF">Vendas por filial</option>
-                <option value="MV">Melhores vendedores</option>
-                <option value="PV">Produtos mais vendidos</option>
+                <option value="MV">Melhores vendedores por filial</option>
+                <option value="PV">Produtos mais vendidos por filial</option>
             </select>
         </div>
         <div class="form-group col-md-2">

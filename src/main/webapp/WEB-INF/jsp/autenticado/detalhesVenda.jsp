@@ -60,21 +60,21 @@
     </div>
 
     <br>
-    <table class="table table-hover">
+    <table class="table table-hover border border-primary">
         <thead> 
-            <tr>
+            <tr class="table-primary">
                 <th class="text-center" scope="col">Id</th>
                 <th class="text-center" scope="col">Produto</th>
                 <th class="text-center" scope="col">Categoria</th>
                 <th class="text-center" scope="col">Plataforma</th>
                 <th class="text-center" scope="col">Genero</th>
                 <th class="text-center" scope="col">Quantidade</th>
-                <th class="text-center" scope="col">Valor Un. R$</th>
+                <th class="text-center" scope="col">Valor Unit. R$</th>
             </tr>
         </thead>
         <tbody id="tabela" name="tabela">
             <c:forEach var="p" items="${pedido.itensPedido}">
-                <tr>
+                <tr >
                     <td class=" text-center">${p.produto.idProduto}</td>
                     <td class=" text-center">${p.produto.nome}</td>
                     <td class=" text-center">${p.produto.categoria.nome}</td>

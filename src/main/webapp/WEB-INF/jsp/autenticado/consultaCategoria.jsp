@@ -28,9 +28,9 @@
     </div>
     <br>
     <br>
-    <table id="tabelaCategorias" class="table table-hover">
+    <table id="tabelaCategorias" class="table table-hover border border-primary">
         <thead> 
-            <tr>
+            <tr class="table-primary">
                 <th scope="col">Id</th>
                 <th class="text-center" scope="col">Nome</th>
                 <th class="text-center" scope="col">#</th>

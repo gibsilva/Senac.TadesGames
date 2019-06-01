@@ -30,9 +30,9 @@
     <br>
     <br>
 
-    <table class="table table-hover">
+    <table class="table table-hover border border-primary">
         <thead> 
-            <tr>
+            <tr class="table-primary">
                 <th class="text-center" scope="col">Id</th>
                 <th class="text-center" scope="col">Nome</th>
                 <th class="text-center" scope="col">Preço de Compra</th>
@@ -48,7 +48,7 @@
         </thead>
         <tbody id="tabela" name="tabela">
             <c:forEach var="p" items="${produtos}">
-                <tr>
+                <tr >
                     <td class="text-center">${p.idProduto}</td>
                     <td class="text-center">${p.nome}</td>
                     <td class="text-center">${p.precoCompra}</td>

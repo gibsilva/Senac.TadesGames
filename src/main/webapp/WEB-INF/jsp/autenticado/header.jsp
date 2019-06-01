@@ -67,13 +67,13 @@
                             <a class="dropdown-item" href="Produtos?acao=listar">Consulta de Produto</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="Plataformas?acao=salvar">Cadastro de Plataforma</a> 
-                            <a class="dropdown-item" href="Plataformas">Consulta de Plataforma</a>
+                            <a class="dropdown-item" href="Plataformas?acao=listar">Consulta de Plataforma</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="Categorias?acao=salvar">Cadastro de Categoria</a> 
                             <a class="dropdown-item" href="Categorias?acao=listar">Consulta de Categoria</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="Generos?acao=salvar">Cadastro de Gênero</a>
-                            <a class="dropdown-item" href="Generos">Consulta de Gênero</a>
+                            <a class="dropdown-item" href="Generos?acao=listar">Consulta de Gênero</a>
                         </div></li>
 
 
@@ -104,9 +104,8 @@
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="Filiais?acao=salvar">Cadastro de Filial</a> 
                             <a class="dropdown-item" href="Filiais">Consulta de Filial</a>
-                        </div></li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/autenticado/sobre">Desenvolvedores</a></li>
+                        </div>
+                    </li>
                 </ul>
 
 

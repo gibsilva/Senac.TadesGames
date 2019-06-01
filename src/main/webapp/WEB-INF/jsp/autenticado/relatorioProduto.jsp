@@ -51,9 +51,9 @@
 
     <br>
 
-    <table class="table table-hover" id ="table">
+    <table class="table table-hover border border-primary" id ="table">
         <thead>
-            <tr>
+            <tr class="table-primary">
                 <th scope="col">ID Produto</th>
                 <th scope="col">Nome</th>
                 <th scope="col">Qtd Vendido</th>
@@ -136,7 +136,7 @@
         $('#tabela').html(s);
         var total = 0;
         for (var i = 0; i < lista.length; i++) {
-            s += '<tr class="table-light text-center">';
+            s += '<tr class=" text-center">';
             s += '<td class="text-center">' + lista[i].idProduto + '</td>';
             s += '<td class="text-center">' + lista[i].nomeProduto + '</td>';
             s += '<td class="text-center">' + lista[i].qtdProduto + '</td>';
@@ -158,7 +158,7 @@
             total += lista[i].totalVendido;
         }
         var foot = '';
-        foot += '<tr> <td><strong>Total vendido:</strong></td><td>R$ ' + total.toLocaleString('pt-br', {minimumFractionDigits: 2}) + '</td> </tr>';
+        foot += '<tr class="blockquote"> <td><strong>Total vendido:</strong></td><td>R$ ' + total.toLocaleString('pt-br', {minimumFractionDigits: 2}) + '</td> </tr>';
         $('#totalTabela').html(foot);
     }
 
