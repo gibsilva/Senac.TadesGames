@@ -7,6 +7,9 @@ package Senac.TadesGames.Servlet;
 
 import Senac.TadesGames.Helpers.Utils;
 import Senac.TadesGames.Models.FilialModel;
+import Senac.TadesGames.Models.GraficoMelhoresVendedoresModel;
+import Senac.TadesGames.Models.GraficoProdutosModel;
+import Senac.TadesGames.Models.GraficoVendasFilialModel;
 import Senac.TadesGames.Models.RelatorioClienteModel;
 import Senac.TadesGames.Models.RelatorioProdutoModel;
 import Senac.TadesGames.Models.RelatorioVendasModel;
@@ -67,6 +70,12 @@ public class RelatorioControllerServlet extends HttpServlet {
                 case "relatorioClientes":
                     gerarRelatorioClientes(request, response);
                     break;
+                case "graficos":
+                    graficos(request, response);
+                    break;
+                case "gerarGraficos":
+                    gerarGraficos(request, response);
+                    break;
             }
         } catch (IOException e) {
             throw new ServletException(e);
@@ -92,7 +101,7 @@ public class RelatorioControllerServlet extends HttpServlet {
             throws ServletException, IOException {
         List<FilialModel> filiais = null;
         UsuarioModel usuario = (UsuarioModel) request.getSession().getAttribute("usuarioLogado");
-        if (usuario.getCargo().equals("Gerente Global") || usuario.getCargo().equals("Diretor") || usuario.getLogin().equals("admin") 
+        if (usuario.getCargo().equals("Gerente Global") || usuario.getCargo().equals("Diretor") || usuario.getLogin().equals("admin")
                 || usuario.getFilial().getCnpj().equals("70752763000174")) {
             filiais = filialService.obterListaFiliais();
         }
@@ -157,6 +166,37 @@ public class RelatorioControllerServlet extends HttpServlet {
 
             List<RelatorioClienteModel> lista = relatorioService.obterPorDataRelatorioCliente(dataInicio, dataFim);
             out.print(gson.toJson(lista));
+            out.flush();
+        }
+    }
+
+    protected void graficos(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.getRequestDispatcher("/WEB-INF/jsp/autenticado/graficos.jsp").forward(request, response);
+    }
+
+    protected void gerarGraficos(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html; charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            Gson gson = new Gson();
+            String tipo = request.getParameter("tipo");
+
+            switch (tipo) {
+                case "vendasPorFilial":
+                    List<GraficoVendasFilialModel> vendas = relatorioService.vendasPorFilial();
+                    out.print(gson.toJson(vendas));
+                    break;
+                case "vendasPorVendedor":
+                    List<GraficoMelhoresVendedoresModel> vendedores = relatorioService.vendasPorVendedor();
+                    out.print(gson.toJson(vendedores));
+                    break;
+                case "produtosVendidos":
+                    List<GraficoProdutosModel> produtos = relatorioService.obterProdutosVendidos();
+                    out.print(gson.toJson(produtos));
+                    break;
+            }
+
             out.flush();
         }
     }

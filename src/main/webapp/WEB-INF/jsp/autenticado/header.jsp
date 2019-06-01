@@ -84,6 +84,7 @@
                             <a class="dropdown-item" href="${pageContext.request.contextPath}/autenticado/Relatorios?acao=clientes">Cliente</a>
                             <a class="dropdown-item" href="${pageContext.request.contextPath}/autenticado/Relatorios?acao=produtos">Produto</a>
                             <a class="dropdown-item" href="${pageContext.request.contextPath}/autenticado/Relatorios?acao=vendas">Vendas</a>
+                            <a class="dropdown-item" href="${pageContext.request.contextPath}/autenticado/Relatorios?acao=graficos">Gráficos</a>
                         </div></li>
 
                     <li class="nav-item dropdown"><a

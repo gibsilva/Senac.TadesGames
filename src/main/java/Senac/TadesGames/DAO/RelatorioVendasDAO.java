@@ -8,6 +8,8 @@ package Senac.TadesGames.DAO;
 import Senac.TadesGames.DAO.Interfaces.IRelatorioVendasDao;
 import Senac.TadesGames.Data.ConexaoDB;
 import Senac.TadesGames.Helpers.Utils;
+import Senac.TadesGames.Models.GraficoMelhoresVendedoresModel;
+import Senac.TadesGames.Models.GraficoVendasFilialModel;
 import Senac.TadesGames.Models.RelatorioVendasModel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -125,6 +127,83 @@ public class RelatorioVendasDAO implements IRelatorioVendasDao {
                 if (relatorioVenda.getIdPedido() != 0) {
                     lista.add(relatorioVenda);
                 }
+            }
+
+            return lista;
+
+        } catch (SQLException ex) {
+            conexao.closeConnection(conn, stmt, rs);
+            return null;
+        } finally {
+            conexao.closeConnection(conn, stmt, rs);
+        }
+    }
+
+    public List<GraficoVendasFilialModel> vendasPorFilial() {
+        Connection conn = conexao.getConnection();
+        GraficoVendasFilialModel relatorioVenda = null;
+
+        List<GraficoVendasFilialModel> lista = new ArrayList<GraficoVendasFilialModel>();
+
+        try {
+            stmt = conn.prepareStatement("select \n"
+                    + "	filial.nome as filial,\n"
+                    + " sum((itenspedido.ValorUnitario * itenspedido.Quantidade)) as total\n"
+                    + "from filial\n"
+                    + "inner join pedido\n"
+                    + "	on pedido.IdFilial = filial.IdFilial\n"
+                    + "inner join itenspedido\n"
+                    + "	on itenspedido.idpedido = pedido.idpedido\n"
+                    + "where pedido.StatusPedido = 1\n"
+                    + "group by filial.nome");
+
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                relatorioVenda = new GraficoVendasFilialModel(
+                        rs.getString("filial"),
+                        rs.getDouble("total")
+                );
+                lista.add(relatorioVenda);
+            }
+
+            return lista;
+
+        } catch (SQLException ex) {
+            conexao.closeConnection(conn, stmt, rs);
+            return null;
+        } finally {
+            conexao.closeConnection(conn, stmt, rs);
+        }
+    }
+
+    public List<GraficoMelhoresVendedoresModel> vendasPorVendedor() {
+        Connection conn = conexao.getConnection();
+        GraficoMelhoresVendedoresModel relatorioVenda = null;
+
+        List<GraficoMelhoresVendedoresModel> lista = new ArrayList<GraficoMelhoresVendedoresModel>();
+
+        try {
+            stmt = conn.prepareStatement("select \n"
+                    + "	usuario.nome as vendedor,\n"
+                    + "    filial.Nome as filial,\n"
+                    + "    count(pedido.IdPedido) as qtdvendas\n"
+                    + "from usuario\n"
+                    + "inner join pedido\n"
+                    + "	on pedido.IdUsuario = usuario.IdUsuario\n"
+                    + "inner join filial\n"
+                    + "	on filial.IdFilial = usuario.IdFilial\n"
+                    + "where usuario.cargo = 'Vendedor (a)'\n"
+                    + "and pedido.StatusPedido = 1\n"
+                    + "group by usuario.nome, filial.nome");
+
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                relatorioVenda = new GraficoMelhoresVendedoresModel(
+                        rs.getString("vendedor"),
+                        rs.getInt("qtdvendas"),
+                        rs.getString("filial")
+                );
+                lista.add(relatorioVenda);
             }
 
             return lista;

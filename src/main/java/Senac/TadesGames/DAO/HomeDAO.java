@@ -193,7 +193,7 @@ public class HomeDAO implements IHomeDao {
 
         try {
             stmt = conn.prepareStatement("select \n"
-                    + "	(select count(1) from pedido where statuspedido = 1) as qtdVendas,\n"
+                    + "	(select count(1) from pedido where statuspedido = 1 and month(pedido.datapedido) = month(now())) as qtdVendas,\n"
                     + "    sum((itenspedido.ValorUnitario * itenspedido.Quantidade)) as totalTendido\n"
                     + "from pedido\n"
                     + "inner join itenspedido\n"
@@ -227,7 +227,7 @@ public class HomeDAO implements IHomeDao {
 
         try {
             stmt = conn.prepareStatement("select \n"
-                    + "	(select count(1) from pedido where statuspedido = 1) as qtdVendas,\n"
+                    + "	(select count(1) from pedido where statuspedido = 1 and month(pedido.datapedido) = month(now())) as qtdVendas,\n"
                     + "    sum((itenspedido.ValorUnitario * itenspedido.Quantidade)) as totalTendido\n"
                     + "from pedido\n"
                     + "inner join itenspedido\n"

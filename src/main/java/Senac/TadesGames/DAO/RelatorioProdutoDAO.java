@@ -8,6 +8,7 @@ package Senac.TadesGames.DAO;
 import Senac.TadesGames.DAO.Interfaces.IRelatorioProdutoDao;
 import Senac.TadesGames.Data.ConexaoDB;
 import Senac.TadesGames.Helpers.Utils;
+import Senac.TadesGames.Models.GraficoProdutosModel;
 import Senac.TadesGames.Models.RelatorioProdutoModel;
 import java.sql.Connection;
 import java.util.Date;
@@ -27,8 +28,8 @@ public class RelatorioProdutoDAO implements IRelatorioProdutoDao {
     private final ProdutoDAO produtoDao;
     private PreparedStatement stmt = null;
     private ResultSet rs = null;
-    
-    public RelatorioProdutoDAO(){
+
+    public RelatorioProdutoDAO() {
         this.conexao = new ConexaoDB();
         this.produtoDao = new ProdutoDAO();
     }
@@ -95,7 +96,7 @@ public class RelatorioProdutoDAO implements IRelatorioProdutoDao {
         RelatorioProdutoModel relatorioProduto = null;
         Utils util = new Utils();
         List<RelatorioProdutoModel> lista = new ArrayList<RelatorioProdutoModel>();
-        //ainda não foi testado de fato por não haver os dados na base das vendas
+
         try {
             stmt = conn.prepareStatement("SELECT   \n"
                     + "	produto.IDPRODUTO,\n"
@@ -135,6 +136,44 @@ public class RelatorioProdutoDAO implements IRelatorioProdutoDao {
                         rs.getBoolean("ativo")
                 );
                 relatorioProduto.setProduto(produtoDao.obterPorId(relatorioProduto.getIdProduto()));
+                lista.add(relatorioProduto);
+            }
+
+            return lista;
+        } catch (SQLException ex) {
+            conexao.closeConnection(conn, stmt, rs);
+            return null;
+        } finally {
+            conexao.closeConnection(conn, stmt, rs);
+        }
+    }
+
+    public List<GraficoProdutosModel> obterProdutosVendidos() {
+        Connection conn = conexao.getConnection();
+        GraficoProdutosModel relatorioProduto = null;
+        List<GraficoProdutosModel> lista = new ArrayList<GraficoProdutosModel>();
+
+        try {
+            stmt = conn.prepareStatement("select \n"
+                    + "	produto.nome as produto,\n"
+                    + "    count(pedido.idpedido) as qtdVendido\n"
+                    + "from produto\n"
+                    + "inner join itenspedido\n"
+                    + "	on itenspedido.IdProduto = produto.IdProduto\n"
+                    + "inner join pedido\n"
+                    + "	on pedido.IdPedido = itenspedido.IdPedido\n"
+                    + "where\n"
+                    + "	pedido.StatusPedido = 1\n"
+                    + "    and produto.Ativo = 1\n"
+                    + "group by\n"
+                    + "	produto.nome");
+
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                relatorioProduto = new GraficoProdutosModel(
+                        rs.getString("produto"),
+                        rs.getInt("qtdVendido")
+                );
                 lista.add(relatorioProduto);
             }
 

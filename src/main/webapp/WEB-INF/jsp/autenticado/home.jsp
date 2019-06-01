@@ -14,6 +14,7 @@
     <h4>Bem-Vindo(a), ${sessionScope.usuarioLogado.nome}</h4> <!--troca o nome pelo nome do usuario -->
     <h3 class="text-center" ><img src="../resources/img/LogoTadesGames.png" class="img-fluid" alt="Responsive image"></h3>
     <hr>
+    <h5 class="text-center">Dados do mês</h5>
     <div class="row justify-content-around">
         <div class="card-deck ">
             <div class="card border-primary mb-3" style="max-width: 20rem;">
@@ -55,7 +56,13 @@
     
     function formatarValor(){
         var totalVendido = parseFloat('${homeVendedor.totalVendido}');
+        if(totalVendido === 'NaN' || '${homeVendedor.totalVendido}' === ''){
+            totalVendido = 0;
+        }
         var totalVendas = parseFloat('${homeVenda.totalVendido}');
+        if(totalVendas === 'NaN' || '${homeVenda.totalVendido}' === ''){
+            totalVendas = 0;
+        }
         
         $('#totalVendido').html('Total vendido: R$ ' + totalVendido.toLocaleString('pt-br', {minimumFractionDigits: 2}));
         $('#totalVendas').html('Total vendido: R$ ' + totalVendas.toLocaleString('pt-br', {minimumFractionDigits: 2}));

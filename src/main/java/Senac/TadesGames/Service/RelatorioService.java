@@ -8,6 +8,9 @@ package Senac.TadesGames.Service;
 import Senac.TadesGames.DAO.RelatorioClienteDAO;
 import Senac.TadesGames.DAO.RelatorioProdutoDAO;
 import Senac.TadesGames.DAO.RelatorioVendasDAO;
+import Senac.TadesGames.Models.GraficoMelhoresVendedoresModel;
+import Senac.TadesGames.Models.GraficoProdutosModel;
+import Senac.TadesGames.Models.GraficoVendasFilialModel;
 import Senac.TadesGames.Models.RelatorioClienteModel;
 import Senac.TadesGames.Models.RelatorioProdutoModel;
 import Senac.TadesGames.Models.RelatorioVendasModel;
@@ -48,5 +51,17 @@ public class RelatorioService {
 
     public List<RelatorioClienteModel> obterPorDataRelatorioCliente(Date dataInicio, Date dataFim) {
         return relatorioClienteDao.obterPorData(dataInicio, dataFim);
+    }
+
+    public List<GraficoVendasFilialModel> vendasPorFilial() {
+        return relatorioVendasDao.vendasPorFilial();
+    }
+
+    public List<GraficoMelhoresVendedoresModel> vendasPorVendedor() {
+        return relatorioVendasDao.vendasPorVendedor();
+    }
+
+    public List<GraficoProdutosModel> obterProdutosVendidos() {
+        return relatorioProdutoDao.obterProdutosVendidos();
     }
 }
