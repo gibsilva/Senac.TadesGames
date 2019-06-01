@@ -122,6 +122,54 @@ public class FilialDAO implements IFilialDao {
     }
 
     @Override
+    public List<FilialModel> obterTodasAtivas() {
+        Connection conn = conexao.getConnection();
+        FilialModel filial = null;
+        List<FilialModel> filiais = new ArrayList<FilialModel>();
+
+        try {
+            stmt = conn.prepareStatement("SELECT IDFILIAL, "
+                    + "NOME, "
+                    + "CNPJ, "
+                    + "CEP, "
+                    + "LOGRADOURO, "
+                    + "NUMERO, "
+                    + "COMPLEMENTO, "
+                    + "BAIRRO, "
+                    + "CIDADE, "
+                    + "ESTADO, "
+                    + "ATIVO "
+                    + "FROM filial WHERE ATIVO = 1");
+
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                filial = new FilialModel(
+                        rs.getInt("IdFilial"),
+                        rs.getString("Cnpj"),
+                        rs.getString("Nome"),
+                        rs.getString("cep"),
+                        rs.getString("logradouro"),
+                        rs.getInt("numero"),
+                        rs.getString("complemento"),
+                        rs.getString("bairro"),
+                        rs.getString("cidade"),
+                        rs.getString("estado"),
+                        rs.getBoolean("ativo")
+                );
+
+                filiais.add(filial);
+            }
+
+            return filiais;
+        } catch (SQLException ex) {
+            conexao.closeConnection(conn, stmt, rs);
+            return null;
+        } finally {
+            conexao.closeConnection(conn, stmt, rs);
+        }
+    }
+
+    @Override
     public void inserir(FilialModel filial) {
         Connection conn = conexao.getConnection();
 

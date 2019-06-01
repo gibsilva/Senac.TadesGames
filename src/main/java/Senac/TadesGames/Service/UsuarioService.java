@@ -146,6 +146,10 @@ public class UsuarioService {
         return usuarioDao.obterTodosPorCargo(cargo);
     }
 
+    public List<UsuarioModel> obterTodosPorCargo(String cargo, int idFilial) {
+        return usuarioDao.obterTodosPorCargo(cargo, idFilial);
+    }
+
     public void limparNotificacoes() {
         this.notificacao.limparLista();
     }

@@ -53,12 +53,65 @@ public class RelatorioVendasDAO implements IRelatorioVendasDao {
                     + "inner join itenspedido\n"
                     + "	on itenspedido.idpedido = pedido.idpedido\n"
                     + "where\n"
-                    + "	pedido.DataPedido between ? and ?\n"
+                    + "	pedido.DataPedido between ? and ? and pedido.statuspedido != 0\n"
                     + "group by\n"
                     + "	pedido.IdPedido");
 
             stmt.setString(1, util.converteDateParaStr(dataInicio));
             stmt.setString(2, util.converteDateParaStr(dataFim));
+
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                relatorioVenda = new RelatorioVendasModel(
+                        rs.getInt("IdPedido"),
+                        rs.getDouble("valortotal"),
+                        rs.getString("dataFormatada")
+                );
+                relatorioVenda.setPedido(pedidoDao.obterPorId(relatorioVenda.getIdPedido()));
+
+                if (relatorioVenda.getIdPedido() != 0) {
+                    lista.add(relatorioVenda);
+                }
+            }
+
+            return lista;
+
+        } catch (SQLException ex) {
+            conexao.closeConnection(conn, stmt, rs);
+            return null;
+        } finally {
+            conexao.closeConnection(conn, stmt, rs);
+        }
+    }
+
+    @Override
+    public List<RelatorioVendasModel> obterPorData(Date dataInicio, Date dataFim, int idFilial) {
+        Connection conn = conexao.getConnection();
+        RelatorioVendasModel relatorioVenda = null;
+        Utils util = new Utils();
+        List<RelatorioVendasModel> lista = new ArrayList<RelatorioVendasModel>();
+
+        try {
+            stmt = conn.prepareStatement("select\n"
+                    + "	pedido.IdPedido,\n"
+                    + "    sum(itenspedido.Quantidade * itenspedido.ValorUnitario) as valortotal,\n"
+                    + " DATE_FORMAT(pedido.datapedido,'%d/%m/%Y') AS dataFormatada\n"
+                    + "from pedido\n"
+                    + "inner join cliente\n"
+                    + "	on cliente.IdCliente = pedido.IdCliente\n"
+                    + "inner join filial\n"
+                    + "	on filial.IdFilial = pedido.IdFilial\n"
+                    + "inner join itenspedido\n"
+                    + "	on itenspedido.idpedido = pedido.idpedido\n"
+                    + "where\n"
+                    + "	pedido.DataPedido between ? and ? and pedido.statuspedido != 0\n"
+                    + " and pedido.idfilial = ?\n"
+                    + "group by\n"
+                    + "	pedido.IdPedido");
+
+            stmt.setString(1, util.converteDateParaStr(dataInicio));
+            stmt.setString(2, util.converteDateParaStr(dataFim));
+            stmt.setInt(3, idFilial);
 
             rs = stmt.executeQuery();
             while (rs.next()) {

@@ -23,22 +23,30 @@ public class RelatorioService {
     private final RelatorioVendasDAO relatorioVendasDao;
     private final RelatorioProdutoDAO relatorioProdutoDao;
     private final RelatorioClienteDAO relatorioClienteDao;
-    
-    public RelatorioService(){
+
+    public RelatorioService() {
         this.relatorioVendasDao = new RelatorioVendasDAO();
         this.relatorioClienteDao = new RelatorioClienteDAO();
         this.relatorioProdutoDao = new RelatorioProdutoDAO();
     }
-    
-    public List<RelatorioVendasModel> obterPorDataRelatorioVendas(Date dataInicio, Date dataFim){
+
+    public List<RelatorioVendasModel> obterPorDataRelatorioVendas(Date dataInicio, Date dataFim) {
         return relatorioVendasDao.obterPorData(dataInicio, dataFim);
     }
-    
-    public List<RelatorioProdutoModel> obterPorDataRelatorioProduto(Date dataInicio, Date dataFim){
+
+    public List<RelatorioVendasModel> obterPorDataRelatorioVendas(Date dataInicio, Date dataFim, int idFilial) {
+        return relatorioVendasDao.obterPorData(dataInicio, dataFim, idFilial);
+    }
+
+    public List<RelatorioProdutoModel> obterPorDataRelatorioProduto(Date dataInicio, Date dataFim) {
         return relatorioProdutoDao.obterPorData(dataInicio, dataFim);
     }
-    
-    public List<RelatorioClienteModel> obterPorDataRelatorioCliente(Date dataInicio, Date dataFim){
+
+    public List<RelatorioProdutoModel> obterPorDataRelatorioProduto(Date dataInicio, Date dataFim, int idFilial) {
+        return relatorioProdutoDao.obterPorData(dataInicio, dataFim, idFilial);
+    }
+
+    public List<RelatorioClienteModel> obterPorDataRelatorioCliente(Date dataInicio, Date dataFim) {
         return relatorioClienteDao.obterPorData(dataInicio, dataFim);
     }
 }

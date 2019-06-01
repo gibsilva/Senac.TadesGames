@@ -134,7 +134,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">R$</span>
                             </div>
-                            <input type="text" class="form-control" id="valorRecebido" name="valorRecebido" placeholder="00,00" readonly>
+                            <input type="text" class="form-control money" id="valorRecebido" name="valorRecebido" placeholder="00,00" readonly>
                         </div>
                     </div>
 
@@ -165,7 +165,7 @@
 
         <div class="btn-toolbar justify-content-between" role="toolbar" >
             <div class="form-group">
-                <button type="reset" class="btn-lg btn-warning"><i class="fas fa-ban"></i> Cancelar</button>
+                <button type="reset" class="btn-lg btn-warning" onclick="limparTabela()"><i class="fas fa-ban"></i> Cancelar</button>
             </div>
 
             <div class="form-group">
@@ -228,14 +228,14 @@
     var produtos = [];
 
     $(document).ready(function () {
-        
+
         //mascaras
         $('.money').mask('000.000.000.000.000,00', {reverse: true});
         $('.money2').mask("#.##0,00", {reverse: true});
         $('.number').mask("0000000000", {reverse: true});
         $('.document').mask("00000000000000", {reverse: true});
         //fim mascaras
-        
+
         pedidoSalvo();
 
         $('#vendas').submit(function (e) {
@@ -260,12 +260,14 @@
                     $("#parcelas").val('');
                     $("#parcelas").prop('required', false);
                     $("#parcelas").prop('disabled', true);
+                    $('#troco').val('');
                     break;
                 case '2':
                     $('#valorRecebido').val($('#totalPedido').val());
                     $("#valorRecebido").prop('readonly', true);
                     $("#parcelas").prop('disabled', false);
                     $("#parcelas").prop('required', true);
+                    $('#troco').val('');
                     break;
                 case '3':
                     $("#valorRecebido").prop('readonly', false);
@@ -283,9 +285,29 @@
         });
 
         $('#valorRecebido').blur(function () {
-            $("#troco").val($('#valorRecebido').val() - $('#totalPedido').val());
+            if ($('#formaPagamento').val() !== '') {
+                troco = calculaTroco($('#valorRecebido').val(), $('#totalPedido').val());
+                $("#troco").val(troco.toLocaleString('pt-br', {minimumFractionDigits: 2}));
+            }
         });
     });
+
+    function calculaTroco(valorRecebido, totalPedido) {
+        valorRecebido = valorRecebido.replace('.', '');
+        totalPedido = totalPedido.replace('.', '');
+
+        valorRecebido = valorRecebido.replace(',', '.');
+        totalPedido = totalPedido.replace(',', '.');
+
+        return (parseFloat(valorRecebido) - parseFloat(totalPedido));
+    }
+    
+    function limparTabela(){
+        $('#tabela').html('');
+        for (var i = 0; i < lista.itens.length; i++) {
+            lista.itens.splice(i, 1);
+        }
+    }
 
     function editarClienteInativo(id) {
         $('#linkEditarCliente').attr('href', '${pageContext.request.contextPath}/autenticado/Clientes?acao=alterar&idCliente=' + id);
@@ -346,7 +368,7 @@
                             $('#idProduto').focus();
                         } else {
                             $('#nomeProduto').val(produto.nome);
-                            $('#valorUnitario').val(produto.precoVenda);
+                            $('#valorUnitario').val(produto.precoVenda.toLocaleString('pt-br', {minimumFractionDigits: 2}));
                         }
                     } else {
                         toastr.warning('Produto não encontrado, verifique o código digitado', 'Atenção');
@@ -393,8 +415,8 @@
                 valorUnitario: parseFloat($('#valorUnitario').val()),
                 precoTotal: 0
             };
-            
-            item.precoTotal.toFixed(2);         
+
+            item.precoTotal.toFixed(2);
             item.precoTotal = item.quantidade * item.valorUnitario;
             this.produto.quantidadeEstoque = this.produto.quantidadeEstoque - item.quantidade;
 
@@ -409,8 +431,8 @@
                 s += '<td class="text-center">' + lista.itens[i].plataforma + '</td>';
                 s += '<td class="text-center">' + lista.itens[i].genero + '</td>';
                 s += '<td class="text-center">' + lista.itens[i].quantidade + '</td>';
-                s += '<td class="text-center">' + lista.itens[i].valorUnitario + '</td>';
-                s += '<td class="text-center">' + parseFloat(lista.itens[i].precoTotal) + '</td>';
+                s += '<td class="text-center">' + lista.itens[i].valorUnitario.toLocaleString('pt-br', {minimumFractionDigits: 2}) + '</td>';
+                s += '<td class="text-center">' + parseFloat(lista.itens[i].precoTotal).toLocaleString('pt-br', {minimumFractionDigits: 2}) + '</td>';
                 s += '<td class="text-center">' + '<button type="button" class="btn btn-danger btn-sm" onclick="removerItem(' + i + ')"><i class="fas fa-times"></i></button>' + '</td>';
             }
             $('#tabela').html(s);
@@ -435,9 +457,9 @@
             s += '<td class="text-center">' + lista.itens[i].plataforma + '</td>';
             s += '<td class="text-center">' + lista.itens[i].genero + '</td>';
             s += '<td class="text-center">' + lista.itens[i].quantidade + '</td>';
-            s += '<td class="text-center">' + lista.itens[i].valorUnitario + '</td>';
-            s += '<td class="text-center">' + parseFloat(lista.itens[i].precoTotal) + '</td>';
-            s += '<td class="text-center">' + '<button type="button" class="btn btn-danger btn-sm" onclick="removerItem(' + i + ')">excluir</button>' + '</td>';
+            s += '<td class="text-center">' + lista.itens[i].valorUnitario.toLocaleString('pt-br', {minimumFractionDigits: 2}) + '</td>';
+            s += '<td class="text-center">' + parseFloat(lista.itens[i].precoTotal.toLocaleString('pt-br', {minimumFractionDigits: 2})) + '</td>';
+            s += '<td class="text-center">' + '<button type="button" class="btn btn-danger btn-sm" onclick="removerItem(' + i + ')"><i class="fas fa-times"></i></button>' + '</td>';
         }
         $('#tabela').html(s);
         toastr.error('Item removido da lista', 'Aviso');
@@ -451,9 +473,9 @@
             for (var i = 0; i < lista.itens.length; i++) {
                 total += lista.itens[i].precoTotal;
             }
-            total.toFixed(2);
-            $('#totalPedido').val(total);
-            $('#valorRecebido').val(total);
+
+            $('#totalPedido').val(total.toLocaleString('pt-br', {minimumFractionDigits: 2}));
+            $('#valorRecebido').val(total.toLocaleString('pt-br', {minimumFractionDigits: 2}));
         }
     }
 

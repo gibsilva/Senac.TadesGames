@@ -107,7 +107,7 @@ public class UsuarioControllerServlet extends HttpServlet {
                 listarUsuarios(request, response);
             } else {
                 request.setAttribute("notificacoes", notificacoes);
-                request.setAttribute("filiais", filialService.obterListaFiliais());
+                request.setAttribute("filiais", filialService.obterListaFiliaisAtivas());
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/autenticado/cadastroUsuario.jsp");
                 dispatcher.forward(request, response);
             }
@@ -165,14 +165,14 @@ public class UsuarioControllerServlet extends HttpServlet {
         UsuarioModel usuario = usuarioService.obterUsuarioPorId(id);
 
         request.setAttribute("usuario", usuario);
-        request.setAttribute("filiais", filialService.obterListaFiliais());
+        request.setAttribute("filiais", filialService.obterListaFiliaisAtivas());
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/autenticado/alterarUsuario.jsp");
         dispatcher.forward(request, response);
     }
 
     protected void criarUsuario(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setAttribute("filiais", filialService.obterListaFiliais());
+        request.setAttribute("filiais", filialService.obterListaFiliaisAtivas());
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/autenticado/cadastroUsuario.jsp");
         dispatcher.forward(request, response);
@@ -217,7 +217,7 @@ public class UsuarioControllerServlet extends HttpServlet {
             } else {
                 request.setAttribute("notificacoes", notificacoes);
                 request.setAttribute("usuario", usuario);
-                request.setAttribute("filiais", filialService.obterListaFiliais());
+                request.setAttribute("filiais", filialService.obterListaFiliaisAtivas());
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/autenticado/alterarUsuario.jsp");
                 dispatcher.forward(request, response);
             }

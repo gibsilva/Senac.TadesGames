@@ -23,6 +23,17 @@
                 <label>Até:</label>
                 <input type="date" class="form-control" id="dataFim" name="dataFim" id="dataFim" required>
             </div>
+            <c:if test="${filiais != null}">
+                <div class="form-group col-md-2" id="filiais">
+                    <label for="inputFilial">Filial<h11 class="text-danger">*</h11></label>
+                    <select id="filial" name="filial" class="custom-select">
+                        <option value="0">Todas</option>
+                        <c:forEach var="f" items="${filiais}">
+                            <option value="${f.idFilial}">${f.nome}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+            </c:if>
 
             <div class="form-group col-md-2">
                 <button type="button" id="btnPesquisa" style="margin-top: 30px" class="btn btn-primary" onclick="gerarRelatorio()" data-toggle="tooltip" data-placement="right" title="Gerar Relatorio"><i class="fas fa-check"></i> Gerar</button>
@@ -33,7 +44,9 @@
         </div>
     </form>
 
-    <br>
+    <div id="aguarde" class="text-center">
+        
+    </div>
 
     <table class="table table-hover" id="table">
         <thead>
@@ -43,8 +56,12 @@
                 <th scope="col">CPF/CNPJ Cliente</th>
                 <th scope="col">Data da Venda</th>
                 <th scope="col">Forma de Pagto.</th>
+                <th scope="col">Nº parcelas</th>
+                <th scope="col">Valor parcela</th>
+                <th scope="col">Vendedor(a)</th>
                 <th scope="col">Filial</th>
                 <th scope="col">Valor Total R$</th>
+                <th scope="col">Status</th>
             </tr>
         </thead>
 
@@ -63,42 +80,76 @@
     var lista = '';
 
     function gerarRelatorio() {
-        if($('#dataInicio').val() === '' || $('#dataFim').val() === ''){
-            toastr.warning('Preencha os parâmetros antes de gerar o relatório', 'Atenção');
-        } else {
-            $.ajax({
-                url: 'Relatorios?acao=relatorioVendas',
-                type: 'GET',
-                contentType: 'application/json',
-                data: {'dataInicio': $('#dataInicio').val(), 'dataFim': $('#dataFim').val()},
-                success: function (data) {
-                    lista = $.parseJSON(data);
-                    carregarTabela(lista);
-                },
-                error: function () {
-                    toastr.error('Ocorreu um erro ao gerar o relatório', 'Erro');
-                }
-            });
+        if (validarDatas()) {
+            var filial = $('#filial').val();
+            filial = typeof filial === 'undefined' ? '${sessionScope.usuarioLogado.idFilial}' : $('#filial').val();
+            if ($('#dataInicio').val() === '' || $('#dataFim').val() === '') {
+                toastr.warning('Preencha os parâmetros antes de gerar o relatório', 'Atenção');
+            } else {
+                $.ajax({
+                    url: 'Relatorios?acao=relatorioVendas',
+                    type: 'GET',
+                    contentType: 'application/json',
+                    data: {'dataInicio': $('#dataInicio').val(), 'dataFim': $('#dataFim').val(), 'filial': filial},
+                    beforeSend: function () {
+                        $('#aguarde').html("<img id='loader' src='../resources/img/ajax-loader.gif'/><br /> <p id='adicionando'>Gerando relatório... Por favor aguarde.</p>");
+                        $('#btnPesquisa').prop("disabled", true);
+                        $('#btnExportar').prop("disabled", true);
+                    },
+                    success: function (data) {
+                        lista = $.parseJSON(data);
+                        carregarTabela(lista);
+                    },
+                    error: function () {
+                        toastr.error('Ocorreu um erro ao gerar o relatório', 'Erro');
+                    },
+                    complete: function () {
+                        $('aguarde').prop('hidden', true);
+                        $('#loader').prop('hidden', true);
+                        $("#adicionando").remove();
+                        $('#btnPesquisa').prop('disabled', false);
+                        $('#btnExportar').prop('disabled', false);
+                    }
+                });
+            }
         }
     }
 
-    function carregarTabela(lista) {
+    function validarDatas() {
+        if ($('#dataInicio').val() > $('#dataFim').val()) {
+            toastr.warning('Data de início não pode ser maior que a data final', 'Atenção');
+            $('#dataInicio').val('');
+            $('#dataFim').val('');
+            return false;
+        }
+        return true;
+    }
+
+    function carregarTabela(lista) {      
         var s = '';
+        $('#tabela').html(s);
         var total = 0;
         for (var i = 0; i < lista.length; i++) {
+            var documento = lista[i].pedido.cliente.documento.cpf === '' ? lista[i].pedido.cliente.documento.cnpj : lista[i].pedido.cliente.documento.cpf;
+            var valorParcela = lista[i].pedido.parcela === 0 ? 0 : (lista[i].valorTotal / lista[i].pedido.parcela).toLocaleString('pt-br', {minimumFractionDigits: 2});
+            var status = lista[i].pedido.status === 1 ? 'Concluído' : 'Cancelado';
             s += '<tr class="table-light text-center">';
             s += '<td class="text-center">' + lista[i].pedido.idPedido + '</td>';
             s += '<td class="text-center">' + lista[i].pedido.cliente.nome + '</td>';
-            s += '<td class="text-center">' + lista[i].pedido.cliente.cpf + '</td>';
+            s += '<td class="text-center">' + documento + '</td>';
             s += '<td class="text-center">' + lista[i].dataFormatada + '</td>';
             s += '<td class="text-center">' + lista[i].pedido.descFormaPagamento + '</td>';
+            s += '<td class="text-center">' + lista[i].pedido.parcela + '</td>';
+            s += '<td class="text-center">' + valorParcela + '</td>';
+            s += '<td class="text-center">' + lista[i].pedido.usuario.nome + '</td>';
             s += '<td class="text-center">' + lista[i].pedido.filial.nome + '</td>';
-            s += '<td class="text-center">' + lista[i].valorTotal + '</td>';           
+            s += '<td class="text-center">' + lista[i].valorTotal.toLocaleString('pt-br', {minimumFractionDigits: 2}) + '</td>';
+            s += '<td class="text-center">' + status + '</td>';
             $('#tabela').html(s);
             total += lista[i].valorTotal;
         }
         var foot = '';
-        foot += '<tr> <td><strong>Total do Período:</strong></td><td>R$ ' + total + '</td> </tr>';
+        foot += '<tr> <td><strong>Total do Período:</strong></td><td>R$ ' + total.toLocaleString('pt-br', {minimumFractionDigits: 2}) + '</td> </tr>';
         $('#totalTabela').html(foot);
     }
 
@@ -113,5 +164,5 @@
             });
         }
     }
-    
+
 </script>

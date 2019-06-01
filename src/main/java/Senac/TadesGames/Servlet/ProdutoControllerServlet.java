@@ -7,7 +7,9 @@ package Senac.TadesGames.Servlet;
 
 import Senac.TadesGames.Helpers.Notificacao;
 import Senac.TadesGames.Helpers.Utils;
+import Senac.TadesGames.Models.FilialModel;
 import Senac.TadesGames.Models.ProdutoModel;
+import Senac.TadesGames.Models.UsuarioModel;
 import Senac.TadesGames.Service.CategoriaService;
 import Senac.TadesGames.Service.FilialService;
 import Senac.TadesGames.Service.GeneroService;
@@ -17,7 +19,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -94,7 +95,17 @@ public class ProdutoControllerServlet extends HttpServlet {
 
     protected void listarProdutos(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setAttribute("produtos", produtoService.obterTodos());
+        UsuarioModel usuario = (UsuarioModel) request.getSession().getAttribute("usuarioLogado");
+        List<ProdutoModel> produtos = null;
+        
+        if (usuario.getCargo().equals("Gerente Global") || usuario.getCargo().equals("Diretor") || usuario.getLogin().equals("admin")
+                || usuario.getFilial().getCnpj().equals("70752763000174")) {
+            produtos = produtoService.obterTodos();
+        } else{
+            produtos = produtoService.obterTodosPorIdFilial(usuario.getIdFilial());
+        }
+
+        request.setAttribute("produtos", produtos);
         request.getRequestDispatcher("/WEB-INF/jsp/autenticado/consultaProduto.jsp").forward(request, response);
     }
 
@@ -103,7 +114,15 @@ public class ProdutoControllerServlet extends HttpServlet {
         request.setAttribute("plataformas", plataformaService.obterListaPlataforma());
         request.setAttribute("generos", generoService.obterListaGenero());
         request.setAttribute("categorias", categoriaService.obterListaCategoria());
-        request.setAttribute("filiais", filialService.obterListaFiliais());
+        List<FilialModel> filiais = null;
+
+        UsuarioModel usuario = (UsuarioModel) request.getSession().getAttribute("usuarioLogado");
+        if (usuario.getCargo().equals("Gerente Global") || usuario.getCargo().equals("Diretor") || usuario.getLogin().equals("admin")
+                || usuario.getFilial().getCnpj().equals("70752763000174")) {
+            filiais = filialService.obterListaFiliaisAtivas();
+        }
+
+        request.setAttribute("filiais", filiais);
         request.getRequestDispatcher("/WEB-INF/jsp/autenticado/cadastroProduto.jsp").forward(request, response);
     }
 
@@ -111,19 +130,27 @@ public class ProdutoControllerServlet extends HttpServlet {
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("idProduto"));
         ProdutoModel produto = produtoService.obterPorId(id);
+        List<FilialModel> filiais = null;
+
+        UsuarioModel usuario = (UsuarioModel) request.getSession().getAttribute("usuarioLogado");
+        if (usuario.getCargo().equals("Gerente Global") || usuario.getCargo().equals("Diretor") || usuario.getLogin().equals("admin")
+                || usuario.getFilial().getCnpj().equals("70752763000174")) {
+            filiais = filialService.obterListaFiliaisAtivas();
+        }
 
         request.setAttribute("produto", produto);
         request.setAttribute("plataformas", plataformaService.obterListaPlataforma());
         request.setAttribute("generos", generoService.obterListaGenero());
         request.setAttribute("categorias", categoriaService.obterListaCategoria());
-        request.setAttribute("filiais", filialService.obterListaFiliais());
+        request.setAttribute("filiais", filiais);
         request.getRequestDispatcher("/WEB-INF/jsp/autenticado/alterarProduto.jsp").forward(request, response);
     }
 
     protected void incluirProduto(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
         Utils utils = new Utils();
-        
+        UsuarioModel usuario = (UsuarioModel) request.getSession().getAttribute("usuarioLogado");
+
         String nome = request.getParameter("nome");
         int idPlataforma = Integer.parseInt(request.getParameter("plataforma"));
         int idCategoria = Integer.parseInt(request.getParameter("categoria"));
@@ -133,7 +160,7 @@ public class ProdutoControllerServlet extends HttpServlet {
         boolean ativo = Boolean.parseBoolean(request.getParameter("ativo"));
         int idGenero = Integer.parseInt(request.getParameter("genero"));
         String descricao = request.getParameter("descricao");
-        int idFilial = Integer.parseInt(request.getParameter("filial"));
+        int idFilial = request.getParameter("filial") == null ? usuario.getIdFilial() : Integer.parseInt(request.getParameter("filial"));
 
         ProdutoModel produto = new ProdutoModel(0, nome, descricao, valorCompra, valorVenda, idCategoria, idGenero, ativo, idFilial, idPlataforma, quantidade);
 
@@ -144,9 +171,7 @@ public class ProdutoControllerServlet extends HttpServlet {
                 listarProdutos(request, response);
             } else {
                 request.setAttribute("notificacoes", notificacoes);
-                request.setAttribute("produto", produto);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/autenticado/cadastroProduto.jsp");
-                dispatcher.forward(request, response);
+                criarProduto(request, response);
             }
         } catch (Exception e) {
             request.getRequestDispatcher("erro.jsp").forward(request, response);
@@ -159,7 +184,8 @@ public class ProdutoControllerServlet extends HttpServlet {
     protected void alterarProduto(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
         Utils utils = new Utils();
-        
+        UsuarioModel usuario = (UsuarioModel) request.getSession().getAttribute("usuarioLogado");
+
         int id = Integer.parseInt(request.getParameter("idProduto"));
         String nome = request.getParameter("nome");
         int idPlataforma = Integer.parseInt(request.getParameter("plataforma"));
@@ -170,7 +196,7 @@ public class ProdutoControllerServlet extends HttpServlet {
         boolean ativo = Boolean.parseBoolean(request.getParameter("ativo"));
         int idGenero = Integer.parseInt(request.getParameter("genero"));
         String descricao = request.getParameter("descricao");
-        int idFilial = 1;
+        int idFilial = request.getParameter("filial") == null ? usuario.getIdFilial() : Integer.parseInt(request.getParameter("filial"));
 
         ProdutoModel produto = new ProdutoModel(id, nome, descricao, valorCompra, valorVenda, idCategoria, idGenero, ativo, idFilial, idPlataforma, quantidade);
 
@@ -181,9 +207,7 @@ public class ProdutoControllerServlet extends HttpServlet {
                 listarProdutos(request, response);
             } else {
                 request.setAttribute("notificacoes", notificacoes);
-                request.setAttribute("produto", produto);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/autenticado/alterarProduto.jsp");
-                dispatcher.forward(request, response);
+                carregarProduto(request, response);
             }
         } catch (Exception e) {
             throw new Exception(e.getMessage());

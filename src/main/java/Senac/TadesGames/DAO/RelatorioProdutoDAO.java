@@ -5,6 +5,7 @@
  */
 package Senac.TadesGames.DAO;
 
+import Senac.TadesGames.DAO.Interfaces.IRelatorioProdutoDao;
 import Senac.TadesGames.Data.ConexaoDB;
 import Senac.TadesGames.Helpers.Utils;
 import Senac.TadesGames.Models.RelatorioProdutoModel;
@@ -20,18 +21,25 @@ import java.util.List;
  *
  * @author Gi
  */
-public class RelatorioProdutoDAO {
+public class RelatorioProdutoDAO implements IRelatorioProdutoDao {
 
-    private final ConexaoDB conexao = new ConexaoDB();
+    private final ConexaoDB conexao;
+    private final ProdutoDAO produtoDao;
     private PreparedStatement stmt = null;
-    ResultSet rs = null;
+    private ResultSet rs = null;
+    
+    public RelatorioProdutoDAO(){
+        this.conexao = new ConexaoDB();
+        this.produtoDao = new ProdutoDAO();
+    }
 
+    @Override
     public List<RelatorioProdutoModel> obterPorData(Date dataInicio, Date dataFim) {
         Connection conn = conexao.getConnection();
         RelatorioProdutoModel relatorioProduto = null;
         Utils util = new Utils();
         List<RelatorioProdutoModel> lista = new ArrayList<RelatorioProdutoModel>();
-        //ainda não foi testado de fato por não haver os dados na base das vendas
+
         try {
             stmt = conn.prepareStatement("SELECT   \n"
                     + "	produto.IDPRODUTO,\n"
@@ -68,6 +76,65 @@ public class RelatorioProdutoDAO {
                         rs.getString("DataUltimaVenda"),
                         rs.getBoolean("ativo")
                 );
+                relatorioProduto.setProduto(produtoDao.obterPorId(relatorioProduto.getIdProduto()));
+                lista.add(relatorioProduto);
+            }
+
+            return lista;
+        } catch (SQLException ex) {
+            conexao.closeConnection(conn, stmt, rs);
+            return null;
+        } finally {
+            conexao.closeConnection(conn, stmt, rs);
+        }
+    }
+
+    @Override
+    public List<RelatorioProdutoModel> obterPorData(Date dataInicio, Date dataFim, int idFilial) {
+        Connection conn = conexao.getConnection();
+        RelatorioProdutoModel relatorioProduto = null;
+        Utils util = new Utils();
+        List<RelatorioProdutoModel> lista = new ArrayList<RelatorioProdutoModel>();
+        //ainda não foi testado de fato por não haver os dados na base das vendas
+        try {
+            stmt = conn.prepareStatement("SELECT   \n"
+                    + "	produto.IDPRODUTO,\n"
+                    + "	produto.NOME,\n"
+                    + "	(SELECT SUM(I.QUANTIDADE) FROM itenspedido I WHERE I.IDPRODUTO = produto.IDPRODUTO) AS QTDPRODUTO,\n"
+                    + "	SUM(itenspedido.VALORUNITARIO * itenspedido.QUANTIDADE) AS TOTALVENDIDO,\n"
+                    + "	categoria.NOME AS CATEGORIA,\n"
+                    + "	produto.ATIVO,\n"
+                    + "	DATE_FORMAT((select i.datahoracriacao from itenspedido i where i.idproduto = produto.idproduto limit 1), '%d/%m/%Y') AS DataUltimaVenda,\n"
+                    + "	DATE_FORMAT(produto.DATAHORACRIACAO, '%d/%m/%Y') AS DATAHORACRIACAO\n"
+                    + "FROM\n"
+                    + "    produto\n"
+                    + "INNER JOIN itenspedido\n"
+                    + "    ON itenspedido.IDPRODUTO = produto.IDPRODUTO\n"
+                    + "INNER JOIN categoria\n"
+                    + "    ON categoria.IDCATEGORIA = produto.IDCATEGORIA\n"
+                    + "WHERE\n"
+                    + "    DATE(produto.DATAHORACRIACAO) BETWEEN ? AND ?\n"
+                    + " and produto.idfilial = ?\n"
+                    + "GROUP BY\n"
+                    + "    produto.IDPRODUTO,\n"
+                    + "    produto.DataHoraCriacao");
+
+            stmt.setString(1, util.converteDateParaStr(dataInicio));
+            stmt.setString(2, util.converteDateParaStr(dataFim));
+            stmt.setInt(3, idFilial);
+
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                relatorioProduto = new RelatorioProdutoModel(
+                        rs.getInt("IdProduto"),
+                        rs.getString("nome"),
+                        rs.getInt("qtdProduto"),
+                        rs.getDouble("totalVendido"),
+                        rs.getString("categoria"),
+                        rs.getString("DataUltimaVenda"),
+                        rs.getBoolean("ativo")
+                );
+                relatorioProduto.setProduto(produtoDao.obterPorId(relatorioProduto.getIdProduto()));
                 lista.add(relatorioProduto);
             }
 

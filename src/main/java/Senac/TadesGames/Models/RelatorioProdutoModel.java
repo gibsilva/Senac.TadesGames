@@ -17,6 +17,7 @@ public class RelatorioProdutoModel {
     private final String categoria;
     private final String dataUltimaVenda;
     private final boolean ativo;
+    private ProdutoModel produto;
     
     public RelatorioProdutoModel(int idProduto, String nomeProduto, int qtdProduto,
             double totalVendido, String categoria, String dataUltimaVenda, boolean ativo){
@@ -79,5 +80,12 @@ public class RelatorioProdutoModel {
         return ativo;
     }
 
+    public ProdutoModel getProduto(){
+        return this.produto;
+    }
+    
+    public void setProduto(ProdutoModel produto){
+        this.produto = produto;
+    }
 }
 

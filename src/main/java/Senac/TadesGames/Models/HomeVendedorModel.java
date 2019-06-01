@@ -9,14 +9,14 @@ package Senac.TadesGames.Models;
  *
  * @author Gi
  */
-public class HomeModel {
+public class HomeVendedorModel {
     private final int qtdvendas;
     private final String nomeVendedor;
     private final double totalVendido;
     private final int idFilial;
     private final int idUsuario;
     
-    public HomeModel(int qtdVendas, String nomeVendedor, double totalVendido, int idFilial, int idUsuario){
+    public HomeVendedorModel(int qtdVendas, String nomeVendedor, double totalVendido, int idFilial, int idUsuario){
         this.idFilial = idFilial;
         this.nomeVendedor = nomeVendedor;
         this.totalVendido = totalVendido;

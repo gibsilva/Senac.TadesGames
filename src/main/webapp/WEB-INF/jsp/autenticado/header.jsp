@@ -104,7 +104,8 @@
                             <a class="dropdown-item" href="Filiais?acao=salvar">Cadastro de Filial</a> 
                             <a class="dropdown-item" href="Filiais">Consulta de Filial</a>
                         </div></li>
-
+                    <li class="nav-item ">
+                        <a class="nav-link" href="${pageContext.request.contextPath}/autenticado/sobre">Desenvolvedores</a></li>
                 </ul>
 
 
@@ -130,7 +131,7 @@
         <script type="text/javascript" src="../resources/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="../resources/js/jquery.mask.js"></script>
         <script type="text/javascript" src="../resources/js/toastr.min.js"></script>
-        <script type="text/javascript"
-        src="../resources/js/jquery.table2excel.js"></script>
+        <script type="text/javascript" src="../resources/js/jquery.table2excel.js"></script>
     </body>
+    
 </html>

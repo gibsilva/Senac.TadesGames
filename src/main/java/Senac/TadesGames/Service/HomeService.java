@@ -6,20 +6,43 @@
 package Senac.TadesGames.Service;
 
 import Senac.TadesGames.DAO.HomeDAO;
-import Senac.TadesGames.Models.HomeModel;
+import Senac.TadesGames.Models.HomeProdutoModel;
+import Senac.TadesGames.Models.HomeVendaModel;
+import Senac.TadesGames.Models.HomeVendedorModel;
 
 /**
  *
  * @author Gi
  */
 public class HomeService {
+
     private final HomeDAO homeDao;
-    
-    public HomeService(){
+
+    public HomeService() {
         this.homeDao = new HomeDAO();
     }
-    
-    public HomeModel obterHomeVendedor(){
+
+    public HomeVendedorModel obterHomeVendedor() {
         return this.homeDao.obterHomeVendedor();
+    }
+
+    public HomeVendedorModel obterHomeVendedorPorIdFilial(int idFilial) {
+        return this.homeDao.obterHomeVendedorPorIdFilial(idFilial);
+    }
+
+    public HomeProdutoModel obterHomeProduto() {
+        return this.homeDao.obterHomeProduto();
+    }
+
+    public HomeProdutoModel obterHomeProdutoPorIdFilial(int idFilial) {
+        return this.homeDao.obterHomeProduto(idFilial);
+    }
+
+    public HomeVendaModel obterHomeVendas() {
+        return this.homeDao.obterHomeVendas();
+    }
+
+    public HomeVendaModel obterHomeVendasPorIdFilial(int idFilial) {
+        return this.homeDao.obterHomeVendas(idFilial);
     }
 }

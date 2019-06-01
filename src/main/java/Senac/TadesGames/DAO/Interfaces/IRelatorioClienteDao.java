@@ -5,10 +5,14 @@
  */
 package Senac.TadesGames.DAO.Interfaces;
 
+import Senac.TadesGames.Models.RelatorioClienteModel;
+import java.util.Date;
+import java.util.List;
+
 /**
  *
  * @author Gi
  */
 public interface IRelatorioClienteDao {
-    
+    List<RelatorioClienteModel> obterPorData(Date dataInicio, Date dataFim);
 }

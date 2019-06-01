@@ -1,7 +1,7 @@
 <%-- 
     Document   : naoAutorizado.jsp
     Created on : 26/05/2019, 19:47:18
-    Author     : Christian
+    Author     : Gi
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

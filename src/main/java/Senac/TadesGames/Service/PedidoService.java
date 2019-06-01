@@ -133,12 +133,20 @@ public class PedidoService {
         return this.pedidoDao.obterTodos();
     }
 
+    public List<PedidoModel> obterTodosPorIdFilial(int idFilial) {
+        return this.pedidoDao.obterTodosPorIdFilial(idFilial);
+    }
+
     public List<PedidoModel> obterTodosConcluidos() {
         return this.pedidoDao.obterTodosConcluidos();
     }
 
     public List<PedidoModel> pesquisarPedidos(int id, String dataInicio, String dataFim) {
         return this.pedidoDao.pesquisar(id, dataInicio, dataFim);
+    }
+
+    public List<PedidoModel> pesquisarPedidos(int id, String dataInicio, String dataFim, int idFilial) {
+        return this.pedidoDao.pesquisar(id, dataInicio, dataFim, idFilial);
     }
 
     public PedidoModel obterPorId(int id) {

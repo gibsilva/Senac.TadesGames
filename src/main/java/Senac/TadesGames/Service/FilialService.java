@@ -63,7 +63,7 @@ public class FilialService {
         if (!validarCnpj(filial.getCnpj())) {
             this.notificacao.adicionaNotificacao("cnpj", "CNPJ inválido, por favor digite um CNPJ válido");
         }
-        
+
         validarCnpjExistente(filial.getCnpj());
 
         return this.notificacao.quantidadeNotificacoes() == 0;
@@ -77,6 +77,10 @@ public class FilialService {
 
     public List<FilialModel> obterListaFiliais() {
         return filialDao.obterTodas();
+    }
+
+    public List<FilialModel> obterListaFiliaisAtivas() {
+        return filialDao.obterTodasAtivas();
     }
 
     public FilialModel obterPorId(int id) {

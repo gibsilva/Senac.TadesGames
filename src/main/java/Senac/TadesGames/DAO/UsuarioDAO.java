@@ -356,6 +356,7 @@ public class UsuarioDAO implements IUsuarioDao {
         }
     }
 
+    @Override
     public List<UsuarioModel> obterTodosPorCargo(String cargo) {
         Connection conn = conexao.getConnection();
         UsuarioModel usuario = null;
@@ -377,6 +378,56 @@ public class UsuarioDAO implements IUsuarioDao {
                     + " FROM usuario WHERE CARGO = ? AND ATIVO = 1");
 
             stmt.setString(1, cargo);
+
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                usuario = new UsuarioModel(
+                        rs.getInt("IdUsuario"),
+                        rs.getString("Nome"),
+                        rs.getString("cpf"),
+                        rs.getString("Email"),
+                        rs.getString("setor"),
+                        rs.getString("cargo"),
+                        rs.getString("Login"),
+                        rs.getString("Senha"),
+                        rs.getInt("IdFilial"),
+                        rs.getString("sexo"),
+                        rs.getBoolean("ativo")
+                );
+                usuario.setFilial(filialDao.obterPorId(usuario.getIdFilial()));
+                usuarios.add(usuario);
+            }
+
+            return usuarios;
+        } catch (SQLException ex) {
+            conexao.closeConnection(conn, stmt, rs);
+            return null;
+        }
+    }
+
+    @Override
+    public List<UsuarioModel> obterTodosPorCargo(String cargo, int idFilial) {
+        Connection conn = conexao.getConnection();
+        UsuarioModel usuario = null;
+        List<UsuarioModel> usuarios = new ArrayList<UsuarioModel>();
+
+        try {
+            stmt = conn.prepareStatement("SELECT "
+                    + "IDUSUARIO, "
+                    + "NOME, "
+                    + "CPF, "
+                    + "EMAIL, "
+                    + "IDFILIAL, "
+                    + "SETOR, "
+                    + "CARGO, "
+                    + "LOGIN, "
+                    + "SENHA, "
+                    + "SEXO, "
+                    + "ATIVO"
+                    + " FROM usuario WHERE CARGO = ? AND ATIVO = 1 AND IDFILIAL = ?");
+
+            stmt.setString(1, cargo);
+            stmt.setInt(2, idFilial);
 
             rs = stmt.executeQuery();
             while (rs.next()) {
@@ -496,7 +547,7 @@ public class UsuarioDAO implements IUsuarioDao {
             conexao.closeConnection(conn, stmt);
             throw new RuntimeException(ex.getMessage());
         } finally {
-        	conexao.closeConnection(conn, stmt);
+            conexao.closeConnection(conn, stmt);
         }
     }
 
@@ -544,7 +595,7 @@ public class UsuarioDAO implements IUsuarioDao {
             conexao.closeConnection(conn, stmt, rs);
             return null;
         } finally {
-        	conexao.closeConnection(conn, stmt, rs);
+            conexao.closeConnection(conn, stmt, rs);
         }
     }
 
@@ -570,7 +621,7 @@ public class UsuarioDAO implements IUsuarioDao {
             conexao.closeConnection(conn, stmt, rs);
             return false;
         } finally {
-        	conexao.closeConnection(conn, stmt, rs);
+            conexao.closeConnection(conn, stmt, rs);
         }
         return condicao;
     }

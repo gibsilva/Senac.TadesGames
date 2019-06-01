@@ -46,13 +46,14 @@ public class ProdutoService {
     public List<Notificacao> incluirOuAlterarProduto(ProdutoModel produto) throws Exception {
         try {
             if (validarProduto(produto)) {
-                if (produto.getIdProduto() == 0)
+                if (produto.getIdProduto() == 0) {
                     produtoDao.inserir(produto);
-                else
+                } else {
                     produtoDao.alterar(produto);
+                }
             }
             return this.notificacao.listaNotificacoes();
-        } catch(Exception e){
+        } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
     }
@@ -61,11 +62,19 @@ public class ProdutoService {
         return this.produtoDao.obterPorId(id);
     }
 
+    public ProdutoModel obterPorId(int idProduto, int idFilial) {
+        return this.produtoDao.obterPorId(idProduto, idFilial);
+    }
+
     public List<ProdutoModel> obterTodos() {
         return this.produtoDao.obterTodas();
     }
-    
-    public void limparNotificacoes(){
+
+    public List<ProdutoModel> obterTodosPorIdFilial(int idFilial) {
+        return this.produtoDao.obterPorIdFilial(idFilial);
+    }
+
+    public void limparNotificacoes() {
         this.notificacao.limparLista();
     }
 }

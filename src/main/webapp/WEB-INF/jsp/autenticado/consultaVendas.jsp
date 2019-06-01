@@ -51,8 +51,11 @@
                 <th class="text-center" scope="col">Qtde. de Produtos</th>
                 <th class="text-center" scope="col">Valor Total (R$)</th>
                 <th class="text-center" scope="col">Forma de Pagamento</th>
+                <th class="text-center" scope="col">Nº parcelas</th>
+                <th class="text-center" scope="col">Valor parcela</th>
                 <th class="text-center" scope="col">Data da Venda</th>
                 <th class="text-center" scope="col">Vendedor</th>
+                <th class="text-center" scope="col">Filial</th>
                 <th class="text-center" scope="col">Status</th>
                 <th class="text-center" scope="col">#</th>
             </tr>
@@ -67,8 +70,11 @@
                     <td class=" text-center">${p.itensPedido.size()}</td>
                     <td class=" text-center">${p.valorTotal}</td>
                     <td class=" text-center">${p.descFormaPagamento}</td>
+                    <td class=" text-center">${p.parcela}</td>
+                    <td class=" text-center">${p.parcela == 0 ? 0.00 : p.valorTotal/p.parcela}</td>
                     <td class=" text-center">${p.dataPedido}</td>
                     <td class=" text-center">${p.usuario.nome}</td>
+                    <td class=" text-center">${p.filial.nome}</td>
                     <c:if test="${p.status == 1}">
                         <td class="text-center">Concluído</td>
                     </c:if>

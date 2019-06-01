@@ -25,12 +25,14 @@ public class ProdutoDAO implements IProdutoDao {
     private final GeneroDAO generoDao;
     private final PlataformaDAO plataformaDao;
     private final CategoriaDAO categoriaDao;
+    private final FilialDAO filialDao;
 
     public ProdutoDAO() {
         this.conexao = new ConexaoDB();
         this.generoDao = new GeneroDAO();
         this.plataformaDao = new PlataformaDAO();
         this.categoriaDao = new CategoriaDAO();
+        this.filialDao = new FilialDAO();
     }
 
     private PreparedStatement stmt = null;
@@ -75,6 +77,60 @@ public class ProdutoDAO implements IProdutoDao {
                 produto.setCategoria(categoriaDao.obterPorId(produto.getIdCategoria()));
                 produto.setPlataforma(plataformaDao.obterPorId(produto.getIdPlataforma()));
                 produto.setGenero(generoDao.obterPorId(produto.getIdGenero()));
+                produto.setFilial(filialDao.obterPorId(produto.getIdFilial()));
+            }
+
+            return produto;
+        } catch (SQLException ex) {
+            conexao.closeConnection(conn, stmt, rs);
+            return null;
+        } finally {
+            conexao.closeConnection(conn, stmt, rs);
+        }
+    }
+
+    @Override
+    public ProdutoModel obterPorId(int idProduto, int idFilial) {
+        Connection conn = conexao.getConnection();
+        ProdutoModel produto = null;
+
+        try {
+            stmt = conn.prepareStatement("SELECT "
+                    + "IDPRODUTO, "
+                    + "NOME, "
+                    + "DESCRICAO, "
+                    + "PRECOCOMPRA, "
+                    + "PRECOVENDA, "
+                    + "IDCATEGORIA, "
+                    + "IDGENERO, "
+                    + "ATIVO, "
+                    + "IDFILIAL, "
+                    + "IDPLATAFORMA, "
+                    + "QUANTIDADEESTOQUE "
+                    + " FROM produto WHERE IDPRODUTO = ? AND IDFILIAL = ?");
+            
+            stmt.setInt(1, idProduto);
+            stmt.setInt(2, idFilial);
+
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                produto = new ProdutoModel(
+                        rs.getInt("IdProduto"),
+                        rs.getString("Nome"),
+                        rs.getString("Descricao"),
+                        rs.getDouble("PrecoCompra"),
+                        rs.getDouble("PrecoVenda"),
+                        rs.getInt("IdCategoria"),
+                        rs.getInt("IdGenero"),
+                        rs.getBoolean("Ativo"),
+                        rs.getInt("IdFilial"),
+                        rs.getInt("IdPlataforma"),
+                        rs.getInt("QuantidadeEstoque")
+                );
+                produto.setCategoria(categoriaDao.obterPorId(produto.getIdCategoria()));
+                produto.setPlataforma(plataformaDao.obterPorId(produto.getIdPlataforma()));
+                produto.setGenero(generoDao.obterPorId(produto.getIdGenero()));
+                produto.setFilial(filialDao.obterPorId(produto.getIdFilial()));
             }
 
             return produto;
@@ -124,6 +180,61 @@ public class ProdutoDAO implements IProdutoDao {
                 produto.setCategoria(categoriaDao.obterPorId(produto.getIdCategoria()));
                 produto.setPlataforma(plataformaDao.obterPorId(produto.getIdPlataforma()));
                 produto.setGenero(generoDao.obterPorId(produto.getIdGenero()));
+                produto.setFilial(filialDao.obterPorId(produto.getIdFilial()));
+
+                produtos.add(produto);
+            }
+
+            return produtos;
+        } catch (SQLException ex) {
+            conexao.closeConnection(conn, stmt, rs);
+            return null;
+        } finally {
+            conexao.closeConnection(conn, stmt, rs);
+        }
+    }
+
+    @Override
+    public List<ProdutoModel> obterPorIdFilial(int idFilial) {
+        Connection conn = conexao.getConnection();
+        ProdutoModel produto = null;
+        List<ProdutoModel> produtos = new ArrayList<ProdutoModel>();
+
+        try {
+            stmt = conn.prepareStatement("SELECT IDPRODUTO, "
+                    + "NOME, "
+                    + "DESCRICAO, "
+                    + "PRECOCOMPRA, "
+                    + "PRECOVENDA, "
+                    + "IDCATEGORIA, "
+                    + "IDGENERO, "
+                    + "ATIVO, "
+                    + "IDFILIAL, "
+                    + "IDPLATAFORMA, "
+                    + "QUANTIDADEESTOQUE "
+                    + " FROM produto WHERE IDFILIAL = ?");
+
+            stmt.setInt(1, idFilial);
+
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                produto = new ProdutoModel(
+                        rs.getInt("IdProduto"),
+                        rs.getString("Nome"),
+                        rs.getString("Descricao"),
+                        rs.getDouble("PrecoCompra"),
+                        rs.getDouble("PrecoVenda"),
+                        rs.getInt("IdCategoria"),
+                        rs.getInt("IdGenero"),
+                        rs.getBoolean("Ativo"),
+                        rs.getInt("IdFilial"),
+                        rs.getInt("IdPlataforma"),
+                        rs.getInt("QuantidadeEstoque")
+                );
+                produto.setCategoria(categoriaDao.obterPorId(produto.getIdCategoria()));
+                produto.setPlataforma(plataformaDao.obterPorId(produto.getIdPlataforma()));
+                produto.setGenero(generoDao.obterPorId(produto.getIdGenero()));
+                produto.setFilial(filialDao.obterPorId(produto.getIdFilial()));
 
                 produtos.add(produto);
             }
@@ -340,7 +451,8 @@ public class ProdutoDAO implements IProdutoDao {
                     + "IDGENERO = ?, "
                     + "ATIVO = ?, "
                     + "IDPLATAFORMA = ?, "
-                    + "QUANTIDADEESTOQUE = ? "
+                    + "QUANTIDADEESTOQUE = ?, "
+                    + "IDFILIAL = ? "
                     + "WHERE IDPRODUTO = ?");
             stmt.setString(1, produto.getNome());
             stmt.setString(2, produto.getDescricao());
@@ -351,7 +463,8 @@ public class ProdutoDAO implements IProdutoDao {
             stmt.setBoolean(7, produto.getAtivo());
             stmt.setInt(8, produto.getIdPlataforma());
             stmt.setInt(9, produto.getQuantidadeEstoque());
-            stmt.setInt(10, produto.getIdProduto());
+            stmt.setInt(10, produto.getIdFilial());
+            stmt.setInt(11, produto.getIdProduto());
 
             stmt.executeUpdate();
         } catch (SQLException ex) {

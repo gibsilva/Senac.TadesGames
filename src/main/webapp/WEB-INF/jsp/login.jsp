@@ -71,9 +71,12 @@
                         <input type="email" id="email" name="email" value="" class="form-control" placeholder="Digite seu e-mail cadastrado" required>
                         <small>A nova senha será enviada no seu endereço de e-mail</small>
                     </div>
+                    <div id="aguarde">
+                        
+                    </div>
                 </div>
                 <div class="modal-footer">
-                    <a href="#" class="btn btn-success" id="linkResetSenha" onclick="alterarSenha($('#email').val())">Enviar</a>
+                    <button class="btn btn-success" id="linkResetSenha" onclick="alterarSenha($('#email').val())">Enviar</button>
                     <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
                 </div>
             </div>
@@ -123,6 +126,10 @@
                 url: 'ResetSenha',
                 type: 'POST',
                 data: {'email': email.toString()},
+                beforeSend: function () {
+                    $('#aguarde').html("<img id='loader' src='resources/img/ajax-loader.gif'/><br /> <p id='adicionando'>Processando... Por favor aguarde.</p>");
+                    $('#linkResetSenha').prop("disabled", true);
+                },
                 success: function(data){
                     var usuario = $.parseJSON(data);
                     if(usuario !== null){                      
@@ -141,6 +148,12 @@
                     $('#email').val('');
                     $('#modalEsqueciSenha').modal('hide');
                     toastr.error('Ocorreu um erro ao alterar a senha');
+                },
+                complete: function () {
+                    $("aguarde").prop("hidden", true);
+                    $("#loader").prop("hidden", true);
+                    $("#adicionando").prop("hidden", true);
+                    $('#linkResetSenha').prop("disabled", false);
                 }
             });
         }

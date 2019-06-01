@@ -6,9 +6,12 @@
 package Senac.TadesGames.Servlet;
 
 import Senac.TadesGames.Helpers.Utils;
+import Senac.TadesGames.Models.FilialModel;
 import Senac.TadesGames.Models.RelatorioClienteModel;
 import Senac.TadesGames.Models.RelatorioProdutoModel;
 import Senac.TadesGames.Models.RelatorioVendasModel;
+import Senac.TadesGames.Models.UsuarioModel;
+import Senac.TadesGames.Service.FilialService;
 import Senac.TadesGames.Service.RelatorioService;
 import com.google.gson.Gson;
 import java.io.IOException;
@@ -32,9 +35,11 @@ import javax.servlet.http.HttpServletResponse;
 public class RelatorioControllerServlet extends HttpServlet {
 
     private final RelatorioService relatorioService;
+    private final FilialService filialService;
 
     public RelatorioControllerServlet() {
         this.relatorioService = new RelatorioService();
+        this.filialService = new FilialService();
     }
 
     @Override
@@ -73,11 +78,26 @@ public class RelatorioControllerServlet extends HttpServlet {
 
     protected void relatorioVendas(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        List<FilialModel> filiais = null;
+        UsuarioModel usuario = (UsuarioModel) request.getSession().getAttribute("usuarioLogado");
+        if (usuario.getCargo().equals("Gerente Global") || usuario.getCargo().equals("Diretor") || usuario.getLogin().equals("admin") || usuario.getFilial().getCnpj().equals("70752763000174")) {
+            filiais = filialService.obterListaFiliais();
+        }
+
+        request.setAttribute("filiais", filiais);
         request.getRequestDispatcher("/WEB-INF/jsp/autenticado/relatorioVendas.jsp").forward(request, response);
     }
 
     protected void relatorioProduto(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        List<FilialModel> filiais = null;
+        UsuarioModel usuario = (UsuarioModel) request.getSession().getAttribute("usuarioLogado");
+        if (usuario.getCargo().equals("Gerente Global") || usuario.getCargo().equals("Diretor") || usuario.getLogin().equals("admin") 
+                || usuario.getFilial().getCnpj().equals("70752763000174")) {
+            filiais = filialService.obterListaFiliais();
+        }
+
+        request.setAttribute("filiais", filiais);
         request.getRequestDispatcher("/WEB-INF/jsp/autenticado/relatorioProduto.jsp").forward(request, response);
     }
 
@@ -91,10 +111,17 @@ public class RelatorioControllerServlet extends HttpServlet {
         response.setContentType("text/html; charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             Gson gson = new Gson();
+            int idFilial = Integer.parseInt(request.getParameter("filial"));
             Date dataInicio = Utils.converteStrParaDate(request.getParameter("dataInicio"));
             Date dataFim = Utils.converteStrParaDate(request.getParameter("dataFim"));
 
-            List<RelatorioVendasModel> lista = relatorioService.obterPorDataRelatorioVendas(dataInicio, dataFim);
+            List<RelatorioVendasModel> lista;
+            if (idFilial != 0) {
+                lista = relatorioService.obterPorDataRelatorioVendas(dataInicio, dataFim, idFilial);
+            } else {
+                lista = relatorioService.obterPorDataRelatorioVendas(dataInicio, dataFim);
+            }
+
             out.print(gson.toJson(lista));
             out.flush();
         }
@@ -105,10 +132,16 @@ public class RelatorioControllerServlet extends HttpServlet {
         response.setContentType("text/html; charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             Gson gson = new Gson();
+            int idFilial = Integer.parseInt(request.getParameter("filial"));
             Date dataInicio = Utils.converteStrParaDate(request.getParameter("dataInicio"));
             Date dataFim = Utils.converteStrParaDate(request.getParameter("dataFim"));
 
-            List<RelatorioProdutoModel> lista = relatorioService.obterPorDataRelatorioProduto(dataInicio, dataFim);
+            List<RelatorioProdutoModel> lista;
+            if (idFilial != 0) {
+                lista = relatorioService.obterPorDataRelatorioProduto(dataInicio, dataFim, idFilial);
+            } else {
+                lista = relatorioService.obterPorDataRelatorioProduto(dataInicio, dataFim);
+            }
             out.print(gson.toJson(lista));
             out.flush();
         }

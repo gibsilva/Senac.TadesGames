@@ -14,7 +14,9 @@ import java.util.List;
  */
 public interface IProdutoDao {
     ProdutoModel obterPorId(int id);
+    ProdutoModel obterPorId(int idProduto, int idFilial);
     List<ProdutoModel> obterTodas();
+    List<ProdutoModel> obterPorIdFilial(int idFilial);
     void inserir(ProdutoModel produto);
     void alterar(ProdutoModel produto);
     void desativar(ProdutoModel produto);

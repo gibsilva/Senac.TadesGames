@@ -17,7 +17,7 @@ public class PedidoModel {
 
     private int idPedido;
     private int status;
-    private double valorTotal;
+    private final double valorTotal;
     private Date dataPedido;
     private int idCliente;
     private ClienteModel cliente;
@@ -45,6 +45,7 @@ public class PedidoModel {
         this.parcela = parcela;
         this.valorRecebido = valorRecebido;
         this.descFormaPagamento = this.getDescFormaPagamento();
+        this.valorTotal = getValorTotal();
     }
 
     /**
@@ -78,12 +79,12 @@ public class PedidoModel {
     /**
      * @return the valorTotal
      */
-    public double getValorTotal() {
+    public final double getValorTotal() {
         double valor = 0;
         for(ItensPedidoModel p : this.itensPedido){
             valor += p.getQuantidade() * p.getValorUnitario();
         }
-        
+
         return valor;
     }
 

@@ -21,4 +21,6 @@ public interface IUsuarioDao {
     UsuarioModel autenticar (String nomeUsuario, String senha);
     boolean validarLogin (String login, String senha);
     void alterarSenha(UsuarioModel usuario);
+    List<UsuarioModel> obterTodosPorCargo(String cargo);
+    List<UsuarioModel> obterTodosPorCargo(String cargo, int idFilial);
 }

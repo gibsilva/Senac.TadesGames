@@ -105,9 +105,11 @@
     </form>
 </div>
 
+
+
 <script>
     $(document).ready(function () {
-        
+
         document.getElementById('ativo').value = '${filial.ativo}';
 
         $('.date').mask('00/00/0000');

@@ -6,6 +6,7 @@
 package Senac.TadesGames.Servlet;
 
 import Senac.TadesGames.Helpers.Notificacao;
+import Senac.TadesGames.Helpers.Utils;
 import Senac.TadesGames.Models.ClienteModel;
 import Senac.TadesGames.Models.ItensPedidoModel;
 import Senac.TadesGames.Models.PedidoModel;
@@ -61,7 +62,7 @@ public class VendasControllerServlet extends HttpServlet {
                 break;
             case "obterProduto":
                 int idProduto = Integer.parseInt(request.getParameter("idProduto"));
-                obterProduto(idProduto, response);
+                obterProduto(idProduto, request, response);
                 break;
             case "listar":
                 listarPedidos(request, response);
@@ -107,8 +108,15 @@ public class VendasControllerServlet extends HttpServlet {
         int id = request.getParameter("filtroId").equals("") ? 0 : Integer.parseInt(request.getParameter("filtroId"));
         String dataInicio = request.getParameter("filtroDataIni");
         String dataFim = request.getParameter("filtroDataFim");
-        
-        request.setAttribute("pedidos", pedidoService.pesquisarPedidos(id, dataInicio, dataFim));
+
+        UsuarioModel usuario = (UsuarioModel) request.getSession().getAttribute("usuarioLogado");
+        if (usuario.getCargo().equals("Gerente Global") || usuario.getCargo().equals("Diretor") || usuario.getLogin().equals("admin")
+                || usuario.getFilial().getCnpj().equals("70752763000174")) {
+            request.setAttribute("pedidos", pedidoService.pesquisarPedidos(id, dataInicio, dataFim));
+        } else{
+            request.setAttribute("pedidos", pedidoService.pesquisarPedidos(id, dataInicio, dataFim, usuario.getIdFilial()));
+        }
+
         request.getRequestDispatcher("/WEB-INF/jsp/autenticado/consultaVendas.jsp").forward(request, response);
     }
 
@@ -116,9 +124,9 @@ public class VendasControllerServlet extends HttpServlet {
             throws ServletException, IOException, Exception {
         int id = Integer.parseInt(request.getParameter("idPedido"));
         PedidoModel pedido = pedidoService.obterPorId(id);
-        try{
+        try {
             pedidoService.cancelarPedido(pedido);
-        } catch(ServletException e){
+        } catch (ServletException e) {
             throw new Exception(e.getMessage());
         }
     }
@@ -133,19 +141,31 @@ public class VendasControllerServlet extends HttpServlet {
 
     protected void listarPedidos(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setAttribute("pedidos", pedidoService.obterTodos());
+        UsuarioModel usuario = (UsuarioModel) request.getSession().getAttribute("usuarioLogado");
+        List<PedidoModel> pedidos = null;
+
+        if (usuario.getCargo().equals("Gerente Global") || usuario.getCargo().equals("Diretor") || usuario.getLogin().equals("admin")
+                || usuario.getFilial().getCnpj().equals("70752763000174")) {
+            pedidos = pedidoService.obterTodos();
+        } else {
+            pedidos = pedidoService.obterTodosPorIdFilial(usuario.getIdFilial());
+        }
+
+        request.setAttribute("pedidos", pedidos);
         request.getRequestDispatcher("/WEB-INF/jsp/autenticado/consultaVendas.jsp").forward(request, response);
     }
 
     protected void salvarPedido(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, JSONException {
+        Utils utils = new Utils();
+        
         String dados = request.getParameter("listaDeItens");
         String documento = request.getParameter("cpfCliente");
         int idUsuario = Integer.parseInt(request.getParameter("vendedor"));
         Date dataPedido = new Date(System.currentTimeMillis());
         int formaPagamento = Integer.parseInt(request.getParameter("formaPagamento"));
         int parcela = request.getParameter("parcelas") == null ? 0 : Integer.parseInt(request.getParameter("parcelas"));
-        double valorRecebido = Double.parseDouble(request.getParameter("valorRecebido"));
+        double valorRecebido = Double.parseDouble(utils.formatarValor(request.getParameter("valorRecebido")));
 
         //convertando o json de string para um json object
         JSONObject jsonObject = new JSONObject(dados.trim());
@@ -171,7 +191,7 @@ public class VendasControllerServlet extends HttpServlet {
         }
 
         ClienteModel cliente;
-        if(documento.length() == 11){
+        if (documento.length() == 11) {
             cliente = documento.equals("") ? clienteService.obterClientePorCpf("12345678910") : clienteService.obterClientePorCpf(documento);
         } else {
             cliente = clienteService.obterClientePorCnpj(documento);
@@ -203,7 +223,8 @@ public class VendasControllerServlet extends HttpServlet {
 
     protected void criarVenda(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setAttribute("vendedores", usuarioService.obterTodosPorCargo("Vendedor (a)"));
+        UsuarioModel usuario = (UsuarioModel) request.getSession().getAttribute("usuarioLogado");
+        request.setAttribute("vendedores", usuarioService.obterTodosPorCargo("Vendedor (a)", usuario.getIdFilial()));
 
         request.getRequestDispatcher("/WEB-INF/jsp/autenticado/vendas.jsp").forward(request, response);
     }
@@ -213,18 +234,19 @@ public class VendasControllerServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             Gson gson = new Gson();
             ClienteModel cliente = doc.length() == 11 ? clienteService.obterClientePorCpf(doc) : clienteService.obterClientePorCnpj(doc);
-            
+
             out.print(gson.toJson(cliente));
             out.flush();
         }
     }
 
-    protected void obterProduto(int idProduto, HttpServletResponse response) throws IOException {
+    protected void obterProduto(int idProduto, HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html; charset=UTF-8");
+        UsuarioModel usuario = (UsuarioModel) request.getSession().getAttribute("usuarioLogado");
         try (PrintWriter out = response.getWriter()) {
             Gson gson = new Gson();
-            ProdutoModel produto = produtoService.obterPorId(idProduto);
-            
+            ProdutoModel produto = produtoService.obterPorId(idProduto, usuario.getIdFilial());
+
             out.print(gson.toJson(produto));
             out.flush();
         }

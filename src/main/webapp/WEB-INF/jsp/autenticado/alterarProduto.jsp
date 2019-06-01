@@ -89,15 +89,17 @@
 
 
 
-            <div class="form-group col-md-2">
-                <label for="inputFilial">Filial<h11 class="text-danger">*</h11></label>
-                <select id="filial" name="filial" class="custom-select">
-                    <option value="">Selecione</option>
-                    <c:forEach var="f" items="${filiais}">
-                        <option value="${f.idFilial}">${f.nome}</option>
-                    </c:forEach>
-                </select>
-            </div>
+            <c:if test="${filiais != null}">
+                <div class="form-group col-md-2">
+                    <label for="inputFilial">Filial<h11 class="text-danger">*</h11></label>
+                    <select id="filial" name="filial" class="custom-select" required>
+                        <option value="">Selecione</option>
+                        <c:forEach var="f" items="${filiais}">
+                            <option value="${f.idFilial}">${f.nome}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+            </c:if>
 
             <div class="form-group col-md-7">
                 <label for="input Descrição">Descrição<h11 class="text-danger">*</h11></label>
@@ -118,7 +120,10 @@
 
 <script>
     $(document).ready(function () {
-        document.getElementById('filial').value = '${produto.idFilial}';
+        var filiais = '${filiais}';
+        if(filiais !== ''){
+            document.getElementById('filial').value = '${produto.idFilial}';
+        }      
         document.getElementById('plataforma').value = '${produto.idPlataforma}';
         document.getElementById('categoria').value = '${produto.idCategoria}';
         document.getElementById('genero').value = '${produto.idGenero}';

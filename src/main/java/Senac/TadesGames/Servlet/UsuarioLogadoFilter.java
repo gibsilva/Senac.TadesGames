@@ -60,7 +60,7 @@ public class UsuarioLogadoFilter implements Filter {
     private boolean verificarAcesso(UsuarioModel usuario, HttpServletRequest request, HttpServletResponse response) {
         String paginaAcessada = request.getRequestURI();
         String url = getFullURL(request);
-        if (paginaAcessada.endsWith("/Home") || paginaAcessada.endsWith("/Logout") || paginaAcessada.endsWith("/ResetSenha") || paginaAcessada.endsWith("/alterar-senha")) {
+        if (paginaAcessada.endsWith("/Home") || paginaAcessada.endsWith("/Logout") || paginaAcessada.endsWith("/ResetSenha") || paginaAcessada.endsWith("/alterar-senha") || paginaAcessada.endsWith("/sobre")) {
             return true;
         } else if (usuario.getLogin().equals("admin")) {
             return true;

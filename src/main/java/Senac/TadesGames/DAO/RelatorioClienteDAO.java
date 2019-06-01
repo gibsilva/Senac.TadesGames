@@ -5,6 +5,7 @@
  */
 package Senac.TadesGames.DAO;
 
+import Senac.TadesGames.DAO.Interfaces.IRelatorioClienteDao;
 import Senac.TadesGames.Data.ConexaoDB;
 import Senac.TadesGames.Helpers.Utils;
 import Senac.TadesGames.Models.RelatorioClienteModel;
@@ -20,12 +21,13 @@ import java.util.List;
  *
  * @author Gi
  */
-public class RelatorioClienteDAO {
+public class RelatorioClienteDAO implements IRelatorioClienteDao {
 
     private final ConexaoDB conexao = new ConexaoDB();
     private PreparedStatement stmt = null;
     ResultSet rs = null;
 
+    @Override
     public List<RelatorioClienteModel> obterPorData(Date dataInicio, Date dataFim) {
         Connection conn = conexao.getConnection();
         RelatorioClienteModel relatorioCliente = null;

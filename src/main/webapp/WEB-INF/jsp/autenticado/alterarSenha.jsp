@@ -53,6 +53,7 @@
     </form>  
 </div>
 
+
 <script>
     $('#form').submit(function (e) {
         if ($('#novaSenha').val() !== $('#confirmaSenha').val()) {

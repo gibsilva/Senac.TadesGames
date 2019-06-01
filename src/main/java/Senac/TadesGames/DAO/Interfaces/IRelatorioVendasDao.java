@@ -15,4 +15,5 @@ import java.util.List;
  */
 public interface IRelatorioVendasDao {
     List<RelatorioVendasModel> obterPorData(Date dataInicio, Date dataFim);
+    List<RelatorioVendasModel> obterPorData(Date dataInicio, Date dataFim, int idFilial);
 }

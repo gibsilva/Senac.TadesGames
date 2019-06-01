@@ -126,8 +126,58 @@ public class PedidoDAO implements IPedidoDao {
             conexao.closeConnection(conn, stmt, rs);
         }
     }
-    
-        @Override
+
+    @Override
+    public List<PedidoModel> obterTodosPorIdFilial(int idFilial) {
+        Connection conn = conexao.getConnection();
+        PedidoModel pedido = null;
+        List<PedidoModel> pedidos = new ArrayList<PedidoModel>();
+
+        try {
+            stmt = conn.prepareStatement("SELECT IDPEDIDO, "
+                    + "FORMAPAGAMENTO, "
+                    + "STATUSPEDIDO, "
+                    + "DATAPEDIDO, "
+                    + "IDCLIENTE, "
+                    + "IDFILIAL, "
+                    + "IDUSUARIO,"
+                    + "PARCELA, "
+                    + "VALORRECEBIDO "
+                    + " FROM pedido WHERE IDFILIAL = ?");
+
+            stmt.setInt(1, idFilial);
+
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                pedido = new PedidoModel(
+                        rs.getInt("IdPedido"),
+                        rs.getInt("StatusPedido"),
+                        rs.getDate("DataPedido"),
+                        rs.getInt("IdCliente"),
+                        rs.getInt("IdFilial"),
+                        rs.getInt("IdUsuario"),
+                        rs.getInt("FormaPagamento"),
+                        rs.getInt("Parcela"),
+                        rs.getDouble("ValorRecebido")
+                );
+                pedido.setItensPedido(itensPedidoDao.obterPorIdPedido(pedido.getIdPedido()));
+                pedido.setCliente(clienteDao.obterPorId(pedido.getIdCliente()));
+                pedido.setFilial(filialDao.obterPorId(pedido.getIdFilial()));
+                pedido.setUsuario(usuarioDao.obterPorId(pedido.getIdUsuario()));
+
+                pedidos.add(pedido);
+            }
+
+            return pedidos;
+        } catch (SQLException ex) {
+            conexao.closeConnection(conn, stmt, rs);
+            return null;
+        } finally {
+            conexao.closeConnection(conn, stmt, rs);
+        }
+    }
+
+    @Override
     public List<PedidoModel> obterTodosConcluidos() {
         Connection conn = conexao.getConnection();
         PedidoModel pedido = null;
@@ -192,7 +242,7 @@ public class PedidoDAO implements IPedidoDao {
                     + "PARCELA, "
                     + "VALORRECEBIDO "
                     + " FROM pedido WHERE IdUsuario = ?");
-            
+
             stmt.setInt(1, id);
 
             rs = stmt.executeQuery();
@@ -260,6 +310,75 @@ public class PedidoDAO implements IPedidoDao {
                 stmt = conn.prepareStatement(sql);
                 stmt.setString(1, dataInicio);
                 stmt.setString(2, dataFim);
+            }
+
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                pedido = new PedidoModel(
+                        rs.getInt("IdPedido"),
+                        rs.getInt("StatusPedido"),
+                        rs.getDate("DataPedido"),
+                        rs.getInt("IdCliente"),
+                        rs.getInt("IdFilial"),
+                        rs.getInt("IdUsuario"),
+                        rs.getInt("FormaPagamento"),
+                        rs.getInt("Parcela"),
+                        rs.getDouble("ValorRecebido")
+                );
+                pedido.setItensPedido(itensPedidoDao.obterPorIdPedido(pedido.getIdPedido()));
+                pedido.setCliente(clienteDao.obterPorId(pedido.getIdCliente()));
+                pedido.setFilial(filialDao.obterPorId(pedido.getIdFilial()));
+                pedido.setUsuario(usuarioDao.obterPorId(pedido.getIdUsuario()));
+
+                pedidos.add(pedido);
+            }
+
+            return pedidos;
+        } catch (SQLException ex) {
+            conexao.closeConnection(conn, stmt, rs);
+            return null;
+        } finally {
+            conexao.closeConnection(conn, stmt, rs);
+        }
+    }
+
+    @Override
+    public List<PedidoModel> pesquisar(int id, String dataInicio, String dataFim, int idFilial) {
+        Connection conn = conexao.getConnection();
+        PedidoModel pedido = null;
+        List<PedidoModel> pedidos = new ArrayList<PedidoModel>();
+
+        try {
+            String sql = "SELECT IDPEDIDO, "
+                    + "FORMAPAGAMENTO, "
+                    + "STATUSPEDIDO, "
+                    + "DATAPEDIDO, "
+                    + "IDCLIENTE, "
+                    + "IDFILIAL, "
+                    + "IDUSUARIO,"
+                    + "PARCELA, "
+                    + "VALORRECEBIDO "
+                    + " FROM pedido WHERE IDFILIAL = ? ";
+            
+            stmt.setInt(1, idFilial);
+
+            if (id != 0 && dataInicio.equals("") && dataFim.equals("")) {
+                sql += "AND IDPEDIDO = ?";
+                stmt = conn.prepareStatement(sql);
+                stmt.setInt(2, id);
+            } else if (id == 0 && !dataInicio.equals("") && dataFim.equals("")) {
+                sql += "AND DATAPEDIDO >= ?";
+                stmt = conn.prepareStatement(sql);
+                stmt.setString(2, dataInicio);
+            } else if (id == 0 && dataInicio.equals("") && !dataFim.equals("")) {
+                sql += "AND DATAPEDIDO <= ?";
+                stmt = conn.prepareStatement(sql);
+                stmt.setString(2, dataFim);
+            } else {
+                sql += "AND DATAPEDIDO BETWEEN ? AND ?";
+                stmt = conn.prepareStatement(sql);
+                stmt.setString(2, dataInicio);
+                stmt.setString(3, dataFim);
             }
 
             rs = stmt.executeQuery();

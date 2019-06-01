@@ -15,6 +15,7 @@ import java.util.List;
 public interface IFilialDao {
     FilialModel obterPorId(int id);
     List<FilialModel> obterTodas();
+    List<FilialModel> obterTodasAtivas();
     void inserir(FilialModel filial);
     void alterar(FilialModel filial);
     FilialModel obterPorCnpj(String cnpj);
