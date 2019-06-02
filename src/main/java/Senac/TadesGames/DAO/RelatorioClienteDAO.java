@@ -51,9 +51,9 @@ public class RelatorioClienteDAO implements IRelatorioClienteDao {
                     + "	ON itenspedido.IDPEDIDO = pedido.IDPEDIDO \n"
                     + "WHERE\n"
                     + "	DATE(cliente.DATAHORACRIACAO) BETWEEN ? AND ?\n"
+                    + " and pedido.statuspedido = 1\n"
                     + "GROUP BY \n"
-                    + "	cliente.IDCLIENTE,\n"
-                    + " pedido.DATAHORACRIACAO");
+                    + "	cliente.IDCLIENTE");
 
             stmt.setString(1, util.converteDateParaStr(dataInicio));
             stmt.setString(2, util.converteDateParaStr(dataFim));
@@ -77,6 +77,8 @@ public class RelatorioClienteDAO implements IRelatorioClienteDao {
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt, rs);
             return null;
+        } finally{
+            conexao.closeConnection(conn, stmt, rs);
         }
     }
 

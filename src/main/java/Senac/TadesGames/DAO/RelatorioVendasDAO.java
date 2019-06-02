@@ -55,7 +55,7 @@ public class RelatorioVendasDAO implements IRelatorioVendasDao {
                     + "inner join itenspedido\n"
                     + "	on itenspedido.idpedido = pedido.idpedido\n"
                     + "where\n"
-                    + "	pedido.DataPedido between ? and ? and pedido.statuspedido != 0\n"
+                    + "	pedido.DataPedido between ? and ?\n"
                     + "group by\n"
                     + "	pedido.IdPedido");
 
@@ -106,7 +106,7 @@ public class RelatorioVendasDAO implements IRelatorioVendasDao {
                     + "inner join itenspedido\n"
                     + "	on itenspedido.idpedido = pedido.idpedido\n"
                     + "where\n"
-                    + "	pedido.DataPedido between ? and ? and pedido.statuspedido != 0\n"
+                    + "	pedido.DataPedido between ? and ?\n"
                     + " and pedido.idfilial = ?\n"
                     + "group by\n"
                     + "	pedido.IdPedido");

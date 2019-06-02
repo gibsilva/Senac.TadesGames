@@ -96,7 +96,7 @@
             s += '<td class="text-center">' + lista[i].cnpj + '</td>';
             s += '<td class="text-center">' + lista[i].qtdPedidos + '</td>';
             s += '<td class="text-center">' + lista[i].dataUltimoPedido + '</td>';
-            s += '<td class="text-center">' + lista[i].totalComprado + '</td>';
+            s += '<td class="text-center">' + lista[i].totalComprado.toLocaleString('pt-br', {minimumFractionDigits: 2}) + '</td>';
             if(lista[i].ativo === true){
                 s += '<td class="text-center">' + 'Ativo' + '</td>';
             } else{
@@ -106,7 +106,7 @@
             total += lista[i].totalComprado;
         }
         var foot = '';
-        foot += '<tr class="blockquote"> <td><strong>Total:</strong></td><td>R$ ' + total + '</td> </tr>';
+        foot += '<tr class="blockquote"> <td><strong>Total:</strong></td><td>R$ ' + total.toLocaleString('pt-br', {minimumFractionDigits: 2}) + '</td> </tr>';
         $('#totalTabela').html(foot);
     }
 

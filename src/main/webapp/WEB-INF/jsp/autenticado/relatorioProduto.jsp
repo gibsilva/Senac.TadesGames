@@ -154,11 +154,12 @@
             } else {
                 s += '<td class="text-center">' + 'Inativo' + '</td>';
             }
+            s += '</tr>';
             $('#tabela').html(s);
             total += lista[i].totalVendido;
         }
         var foot = '';
-        foot += '<tr class="blockquote"> <td><strong>Total vendido:</strong></td><td>R$ ' + total.toLocaleString('pt-br', {minimumFractionDigits: 2}) + '</td> </tr>';
+        foot += '<tr class="blockquote"> <td colspan="2"><strong>Total vendido:</strong></td><td>R$ ' + total.toLocaleString('pt-br', {minimumFractionDigits: 2}) + '</td> </tr>';
         $('#totalTabela').html(foot);
     }
 

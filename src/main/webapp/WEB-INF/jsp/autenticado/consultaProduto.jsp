@@ -42,6 +42,7 @@
                 <th class="text-center" scope="col">Gênero</th>
                 <th class="text-center" scope="col">Descrição</th>
                 <th class="text-center" scope="col">Qtde. Estoque</th>
+                <th class="text-center" scope="col">Filial</th>
                 <th class="text-center" scope="col">Status</th>
                 <th class="text-center" scope="col">#</th>
             </tr>
@@ -58,6 +59,7 @@
                     <td class="text-center">${p.genero.nome}</td>
                     <td class="text-center">${p.descricao}</td>
                     <td class="text-center">${p.quantidadeEstoque}</td>
+                    <td class="text-center">${p.filial.nome}</td>
                     <c:if test="${p.ativo == true}">
                         <td class="text-center">Ativo</td>
                     </c:if>

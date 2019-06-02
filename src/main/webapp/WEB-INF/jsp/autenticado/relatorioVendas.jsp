@@ -65,11 +65,11 @@
             </tr>
         </thead>
 
-        <tbody id="tabela" name="tabela">
+        <tbody class="table" id="tabela" name="tabela">
             <!--preenchido conforme a consulta -->
         </tbody>
         <tfoot id="totalTabela">
-            <!--total das vendas do período -->
+            <!--total das vendas do período -->       
         </tfoot>
     </table>
 
@@ -133,7 +133,11 @@
             var documento = lista[i].pedido.cliente.documento.cpf === '' ? lista[i].pedido.cliente.documento.cnpj : lista[i].pedido.cliente.documento.cpf;
             var valorParcela = lista[i].pedido.parcela === 0 ? 0 : (lista[i].valorTotal / lista[i].pedido.parcela).toLocaleString('pt-br', {minimumFractionDigits: 2});
             var status = lista[i].pedido.status === 1 ? 'Concluído' : 'Cancelado';
-            s += '<tr class=" text-center">';
+            if(lista[i].pedido.status === 1){
+                s += '<tr class=" text-center">';
+            } else{
+                s += '<tr class=" text-center text-danger">';
+            }          
             s += '<td class="text-center">' + lista[i].pedido.idPedido + '</td>';
             s += '<td class="text-center">' + lista[i].pedido.cliente.nome + '</td>';
             s += '<td class="text-center">' + documento + '</td>';
@@ -146,10 +150,10 @@
             s += '<td class="text-center">' + lista[i].valorTotal.toLocaleString('pt-br', {minimumFractionDigits: 2}) + '</td>';
             s += '<td class="text-center">' + status + '</td>';
             $('#tabela').html(s);
-            total += lista[i].valorTotal;
+            total += lista[i].pedido.status === 0 ? 0 : lista[i].valorTotal;
         }
         var foot = '';
-        foot += '<tr class="blockquote"> <td><strong>Total do Período:</strong></td><td>R$ ' + total.toLocaleString('pt-br', {minimumFractionDigits: 2}) + '</td> </tr>';
+        foot += '<tr class="blockquote"> <td colspan="2"><strong>Total Líquido:</strong></td><td>R$ ' + total.toLocaleString('pt-br', {minimumFractionDigits: 2}) + '</td> </tr>';
         $('#totalTabela').html(foot);
     }
 

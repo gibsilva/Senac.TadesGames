@@ -14,7 +14,7 @@
 
     <form method="post" action="Vendas" id="pesquisa">
         <input type="hidden" value="pesquisar" name="acao" id="acao">
-        
+
         <div class="row">
             <div class="form-group col-md-2">
                 <label for="filtroId">Pesquisa por ID</label>
@@ -63,7 +63,13 @@
 
         <tbody id="tabela" name="tabela">
             <c:forEach var="p" items="${pedidos}">
-                <tr >
+            <c:if test="${p.status == 0}">
+                <tr class="text-center text-danger">
+            </c:if>
+            <c:if test="${p.status == 1}">
+                <tr class="text-center">
+            </c:if>
+                
                     <td class=" text-center">${p.idPedido}</td>
                     <td class=" text-center">${p.cliente.nome}</td>
                     <td class=" text-center">${p.cliente.documento.toString()}</td>
