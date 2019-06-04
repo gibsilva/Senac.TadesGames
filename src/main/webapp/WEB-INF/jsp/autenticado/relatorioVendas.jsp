@@ -61,6 +61,8 @@
                 <th scope="col">Vendedor(a)</th>
                 <th scope="col">Filial</th>
                 <th scope="col">Valor Total R$</th>
+                <th scope="col">Valor Recebido R$</th>
+                <th scope="col">Valor Troco R$</th>
                 <th scope="col">Status</th>
             </tr>
         </thead>
@@ -132,6 +134,7 @@
         for (var i = 0; i < lista.length; i++) {
             var documento = lista[i].pedido.cliente.documento.cpf === '' ? lista[i].pedido.cliente.documento.cnpj : lista[i].pedido.cliente.documento.cpf;
             var valorParcela = lista[i].pedido.parcela === 0 ? 0 : (lista[i].valorTotal / lista[i].pedido.parcela).toLocaleString('pt-br', {minimumFractionDigits: 2});
+            var troco = lista[i].pedido.formaPagamento !== 3 ? 0 : lista[i].pedido.valorRecebido - lista[i].valorTotal;
             var status = lista[i].pedido.status === 1 ? 'Concluído' : 'Cancelado';
             if(lista[i].pedido.status === 1){
                 s += '<tr class=" text-center">';
@@ -148,6 +151,8 @@
             s += '<td class="text-center">' + lista[i].pedido.usuario.nome + '</td>';
             s += '<td class="text-center">' + lista[i].pedido.filial.nome + '</td>';
             s += '<td class="text-center">' + lista[i].valorTotal.toLocaleString('pt-br', {minimumFractionDigits: 2}) + '</td>';
+            s += '<td class="text-center">' + lista[i].pedido.valorRecebido.toLocaleString('pt-br', {minimumFractionDigits: 2}) + '</td>';
+            s += '<td class="text-center">' + troco.toLocaleString('pt-br', {minimumFractionDigits: 2}) + '</td>';
             s += '<td class="text-center">' + status + '</td>';
             $('#tabela').html(s);
             total += lista[i].pedido.status === 0 ? 0 : lista[i].valorTotal;

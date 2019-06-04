@@ -371,4 +371,56 @@ public class ClienteDAO implements IClienteDao {
         }
     }
 
+    @Override
+    public ClienteModel obterPorDocumento(String valor) {
+        Connection conn = conexao.getConnection();
+        ClienteModel cliente = null;
+
+        String sql = "SELECT IDCLIENTE, "
+                + "NOME, "
+                + "CPF, "
+                + "CNPJ, "
+                + "DATANASC, "
+                + "EMAIL, "
+                + "TELEFONE, "
+                + "CELULAR, "
+                + "SEXO, "
+                + "ATIVO "
+                + "FROM cliente WHERE ";
+        
+        if(valor.length() == 11)
+            sql += " CPF = ?";
+        else
+            sql += " CNPJ = ?";
+
+        try {
+            stmt = conn.prepareStatement(sql);
+
+            stmt.setString(1, valor);
+
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                String doc = rs.getString("cpf").equals("") ? rs.getString("cnpj") : rs.getString("cpf");
+                Documento documento = new Documento(doc);
+                cliente = new ClienteModel(
+                        rs.getInt("IdCliente"),
+                        rs.getString("Nome"),
+                        documento,
+                        rs.getDate("DataNasc"),
+                        rs.getString("email"),
+                        rs.getString("telefone"),
+                        rs.getString("celular"),
+                        rs.getString("sexo"),
+                        rs.getBoolean("ativo")
+                );
+            }
+
+            return cliente;
+        } catch (SQLException ex) {
+            conexao.closeConnection(conn, stmt, rs);
+            return null;
+        } finally {
+            conexao.closeConnection(conn, stmt, rs);
+        }
+    }
 }

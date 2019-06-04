@@ -20,5 +20,6 @@ public interface IClienteDao {
     ClienteModel obterPorEmail(String email);
     ClienteModel obterPorCpf(String cpf); 
     ClienteModel obterPorCnpj(String cnpj);
+    ClienteModel obterPorDocumento(String documento);
     
 }
