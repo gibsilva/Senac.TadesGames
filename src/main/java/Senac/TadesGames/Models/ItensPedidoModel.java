@@ -5,6 +5,9 @@
  */
 package Senac.TadesGames.Models;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 /**
  *
  * @author Gi
@@ -20,7 +23,7 @@ public class ItensPedidoModel {
 
     public ItensPedidoModel(int idItensPedido, int idProduto,
             double valorUnitario, int quantidade, int idPedido) {
-        
+
         this.idItensPedido = idItensPedido;
         this.idProduto = idProduto;
         this.valorUnitario = valorUnitario;
@@ -110,5 +113,12 @@ public class ItensPedidoModel {
      */
     public void setProduto(ProdutoModel produto) {
         this.produto = produto;
+    }
+
+    @Override
+    public String toString() {
+        Locale ptBr = new Locale("pt", "BR");
+        String valorString = NumberFormat.getCurrencyInstance(ptBr).format(this.valorUnitario);
+        return valorString;
     }
 }

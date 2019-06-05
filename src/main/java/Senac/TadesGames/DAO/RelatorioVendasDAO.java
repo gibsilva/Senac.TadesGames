@@ -139,10 +139,10 @@ public class RelatorioVendasDAO implements IRelatorioVendasDao {
         }
     }
 
-    public List<GraficoVendasFilialModel> vendasPorFilial() {
+    public List<GraficoVendasFilialModel> vendasPorFilial(Date dataInicio, Date dataFim) {
         Connection conn = conexao.getConnection();
         GraficoVendasFilialModel relatorioVenda = null;
-
+        Utils util = new Utils();
         List<GraficoVendasFilialModel> lista = new ArrayList<GraficoVendasFilialModel>();
 
         try {
@@ -154,8 +154,11 @@ public class RelatorioVendasDAO implements IRelatorioVendasDao {
                     + "	on pedido.IdFilial = filial.IdFilial\n"
                     + "inner join itenspedido\n"
                     + "	on itenspedido.idpedido = pedido.idpedido\n"
-                    + "where pedido.StatusPedido = 1\n"
+                    + "where pedido.StatusPedido = 1 and pedido.datapedido between ? and ?\n"
                     + "group by filial.nome");
+
+            stmt.setString(1, util.converteDateParaStr(dataInicio));
+            stmt.setString(2, util.converteDateParaStr(dataFim));
 
             rs = stmt.executeQuery();
             while (rs.next()) {
@@ -176,10 +179,10 @@ public class RelatorioVendasDAO implements IRelatorioVendasDao {
         }
     }
 
-    public List<GraficoMelhoresVendedoresModel> vendasPorVendedor() {
+    public List<GraficoMelhoresVendedoresModel> vendasPorVendedor(Date dataInicio, Date dataFim) {
         Connection conn = conexao.getConnection();
         GraficoMelhoresVendedoresModel relatorioVenda = null;
-
+        Utils util = new Utils();
         List<GraficoMelhoresVendedoresModel> lista = new ArrayList<GraficoMelhoresVendedoresModel>();
 
         try {
@@ -193,8 +196,11 @@ public class RelatorioVendasDAO implements IRelatorioVendasDao {
                     + "inner join filial\n"
                     + "	on filial.IdFilial = usuario.IdFilial\n"
                     + "where usuario.cargo = 'Vendedor (a)'\n"
-                    + "and pedido.StatusPedido = 1\n"
+                    + "and pedido.StatusPedido = 1 and pedido.datapedido between ? and ?\n"
                     + "group by usuario.nome, filial.nome");
+
+            stmt.setString(1, util.converteDateParaStr(dataInicio));
+            stmt.setString(2, util.converteDateParaStr(dataFim));
 
             rs = stmt.executeQuery();
             while (rs.next()) {

@@ -154,11 +154,12 @@ public class RelatorioProdutoDAO implements IRelatorioProdutoDao {
         }
     }
 
-    public List<GraficoProdutosModel> obterProdutosVendidos() {
+    public List<GraficoProdutosModel> obterProdutosVendidos(Date dataInicio, Date dataFim) {
         Connection conn = conexao.getConnection();
         GraficoProdutosModel relatorioProduto = null;
         List<GraficoProdutosModel> lista = new ArrayList<GraficoProdutosModel>();
-
+        Utils util = new Utils();
+        
         try {
             stmt = conn.prepareStatement("select \n"
                     + "	produto.nome as produto,\n"
@@ -169,10 +170,13 @@ public class RelatorioProdutoDAO implements IRelatorioProdutoDao {
                     + "inner join pedido\n"
                     + "	on pedido.IdPedido = itenspedido.IdPedido\n"
                     + "where\n"
-                    + "	pedido.StatusPedido = 1\n"
+                    + "	pedido.StatusPedido = 1 and pedido.datapedido between ? and ?\n"
                     + "    and produto.Ativo = 1\n"
                     + "group by\n"
                     + "	produto.nome");
+
+            stmt.setString(1, util.converteDateParaStr(dataInicio));
+            stmt.setString(2, util.converteDateParaStr(dataFim));
 
             rs = stmt.executeQuery();
             while (rs.next()) {

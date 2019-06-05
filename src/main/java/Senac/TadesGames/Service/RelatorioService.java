@@ -53,15 +53,15 @@ public class RelatorioService {
         return relatorioClienteDao.obterPorData(dataInicio, dataFim);
     }
 
-    public List<GraficoVendasFilialModel> vendasPorFilial() {
-        return relatorioVendasDao.vendasPorFilial();
+    public List<GraficoVendasFilialModel> vendasPorFilial(Date dataInicio, Date dataFim) {
+        return relatorioVendasDao.vendasPorFilial(dataInicio, dataFim);
     }
 
-    public List<GraficoMelhoresVendedoresModel> vendasPorVendedor() {
-        return relatorioVendasDao.vendasPorVendedor();
+    public List<GraficoMelhoresVendedoresModel> vendasPorVendedor(Date dataInicio, Date dataFim) {
+        return relatorioVendasDao.vendasPorVendedor(dataInicio, dataFim);
     }
 
-    public List<GraficoProdutosModel> obterProdutosVendidos() {
-        return relatorioProdutoDao.obterProdutosVendidos();
+    public List<GraficoProdutosModel> obterProdutosVendidos(Date dataInicio, Date dataFim) {
+        return relatorioProdutoDao.obterProdutosVendidos(dataInicio, dataFim);
     }
 }

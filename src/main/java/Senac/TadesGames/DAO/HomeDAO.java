@@ -36,7 +36,7 @@ public class HomeDAO implements IHomeDao {
 
         try {
             stmt = conn.prepareStatement("SELECT\n"
-                    + "	(select count(p.idpedido) from pedido p where p.idusuario = usuario.idusuario and p.statuspedido = 1) as QtdVendas, \n"
+                    + "	(select count(p.idpedido) from pedido p where p.idusuario = usuario.idusuario and p.statuspedido = 1 and month(now()) = month(p.datapedido)) as QtdVendas, \n"
                     + "    usuario.IdUsuario,\n"
                     + "    usuario.nome as Nome,\n"
                     + "    sum(ValorUnitario * quantidade) as TotalVendido,\n"
@@ -81,7 +81,7 @@ public class HomeDAO implements IHomeDao {
 
         try {
             stmt = conn.prepareStatement("SELECT\n"
-                    + "	(select count(p.idpedido) from pedido p where p.idusuario = usuario.idusuario and p.statuspedido = 1) as QtdVendas, \n"
+                    + "	(select count(p.idpedido) from pedido p where p.idusuario = usuario.idusuario and p.statuspedido = 1 and month(now()) = month(p.datapedido)) as QtdVendas, \n"
                     + "    usuario.IdUsuario,\n"
                     + "    usuario.nome as Nome,\n"
                     + "    sum(ValorUnitario * quantidade) as TotalVendido,\n"

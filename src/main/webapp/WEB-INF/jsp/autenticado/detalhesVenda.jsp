@@ -48,7 +48,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text">R$</span>
                 </div>
-                <input type="text" class="form-control" id="inputValorVenda" placeholder="00,00" readonly value="${pedido.valorTotal}">
+                <input type="text" class="form-control" id="inputValorVenda" placeholder="00,00" readonly value="">
             </div>
         </div>
 
@@ -81,7 +81,7 @@
                     <td class=" text-center">${p.produto.plataforma.nome}</td>
                     <td class="text-center">${p.produto.genero.nome}</td>
                     <td class=" text-center">${p.quantidade}</td>
-                    <td class=" text-center">${p.valorUnitario}</td>
+                    <td class=" text-center">${p.toString()}</td>
                 </tr>
             </c:forEach>
         </tbody>
@@ -136,6 +136,11 @@
         $('#btnCancelar').click(function () {
             $('#modalCancelar').modal();
         });
+        
+        var valorVenda = parseFloat('${pedido.valorTotal}');
+        valorVenda = valorVenda.toLocaleString('pt-br', {minimumFractionDigits: 2});
+        $('#inputValorVenda').val(valorVenda);
+        
     });
 
     function cancelarPedido() {

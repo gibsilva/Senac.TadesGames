@@ -176,23 +176,25 @@ public class RelatorioControllerServlet extends HttpServlet {
     }
 
     protected void gerarGraficos(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, ParseException {
         response.setContentType("text/html; charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             Gson gson = new Gson();
             String tipo = request.getParameter("tipo");
+            Date dataInicio = Utils.converteStrParaDate(request.getParameter("dataInicio"));
+            Date dataFim = Utils.converteStrParaDate(request.getParameter("dataFim"));
 
             switch (tipo) {
                 case "vendasPorFilial":
-                    List<GraficoVendasFilialModel> vendas = relatorioService.vendasPorFilial();
+                    List<GraficoVendasFilialModel> vendas = relatorioService.vendasPorFilial(dataInicio, dataFim);
                     out.print(gson.toJson(vendas));
                     break;
                 case "vendasPorVendedor":
-                    List<GraficoMelhoresVendedoresModel> vendedores = relatorioService.vendasPorVendedor();
+                    List<GraficoMelhoresVendedoresModel> vendedores = relatorioService.vendasPorVendedor(dataInicio, dataFim);
                     out.print(gson.toJson(vendedores));
                     break;
                 case "produtosVendidos":
-                    List<GraficoProdutosModel> produtos = relatorioService.obterProdutosVendidos();
+                    List<GraficoProdutosModel> produtos = relatorioService.obterProdutosVendidos(dataInicio, dataFim);
                     out.print(gson.toJson(produtos));
                     break;
             }

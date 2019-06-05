@@ -65,23 +65,24 @@
     var lista = '';
 
     function gerarRelatorio() {
-        if ($('#dataInicio').val() === '' || $('#dataFim').val() === '') {
-            toastr.warning('Preencha os parâmetros antes de gerar o relatório', 'Atenção');
-        } else {
-            $.ajax({
-                url: 'Relatorios?acao=relatorioClientes',
-                type: 'GET',
-                contentType: 'application/json',
-                data: {'dataInicio': $('#dataInicio').val(), 'dataFim': $('#dataFim').val()},
-                success: function (data) {
-                    lista = $.parseJSON(data);
-                    console.log(lista);
-                    carregarTabela(lista);
-                },
-                error: function () {
-                    toastr.error('Ocorreu um erro ao gerar o relatório', 'Erro');
-                }
-            });
+        if (validarDatas()) {
+            if ($('#dataInicio').val() === '' || $('#dataFim').val() === '') {
+                toastr.warning('Preencha os parâmetros antes de gerar o relatório', 'Atenção');
+            } else {
+                $.ajax({
+                    url: 'Relatorios?acao=relatorioClientes',
+                    type: 'GET',
+                    contentType: 'application/json',
+                    data: {'dataInicio': $('#dataInicio').val(), 'dataFim': $('#dataFim').val()},
+                    success: function (data) {
+                        lista = $.parseJSON(data);
+                        carregarTabela(lista);
+                    },
+                    error: function () {
+                        toastr.error('Ocorreu um erro ao gerar o relatório', 'Erro');
+                    }
+                });
+            }
         }
     }
 
@@ -97,9 +98,9 @@
             s += '<td class="text-center">' + lista[i].qtdPedidos + '</td>';
             s += '<td class="text-center">' + lista[i].dataUltimoPedido + '</td>';
             s += '<td class="text-center">' + lista[i].totalComprado.toLocaleString('pt-br', {minimumFractionDigits: 2}) + '</td>';
-            if(lista[i].ativo === true){
+            if (lista[i].ativo === true) {
                 s += '<td class="text-center">' + 'Ativo' + '</td>';
-            } else{
+            } else {
                 s += '<td class="text-center">' + 'Inativo' + '</td>';
             }
             $('#tabela').html(s);
@@ -120,5 +121,15 @@
                 filename: 'Relatório de Clientes'
             });
         }
+    }
+
+    function validarDatas() {
+        if ($('#dataInicio').val() > $('#dataFim').val()) {
+            toastr.warning('Data de início não pode ser maior que a data final', 'Atenção');
+            $('#dataInicio').val('');
+            $('#dataFim').val('');
+            return false;
+        }
+        return true;
     }
 </script>
