@@ -159,7 +159,7 @@ public class ProdutoControllerServlet extends HttpServlet {
         int quantidade = Integer.parseInt(request.getParameter("quantidade"));
         boolean ativo = Boolean.parseBoolean(request.getParameter("ativo"));
         int idGenero = Integer.parseInt(request.getParameter("genero"));
-        String descricao = request.getParameter("descricao");
+        String descricao = utils.removeQuebraLinha(request.getParameter("descricao"));
         int idFilial = request.getParameter("filial") == null ? usuario.getIdFilial() : Integer.parseInt(request.getParameter("filial"));
 
         ProdutoModel produto = new ProdutoModel(0, nome, descricao, valorCompra, valorVenda, idCategoria, idGenero, ativo, idFilial, idPlataforma, quantidade);
@@ -195,7 +195,7 @@ public class ProdutoControllerServlet extends HttpServlet {
         int quantidade = Integer.parseInt(request.getParameter("quantidade"));
         boolean ativo = Boolean.parseBoolean(request.getParameter("ativo"));
         int idGenero = Integer.parseInt(request.getParameter("genero"));
-        String descricao = request.getParameter("descricao");
+        String descricao = utils.removeQuebraLinha(request.getParameter("descricao"));
         int idFilial = request.getParameter("filial") == null ? usuario.getIdFilial() : Integer.parseInt(request.getParameter("filial"));
 
         ProdutoModel produto = new ProdutoModel(id, nome, descricao, valorCompra, valorVenda, idCategoria, idGenero, ativo, idFilial, idPlataforma, quantidade);

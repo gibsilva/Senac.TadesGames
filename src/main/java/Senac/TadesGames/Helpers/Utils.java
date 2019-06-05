@@ -52,5 +52,11 @@ public class Utils {
     public String removeEspacoBranco(String str) {
         return str.replace(" ", "");
     }
-
+    
+    public String removeQuebraLinha(String str){
+        String texto = str.trim();
+        texto = texto.replace("\n", "");
+        
+        return texto;
+    }
 }
