@@ -33,8 +33,12 @@ public class RelatorioClienteDAO implements IRelatorioClienteDao {
         RelatorioClienteModel relatorioCliente = null;
         List<RelatorioClienteModel> lista = new ArrayList<RelatorioClienteModel>();
         Utils util = new Utils();
-        //ainda não foi testado de fato por não haver os dados na base das vendas
+
         try {
+            //devido ao banco de dados no google cloud utilizar o mysql 5.7 desativar o modo only_full_group_by
+            stmt = conn.prepareStatement("SET @@SESSION.sql_mode =(SELECT REPLACE(@@SESSION.sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
+            stmt.executeUpdate();
+
             stmt = conn.prepareStatement("SELECT\n"
                     + "	cliente.IDCLIENTE,\n"
                     + "	cliente.NOME,\n"
@@ -77,7 +81,7 @@ public class RelatorioClienteDAO implements IRelatorioClienteDao {
         } catch (SQLException ex) {
             conexao.closeConnection(conn, stmt, rs);
             return null;
-        } finally{
+        } finally {
             conexao.closeConnection(conn, stmt, rs);
         }
     }
