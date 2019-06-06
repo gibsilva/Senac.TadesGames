@@ -83,6 +83,8 @@ public class UsuarioLogadoFilter implements Filter {
             return false;
         } else if(paginaAcessada.endsWith("/Vendas") && (usuario.getCargo().contains("Gerente") && usuario.getSetor().equals("Produtos/Serviços/Marketing"))) {
             return true;
+        } else if(url.contains("Produtos?acao=listar") && (usuario.getCargo().contains("Gerente") && usuario.getSetor().equals("Vendas"))){
+            return true;
         }
         return false;
     }
