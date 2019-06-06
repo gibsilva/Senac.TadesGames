@@ -5,6 +5,7 @@
 --%>
 <%@include file="header.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Detalhes da Venda</title>
 
@@ -56,6 +57,44 @@
             <label for="name">Status</label>
             <input type="text" class="form-control" name="status" id="status" readonly value="">   
         </div>
+
+        <div class="form-group col-md-3">
+            <label  for="inputTotal">Valor recebido:</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">R$</span>
+                </div>
+                <input type="text" class="form-control" id="inputValorVenda" placeholder="00,00" readonly value="<fmt:formatNumber value="${pedido.valorRecebido}" type="currency"></fmt:formatNumber>">
+                </div>
+            </div>
+
+            <div class="form-group col-md-3">
+                <label  for="inputTotal">Valor troco:</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">R$</span>
+                    </div>
+                    <input type="text" class="form-control" id="inputValorVenda" placeholder="00,00" readonly value="<fmt:formatNumber value="${pedido.valorRecebido - pedido.valorTotal}" type="currency"></fmt:formatNumber>">
+                </div>
+            </div>
+
+        <c:if test="${pedido.parcela != 0}">
+            <div class="form-group col-md-2">
+                <label for="name">Qtd Parcelas:</label>
+                <input type="text" class="form-control" name="status" id="status" readonly value="${pedido.parcela}">   
+            </div>
+
+            <div class="form-group col-md-3">
+                <label  for="inputTotal">Valor da parcela:</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">R$</span>
+                    </div>
+                    <input type="text" class="form-control" id="inputValorVenda" placeholder="00,00" readonly value="<fmt:formatNumber value="${pedido.valorTotal/pedido.parcela}" type="currency"></fmt:formatNumber>">
+                    </div>
+                </div>
+        </c:if>
+
         <button type="button" id="btnCancelar" name="btnCancelar" class="btn btn-md btn-danger" style="margin-left: 1040px">Cancelar</button>
     </div>
 
@@ -118,29 +157,29 @@
 
         if (${pedido.status} === 1) {
             $('#status').val('Concluído');
-            if ('${sessionScope.usuarioLogado.cargo}' === 'Vendedor (a)') {
-                $('#btnCancelar').prop('disabled', true);
-            } else {
-                $('#btnCancelar').prop('disabled', false);
-            }
-            if (getDataAtual() > $('#data').val()) {
-                $('#btnCancelar').prop('disabled', true);
-            } else {
-                $('#btnCancelar').prop('disabled', false);
-            }
-        } else {
+            habilitarBotao();
+        } else{
             $('#status').val('Cancelado');
             $('#btnCancelar').prop('disabled', true);
         }
+        
+        function habilitarBotao(){
+            if ('${sessionScope.usuarioLogado.setor}' === 'Vendas' && getDataAtual() === $('#data').val() && '${sessionScope.usuarioLogado.cargo}' !== 'Vendedor (a)') {
+                $('#btnCancelar').prop('disabled', false);
+            } else{
+                $('#btnCancelar').prop('disabled', true);
+            }
+        }
+
 
         $('#btnCancelar').click(function () {
             $('#modalCancelar').modal();
         });
-        
+
         var valorVenda = parseFloat('${pedido.valorTotal}');
         valorVenda = valorVenda.toLocaleString('pt-br', {minimumFractionDigits: 2});
         $('#inputValorVenda').val(valorVenda);
-        
+
     });
 
     function cancelarPedido() {

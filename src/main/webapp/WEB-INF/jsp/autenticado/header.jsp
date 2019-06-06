@@ -56,7 +56,7 @@
                             role="button" aria-haspopup="true" aria-expanded="false">Cliente</a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="Clientes?acao=salvar">Cadastro de Cliente</a>
-                            <a class="dropdown-item" href="Clientes"> Consulta de Cliente</a>
+                            <a class="dropdown-item" href="Clientes?acao=listar"> Consulta de Cliente</a>
                         </div></li>
 
                     <li class="nav-item dropdown"><a

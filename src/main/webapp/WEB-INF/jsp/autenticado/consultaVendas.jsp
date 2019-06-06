@@ -54,8 +54,6 @@
                 <th class="text-center" scope="col">Forma de Pagamento</th>
                 <th class="text-center" scope="col">Nº parcelas</th>
                 <th class="text-center" scope="col">Valor parcela</th>
-                <th class="text-center" scope="col">Valor Recebido (R$)</th>
-                <th class="text-center" scope="col">Troco (R$)</th>
                 <th class="text-center" scope="col">Data da Venda</th>
                 <th class="text-center" scope="col">Vendedor</th>
                 <th class="text-center" scope="col">Filial</th>
@@ -86,8 +84,6 @@
                     <c:if test="${p.parcela != 0}">
                         <td class=" text-center"><fmt:formatNumber value="${p.valorTotal/p.parcela}" type="currency"></fmt:formatNumber></td>
                     </c:if>
-                    <td class=" text-center"><fmt:formatNumber value="${p.valorRecebido}" type="currency"></fmt:formatNumber></td>
-                    <td class=" text-center"><fmt:formatNumber value="${p.valorRecebido - p.valorTotal}" type="currency"></fmt:formatNumber></td>
                     <td class=" text-center"><fmt:formatDate value="${p.dataPedido}" pattern="dd/MM/yyyy"></fmt:formatDate></td>
                     <td class=" text-center">${p.usuario.nome}</td>
                     <td class=" text-center">${p.filial.nome}</td>

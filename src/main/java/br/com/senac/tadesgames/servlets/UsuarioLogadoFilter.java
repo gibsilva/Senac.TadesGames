@@ -29,8 +29,9 @@ public class UsuarioLogadoFilter implements Filter {
 
     private String contextPath;
 
-    public UsuarioLogadoFilter() {}
-    
+    public UsuarioLogadoFilter() {
+    }
+
     @Override
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain)
@@ -66,24 +67,28 @@ public class UsuarioLogadoFilter implements Filter {
             return true;
         } else if (usuario.getCargo().equals("Diretor") && usuario.getSetor().equals("Diretoria")) {
             return true;
-        } else if(paginaAcessada.endsWith("/Vendas") && usuario.getSetor().equals("Vendas")){
+        } else if (paginaAcessada.endsWith("/Vendas") && usuario.getSetor().equals("Vendas")) {
             return true;
-        } else if((paginaAcessada.endsWith("/Usuarios") || paginaAcessada.endsWith("/Filiais")) && usuario.getSetor().equals("T.I")){
+        } else if ((paginaAcessada.endsWith("/Usuarios") || paginaAcessada.endsWith("/Filiais")) && usuario.getSetor().equals("T.I")) {
             return true;
-        } else if((paginaAcessada.endsWith("/Produtos") || paginaAcessada.endsWith("/Plataformas") || paginaAcessada.endsWith("/Generos") || 
-                paginaAcessada.endsWith("/Categorias") || paginaAcessada.endsWith("/Clientes")) && usuario.getSetor().equals("Produtos/Serviços/Marketing")){
+        } else if ((paginaAcessada.endsWith("/Produtos") || paginaAcessada.endsWith("/Plataformas") || paginaAcessada.endsWith("/Generos")
+                || paginaAcessada.endsWith("/Categorias")) && usuario.getSetor().equals("Produtos/Serviços/Marketing")) {
             return true;
-        } else if(paginaAcessada.endsWith("/Clientes") && usuario.getSetor().equals("Vendas")){
+        } else if (paginaAcessada.endsWith("/Clientes") && usuario.getSetor().equals("Vendas")) {
             return true;
-        } else if (paginaAcessada.endsWith("/Relatorios") && (usuario.getCargo().contains("Gerente") || usuario.getCargo().contains("Diretor"))){
+        } else if (paginaAcessada.endsWith("/Relatorios") && (usuario.getCargo().contains("Gerente") || usuario.getCargo().contains("Diretor"))) {
             return true;
-        } else if(url.contains("Produtos?acao=listar") && usuario.getCargo().equals("Vendedor (a)")){
+        } else if (url.contains("Produtos?acao=listar") && usuario.getCargo().equals("Vendedor (a)")) {
             return true;
-        } else if(url.contains("Produtos?acao=alterar") && usuario.getCargo().equals("Vendedor (a)")){
+        } else if (url.contains("Produtos?acao=alterar") && usuario.getCargo().equals("Vendedor (a)")) {
             return false;
-        } else if(paginaAcessada.endsWith("/Vendas") && (usuario.getCargo().contains("Gerente") && usuario.getSetor().equals("Produtos/Serviços/Marketing"))) {
+        } else if (paginaAcessada.endsWith("/Vendas") && (usuario.getCargo().contains("Gerente") && usuario.getSetor().equals("Produtos/Serviços/Marketing"))) {
             return true;
-        } else if(url.contains("Produtos?acao=listar") && (usuario.getCargo().contains("Gerente") && usuario.getSetor().equals("Vendas"))){
+        } else if (url.contains("Produtos?acao=listar") && (usuario.getCargo().contains("Gerente") && usuario.getSetor().equals("Vendas"))) {
+            return true;
+        } else if ((url.contains("Clientes?acao=salvar") || url.contains("Clientes?acao=alterar")) && (usuario.getSetor().equals("Produtos/Serviços/Marketing"))) {
+            return false;
+        } else if (paginaAcessada.endsWith("/Clientes") && (usuario.getSetor().equals("Produtos/Serviços/Marketing"))) {
             return true;
         }
         return false;

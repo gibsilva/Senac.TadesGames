@@ -33,6 +33,10 @@
 
     </div>
 
+    <div id="aguarde" class="text-center">
+
+    </div>
+
     <br>
 
     <table class="table table-hover border border-primary" id="table">
@@ -74,12 +78,24 @@
                     type: 'GET',
                     contentType: 'application/json',
                     data: {'dataInicio': $('#dataInicio').val(), 'dataFim': $('#dataFim').val()},
+                    beforeSend: function () {
+                        $('#aguarde').html("<img id='loader' src='../resources/img/ajax-loader.gif'/><br /> <p id='adicionando'>Gerando relatório... Por favor aguarde.</p>");
+                        $('#btnPesquisa').prop("disabled", true);
+                        $('#btnExportar').prop("disabled", true);
+                    },
                     success: function (data) {
                         lista = $.parseJSON(data);
                         carregarTabela(lista);
                     },
                     error: function () {
                         toastr.error('Ocorreu um erro ao gerar o relatório', 'Erro');
+                    },
+                    complete: function () {
+                        $("aguarde").prop("hidden", true);
+                        $("#loader").prop("hidden", true);
+                        $("#adicionando").remove();
+                        $('#btnPesquisa').prop("disabled", false);
+                        $('#btnExportar').prop("disabled", false);
                     }
                 });
             }
