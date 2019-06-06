@@ -5,6 +5,7 @@
 --%>
 <%@include file="header.jsp" %>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <title>Consulta de Cliente</title>
 
 <div class="col-md-10 container">
@@ -51,7 +52,7 @@
                     <td class="text-center">${c.nome}</td>
                     <td class="text-center">${c.documento.cpf}</td>
                     <td class="text-center">${c.documento.cnpj}</td>
-                    <td class="text-center">${c.dataNasc}</td>
+                    <td class="text-center"><fmt:formatDate value="${c.dataNasc}" pattern="dd/MM/yyyy"></fmt:formatDate></td>
                     <td class="text-center">${c.sexo}</td>
                     <td class="text-center">${c.email}</td>
                     <td class="text-center">${c.telefone}</td>

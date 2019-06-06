@@ -6,6 +6,7 @@
 
 <%@include file="header.jsp" %>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <title>Consulta de Produto</title>
 
 <div class="col-md-10 container">
@@ -52,8 +53,8 @@
                 <tr >
                     <td class="text-center">${p.idProduto}</td>
                     <td class="text-center">${p.nome}</td>
-                    <td class="text-center">${p.precoCompra}</td>
-                    <td class="text-center">${p.precoVenda}</td>
+                    <td class="text-center"><fmt:formatNumber value="${p.precoCompra}" type="currency"></fmt:formatNumber></td>
+                    <td class="text-center"><fmt:formatNumber value="${p.precoVenda}" type="currency"></fmt:formatNumber></td>
                     <td class="text-center">${p.plataforma.nome}</td>
                     <td class="text-center">${p.categoria.nome}</td>
                     <td class="text-center">${p.genero.nome}</td>

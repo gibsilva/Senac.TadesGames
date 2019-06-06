@@ -5,6 +5,7 @@
 --%>
 <%@include file="header.jsp" %>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <title>Consulta de Vendas</title>
 
 <div class="container">
@@ -63,22 +64,27 @@
 
         <tbody id="tabela" name="tabela">
             <c:forEach var="p" items="${pedidos}">
-            <c:if test="${p.status == 0}">
-                <tr class="text-center text-danger">
-            </c:if>
-            <c:if test="${p.status == 1}">
-                <tr class="text-center">
-            </c:if>
-                
+                <c:if test="${p.status == 0}">
+                    <tr class="text-center text-danger">
+                    </c:if>
+                    <c:if test="${p.status == 1}">
+                    <tr class="text-center">
+                    </c:if>
+
                     <td class=" text-center">${p.idPedido}</td>
                     <td class=" text-center">${p.cliente.nome}</td>
                     <td class=" text-center">${p.cliente.documento.toString()}</td>
                     <td class=" text-center">${p.itensPedido.size()}</td>
-                    <td class=" text-center">${p.valorTotal}</td>
+                    <td class=" text-center"><fmt:formatNumber value="${p.valorTotal}" type="currency"></fmt:formatNumber></td>
                     <td class=" text-center">${p.descFormaPagamento}</td>
                     <td class=" text-center">${p.parcela}</td>
-                    <td class=" text-center">${p.parcela == 0 ? 0.00 : p.valorTotal/p.parcela}</td>
-                    <td class=" text-center">${p.dataPedido}</td>
+                    <c:if test="${p.parcela == 0}">
+                        <td class=" text-center">0,00</td>
+                    </c:if>
+                    <c:if test="${p.parcela != 0}">
+                        <td class=" text-center"><fmt:formatNumber value="${p.valorTotal/p.parcela}" type="currency"></fmt:formatNumber></td>
+                    </c:if>
+                    <td class=" text-center"><fmt:formatDate value="${p.dataPedido}" pattern="dd/MM/yyyy"></fmt:formatDate></td>
                     <td class=" text-center">${p.usuario.nome}</td>
                     <td class=" text-center">${p.filial.nome}</td>
                     <c:if test="${p.status == 1}">
@@ -106,8 +112,7 @@
             if ($('#filtroId').val() === '' && $('#filtroDataIni').val() === '' && $('#filtroDataFim').val() === '') {
                 toastr.warning('Preencha algum parametro antes de pesquisar', 'Atenção');
                 e.preventDefault(e);
-            }
-            else {
+            } else {
                 this.submit;
             }
         });
